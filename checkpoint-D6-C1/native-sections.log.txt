@@ -1,0 +1,1 @@
+PASS: Battle_Main PPC link; 103 legacy symbols preserved/reappear when rooted; native legacy reference and changed skeleton rejected; real SDK ctype; original Game_Main probe still misses 69 names; no execution

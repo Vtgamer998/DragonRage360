@@ -1,0 +1,7 @@
+== binutils (13:00:59)
+== gcc-stage1 (13:01:42)
+== newlib (13:05:39)
+== gcc (13:05:54)
+== check: the linker refuses objects of another calling convention (13:11:23)
+== check: no float register load at memory not known to be aligned (13:11:23)
+== done: /workspace/scratch/0e938d660765/toolchain-040/bin/powerpc-xsdk-elf-gcc (13:11:23)

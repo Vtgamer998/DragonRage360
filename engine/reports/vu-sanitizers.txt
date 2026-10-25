@@ -1,0 +1,2 @@
+PASS: original VU interpreter two-bone microprogram and 10000 checked UNPACK cases under ASan/UBSan
+Leak scan disabled because runtime /proc task inspection is unavailable. Host native test, not Xbox.

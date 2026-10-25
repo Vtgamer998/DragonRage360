@@ -1,0 +1,1 @@
+0.44-D10: novo XEX compilado; 405/405 unidades PPC; zero indefinidos. Boot original de objetos e BtlChar/BtlAi executado em i386, não em PowerPC. Sem luta/GPU de combate. Consulte RELATORIO-0.44-D10.md e checkpoint-D10-final/.

@@ -1,0 +1,81 @@
+
+active/DragonRage360-Demo/build/diagnostic-D4/default.elf:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+820f6c08 <Battle_Main>:
+820f6c08:	7c 08 02 a6 	mflr    r0
+820f6c0c:	94 21 ff a0 	stwu    r1,-96(r1)
+820f6c10:	fb e1 00 58 	std     r31,88(r1)
+820f6c14:	90 01 00 64 	stw     r0,100(r1)
+820f6c18:	48 16 cf 79 	bl      82263b90 <XbTypedData_RequireBattleData>
+820f6c1c:	2c 03 00 00 	cmpwi   r3,0
+820f6c20:	7c 7f 1b 78 	mr      r31,r3
+820f6c24:	40 82 00 e4 	bne     820f6d08 <Battle_Main+0x100>
+820f6c28:	48 00 3d f1 	bl      820faa18 <Battle_GetWork>
+820f6c2c:	39 20 00 01 	li      r9,1
+820f6c30:	91 23 19 f8 	stw     r9,6648(r3)
+820f6c34:	48 00 3f 65 	bl      820fab98 <Battle_Load>
+820f6c38:	48 13 f7 21 	bl      82236358 <StgFx_Init>
+820f6c3c:	48 14 12 3d 	bl      82237e78 <StgModel_InitStage>
+820f6c40:	38 60 00 02 	li      r3,2
+820f6c44:	48 06 85 0d 	bl      8215f150 <BtlChar_AllocAll>
+820f6c48:	48 03 c4 e1 	bl      82133128 <BtlAiMgr_Init>
+820f6c4c:	48 04 1e 2d 	bl      82138a78 <BtlCam_Init>
+820f6c50:	48 0b a1 41 	bl      821b0d90 <StgNav_Init>
+820f6c54:	48 08 7a 15 	bl      8217e668 <BtlGame_Init>
+820f6c58:	4b fe 76 41 	bl      820de298 <Ot_Init>
+820f6c5c:	38 60 00 00 	li      r3,0
+820f6c60:	48 07 86 a1 	bl      8216f300 <BtlScene_Init>
+820f6c64:	38 60 00 3c 	li      r3,60
+820f6c68:	4b ff d9 29 	bl      820f4590 <Snd_StopBankAndResume>
+820f6c6c:	48 00 3d fd 	bl      820faa68 <Battle_ResetWork>
+820f6c70:	38 60 00 00 	li      r3,0
+820f6c74:	48 07 8b 7d 	bl      8216f7f0 <BtlScene_Reset>
+820f6c78:	48 13 f5 d9 	bl      82236250 <StgFx_Reset>
+820f6c7c:	48 08 79 ad 	bl      8217e628 <BtlGame_Reset>
+820f6c80:	48 13 64 c9 	bl      8222d148 <BtlStage_Reset>
+820f6c84:	48 06 83 ad 	bl      8215f030 <BtlChar_ResetAll>
+820f6c88:	4b fe 5c e9 	bl      820dc970 <Fade_ResetAll>
+820f6c8c:	3d 20 82 01 	lis     r9,-32255
+820f6c90:	38 80 00 01 	li      r4,1
+820f6c94:	38 60 00 00 	li      r3,0
+820f6c98:	c0 29 9b 30 	lfs     f1,-25808(r9)
+820f6c9c:	4b fe 5d 9d 	bl      820dca38 <Fade_Start>
+820f6ca0:	4b ff fe 41 	bl      820f6ae0 <Battle_Loop>
+820f6ca4:	48 00 1b bd 	bl      820f8860 <BattleResult_Finish>
+820f6ca8:	4b fe 52 b9 	bl      820dbf60 <Adx_StopAll>
+820f6cac:	48 06 83 25 	bl      8215efd0 <BtlChar_FreeAll>
+820f6cb0:	48 04 1e 31 	bl      82138ae0 <BtlCam_Term>
+820f6cb4:	48 07 79 0d 	bl      8216e5c0 <BtlScene_Term>
+820f6cb8:	4b fe 6e d9 	bl      820ddb90 <Ot_Term>
+820f6cbc:	48 13 ea bd 	bl      82235778 <StgFx_Term>
+820f6cc0:	48 13 65 59 	bl      8222d218 <BtlStage_Term>
+820f6cc4:	48 03 c4 d5 	bl      82133198 <BtlAiMgr_Term>
+820f6cc8:	48 0b a0 49 	bl      821b0d10 <StgNav_Term>
+820f6ccc:	48 08 79 fd 	bl      8217e6c8 <BtlGame_Term>
+820f6cd0:	48 00 3f 39 	bl      820fac08 <Battle_Unload>
+820f6cd4:	4b fe 5c 9d 	bl      820dc970 <Fade_ResetAll>
+820f6cd8:	4b fb b4 e1 	bl      820b21b8 <Dma_ResetBuffers>
+820f6cdc:	4b ff 6f ad 	bl      820edc88 <Job_Clear>
+820f6ce0:	48 00 3d 39 	bl      820faa18 <Battle_GetWork>
+820f6ce4:	7c 69 1b 78 	mr      r9,r3
+820f6ce8:	38 60 00 01 	li      r3,1
+820f6cec:	93 e9 19 f8 	stw     r31,6648(r9)
+820f6cf0:	80 01 00 64 	lwz     r0,100(r1)
+820f6cf4:	eb e1 00 58 	ld      r31,88(r1)
+820f6cf8:	38 21 00 60 	addi    r1,r1,96
+820f6cfc:	7c 08 03 a6 	mtlr    r0
+820f6d00:	4e 80 00 20 	blr
+820f6d04:	60 00 00 00 	nop
+820f6d08:	3c 60 82 00 	lis     r3,-32256
+820f6d0c:	7f e4 fb 78 	mr      r4,r31
+820f6d10:	38 63 42 a0 	addi    r3,r3,17056
+820f6d14:	48 17 b0 7d 	bl      82271d90 <xsdk_log_write>
+820f6d18:	80 01 00 64 	lwz     r0,100(r1)
+820f6d1c:	7c 7f 00 d0 	neg     r3,r31
+820f6d20:	eb e1 00 58 	ld      r31,88(r1)
+820f6d24:	38 21 00 60 	addi    r1,r1,96
+820f6d28:	7c 08 03 a6 	mtlr    r0
+820f6d2c:	4e 80 00 20 	blr

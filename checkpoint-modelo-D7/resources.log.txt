@@ -1,0 +1,9 @@
+[('common-2', 2), ('common-3', 3), ('common-4', 4), ('common-boot', 5), ('progress-default', 6), ('member-left', 8), ('member-right', 11), ('battle-sound', 330), ('stage-sound', 334), ('stage-model', 369), ('left-model', 1424), ('right-model', 1434), ('left-animation', 1432), ('right-animation', 1442), ('left-extra', 1433), ('right-extra', 1443), ('left-voice', 3034), ('right-voice', 3035)]
+VERIFIED ('common-2', 88832)
+VERIFIED ('common-3', 1308992)
+VERIFIED ('common-4', 23744)
+VERIFIED ('stage-model', 6231936)
+VERIFIED ('left-model', 742592)
+VERIFIED ('right-model', 787840)
+VERIFIED ('left-animation', 1043392)
+VERIFIED ('right-animation', 996736)

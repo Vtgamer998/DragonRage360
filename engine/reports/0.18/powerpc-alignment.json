@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "compiled_with_alignment_check": [
+    "dr_xenos.c",
+    "dr_targets.c",
+    "dr_gs_backend.c",
+    "dr_gs_replay.c"
+  ],
+  "backend_and_bridge": "separate objects, not in launcher link",
+  "execution": false
+}

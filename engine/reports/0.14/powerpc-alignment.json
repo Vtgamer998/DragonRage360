@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "compiler": "/workspace/scratch/0e938d660765/xsdk-gcc/bin/powerpc-xsdk-elf-gcc",
+  "units": [
+    "resource/dr_body_model.c",
+    "resource/dr_elf.c",
+    "resource/dr_face_vif.c",
+    "vu/dr_vu1.c",
+    "vu/dr_body_pipeline.c",
+    "graphics/dr_body_demo.c",
+    "graphics/dr_targets.c",
+    "graphics/dr_xenos.c",
+    "graphics/dr_gs_replay.c"
+  ],
+  "extra_check": "-mcheck-fpr-alignment",
+  "execution": false,
+  "gs_replay_linked_to_xex": false
+}

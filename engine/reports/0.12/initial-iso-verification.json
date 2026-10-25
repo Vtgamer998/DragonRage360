@@ -1,0 +1,109 @@
+{
+  "ISO_bytes": 3020816384,
+  "sha1_matches_archive_metadata": true,
+  "AFS": [
+    {
+      "name": "DATA/PZS3US0.AFS",
+      "bytes": 14336,
+      "entries_with_valid_bounds": 1
+    },
+    {
+      "name": "DATA/PZS3US1.AFS",
+      "bytes": 1462016000,
+      "entries_with_valid_bounds": 3399
+    },
+    {
+      "name": "DATA/PZS3US2.AFS",
+      "bytes": 1220337664,
+      "entries_with_valid_bounds": 65201
+    }
+  ],
+  "first_character_animation_pack": {
+    "path": "pzs3us1/01431.bin",
+    "bytes": 1043392,
+    "table_entries": 440,
+    "first_entries_big_endian_conversion": [
+      {
+        "index": 0,
+        "result": 0,
+        "native_bytes": 5384
+      },
+      {
+        "index": 1,
+        "result": 0,
+        "native_bytes": 7716
+      },
+      {
+        "index": 2,
+        "result": 0,
+        "native_bytes": 2184
+      },
+      {
+        "index": 3,
+        "result": 0,
+        "native_bytes": 2332
+      },
+      {
+        "index": 4,
+        "result": 0,
+        "native_bytes": 2088
+      },
+      {
+        "index": 5,
+        "result": 0,
+        "native_bytes": 2152
+      },
+      {
+        "index": 6,
+        "result": 0,
+        "native_bytes": 2220
+      },
+      {
+        "index": 7,
+        "result": 0,
+        "native_bytes": 2148
+      },
+      {
+        "index": 8,
+        "result": 0,
+        "native_bytes": 1712
+      },
+      {
+        "index": 9,
+        "result": 0,
+        "native_bytes": 1756
+      },
+      {
+        "index": 10,
+        "result": 0,
+        "native_bytes": 1672
+      },
+      {
+        "index": 11,
+        "result": 0,
+        "native_bytes": 1688
+      },
+      {
+        "index": 12,
+        "result": 0,
+        "native_bytes": 2084
+      },
+      {
+        "index": 13,
+        "result": 0,
+        "native_bytes": 2456
+      },
+      {
+        "index": 14,
+        "result": 0,
+        "native_bytes": 1884
+      },
+      {
+        "index": 15,
+        "result": 0,
+        "native_bytes": 2200
+      }
+    ]
+  },
+  "limits": "Host parsing/conversion only; no game/GPU/Xbox execution. Hash matches source metadata, not a certified disc dump."
+}

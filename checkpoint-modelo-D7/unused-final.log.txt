@@ -1,0 +1,1 @@
+PASS: original-only pool proof; injected allocated native reference and changed vector source rejected

@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "compiled_microcode_cases": 5760,
+  "discarded_cases": 2560,
+  "scope": "TFX 0..3, TCC, ATST off/0..7, AREF boundaries, source-alpha prescaling",
+  "GPU_execution": false,
+  "rasterization": false,
+  "texture_filtering": false,
+  "DATE_FBA_stencil": "not implemented by this shader",
+  "reference": "original gs.frag equations; CPU microcode simulator is not hardware evidence"
+}

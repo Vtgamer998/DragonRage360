@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "blend_keys": 108,
+  "mipmap_levels": 3,
+  "scope": "material constants, channel masks, blend-key mapping, explicit mip-chain preflight/upload",
+  "GPU_execution": false,
+  "rasterization": false,
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "target": "PowerPC xsdk",
+  "flags": [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-mcheck-fpr-alignment"
+  ],
+  "source": "engine/platform/platform/xb_battle_fighter.c",
+  "hardware_executed": false
+}

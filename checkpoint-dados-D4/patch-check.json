@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "baseline": "0.37-D3",
+  "changed_text_files": [
+    "LEIA-ME.txt",
+    "PENDENCIAS.md",
+    "README.md",
+    "RELATORIO-0.38-D4.md",
+    "engine/platform/platform/xb_battle_fighter.c",
+    "engine/platform/platform/xb_battle_fighter.h",
+    "engine/tests/test_native_fighter.c",
+    "engine/tools/build_engine_diagnostic.py",
+    "engine/tools/fixed_profile_source.py",
+    "engine/tools/link_battle.py",
+    "engine/tools/test_native_fighter.py",
+    "src/demo_ui.c",
+    "src/main.c",
+    "tests/check_xex.py"
+  ],
+  "applied_and_compared": true,
+  "binary_and_manifest_supplied_separately_in_full": true
+}

@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "baseline": "0.39-D5",
+  "changed_text_files": [
+    "Makefile",
+    "README.md",
+    "REVISAO-D6-C1.md",
+    "engine/platform/platform-sources.txt",
+    "engine/tools/audit_d6_bundle.py",
+    "engine/tools/audit_platform_sources.py",
+    "engine/tools/link_battle.py",
+    "engine/tools/platform_sources.py",
+    "engine/tools/test_platform_sources.py"
+  ],
+  "applied_and_compared": true,
+  "binary_and_manifest_supplied_separately_in_full": true
+}

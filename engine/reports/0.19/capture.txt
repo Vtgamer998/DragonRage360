@@ -1,0 +1,1 @@
+PASS: full gs_core/gs_draw/GsBackend compiled; unaligned LE GIF, CT32/CT16/T8/T4 uploads, original capture draw/replay, canonical RGBA, borrowed lifecycle, two open/close cycles, filter/clamp capture states, DATE/FBA marker capture; VU rejected; GPU APIs MOCKED, no hardware pixels

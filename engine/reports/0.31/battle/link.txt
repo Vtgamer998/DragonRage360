@@ -1,0 +1,286 @@
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_file_c.o: in function `File_StartAdxById':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_file_c.c:445:(.text.File_StartAdxById+0x2c): undefined reference to `ADXT_StartAfs'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_file_c.c:445:(.text.File_StartAdxById+0x48): undefined reference to `ADXT_StartAfs'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_battle_load_c.o: in function `BattleResult_Finish':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1101:(.text.BattleResult_Finish+0x70): undefined reference to `DrNet_BattleFinished'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_battle_load_c.o: in function `BtlMember_ApplyItems':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1337:(.text.BtlMember_ApplyItems+0x14): undefined reference to `Port_NetSession'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_battle_load_c.o: in function `BattleSetup_DefaultOptions':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1493:(.text.BattleSetup_DefaultOptions+0x70): undefined reference to `Port_NetSideOptions'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_battle_load_c.o: in function `BattleSetup_SetRule':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1556:(.text.BattleSetup_SetRule+0x50): undefined reference to `Port_TestScreen'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1557:(.text.BattleSetup_SetRule+0x5c): undefined reference to `Port_TestScreen'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1566:(.text.BattleSetup_SetRule+0x6c): undefined reference to `Port_TestBgm'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1567:(.text.BattleSetup_SetRule+0x78): undefined reference to `Port_TestBgm'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1582:(.text.BattleSetup_SetRule+0x98): undefined reference to `Port_TestStage'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_battle_load_c.c:1583:(.text.BattleSetup_SetRule+0xa4): undefined reference to `Port_TestStage'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_act_e_c.o: in function `BtlAct_ClashBlowsHandler':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_act_e_c.c:1370:(.text.BtlAct_ClashBlowsHandler+0x458): undefined reference to `Port_ClashLog'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_act_f_c.o: in function `BtlAct_ClashStruggleHandler':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_act_f_c.c:3062:(.text.BtlAct_ClashStruggleHandler+0x7c): undefined reference to `Port_ClashLog'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_act_f_c.c:3043:(.text.BtlAct_ClashStruggleHandler+0x3d0): undefined reference to `Port_ClashLog'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_input_c.o: in function `BtlInput_Sample':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_input_c.c:561:(.text.BtlInput_Sample+0xb0): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_scene_c.o: in function `BtlScene_IsCharInView':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_scene_c.c:342:(.text.BtlScene_IsCharInView+0x74): undefined reference to `Port_NetView'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_scene_c.c:343:(.text.BtlScene_IsCharInView+0xa8): undefined reference to `Port_NetView'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_seq_c.o: in function `BtlSeqFight_Update':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_seq_c.c:1345:(.text.BtlSeqFight_Update+0x80): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_seq_c.c:1358:(.text.BtlSeqFight_Update+0xd8): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_seq_c.c:1359:(.text.BtlSeqFight_Update+0xec): undefined reference to `Port_NetMe'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_seq_c.c:1376:(.text.BtlSeqFight_Update+0x138): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_col_c_c.o: in function `Font_UploadTexture':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_col_c_c.c:202:(.text.Font_UploadTexture+0x2c): undefined reference to `MenuText_RegisterGlyphs'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_col_c_c.o: in function `Font_CountLinesEx':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_col_c_c.c:426:(.text.Font_GetHeight+0x18): undefined reference to `UiText_TranslateString'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_col_c_c.o: in function `Font_MeasureWidthEx':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_col_c_c.c:370:(.text.Font_MeasureWidthEx+0x170): undefined reference to `UiText_TranslateString'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_col_c_c.o: in function `Font_NewCmd':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_col_c_c.c:1100:(.text.Font_NewCmd+0x114): undefined reference to `PortA11y_FontText'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_col_c_c.o: in function `Font_PrintAt':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_col_c_c.c:489:(.text.Font_PrintAt+0x1c): undefined reference to `UiText_TranslateString'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_col_c_c.o: in function `Font_Print':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_col_c_c.c:481:(.text.Font_Print+0xc): undefined reference to `UiText_TranslateString'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_0_c.o: in function `PauseMenu_Init':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_0_c.c:325:(.text.PauseMenu_Init+0xc): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_0_c.o: in function `PauseMenu_Draw':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_0_c.c:441:(.text.PauseMenu_Draw+0xc): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_0_c.c:442:(.text.PauseMenu_Draw+0x5c): undefined reference to `Port_NetMe'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_a_c.o: in function `Hud_PreUpdate':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_a_c.c:452:(.text.Hud_PreUpdate+0x4a0): undefined reference to `Port_ClashSquare'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_a_c.c:452:(.text.Hud_PreUpdate+0x4ac): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_a_c.c:452:(.text.Hud_PreUpdate+0x4e0): undefined reference to `Port_NetMe'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_b_c.o: in function `HudGauge_HpAnchor':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_b_c.c:810:(.text.HudGauge_DrawHp+0x2c): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_b_c.c:810:(.text.HudGauge_DrawHp+0x138): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_b_c.c:810:(.text.HudGauge_DrawWideFrame+0xe8): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_b_c.c:810:(.text.HudGauge_DrawWideFrame+0x1d8): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_b_c.o: in function `HudGauge_ClearFaceTexMark':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_b_c.c:982:(.text.HudGauge_DrawFace+0x50): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_b_c.o:/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_b_c.c:982: more undefined references to `Port_HudSwap' follow
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_menu_port_screen_c.o: in function `Ps_Line':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_screen_c.c:377:(.text.Ps_Line+0xa0): undefined reference to `PortTbo_TextInfo'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_screen_c.c:378:(.text.Ps_Line+0xd4): undefined reference to `PortTbo_TextInfo'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_screen_c.c:379:(.text.Ps_Line+0x108): undefined reference to `PortTbo_TextInfo'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_screen_c.c:380:(.text.Ps_Line+0x134): undefined reference to `PortTbo_TextInfo'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_menu_port_screen_c.o: in function `Ps_Msg':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_screen_c.c:498:(.text.Ps_Msg+0x3c): undefined reference to `PortTbo_TextId'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_PauseSeVoice':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:113:(.text.Adx_PauseSeVoice+0x20): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:114:(.text.Adx_PauseSeVoice+0x2c): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:115:(.text.Adx_PauseSeVoice+0x38): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:116:(.text.Adx_PauseSeVoice+0x44): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_ResumeSeVoice':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:121:(.text.Adx_ResumeSeVoice+0x20): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o:/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:122: more undefined references to `ADXT_Pause' follow
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Stop':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:155:(.text.Adx_StopAll+0x38): undefined reference to `ADXT_Stop'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:155:(.text.Adx_StopAll+0x40): undefined reference to `ADXT_Stop'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_GetStat':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:188:(.text.Adx_StopAll+0x64): undefined reference to `ADXT_GetStat'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:188:(.text.Adx_StopAll+0x84): undefined reference to `ADXT_GetStat'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:188:(.text.Adx_StopAll+0x98): undefined reference to `ADXT_GetStat'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:188:(.text.Adx_GetStat+0x20): undefined reference to `ADXT_GetStat'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetPan':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:209:(.text.Adx_SetPan+0x58): undefined reference to `ADXT_SetOutPan'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:210:(.text.Adx_SetPan+0x98): undefined reference to `ADXT_SetOutPan'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetVolume':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:183:(.text.Adx_Play+0x70): undefined reference to `ADXT_SetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Play':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:149:(.text.Adx_Play+0x7c): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetPan':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:209:(.text.Bgm_Play+0x2c): undefined reference to `ADXT_SetOutPan'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:210:(.text.Bgm_Play+0x3c): undefined reference to `ADXT_SetOutPan'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetVolume':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:183:(.text.Bgm_Play+0x5c): undefined reference to `ADXT_SetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Play':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:149:(.text.Bgm_Play+0x68): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_GetStat':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:188:(.text.Bgm_IsStopped+0x14): undefined reference to `ADXT_GetStat'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_FadeOutStep':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:216:(.text.Bgm_FadeOutStep+0x14): undefined reference to `ADXT_GetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:223:(.text.Bgm_FadeOutStep+0x44): undefined reference to `ADXT_SetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:223:(.text.Bgm_FadeOutStep+0x64): undefined reference to `ADXT_SetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetPan':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:209:(.text.MapBgm_Play+0x2c): undefined reference to `ADXT_SetOutPan'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:210:(.text.MapBgm_Play+0x3c): undefined reference to `ADXT_SetOutPan'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetVolume':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:183:(.text.MapBgm_Play+0x5c): undefined reference to `ADXT_SetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Play':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:149:(.text.MapBgm_Play+0x68): undefined reference to `ADXT_Pause'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Stop':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:155:(.text.MapBgm_Stop+0x14): undefined reference to `ADXT_Stop'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_SetVolume':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:183:(.text.MapBgm_SetVolume+0x30): undefined reference to `ADXT_SetOutVol'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Stop':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:155:(.text.Voice_Stop+0x20): undefined reference to `ADXT_Stop'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_GetStat':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:188:(.text.Voice_IsStopped+0x20): undefined reference to `ADXT_GetStat'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_adx_c.o: in function `Adx_Stop':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_adx_c.c:155:(.text.StreamSe_Stop+0x20): undefined reference to `ADXT_Stop'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_gfx_c.o: in function `Gfx_EndFrame':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_gfx_c.c:192:(.text.Gfx_EndFrame+0x1c): undefined reference to `PortQuit_Draw'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_RpcCall':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_RpcFlush+0x54): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_RpcFlush+0xe0): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransfer':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:275:(.text.Snd_SendBank+0xa4): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransferWait':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:280:(.text.Snd_SendBank+0xbc): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_RpcCall':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_Reset+0x5c): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransferWait':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:280:(.text.Snd_Reset+0x74): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransferCheck':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:285:(.text.Snd_Update+0x88): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransfer':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:275:(.text.Snd_Update+0xf8): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_RpcCall':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_UnloadBank+0x13c): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SetPause':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:693:(.text.Snd_SetPause+0x54): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_RpcCall':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_StopBankAndResume+0x64): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_StopBankAndResume+0x9c): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_SendFighters+0x138): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o:/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101: more undefined references to `sceSifCallRpc' follow
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransferWait':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:280:(.text.Snd_LoadBank+0x1d4): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_RpcCall':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_ReloadBank+0x180): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:101:(.text.Snd_ReloadBank+0x204): undefined reference to `sceSifCallRpc'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_sys_snd_c.o: in function `Snd_SpuTransferWait':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_sys_snd_c.c:280:(.text.Snd_ReloadBank+0x274): undefined reference to `func_002967C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_cam_c.o: in function `BtlCam_UpdateOverride':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_cam_c.c:536:(.text.BtlCam_UpdateOverride+0x1c0): undefined reference to `Port_NetView'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_btl_char_get_c.o: in function `BtlChar_UpdateVibration':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_btl_char_get_c.c:323:(.text.BtlChar_UpdateVibration+0xf0): undefined reference to `Port_RumbleTest'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_a_b_c.o: in function `HudTeam_SelectSide':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_a_b_c.c:333:(.text.HudTeam_SelectSide+0x20): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_a_b_c.c:337:(.text.HudTeam_SelectSide+0x38): undefined reference to `Port_HudSwap'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_battle_hud_e_d_c.o: in function `BtlPause_CheckOpen':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_battle_hud_e_d_c.c:60:(.text.BtlPause_CheckOpen+0x70): undefined reference to `Port_NetActive'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/src_menu_port_tbo_c.o: in function `PortTbo_SparSign':
+/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_tbo_c.c:2043:(.text.PortTbo_SparSign+0x1c): undefined reference to `Port_LobbyInBackground'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/prepared/src_menu_port_tbo_c.c:2057:(.text.PortTbo_SparSign+0x194): undefined reference to `Port_LobbyCode'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002D3FF8':
+(.data+0x10bf8): undefined reference to `func_0027BCD0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10bfc): undefined reference to `func_0027BD48'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c00): undefined reference to `dvCiGetFileSize'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c08): undefined reference to `dvCiOpen'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c0c): undefined reference to `func_0027C0F0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c10): undefined reference to `func_0027C148'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c14): undefined reference to `func_0027C1E0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c18): undefined reference to `dvCiReqRd'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c20): undefined reference to `func_0027C3C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c24): undefined reference to `func_0027C4A8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c28): undefined reference to `func_0027C4E0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c30): undefined reference to `func_0027C4E8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c38): undefined reference to `func_0027BDD8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x10c58): undefined reference to `func_0027C680'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002D9800':
+(.data+0x16400): undefined reference to `func_0027F7A0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16404): undefined reference to `func_0027F7F8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16408): undefined reference to `func_0027F810'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16410): undefined reference to `mfCiOpen'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16414): undefined reference to `func_0027F9B8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16418): undefined reference to `func_0027FA00'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1641c): undefined reference to `func_0027FAC0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16420): undefined reference to `mfCiReqRd'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16428): undefined reference to `func_0027FC80'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1642c): undefined reference to `func_0027FCD0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16430): undefined reference to `func_0027FD08'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16434): undefined reference to `func_0027FD40'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16438): undefined reference to `func_0027FDC0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x16460): undefined reference to `func_0027FE80'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002DE590':
+(.data+0x1b19c): undefined reference to `func_002826A0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1a0): undefined reference to `func_00282758'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1a4): undefined reference to `func_00282898'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1a8): undefined reference to `func_00282978'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1ac): undefined reference to `func_00282BA8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1b0): undefined reference to `func_00282AB8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1b4): undefined reference to `func_00282930'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1b8): undefined reference to `func_00282CF8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b1bc): undefined reference to `func_002827E8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002DEA78':
+(.data+0x1b684): undefined reference to `func_00283278'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b688): undefined reference to `func_00283330'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b68c): undefined reference to `func_00283348'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b690): undefined reference to `func_00283448'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b694): undefined reference to `func_00283818'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b698): undefined reference to `func_00283648'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b69c): undefined reference to `func_002833F8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b6a0): undefined reference to `func_00283A48'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1b6a4): undefined reference to `func_00283338'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002E2AB0':
+(.data+0x1f6bc): undefined reference to `func_00283E98'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6c0): undefined reference to `func_00283F50'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6c4): undefined reference to `func_00284090'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6c8): undefined reference to `func_00284298'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6cc): undefined reference to `func_002845C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6d0): undefined reference to `func_00284448'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6d4): undefined reference to `func_00284198'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6d8): undefined reference to `func_00284730'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x1f6dc): undefined reference to `func_00283FE0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002E6F68':
+(.data+0x23b68): undefined reference to `func_0028B7C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b6c): undefined reference to `func_0028B838'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b70): undefined reference to `func_0028B8F0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b78): undefined reference to `htCiOpen'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b7c): undefined reference to `func_0028BD28'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b80): undefined reference to `func_0028BDC8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b84): undefined reference to `func_0028BE60'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b88): undefined reference to `htCiReqRd'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b90): undefined reference to `func_0028C028'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b94): undefined reference to `func_0028C120'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23b98): undefined reference to `func_0028C158'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23ba0): undefined reference to `func_0028C160'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23ba8): undefined reference to `func_0028B850'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x23bc8): undefined reference to `func_0028C288'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002E7788':
+(.data+0x24388): undefined reference to `func_0029F2F8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x2438c): undefined reference to `func_0029F408'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x24390): undefined reference to `func_0029F590'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x24394): undefined reference to `func_0029F6F8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x24398): undefined reference to `func_0029F8F0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x2439c): undefined reference to `func_0029FA40'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243a0): undefined reference to `func_0029FC08'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243a4): undefined reference to `func_0029FDB0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002E77A8':
+(.data+0x243a8): undefined reference to `func_0029F370'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243ac): undefined reference to `func_0029F4C0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243b0): undefined reference to `func_0029F640'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243b4): undefined reference to `func_0029F7F0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243b8): undefined reference to `func_0029F990'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243bc): undefined reference to `func_0029FB20'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243c0): undefined reference to `func_0029FCE0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x243c4): undefined reference to `func_0029FED0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002E9C88':
+(.data+0x26888): undefined reference to `D_3BE71C'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002E9D50':
+(.data+0x26954): undefined reference to `func_002BA308'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x2695c): undefined reference to `func_002BA2D0'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002EA510':
+(.data+0x27114): undefined reference to `func_002BA518'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002EA528':
+(.data+0x2712c): undefined reference to `func_002BA688'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002EAC98':
+(.data+0x2789c): undefined reference to `func_002BA938'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002EB080':
+(.data+0x27c84): undefined reference to `func_002BC748'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1C3400_data_s.o: in function `D_002EB190':
+(.data+0x27da4): undefined reference to `func_00100000'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-031/objects/port_data_cod_1F44C0_rodata_s.o: in function `D_002FAA08':
+(.data+0x6548): undefined reference to `func_002A0C10'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x654c): undefined reference to `func_002A09D8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6550): undefined reference to `func_002A11E8'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6554): undefined reference to `func_002A0B18'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6558): undefined reference to `func_002A1278'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x655c): undefined reference to `func_002A0C00'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6560): undefined reference to `func_002A0C10'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6564): undefined reference to `func_002A1310'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6568): undefined reference to `func_002A0C20'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x656c): undefined reference to `func_002A0E08'
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: (.data+0x6570): undefined reference to `func_002A0E18'
+collect2: error: ld returned 1 exit status

@@ -1,0 +1,1 @@
+PASS body reader: hierarchy, all truncations, no partial output, bounds; ELF mapping and overlap rejection

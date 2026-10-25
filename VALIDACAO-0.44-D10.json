@@ -1,0 +1,42 @@
+{
+  "version": "0.44-D10",
+  "request_complete": false,
+  "playable_battle": false,
+  "new_XEX_built": true,
+  "new_XEX_sha256": "8f6fb694564c001729c90b5045b4a69114dab080c1544463f1a603b8d5a5a6cb",
+  "XEX_bytes": 13705216,
+  "PPC_units": 405,
+  "PPC_link_undefined": 0,
+  "PPC_ABI_closed": true,
+  "source_input_hashes_match_final_build": true,
+  "original_BtlObj_Init_Term_integrated": true,
+  "original_BtlChar_AllocAll_and_BtlAiMgr_Init_integrated": true,
+  "CPU_i386_execution_test": {
+    "result": "PASS",
+    "host_execution": "QEMU-i386",
+    "original_full_roster_reset_and_AI_init": true,
+    "original_object_Init_Term": true,
+    "original_input_sample_remap_press_release": true,
+    "typed_catalog_real_data_and_callbacks": true,
+    "SDK_import_traps": [
+      "xsdk_audio_close",
+      "xsdk_audio_next_frame",
+      "xsdk_audio_open",
+      "xsdk_audio_queue_frame",
+      "xsdk_audio_stats"
+    ],
+    "SDK_calls_during_test": 0,
+    "PowerPC_execution": false,
+    "GPU_execution": false,
+    "Battle_Update_or_Main": false,
+    "sanitizers": "undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks"
+  },
+  "Xbox_or_Xenia_execution": false,
+  "Battle_Update_or_Main_executed": false,
+  "GPU_battle_or_audio_executed": false,
+  "common3_complete": false,
+  "full_stage_complete": false,
+  "Battle_Load_Init_complete": false,
+  "boot_marker": 2,
+  "report": "RELATORIO-0.44-D10.md"
+}

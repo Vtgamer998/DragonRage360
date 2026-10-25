@@ -1,0 +1,307 @@
+{
+  "result": "PASS",
+  "meaning": "comparison assertions passed; D6 is NOT a playable or validated upgrade",
+  "input_archives": [
+    {
+      "name": "DragonRage360-0.39-D5-tabelas-e-registro.zip",
+      "sha256": "1d95b1960dadd75fc7101694158fe23490e547193d890f8cd8b98597ebbef4f1"
+    },
+    {
+      "name": "DragonRage360-0.40-D6-Demo.zip",
+      "sha256": "2ab4bd8c95f97c03aa80d1f7b2f680b0374757d8335e78345106189afce1b1b2"
+    },
+    {
+      "name": "correcao-D6.zip",
+      "sha256": "45b3a63058f91f6b0979fe301d892ad5ef7d3cf5a34459de2f8fee042cd0fb90"
+    }
+  ],
+  "added_files": [
+    "ATUALIZACAO-0.40-D6.md",
+    "engine/include/battle/battle.h",
+    "engine/include/battle/battle_setup.h",
+    "engine/include/battle/battle_work.h",
+    "engine/include/battle/bobj_a.h",
+    "engine/include/battle/bobj_b.h",
+    "engine/include/battle/btl_act_a.h",
+    "engine/include/battle/btl_act_b.h",
+    "engine/include/battle/btl_act_c.h",
+    "engine/include/battle/btl_act_d.h",
+    "engine/include/battle/btl_act_e.h",
+    "engine/include/battle/btl_act_f.h",
+    "engine/include/battle/btl_act_g.h",
+    "engine/include/battle/btl_act_h.h",
+    "engine/include/battle/btl_act_i.h",
+    "engine/include/battle/btl_act_j.h",
+    "engine/include/battle/btl_ai.h",
+    "engine/include/battle/btl_ai_act.h",
+    "engine/include/battle/btl_ai_int.h",
+    "engine/include/battle/btl_ai_mgr.h",
+    "engine/include/battle/btl_ai_seq_a.h",
+    "engine/include/battle/btl_ai_think.h",
+    "engine/include/battle/btl_cam.h",
+    "engine/include/battle/btl_capi_a.h",
+    "engine/include/battle/btl_capi_b.h",
+    "engine/include/battle/btl_char_action.h",
+    "engine/include/battle/btl_char_api.h",
+    "engine/include/battle/btl_char_cam.h",
+    "engine/include/battle/btl_char_cam_int.h",
+    "engine/include/battle/btl_char_coll.h",
+    "engine/include/battle/btl_char_ctl.h",
+    "engine/include/battle/btl_char_flag.h",
+    "engine/include/battle/btl_char_fx.h",
+    "engine/include/battle/btl_char_get.h",
+    "engine/include/battle/btl_char_hit.h",
+    "engine/include/battle/btl_char_member.h",
+    "engine/include/battle/btl_char_mgr.h",
+    "engine/include/battle/btl_char_move.h",
+    "engine/include/battle/btl_char_status.h",
+    "engine/include/battle/btl_demo_cam.h",
+    "engine/include/battle/btl_facade.h",
+    "engine/include/battle/btl_input.h",
+    "engine/include/battle/btl_obj.h",
+    "engine/include/battle/btl_pool.h",
+    "engine/include/battle/btl_replay.h",
+    "engine/include/battle/btl_scene.h",
+    "engine/include/battle/btl_script.h",
+    "engine/include/battle/btl_script_cmd.h",
+    "engine/include/battle/btl_seq.h",
+    "engine/include/battle/btl_tech_a.h",
+    "engine/include/battle/btl_tech_b.h",
+    "engine/include/battle/col_a.h",
+    "engine/include/battle/col_b.h",
+    "engine/include/battle/col_c.h",
+    "engine/include/battle/eft_a.h",
+    "engine/include/battle/eft_aa.h",
+    "engine/include/battle/eft_ab.h",
+    "engine/include/battle/eft_ac.h",
+    "engine/include/battle/eft_ad.h",
+    "engine/include/battle/eft_ae.h",
+    "engine/include/battle/eft_b.h",
+    "engine/include/battle/eft_c.h",
+    "engine/include/battle/eft_d.h",
+    "engine/include/battle/eft_det_a.h",
+    "engine/include/battle/eft_det_b.h",
+    "engine/include/battle/eft_e.h",
+    "engine/include/battle/eft_f.h",
+    "engine/include/battle/eft_g.h",
+    "engine/include/battle/eft_h.h",
+    "engine/include/battle/eft_i.h",
+    "engine/include/battle/eft_j.h",
+    "engine/include/battle/eft_k.h",
+    "engine/include/battle/eft_l.h",
+    "engine/include/battle/eft_m.h",
+    "engine/include/battle/eft_n.h",
+    "engine/include/battle/eft_o.h",
+    "engine/include/battle/eft_p.h",
+    "engine/include/battle/eft_q.h",
+    "engine/include/battle/eft_r.h",
+    "engine/include/battle/eft_s.h",
+    "engine/include/battle/eft_t.h",
+    "engine/include/battle/eft_u.h",
+    "engine/include/battle/eft_v.h",
+    "engine/include/battle/eft_v_ext.h",
+    "engine/include/battle/eft_w.h",
+    "engine/include/battle/eft_x.h",
+    "engine/include/battle/eft_y.h",
+    "engine/include/battle/eft_z.h",
+    "engine/include/battle/hud_0.h",
+    "engine/include/battle/hud_a.h",
+    "engine/include/battle/hud_b.h",
+    "engine/include/battle/hud_c.h",
+    "engine/include/battle/hud_d.h",
+    "engine/include/battle/hud_e.h",
+    "engine/include/battle/orbit_cam.h",
+    "engine/include/battle/stg_a.h",
+    "engine/include/battle/stg_b.h",
+    "engine/include/battle/stg_c.h",
+    "engine/include/battle/stg_d.h",
+    "engine/include/battle/stgm_a.h",
+    "engine/include/battle/stgm_a_b.h",
+    "engine/include/battle/view_a.h",
+    "engine/include/battle/view_b.h",
+    "engine/platform/platform/attack_tail_fighter0.bin",
+    "engine/platform/platform/attack_tail_fighter1.bin",
+    "engine/platform/platform/btl_char_mgr_decomp.c",
+    "engine/platform/platform/btl_obj_decomp.c",
+    "engine/platform/platform/ki_tail_fighter0.bin",
+    "engine/platform/platform/ki_tail_fighter1.bin",
+    "engine/platform/platform/move_tail_fighter0.bin",
+    "engine/platform/platform/move_tail_fighter1.bin",
+    "engine/platform/platform/port_compat.h",
+    "engine/platform/platform/roster_actions.bin",
+    "engine/platform/platform/super_skill.bin",
+    "engine/platform/platform/tables_dump/common2_word10.bin",
+    "engine/platform/platform/tables_dump/common2_word11.bin",
+    "engine/platform/platform/tables_dump/common2_word12.bin",
+    "engine/platform/platform/tables_dump/common2_word13.bin",
+    "engine/platform/platform/tables_dump/common2_word14.bin",
+    "engine/platform/platform/tables_dump/common2_word15.bin",
+    "engine/platform/platform/tables_dump/common2_word16.bin",
+    "engine/platform/platform/tables_dump/common2_word17.bin",
+    "engine/platform/platform/tables_dump/common2_word18.bin",
+    "engine/platform/platform/tables_dump/common2_word19.bin",
+    "engine/platform/platform/tables_dump/common2_word3.bin",
+    "engine/platform/platform/tables_dump/common2_word4.bin",
+    "engine/platform/platform/tables_dump/common2_word5.bin",
+    "engine/platform/platform/tables_dump/common2_word6.bin",
+    "engine/platform/platform/tables_dump/common2_word7.bin",
+    "engine/platform/platform/tables_dump/common2_word8.bin",
+    "engine/platform/platform/tables_dump/common2_word9.bin",
+    "engine/platform/platform/xb_battle_activate.c",
+    "engine/platform/platform/xb_boot_combat.c",
+    "engine/platform/platform/xb_facial_hook.c",
+    "engine/platform/platform/xb_render_hook.c",
+    "engine/platform/platform/xb_tables_complete.c"
+  ],
+  "changed_files": [
+    "src/main.c"
+  ],
+  "removed_files": [],
+  "correction_main_exactly_matches_D5": true,
+  "XEX_identical_to_D5": true,
+  "XEX_sha256": "ff48957be7fd58bd482addee8ea9106cae7dbfa765de4339dd103ef5c2c9b81a",
+  "upstream_identical_headers": 102,
+  "upstream_identical_modules_and_shim": {
+    "engine/platform/platform/btl_obj_decomp.c": "src/battle/btl_obj.c",
+    "engine/platform/platform/btl_char_mgr_decomp.c": "src/battle/btl_char_mgr.c",
+    "engine/platform/platform/port_compat.h": "port/include/port_compat.h"
+  },
+  "untyped_binary_additions": [
+    {
+      "path": "engine/platform/platform/attack_tail_fighter0.bin",
+      "bytes": 688,
+      "sha256": "088749b213cccc1ad97c421f6862c7e95cd0841de0949cb06ff081c07ba700ed"
+    },
+    {
+      "path": "engine/platform/platform/attack_tail_fighter1.bin",
+      "bytes": 688,
+      "sha256": "a8e71eb7c969da22d7ba82abc4ec641434c29c8037c1c89383d9a9179ba5e030"
+    },
+    {
+      "path": "engine/platform/platform/ki_tail_fighter0.bin",
+      "bytes": 688,
+      "sha256": "fc46092e53443ae6a3b6e5d316b6a34703a44ea41ec36a26880f6eb9524743f3"
+    },
+    {
+      "path": "engine/platform/platform/ki_tail_fighter1.bin",
+      "bytes": 688,
+      "sha256": "729415bc79d8f9c5dd185f7a96dfbbe233666011bb5082b511ad1334919714cf"
+    },
+    {
+      "path": "engine/platform/platform/move_tail_fighter0.bin",
+      "bytes": 688,
+      "sha256": "e9f89e1ea3c73cce4071f14862fdbfc751c19c5507f9073b264961309124f850"
+    },
+    {
+      "path": "engine/platform/platform/move_tail_fighter1.bin",
+      "bytes": 688,
+      "sha256": "0b0900e7e76384100af47d2f978e6c4ec798e4dce78c533375402c1b51f86be2"
+    },
+    {
+      "path": "engine/platform/platform/roster_actions.bin",
+      "bytes": 8192,
+      "sha256": "07ca979ee6892e69d37b2f1b9b1c989011df3dcef929786f7bd7cef1ddc2786f"
+    },
+    {
+      "path": "engine/platform/platform/super_skill.bin",
+      "bytes": 4096,
+      "sha256": "65d07aadc19df8090700e56bef7bb855368f872974885db92f5834e530615ad3"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word10.bin",
+      "bytes": 4096,
+      "sha256": "65d07aadc19df8090700e56bef7bb855368f872974885db92f5834e530615ad3"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word11.bin",
+      "bytes": 4096,
+      "sha256": "973685716909a8ba35443222dca56ab9681d81d6c6e58e377d3c5cb40ce975f3"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word12.bin",
+      "bytes": 4096,
+      "sha256": "f12fd9ec0ff7392d031183c01b500e6431a079539716d365f89bc1f2f726a41a"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word13.bin",
+      "bytes": 4096,
+      "sha256": "ea8205eb15ce01197f7861a149edcd4ee0cf221f11e26f9cce011125fed8ee46"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word14.bin",
+      "bytes": 4096,
+      "sha256": "24a6fe5ce746dbfbe29dc3928bd5aa5f33f951ce0461ec0a581668d91dcf74b4"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word15.bin",
+      "bytes": 4096,
+      "sha256": "1b0051d928af690ca64b931d08cab63437d220ae5affdf9988a2ba5607974b86"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word16.bin",
+      "bytes": 4096,
+      "sha256": "19cff57fa4042434a8525aaf06ffc8767a902f9cd9d5d1884cf0d46a1e9eb82e"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word17.bin",
+      "bytes": 4096,
+      "sha256": "dfb5c042326fcabaa3efee6f10e133b7dfb5bad293a1c872d05e8317da7ac3c3"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word18.bin",
+      "bytes": 4096,
+      "sha256": "2f2eb8986d2ddbdc0904dd12452d512baa81e464d1c0825abd1e186d9df04c32"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word19.bin",
+      "bytes": 4096,
+      "sha256": "86d2dab349cab1633cf5a530cf7a5d1d465165b1e96a0c4fc229720cbd48de2c"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word3.bin",
+      "bytes": 4096,
+      "sha256": "896421e30b31a5664c9c79eb28e6b1b9d9734f7ab3a8a4f7a70d736fe8da77a3"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word4.bin",
+      "bytes": 4096,
+      "sha256": "30951b5b87ae506adcfcf38346d6873b34be2b88e6ae240ab9320f0ed8721ed7"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word5.bin",
+      "bytes": 4096,
+      "sha256": "29490d4271a78e6e92bcaaf0b46bd0b01c9f14e0ecec0b500cfb7561bf9d36f4"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word6.bin",
+      "bytes": 4096,
+      "sha256": "029c9c148841818752267c6767e9fcd69d50a809858a0c6ed2729e1cdba25996"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word7.bin",
+      "bytes": 4096,
+      "sha256": "6ed22ce45267e33d9354f910dad514fd8cc942046f5208bcaa303eeea8420713"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word8.bin",
+      "bytes": 4096,
+      "sha256": "b9373bab9653e9832fd6c073aff4c46322de500ad062948d1d2817d312b44ebb"
+    },
+    {
+      "path": "engine/platform/platform/tables_dump/common2_word9.bin",
+      "bytes": 4096,
+      "sha256": "0140e8b93f8e0fb1db4a88e30864c0da10dcee4e575a00b69f287f19a64c028f"
+    }
+  ],
+  "untyped_binary_total_bytes": 86048,
+  "findings": [
+    "CompleteTables exists but returns success without completing tables; correction readme is imprecise about its absence",
+    "boot writes a separately declared gScenarioReady, not the actual gPortDataStripped/NOT_READY state; Battle_Main call is commented out",
+    "common2/common4 pointers are published then their buffers are freed",
+    "raw tail buffers have no field conversion or native destination layout validation",
+    "facial/render wrappers call APIs not implemented by the baseline",
+    "main invokes activation before the diagnostic has prepared its resources"
+  ],
+  "hardware_execution": false,
+  "assets_redistributed": false
+}

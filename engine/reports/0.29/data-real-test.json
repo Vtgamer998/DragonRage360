@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "source_program_sha256": {
+    "SLUS_216.78": "811188ba9b416500d921cd4d9514df0cbf42f3a41a99cf5aac5a3da37171bf99",
+    "DBZP.BIN": "30f61f9c78c3859e5dd4fcfd8df6753b0f2d2c64beb924b92da5b2eaaa5e09cc"
+  },
+  "tables": [
+    {
+      "name": "gMathfSinCoef",
+      "source_address": "0x2c3450",
+      "width": 4,
+      "count": 4
+    },
+    {
+      "name": "gSndBankVolume",
+      "source_address": "0x2c3460",
+      "width": 4,
+      "count": 8
+    },
+    {
+      "name": "gBattleTimeLimitTbl",
+      "source_address": "0x2c3480",
+      "width": 2,
+      "count": 8
+    }
+  ],
+  "real_source_coverage_checked": true,
+  "checksum_failure_preserves_destination": true,
+  "destination": "host test buffer only",
+  "game_global_tables_initialized": false,
+  "PowerPC_execution": false,
+  "battle_execution": false
+}

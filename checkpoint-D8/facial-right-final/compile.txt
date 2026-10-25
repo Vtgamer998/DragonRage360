@@ -1,0 +1,167 @@
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BtlObjHit_BuildVolumes’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1276:53: warning: passing argument 2 of ‘ColBox_AddPointKeepW’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 1276 |                 ColBox_AddPointKeepW(&work->atkBox, &boundsPoint);
+      |                                                     ^~~~~~~~~~~~
+      |                                                     |
+      |                                                     Vec4 *
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:64:54: note: expected ‘f32 *’ {aka ‘float *’} but argument is of type ‘Vec4 *’
+   64 | extern void ColBox_AddPointKeepW(BobjAabb *box, f32 *point);
+      |                                                 ~~~~~^~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1278:53: warning: passing argument 2 of ‘ColBox_AddPointKeepW’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 1278 |                 ColBox_AddPointKeepW(&work->atkBox, &boundsPoint);
+      |                                                     ^~~~~~~~~~~~
+      |                                                     |
+      |                                                     Vec4 *
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:64:54: note: expected ‘f32 *’ {aka ‘float *’} but argument is of type ‘Vec4 *’
+   64 | extern void ColBox_AddPointKeepW(BobjAabb *box, f32 *point);
+      |                                                 ~~~~~^~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1292:53: warning: passing argument 2 of ‘ColBox_AddPointKeepW’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 1292 |                 ColBox_AddPointKeepW(&work->atkBox, &boundsPoint);
+      |                                                     ^~~~~~~~~~~~
+      |                                                     |
+      |                                                     Vec4 *
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:64:54: note: expected ‘f32 *’ {aka ‘float *’} but argument is of type ‘Vec4 *’
+   64 | extern void ColBox_AddPointKeepW(BobjAabb *box, f32 *point);
+      |                                                 ~~~~~^~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1294:53: warning: passing argument 2 of ‘ColBox_AddPointKeepW’ from incompatible pointer type [-Wincompatible-pointer-types]
+ 1294 |                 ColBox_AddPointKeepW(&work->atkBox, &boundsPoint);
+      |                                                     ^~~~~~~~~~~~
+      |                                                     |
+      |                                                     Vec4 *
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:64:54: note: expected ‘f32 *’ {aka ‘float *’} but argument is of type ‘Vec4 *’
+   64 | extern void ColBox_AddPointKeepW(BobjAabb *box, f32 *point);
+      |                                                 ~~~~~^~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BObjFace_InitMouth’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1935:5: note: in expansion of macro ‘BtlObjFace_Reset’
+ 1935 |     BtlObjFace_Reset(face, 0);
+      |     ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1887:33: warning: function called through a non-compatible type
+ 1887 | #define BtlObjMdl_CopyTexAlpha ((void (*)(BObjMdl *mdl, BObjTexTable *tex, void *set))BtlObjMdl_CopyTexAlpha)
+      |                                ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1939:13: note: in expansion of macro ‘BtlObjMdl_CopyTexAlpha’
+ 1939 |             BtlObjMdl_CopyTexAlpha(mdl, mdl->tex, obj->mdl.mouthB[i]);
+      |             ^~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BObjFace_UpdateMouth’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1893:26: warning: function called through a non-compatible type
+ 1893 | #define BtlObjFace_Step ((void (*)(BObj *obj, BObjFace *face))BtlObjFace_Step)
+      |                         ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1991:5: note: in expansion of macro ‘BtlObjFace_Step’
+ 1991 |     BtlObjFace_Step(obj, face);
+      |     ^~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BtlObj_UpdateFace’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1891:31: warning: function called through a non-compatible type
+ 1891 | #define BtlObjFace_StepBlink ((void (*)(BObj *obj, BObjFace *face))BtlObjFace_StepBlink)
+      |                              ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2003:13: note: in expansion of macro ‘BtlObjFace_StepBlink’
+ 2003 |             BtlObjFace_StepBlink(obj, face);
+      |             ^~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BtlObj_CreateFace’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1895:29: warning: function called through a non-compatible type
+ 1895 | #define BtlObjMdl_HasMouth ((s32 (*)(BObjMdl *mdl))BtlObjMdl_HasMouth)
+      |                            ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2022:9: note: in expansion of macro ‘BtlObjMdl_HasMouth’
+ 2022 |     if (BtlObjMdl_HasMouth(mdl)) {
+      |         ^~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1890:26: warning: function called through a non-compatible type
+ 1890 | #define BtlObjFace_Init ((void (*)(BObj *obj, BObjFace *face))BtlObjFace_Init)
+      |                         ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2030:13: note: in expansion of macro ‘BtlObjFace_Init’
+ 2030 |             BtlObjFace_Init(obj, face);
+      |             ^~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BtlObj_SetSubState’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1886:32: warning: function called through a non-compatible type
+ 1886 | #define BtlObjMdl_HasLipTrack ((s32 (*)(BObjMdl *mdl, s32 line))BtlObjMdl_HasLipTrack)
+      |                               ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2081:14: note: in expansion of macro ‘BtlObjMdl_HasLipTrack’
+ 2081 |         if (!BtlObjMdl_HasLipTrack(mdl, arg)) {
+      |              ^~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1892:30: warning: function called through a non-compatible type
+ 1892 | #define BtlObjFace_CanStart ((s32 (*)(BObjFace *face, s32 mode))BtlObjFace_CanStart)
+      |                             ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2085:10: note: in expansion of macro ‘BtlObjFace_CanStart’
+ 2085 |     if (!BtlObjFace_CanStart(face, mode)) {
+      |          ^~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2091:9: note: in expansion of macro ‘BtlObjFace_Reset’
+ 2091 |         BtlObjFace_Reset(face, 0);
+      |         ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2094:9: note: in expansion of macro ‘BtlObjFace_Reset’
+ 2094 |         BtlObjFace_Reset(face, 1);
+      |         ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1889:33: warning: function called through a non-compatible type
+ 1889 | #define BtlObjFace_PickJawKeys ((void (*)(BObj *obj, BObjFace *face))BtlObjFace_PickJawKeys)
+      |                                ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2110:9: note: in expansion of macro ‘BtlObjFace_PickJawKeys’
+ 2110 |         BtlObjFace_PickJawKeys(obj, face);
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1889:33: warning: function called through a non-compatible type
+ 1889 | #define BtlObjFace_PickJawKeys ((void (*)(BObj *obj, BObjFace *face))BtlObjFace_PickJawKeys)
+      |                                ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2123:9: note: in expansion of macro ‘BtlObjFace_PickJawKeys’
+ 2123 |         BtlObjFace_PickJawKeys(obj, face);
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1889:33: warning: function called through a non-compatible type
+ 1889 | #define BtlObjFace_PickJawKeys ((void (*)(BObj *obj, BObjFace *face))BtlObjFace_PickJawKeys)
+      |                                ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2132:9: note: in expansion of macro ‘BtlObjFace_PickJawKeys’
+ 2132 |         BtlObjFace_PickJawKeys(obj, face);
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2147:9: note: in expansion of macro ‘BtlObjFace_Reset’
+ 2147 |         BtlObjFace_Reset(face, 0);
+      |         ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2152:9: note: in expansion of macro ‘BtlObjFace_Reset’
+ 2152 |         BtlObjFace_Reset(face, 0);
+      |         ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2161:9: note: in expansion of macro ‘BtlObjFace_Reset’
+ 2161 |         BtlObjFace_Reset(face, 0);
+      |         ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1885:27: warning: function called through a non-compatible type
+ 1885 | #define BtlObjFace_Reset ((void (*)(BObjFace *face, s32 keep))BtlObjFace_Reset)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2166:9: note: in expansion of macro ‘BtlObjFace_Reset’
+ 2166 |         BtlObjFace_Reset(face, 0);
+      |         ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BtlObj_GetSubState’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1894:32: warning: function called through a non-compatible type
+ 1894 | #define BtlObjMdl_HasMouthSet ((s32 (*)(BObjMdl *mdl, s32 shape))BtlObjMdl_HasMouthSet)
+      |                               ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2181:9: note: in expansion of macro ‘BtlObjMdl_HasMouthSet’
+ 2181 |     if (BtlObjMdl_HasMouthSet(&obj->mdl, face->shape)) {
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c: In function ‘BtlObj_IsJawActive’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:1888:27: warning: function called through a non-compatible type
+ 1888 | #define BtlObjMdl_HasJaw ((s32 (*)(BObj *obj))BtlObjMdl_HasJaw)
+      |                          ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/bobj_a.c:2244:13: note: in expansion of macro ‘BtlObjMdl_HasJaw’
+ 2244 |         if (BtlObjMdl_HasJaw(obj)) {
+      |             ^~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/btl_obj.c: In function ‘BtlRes_LoadFile’:
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/btl_obj.c:104:39: warning: function called through a non-compatible type
+  104 | #define File_Request3(id, buf, size) ((void *(*)(s32, void *, s32))File_Request)(id, buf, size)
+      |                                      ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/btl_obj.c:1155:25: note: in expansion of macro ‘File_Request3’
+ 1155 |             file->buf = File_Request3(file->id, NULL, 0);
+      |                         ^~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/btl_obj.c:104:39: warning: function called through a non-compatible type
+  104 | #define File_Request3(id, buf, size) ((void *(*)(s32, void *, s32))File_Request)(id, buf, size)
+      |                                      ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/facial-right-final/btl_obj.c:1159:25: note: in expansion of macro ‘File_Request3’
+ 1159 |             file->buf = File_Request3(file->id, file->buf, file->size);
+      |                         ^~~~~~~~~~~~~

@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "excluded_original_only_bytes": 46,
+  "new_native_consumer_rejected": true,
+  "changed_vector_reader_rejected": true,
+  "gaps_are_not_guessed_types": true
+}

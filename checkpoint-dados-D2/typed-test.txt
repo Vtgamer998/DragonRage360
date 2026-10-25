@@ -1,0 +1,3 @@
+PASS: actual typed loader; all real scalar/mixed/pointer ops and whole-buffer hashes; opaque bytes untouched; incomplete boot refused; dry run, bad hash, pointer mismatch, overlap, source bounds and reentry refuse atomically; host buffers only
+typed-data: 2736 ops validated; complete=0; commit=0; combat NOT started
+typed-data: 2736 ops validated; complete=0; commit=1; combat NOT started

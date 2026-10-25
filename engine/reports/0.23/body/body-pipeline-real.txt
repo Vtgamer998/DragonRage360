@@ -1,0 +1,4 @@
+PASS body corpus: models=698 nodes=43121 validated_body_VIF_chains=32454
+body pipeline rc=0 vertices=13476 parts=69 chains=53 MSCNT=564 GIF=564 strips=564 triangles=4492 ADC=0 instructions=127
+bounds x=613.250000..667.812500 y=517.375000..600.000000 z=0.496022..0.504146
+PASS output capacity failure: no published vertices or statistics

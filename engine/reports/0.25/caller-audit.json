@@ -1,0 +1,1203 @@
+[
+ {
+  "file": "battle/col_c.c",
+  "line": 13,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/col_c.c",
+  "line": 30,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_ad_b.c",
+  "line": 110,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_ad_b.c",
+  "line": 997,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_b.c",
+  "line": 155,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_b.c",
+  "line": 1306,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_c.c",
+  "line": 1417,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "battle/eft_c.c",
+  "line": 1460,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_c.c",
+  "line": 1525,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_d.c",
+  "line": 368,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 113,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 220,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 303,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 450,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 606,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 623,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "battle/eft_d_b.c",
+  "line": 758,
+  "kind": "Direct",
+  "status": "NO_END",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_det_a.c",
+  "line": 30,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_det_a.c",
+  "line": 250,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_det_a.c",
+  "line": 256,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_det_a.c",
+  "line": 31,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_det_a.c",
+  "line": 251,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "battle/eft_det_a.c",
+  "line": 257,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_0_b.c",
+  "line": 40,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_0_b.c",
+  "line": 75,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_a_b.c",
+  "line": 79,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_a_b.c",
+  "line": 93,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_a_d.c",
+  "line": 29,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_a_d.c",
+  "line": 43,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_a_d.c",
+  "line": 60,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_a_d.c",
+  "line": 76,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 234,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 290,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 324,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 418,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 521,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 176,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 184,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 196,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 395,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 177,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 185,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_c_c.c",
+  "line": 197,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_d_b.c",
+  "line": 66,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_d_b.c",
+  "line": 79,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_d_b.c",
+  "line": 93,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_d_b.c",
+  "line": 107,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_d_b.c",
+  "line": 122,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/hud_d_b.c",
+  "line": 136,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_b.c",
+  "line": 1080,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_b.c",
+  "line": 1172,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_b.c",
+  "line": 1653,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_b.c",
+  "line": 1078,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_b.c",
+  "line": 1637,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_c.c",
+  "line": 216,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_c.c",
+  "line": 892,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "battle/stg_c.c",
+  "line": 210,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stgm_a.c",
+  "line": 520,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stgm_a.c",
+  "line": 533,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stgm_a.c",
+  "line": 544,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stgm_a.c",
+  "line": 555,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stgm_a.c",
+  "line": 566,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "battle/stgm_a.c",
+  "line": 584,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "menu/port_screen.c",
+  "line": 29,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "menu/port_screen.c",
+  "line": 40,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "menu/port_screen.c",
+  "line": 198,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/color_fade.c",
+  "line": 17,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/fade.c",
+  "line": 24,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfx.c",
+  "line": 219,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfx_ot.c",
+  "line": 185,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfx_ot.c",
+  "line": 226,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfx_ot.c",
+  "line": 243,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 315,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 405,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u8 *)"
+  ]
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 585,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 631,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1062,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1178,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1253,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1307,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1350,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 144,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 167,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1118,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1134,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1406,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1434,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1559,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1715,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_a.c",
+  "line": 1823,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 74,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 141,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 205,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 269,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 366,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   "(u32 *)"
+  ]
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 713,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 1001,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 1176,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 823,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b.c",
+  "line": 1251,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b_b.c",
+  "line": 265,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b_b.c",
+  "line": 274,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b_b.c",
+  "line": 266,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_b_b.c",
+  "line": 275,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 750,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 795,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 871,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 684,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 689,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 685,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_c.c",
+  "line": 690,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 138,
+  "kind": "Direct",
+  "status": "REVIEW",
+  "hits": [
+   ".w["
+  ]
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 358,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 290,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 294,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 304,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 308,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 313,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 317,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 833,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 853,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 867,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 881,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 915,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 928,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 940,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 291,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 295,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 305,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 309,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 314,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_d_c.c",
+  "line": 318,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_e.c",
+  "line": 31,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_e.c",
+  "line": 44,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_e.c",
+  "line": 61,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_e.c",
+  "line": 85,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_e.c",
+  "line": 107,
+  "kind": "AddData",
+  "status": "CHECK_SOURCE_TYPE",
+  "hits": []
+ },
+ {
+  "file": "sys/gfxm_e_b.c",
+  "line": 487,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/pad_watch.c",
+  "line": 187,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/sprite.c",
+  "line": 41,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/sprite.c",
+  "line": 66,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/sprite.c",
+  "line": 99,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/sprite.c",
+  "line": 121,
+  "kind": "Direct",
+  "status": "u64-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 47,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 69,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 85,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 103,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 117,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 135,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 149,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 171,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 185,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 202,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 218,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 236,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 355,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 379,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 393,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 410,
+  "kind": "Alloc",
+  "status": "u32-only?",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 68,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 102,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 134,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 167,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 169,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 201,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 235,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 375,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 377,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ },
+ {
+  "file": "sys/vu1_packet.c",
+  "line": 409,
+  "kind": "AddRef",
+  "status": "CHECK_SOURCE_ENDIAN",
+  "hits": []
+ }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "file": "inc_D_002F2420.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EC8C0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE820.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FF170.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEB78.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDC70.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FF05C.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE4BC.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1C3398.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1EC248.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDEB0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002F3410.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEC44.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1C3380.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_gEftShotFxRows.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FC2A0.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDE10.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1C3388.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ED550.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "dbzp_07C204.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1EE7BC.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FF11C.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1ECB60.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "vu1_micro.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_002FF180.sbss.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEBB0.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1F36F8.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDCE0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ECEA0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_002FF300.bss.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEAE0.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE958.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDDC0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FC744.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002F3440.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1EB354.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ECE90.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1F2168.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE880.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1EB380.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDEE8.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EC8D0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE9DC.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDDD8.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FC2CC.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002F33E0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EC6E0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE7AC.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1F3488.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDA70.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_gEftShotFxSegs.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ED360.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FC728.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002F33D0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002F1B90.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE408.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1C3400.data.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEC20.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FC3FC.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ED3E0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FE9F0.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002EDD50.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEA58.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1F2198.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ED510.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1F44C0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_002FF280.bss.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ED5D0.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FC328.lit4.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "inc_D_002ED590.rodata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEB28.sdata.s",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "file": "cod_1FEA18.sdata.s",
+    "ok": true,
+    "error": ""
+  }
+]

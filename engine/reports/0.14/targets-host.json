@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "coverage": [
+    "A/B/A color/depth call model",
+    "native draw core integration",
+    "24 target IDs",
+    "128MiB page-rounded peak budget",
+    "partial allocation failure preserves old target",
+    "GPU timeout never frees in-flight memory",
+    "normal diagnostic batches do not lose stored targets"
+  ],
+  "limits": [
+    "no GPU rasterization",
+    "no stencil restore",
+    "no GS aux/DATE",
+    "no engine registration",
+    "no game assets",
+    "no PowerPC execution",
+    "no new XEX"
+  ],
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

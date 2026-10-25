@@ -1,0 +1,3 @@
+PASS: PSMT8 palette diagnostic chain and native renderer calls, vertex arena lifetime, fences/timeouts, failure cleanup, state/capacity/input checks
+PASS: real sXenosBackend callbacks, textures/mips/ownership/generation, DATE marker/FBA replay, present/read/copy, unsupported VU failure; MOCK GPU and capture globals only
+PASS: patched GsGpu_Init body selects sXenosBackend under DR_XBOX360, no GL/Vulkan linked; remaining capture source not compiled

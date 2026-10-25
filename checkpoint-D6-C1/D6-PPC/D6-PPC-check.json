@@ -1,0 +1,36 @@
+[
+  {
+    "source": "xb_battle_activate.c",
+    "PPC_compile_returncode": 1,
+    "undefined_references_if_compiled": []
+  },
+  {
+    "source": "xb_tables_complete.c",
+    "PPC_compile_returncode": 1,
+    "undefined_references_if_compiled": []
+  },
+  {
+    "source": "xb_boot_combat.c",
+    "PPC_compile_returncode": 0,
+    "undefined_references_if_compiled": [
+      "         U gScenarioReady",
+      "         U xsdk_log_write"
+    ]
+  },
+  {
+    "source": "xb_facial_hook.c",
+    "PPC_compile_returncode": 0,
+    "undefined_references_if_compiled": [
+      "         U dr_face_vif_init",
+      "         U dr_face_vif_update"
+    ]
+  },
+  {
+    "source": "xb_render_hook.c",
+    "PPC_compile_returncode": 0,
+    "undefined_references_if_compiled": [
+      "         U BtlObj_UpdateAll",
+      "         U dr_gs_backend_submit"
+    ]
+  }
+]

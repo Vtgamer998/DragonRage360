@@ -1,0 +1,26 @@
+{
+  "version": "0.31",
+  "previous_boot_unresolved": 228,
+  "boot_unresolved": 221,
+  "battle_unresolved": 133,
+  "additional_initialization_references": 88,
+  "resolved": [
+    "Dma_InitBuffers",
+    "Dma_SendGif",
+    "sceCdSearchFile",
+    "sceClose",
+    "sceLseek",
+    "sceOpen",
+    "sceRead"
+  ],
+  "PowerPC_units_compiled": 384,
+  "ABI_conflicts": 0,
+  "native_arithmetic_in_lowered_objects": [],
+  "Battle_Main_in_XEX": false,
+  "Game_Main_in_XEX": false,
+  "XEX": "diagnostic only",
+  "hardware_tested": false,
+  "GPU_pixels_validated": false,
+  "native_XEX_sha256": "0c759e8878b1e0bb188b892b1185d5447b9ac7585404986432ad82530355b92c",
+  "source_programs_tested": "USA ELF and overlay read as raw bytes only; never executed/copied to native code"
+}

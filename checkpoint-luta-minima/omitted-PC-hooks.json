@@ -1,0 +1,15 @@
+{
+  "src/sys/gfx.c": [
+    "PortQuit_Draw"
+  ],
+  "src/battle/battle_load.c": [
+    "DrNet_BattleFinished"
+  ],
+  "src/battle/btl_act_e.c": [
+    "Port_ClashLog"
+  ],
+  "src/battle/btl_act_f.c": [
+    "Port_ClashLog",
+    "Port_ClashLog"
+  ]
+}

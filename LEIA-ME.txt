@@ -1,0 +1,181 @@
+# 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
+
+Novo default.xex compilado. O boot original de objetos e o reset/inicialização
+de BtlChar/BtlAi estão integrados ao diagnóstico e passaram em CPU i386 com
+recursos reais. Ainda não existe luta jogável: Battle_Update/Battle_Main e
+apresentação GPU do combate continuam pendentes; sem teste em Xbox/Xenia.
+
+Leia TESTAR-PRIMEIRO.md e RELATORIO-0.44-D10.md. O XEX anterior D8 foi preservado.
+
+---
+Documentação histórica da versão anterior:
+
+# Revisão de fontes 0.43-D9 — entrega parcial
+
+**Não há XEX novo nem luta jogável nesta revisão.** O default.xex é o diagnóstico
+0.42-D8 original. As alterações em fontes tratam comum 4, leitores temporários
+e posicionamento inicial com chão. Leia RELATORIO-0.43-D9-FONTES.md para testes
+e pendências. Não execute BtlChar_AllocAll/Battle_Main como se o boot estivesse pronto.
+
+---
+Documentação histórica da versão recebida:
+
+ATUALIZAÇÃO 0.42-D8: seis janelas comuns/IA e oito janelas por modelo preparadas; estado facial CPU exercitado. BtlChar/BtlAi, boot completo, cenário/simulação/controle/apresentação continuam pendentes. Luta bloqueada; XEX recompilado, não executado no Xbox. Leia RELATORIO-0.42-D8.md.
+
+DOCUMENTAÇÃO HISTÓRICA ABAIXO:
+
+ATUALIZAÇÃO 0.38-D4: reprodução/retarget, poses, matrizes, BobjWork e volumes ligados ao caminho original; texturas e referências faciais preparadas. A lista AINDA NÃO está concluída: faltam tabelas/binders completos, renderer/facial e estado/registro nos gerenciadores. Novo XEX de diagnóstico; luta bloqueada e versão não testada no Xbox/Xenia. Consulte RELATORIO-0.38-D4.md.
+
+DOCUMENTAÇÃO HISTÓRICA ABAIXO:
+
+ATUALIZAÇÃO 0.37-D3: catálogo nativo complete=true com exclusões comprovadas de pools originais sem consumidor. Colisão instalada com NOT_READY; dois modelos/animações preparados. Lutadores completos, cenário completo e boot da luta AINDA PENDENTES. Novo XEX de diagnóstico, sem teste no Xbox. Consulte RELATORIO-0.37-D3.md.
+
+DOCUMENTAÇÃO HISTÓRICA ABAIXO:
+
+ATUALIZAÇÃO 0.36-D2: consulte RELATORIO-0.36-D2.md. O XEX da raiz é o diagnóstico D2, sem luta jogável. Restam 4 faixas/54 bytes no catálogo e o boot/instalação de recursos. Colisão do cenário validada em host, não instalada no combate. Sem teste desta versão no Xbox.
+
+DOCUMENTAÇÃO HISTÓRICA ABAIXO:
+
+# Atualização de diagnóstico 0.33-HW1
+
+Leia TESTE-AUTOMATICO-HW1.md primeiro. Novo default.xex com teste gráfico
+configurado para abrir automaticamente. Ainda não testado em hardware.
+Modelo pode ser escolhido com startup_test.txt contendo model. Luta ausente.
+Os relatórios e patches abaixo são históricos e têm escopos diferentes.
+
+# Atualização 0.33 — decodificador de vídeo PSS
+
+O novo decoder nativo lê os dois vídeos completos pela ISO: 7.010 quadros
+passaram em host com ASan/UBSan. Os primeiros 32 de cada vídeo foram comparados
+com FFmpeg. 389/389 unidades PowerPC compilaram, sem conflito de ABI.
+O vínculo completo continua falhando nas mesmas 207 referências (104 código,
+103 somente dados). As nove sceMpeg e a integração do player seguem pendentes.
+O default.xex 0.33 contém as APIs XbMpeg_* para inspeção estática, mas o launcher
+não as chama. Não reproduz os filmes nem roda Game_Main/Battle_Main.
+**Não há luta jogável ou teste em Xbox/emulador.**
+Consulte RELATORIO-0.33.md e TESTE-XBOX-0.33.md.
+
+--- Histórico ---
+
+# Atualização 0.32 — overlay nativo e ADXT
+
+As 13 APIs ADXT e a consulta de prefetch têm implementação nativa.
+Overlay_Load deixou de copiar MIPS sobre código PowerPC: usa catálogo gerado
+para os 72 objetos nativos dos menus (119 regiões e 46 relocações de ponteiros).
+Restam 207 nomes no vínculo com Game_Main e Battle_Main, antes 221.
+387/387 unidades PowerPC, zero conflitos de ABI. Testes de host com ISO/ADX
+reais passaram; GPU/áudio/kernel foram simulados onde indicado.
+**O pedido completo ainda não está atendido. Não há luta executável.**
+O default.xex é o diagnóstico 0.32, sem Game_Main/Battle_Main e sem o catálogo
+dos menus. Consulte RELATORIO-0.32.md e TESTE-XBOX-0.32.md.
+
+--- Histórico ---
+
+# Atualização 0.31 — ISO e DMA da inicialização
+
+Cinco chamadas de arquivo e duas de DMA implementadas e verificadas.
+384/384 unidades PowerPC, zero conflitos ABI. Vínculo com Game_Main e
+Battle_Main: 228 → 221 referências pendentes (133 combate + 88 adicionais).
+ISO real: ELF/overlay conferiram por SHA-256; testes de memória e captura
+passaram com ASan/UBSan e transportes NT/GPU simulados.
+**O pedido de vínculo completo ainda não está atendido. A luta não roda.**
+O default.xex é o diagnóstico 0.31. Game_Main e Battle_Main continuam ausentes.
+Consulte RELATORIO-0.31.md, inclusive o bloqueio do overlay MIPS, e TESTE-XBOX-0.31.md.
+
+--- Histórico ---
+
+# Atualização 0.30 — chamadas GS e auditoria do boot
+
+Quatro chamadas gráficas reais adaptadas e ligadas ao novo XEX de diagnóstico.
+383/383 unidades PowerPC, zero conflitos ABI. Battle_Main: 137 → 133 nomes
+pendentes. Incluindo Game_Main, o total é 228: o boot não era coberto antes.
+1.841 comparações de pacotes e testes de leitura RGB/sincronização passaram
+em host com ASan/UBSan e GPU simulada.
+**A luta ainda não roda. Battle_Main e Game_Main seguem fora do XEX.**
+Sem teste em Xbox/emulador ou validação de pixels. Consulte RELATORIO-0.30.md.
+
+--- Histórico ---
+
+# Atualização 0.29 — recursos completos e heap do motor
+
+ISO completa baixada, com executáveis e três AFS extraídos e validados.
+Heap nativo corrigido: 3.016 verificações passaram. Dados reais: 698 modelos
+e 57.259 animações não vazias validados em host; modelo VU em pose de referência.
+383/383 unidades PowerPC, sem conflito ABI; vínculo com 137 nomes pendentes.
+**A luta ainda não roda. Battle_Main segue fora do XEX. Sem teste em Xbox.**
+O default.xex é o diagnóstico 0.27 inalterado. Consulte RELATORIO-0.29.md.
+
+--- Histórico ---
+
+# Atualização 0.28 — fontes do carregador de dados
+
+Carregador BT3X com destinos explícitos, validação das origens/ELF e checksum
+antes da escrita. 546 verificações passaram. 382/382 unidades PowerPC,
+sem conflito de ABI; o vínculo segue com 139 referências pendentes.
+**O jogo e a luta não rodam. Battle_Main segue fora do XEX. Sem teste em Xbox.**
+O default.xex continua o diagnóstico 0.27. Consulte RELATORIO-0.28.md.
+
+--- Histórico ---
+
+# Atualização 0.27 — caminho VIF/VU/GIF nativo
+
+Novo default.xex de diagnóstico com as entradas gráficas Port_Gs*, uma sessão
+VU compartilhada e conversão do ambiente/clear DBuff. 382/382 unidades do motor
+compilaram; ABI sem conflitos; 139 nomes pendentes no vínculo do combate.
+**O jogo e a luta não rodam. Battle_Main segue fora do XEX. Sem teste em Xbox.**
+Consulte RELATORIO-0.27.md e TESTE-XBOX-0.27.md.
+
+--- Histórico ---
+
+# Atualização 0.26 — fontes do produtor de textura
+
+Dma_PutTexStrips adaptado e compilado no vínculo do motor; 382/382 unidades,
+sem conflito ABI, 156 nomes pendentes. 5.768 casos de teste passaram.
+**Battle_Main continua fora do XEX, sem luta nem teste em Xbox/emulador.**
+O default.xex é o diagnóstico 0.25 inalterado. Consulte RELATORIO-0.26.md.
+
+--- Histórico ---
+
+DRAGONRAGE360 0.25 INTEGRADA — DIAGNOSTICO SEM COMBATE
+
+Patch aplicado na base completa, dependencias incluidas e novo default.xex compilado.
+NEXT/retorno com mapas explicitos e copia limitada para buffers IOP adicionados.
+381 unidades PowerPC compilaram; ABI sem rejeicoes; 157 nomes pendentes.
+Battle_Main continua fora do XEX. Nenhuma execucao em Xbox/emulador.
+Leia RELATORIO-0.25-integrado.md e VALIDACAO.json.
+
+--- Historico ---
+
+PLATAFORMA 0.4 INTEGRADA — DIAGNOSTICO, SEM COMBATE
+
+Novo default.xex: ADXF, gancho de recursos e coleta de IDs na verificacao da ISO.
+380 unidades do motor/plataforma compilaram; ABI sem rejeicoes, 163 simbolos pendentes.
+Battle_Main continua fora do XEX. Nada executado em Xbox ou emulador.
+Leia RELATORIO-plataforma-0.4.md para limites, uso e testes.
+
+--- Historico anterior ---
+
+TENTATIVA DE INTEGRACAO DE Battle_Main
+
+368 unidades compilaram; o vinculo falhou por ABI e 187 simbolos pendentes.
+Battle_Main NAO esta no XEX. O executavel abaixo continua sendo o 0.24.
+Leia RELATORIO-Battle_Main.md e engine/combat/README.md.
+
+DRAGONRAGE360 — EXPERIMENTAL 0.24
+
+Novo: subconjunto de produtores de registradores/retângulos de dma.c
+adaptado para LE explícito. Dma_Flush/ResetBuffers e os produtores usados
+pelo diagnóstico agora estão no XEX, ligados ao consumidor DMA/VIF/GS.
+1.329 comparações de bytes com os produtores originais passaram.
+
+O COMBATE NÃO FOI INTEGRADO. Battle_Main continua fora do executável.
+IA, colisões e animações de combate continuam pendentes. Os demais
+produtores de modelos/VU/efeitos e a plataforma PS2 não estão adaptados.
+
+X abre diagnóstico GS; Y dentro dele abre captura sintética; B volta.
+O visualizador da ISO continua em pose fixa. A ISO não acompanha o pacote.
+Nenhum XEX foi executado no Xbox/emulador. DATE/FBA/stencil continuam sem
+pixels validados em hardware. Não há luta ou online jogável.
+
+Leia RELATORIO-0.24.md, PENDENCIAS.md, BUILD-RESULT.txt e VALIDACAO.json.
+Resultados atuais: engine/reports/0.24/. Relatórios anteriores são históricos.

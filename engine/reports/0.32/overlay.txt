@@ -1,0 +1,1 @@
+PASS: actual native overlay loader, real USA source identity; native pointers/mixed fields restored 100 times; code unchanged; malformed regions, relocs, IO/hash errors, alias mutation and recursion refused; no PS2 bytes executed

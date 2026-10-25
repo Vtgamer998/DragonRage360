@@ -1,0 +1,79 @@
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c: In function 'Load_Typed_Table':
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:47:5: error: unknown type name 'FILE'
+   47 |     FILE *f = fopen(path, "rb");
+      |     ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:11:1: note: 'FILE' is defined in header '<stdio.h>'; this is probably fixable by adding '#include <stdio.h>'
+   10 | #include <string.h>
+  +++ |+#include <stdio.h>
+   11 | 
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:47:15: error: implicit declaration of function 'fopen' [-Wimplicit-function-declaration]
+   47 |     FILE *f = fopen(path, "rb");
+      |               ^~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:47:15: note: 'fopen' is defined in header '<stdio.h>'; this is probably fixable by adding '#include <stdio.h>'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:47:15: error: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:49:5: error: implicit declaration of function 'fseek' [-Wimplicit-function-declaration]
+   49 |     fseek(f, 0, SEEK_END);
+      |     ^~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:49:17: error: 'SEEK_END' undeclared (first use in this function)
+   49 |     fseek(f, 0, SEEK_END);
+      |                 ^~~~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:49:17: note: each undeclared identifier is reported only once for each function it appears in
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:50:15: error: implicit declaration of function 'ftell' [-Wimplicit-function-declaration]
+   50 |     long sz = ftell(f);
+      |               ^~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:51:17: error: 'SEEK_SET' undeclared (first use in this function)
+   51 |     fseek(f, 0, SEEK_SET);
+      |                 ^~~~~~~~
+In file included from incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:7:
+incoming/D6/DragonRage360-Demo/engine/platform/platform/port_compat.h:33:16: error: implicit declaration of function 'Port_Malloc' [-Wimplicit-function-declaration]
+   33 | #define malloc Port_Malloc
+      |                ^~~~~~~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:52:17: note: in expansion of macro 'malloc'
+   52 |     void *buf = malloc(sz);
+      |                 ^~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/port_compat.h:33:16: error: initialization of 'void *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+   33 | #define malloc Port_Malloc
+      |                ^~~~~~~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:52:17: note: in expansion of macro 'malloc'
+   52 |     void *buf = malloc(sz);
+      |                 ^~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:53:17: error: implicit declaration of function 'fclose' [-Wimplicit-function-declaration]
+   53 |     if (!buf) { fclose(f); return -2; }
+      |                 ^~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:54:5: error: implicit declaration of function 'fread' [-Wimplicit-function-declaration]
+   54 |     fread(buf, 1, sz, f);
+      |     ^~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c: In function 'Load_SuperSkill_Roster_Tails':
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:67:9: error: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+   67 |         free(buf);
+      |         ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:11:1: note: include '<stdlib.h>' or provide a declaration of 'free'
+   10 | #include <string.h>
+  +++ |+#include <stdlib.h>
+   11 | 
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:67:9: warning: incompatible implicit declaration of built-in function 'free' [-Wbuiltin-declaration-mismatch]
+   67 |         free(buf);
+      |         ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:67:9: note: include '<stdlib.h>' or provide a declaration of 'free'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:70:9: warning: incompatible implicit declaration of built-in function 'free' [-Wbuiltin-declaration-mismatch]
+   70 |         free(buf);
+      |         ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:70:9: note: include '<stdlib.h>' or provide a declaration of 'free'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:75:9: error: implicit declaration of function 'snprintf' [-Wimplicit-function-declaration]
+   75 |         snprintf(path, sizeof(path), "engine/platform/platform/attack_tail_fighter%d.bin", fgt);
+      |         ^~~~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:75:9: note: include '<stdio.h>' or provide a declaration of 'snprintf'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:75:9: warning: incompatible implicit declaration of built-in function 'snprintf' [-Wbuiltin-declaration-mismatch]
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:75:9: note: include '<stdio.h>' or provide a declaration of 'snprintf'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:76:54: warning: incompatible implicit declaration of built-in function 'free' [-Wbuiltin-declaration-mismatch]
+   76 |         if (Load_Typed_Table(path, &buf, &len) == 0) free(buf);
+      |                                                      ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:76:54: note: include '<stdlib.h>' or provide a declaration of 'free'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:78:54: warning: incompatible implicit declaration of built-in function 'free' [-Wbuiltin-declaration-mismatch]
+   78 |         if (Load_Typed_Table(path, &buf, &len) == 0) free(buf);
+      |                                                      ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:78:54: note: include '<stdlib.h>' or provide a declaration of 'free'
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:80:54: warning: incompatible implicit declaration of built-in function 'free' [-Wbuiltin-declaration-mismatch]
+   80 |         if (Load_Typed_Table(path, &buf, &len) == 0) free(buf);
+      |                                                      ^~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_battle_activate.c:80:54: note: include '<stdlib.h>' or provide a declaration of 'free'

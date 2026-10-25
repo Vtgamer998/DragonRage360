@@ -1,0 +1,31 @@
+# Dados do jogo e ISOs: NUNCA publicar
+*.iso
+*.bin.iso
+isos/*
+!isos/COLOQUE_SUA_ISO_AQUI.txt
+save_import/*
+!save_import/LEIA-ME.txt
+common-*.bin
+stage.bin
+*-model.bin
+*-animation.bin
+
+# Binários compilados e versões antigas (ocupam espaço e contêm código do jogo)
+*.xex
+diagnostico-anterior-*/
+build/
+
+# Logs e arquivos locais do console
+default.log
+*.log
+demo.cfg
+battle_resource.txt
+
+# Artefatos de compilação e testes (contêm código compilado do jogo)
+*.o
+*.elf
+*.xex.*
+*.ate-*
+checkpoint-*/synthetic/
+checkpoint-*/consumers32/
+checkpoint-*/*.bin

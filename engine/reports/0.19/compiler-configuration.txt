@@ -1,0 +1,8 @@
+Using built-in specs.
+COLLECT_GCC=xsdk-gcc/bin/powerpc-xsdk-elf-gcc
+COLLECT_LTO_WRAPPER=/workspace/scratch/0e938d660765/xsdk-gcc/libexec/gcc/powerpc-xsdk-elf/15.3.0/lto-wrapper
+Target: powerpc-xsdk-elf
+Configured with: /workspace/scratch/0e938d660765/xsdk-gcc-work-14/src/gcc-15.3.0/configure --target=powerpc-xsdk-elf --prefix=/workspace/scratch/0e938d660765/xsdk-gcc --disable-nls --disable-multilib --with-gmp=/workspace/scratch/0e938d660765/toolchain-deps/root/usr --with-mpfr=/workspace/scratch/0e938d660765/toolchain-deps/root/usr --with-mpc=/workspace/scratch/0e938d660765/toolchain-deps/root/usr --with-cpu=cell --with-newlib --disable-shared --disable-tls --with-specs='-D__XSDK__ -D__DYNAMIC_REENT__ -mpowerpc64 -ffixed-cr2 -ffixed-cr3 -ffixed-cr4 -ffixed-cr5 -ffixed-cr6 -ffixed-cr7 %{!ftree-vectorize:-fno-tree-vectorize} -fno-optimize-sibling-calls -fno-reorder-blocks-and-partition -fno-gcse' --enable-initfini-array --disable-libssp --disable-libquadmath --disable-libgomp --disable-libitm --disable-libsanitizer --disable-libvtv --enable-languages=c --without-headers --disable-threads --disable-libatomic
+Thread model: single
+Supported LTO compression algorithms: zlib
+gcc version 15.3.0 (GCC) 

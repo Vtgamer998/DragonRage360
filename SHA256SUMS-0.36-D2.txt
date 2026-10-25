@@ -1,0 +1,4 @@
+8ede255841e24eec476c3e4ad292cc9b05a3b92ab0dfbf5a8b3ed21565e1ba58  default.xex
+e43decb391f1d12ceaa5767c4124d17a3b4d7e14d8912dc753b05eaf7c34f746  manifesto-tipado/typed-manifest.json
+58faca9650ddffb0107439ca68dadda6ab00dc549fdc2a6f04673448b747a44a  manifesto-tipado/typed_catalog.c
+16e8bd7e8272020653fff39bfb29576c1cdb327e8edd931c6229927c2a384468  extras/dados-colisao-0.35-D1-para-0.36-D2.patch

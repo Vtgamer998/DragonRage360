@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "ABI": "original pinned port/src/gs/gs_draw.h",
+  "scope": "single diagnostic surface or multiple saved color/depth targets, actual GsDraw descriptors, ordinary CPU vertices, complete-list validation",
+  "unsupported": "stencil restore, framebuffer-texture GS passes, VU, native effects, DATE/FBA, shader alpha tests, mipmaps, most blending and depth modes",
+  "GPU_execution": false,
+  "XEX_rebuilt": false,
+  "game_engine_linked": false,
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

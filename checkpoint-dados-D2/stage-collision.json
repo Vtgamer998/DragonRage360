@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "zones": 100,
+  "mesh_occurrences": 151,
+  "triangle_occurrences": 13583,
+  "canonical_triangle_fnv64": "04645362575aed17",
+  "independent_reference": "Python little-endian file walk vs C native float triangle/AABB accessors",
+  "sanitizers": true,
+  "immutable_input": true,
+  "native_engine_installed": false,
+  "Xbox_executed": false
+}

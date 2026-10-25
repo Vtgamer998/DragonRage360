@@ -1,0 +1,35 @@
+{
+  "format": "XEX2",
+  "size_bytes": 790528,
+  "sha256": "58d55dc2c8fe0eef2af23f117b02c27e4db45a7a9430571d397ff47ada4f2a1d",
+  "machine": "PowerPC big-endian",
+  "entry_point": "0x82052640",
+  "image_base": "0x82000000",
+  "title_id": "0x44523630",
+  "pages": 12,
+  "checks": [
+    "ELF32 PowerPC xsdk ABI flag 0x100",
+    "no unresolved strong ELF symbols",
+    "PE PowerPCBE / Xbox subsystem",
+    "header SHA-1",
+    "full image page hash chain",
+    "unencrypted basic-compression homebrew XEX"
+  ],
+  "linked_body_symbols": [
+    "dr_body_demo_draw",
+    "dr_body_demo_open",
+    "dr_body_model_read",
+    "dr_body_pipeline_build",
+    "dr_elf_mips_span",
+    "dr_face_vif_parse",
+    "dr_targets_bind",
+    "dr_texfile_decode",
+    "dr_vu1_call"
+  ],
+  "unresolved_weak_symbols": [],
+  "runtime_test": "Not run on Xbox 360 or emulator",
+  "gpu_pixels_verified": false,
+  "game_complete": false,
+  "battle_loop_linked": false,
+  "scope": "0.15 native launcher; real ISO body reference-pose viewer using original VU1 program 0 and diagnostic colors; separately decoded real TexFile texture previews (no body material mapping); native color/depth targets module; synthetic graphics diagnostic; separate LAN lobby and save export; no complete registered GsBackend, textured/animated battle or online matches"
+}

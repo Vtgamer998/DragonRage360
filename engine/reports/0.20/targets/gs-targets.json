@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "scope": [
+    "GS MRT/tiled call order",
+    "A/B/A color/raw-alpha/depth/stencil model",
+    "independent DATE and effect snapshots",
+    "target sampling and feedback resolve",
+    "timeout ownership",
+    "recording failure cleanup"
+  ],
+  "GPU_execution": false,
+  "not_verified": [
+    "actual D24S8/RGBA8 alias",
+    "tiling bands on hardware",
+    "rasterized pixels"
+  ],
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

@@ -1,0 +1,2 @@
+PASS native original collision: broken=0 triangles=12251 fingerprint=ddc3c6e2c300bf12
+PASS native original collision: broken=1 triangles=9789 fingerprint=a6ddb9dbe6da84b2

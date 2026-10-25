@@ -1,0 +1,16 @@
+build/gs_draw.o
+Attribute Section: gnu
+File Attributes
+  Tag_GNU_Power_ABI_FP: hard float, 64-bit long double
+  Tag_GNU_Power_ABI_Struct_Return: memory
+
+build/battle-native/objects/src_battle_battle_c.o
+Attribute Section: gnu
+File Attributes
+  Tag_GNU_Power_ABI_FP: hard float, unspecified long double
+  Tag_GNU_Power_ABI_Struct_Return: memory
+
+build/battle-native/objects/port_src_softfloat_ps2_c.o
+Attribute Section: gnu
+File Attributes
+  Tag_GNU_Power_ABI_Struct_Return: memory

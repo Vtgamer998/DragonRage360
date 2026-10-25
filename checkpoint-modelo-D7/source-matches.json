@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "compiled_delivered_sources": [
+    {
+      "source": "xb_battle_fighter.c",
+      "sha256": "801f0bfa522f42af55953e9a90cdf570314e6e2fafe2bf0e9b1c08c0a361bb3f"
+    },
+    {
+      "source": "xb_fighter_registry.c",
+      "sha256": "008956779ac09c89dca6d7c6c76c4582cd56aa32cb263ba85a2c7e0308899ee8"
+    },
+    {
+      "source": "xb_model_native.c",
+      "sha256": "ad17602cb418856cb1ed2687da2a35eb261cfe129bb12341eb8f13267aabc423"
+    }
+  ]
+}

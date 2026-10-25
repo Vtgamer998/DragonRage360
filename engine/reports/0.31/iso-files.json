@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "extracted_sha256": {
+    "SLUS_216.78": "811188ba9b416500d921cd4d9514df0cbf42f3a41a99cf5aac5a3da37171bf99",
+    "DBZP.BIN": "30f61f9c78c3859e5dd4fcfd8df6753b0f2d2c64beb924b92da5b2eaaa5e09cc"
+  },
+  "matches_previous_independent_extraction": true,
+  "Sony_search_date": "unavailable, zero",
+  "sanitizers": "ASan/UBSan",
+  "NT_IO": "mocked",
+  "actual_modules": [
+    "xb_iso_file.c",
+    "xb_disc.c",
+    "dr_disc.c"
+  ],
+  "PowerPC_execution": false,
+  "game_executed": false
+}

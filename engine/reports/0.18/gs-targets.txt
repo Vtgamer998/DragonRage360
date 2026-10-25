@@ -1,0 +1,2 @@
+PASS: PSMT8 palette diagnostic chain and native renderer calls, vertex arena lifetime, fences/timeouts, failure cleanup, state/capacity/input checks
+PASS: GS MRT/tile call model, A/B/A color/raw-alpha/depth/stencil, frozen DATE/effect snapshots, target sampling/feedback, timeout ownership, failed recording cleanup; NO GPU execution

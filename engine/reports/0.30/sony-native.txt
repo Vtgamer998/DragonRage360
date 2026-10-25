@@ -1,0 +1,1 @@
+PASS: native DBuff clear/no-clear, both frame buffers, game-edited u64 values, exact canonical GIF, preserved source and invalid-packet bounds; host transport only

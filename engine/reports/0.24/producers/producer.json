@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "upstream_source_sha256": "b7d254aa36fd34762d217b65cf2aa4437ef62ac40d4eba13ca80451f4b8094f3",
+  "reference": "actual separately compiled upstream src/sys/dma.c producer functions, renamed; no PS2 MMIO executed",
+  "byte_comparisons": 1329,
+  "sanitizers": "ASan/UBSan",
+  "GPU_execution": false,
+  "battle_executed": false,
+  "all_engine_packet_producers_adapted": false
+}

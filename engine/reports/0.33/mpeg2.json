@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "sanitizers": true,
+  "cases": [
+    {
+      "name": "opening",
+      "path": "disc/DATA/ZS3USOP.PSS",
+      "pss_bytes": 120569860,
+      "pss_sha256": "225c4f87b35e889ef1eda5c25180b8d711b9ea3125e0a68b23caaa62656ca533",
+      "decoded_frames": 2810,
+      "EOF_checked": true,
+      "ffmpeg_compared_frames": 32,
+      "RGB_mean_absolute_error": 1.0836240223475866,
+      "RGB_maximum_error": 5,
+      "host_sanitized_seconds": 25.26023682699997,
+      "rgba_sha256": "92ed24b8512e1fc6cd4d464261d897f32c56ea7a4607c04ef49b31ee5b4cf1fd"
+    },
+    {
+      "name": "ending",
+      "path": "disc/DATA/ZS3USED.PSS",
+      "pss_bytes": 180191236,
+      "pss_sha256": "730a6bf6d91d41f53b794bcc2849ee7ce71bf2bdd63dd315294b7eda87a580e2",
+      "decoded_frames": 4200,
+      "EOF_checked": true,
+      "ffmpeg_compared_frames": 32,
+      "RGB_mean_absolute_error": 1.0911374319167364,
+      "RGB_maximum_error": 5,
+      "host_sanitized_seconds": 37.12873152300017,
+      "rgba_sha256": "d8628349ff3716b1ee9d0221ed20cfb053b4e199dd278db9b17d93ceea031e5f"
+    }
+  ],
+  "negative_tests": [
+    "invalid PES header",
+    "IO failure",
+    "short output capacity",
+    "sticky error",
+    "unchanged output on failure",
+    "dimension mismatch",
+    "unsupported P-picture",
+    "all byte truncations through first picture header",
+    "allocation failures (decoder, ES, planes)",
+    "ES cache cap 2 MiB",
+    "reader close ownership",
+    "mount/unmount/remount invalidation including buffered bytes"
+  ],
+  "source_sha256": {
+    "xb_mpeg2.c": "ee6d84afa0e41dbd9537aaa9f1908f9fbdaa5d9a7a5ae3ad472965a858a27c36",
+    "xb_movie_source.c": "4731097630a39d48db111e88a98240834da56e3249531819844896318f72677d",
+    "xb_mpeg2.h": "ac3ac4a6350f317d8b8e3e5b30a20de26c5e6f571888d816fc30731daec1d1b9"
+  },
+  "transport": "actual xb_disc/dr_disc and mounted ISO; only NT transport mocked",
+  "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "PPC_execution": false,
+  "Xbox_GPU_pixels": false,
+  "Sony_sceMpeg_wrapper_integrated": false,
+  "audio_video_sync": false,
+  "fight_running": false
+}
