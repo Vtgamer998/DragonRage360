@@ -125,22 +125,27 @@ int dr_gs_replay(const DrGsReplay *r,const GsDraw *draws,uint32_t n,
        r->physical_width>1280 || r->physical_height>720 || (r->physical_width&31))) ||
        !r->logical_width || !r->logical_height ||
        r->logical_width>4096 || r->logical_height>4096) return DR_XENOS_INVALID;
-    uint32_t capacity=r->saved_targets?FRAME_VERTICES:CAPACITY;
-    if(n>(r->saved_targets?FRAME_DRAWS:CAPACITY)) return DR_XENOS_FULL;
-    DrXenosCommand *commands=calloc(n,sizeof(*commands));
-    DrXenosTargetCommand *targets=r->saved_targets?calloc(n*2,sizeof(*targets)):NULL;
-    DrGsVertex *copy=malloc(capacity*sizeof(*copy));
-    float *vu=malloc((size_t)capacity*48);
-    if(!commands || !copy || !vu || (r->saved_targets && !targets)) {
-        free(vu);free(targets);free(commands);free(copy);return DR_GS_MEMORY;
-    }
+    int saved=r->saved_targets;
+    uint32_t capacity=saved?FRAME_VERTICES:CAPACITY;
+    if(n>(saved?FRAME_DRAWS:CAPACITY)) return DR_XENOS_FULL;
+    /* Recurring per-frame scratch buffers. They are grown, never zeroed:
+     * every slot read this frame was written this frame, or assigned as a
+     * complete designated initializer above. One thread only. */
+    static DrXenosCommand *commands;static DrXenosTargetCommand *targets;
+    static DrGsVertex *copy;static float *vu;
+    static uint32_t command_cap,target_cap,copy_cap,vu_cap;
+    if(n>command_cap) {DrXenosCommand *p=malloc(n*sizeof(*p));if(!p)return DR_GS_MEMORY;free(commands);commands=p;command_cap=n;}
+    if(saved) {uint32_t need=n*2;if(need>target_cap){DrXenosTargetCommand *p=malloc(need*sizeof(*p));if(!p)return DR_GS_MEMORY;free(targets);targets=p;target_cap=need;}}
+    {if(capacity>copy_cap){DrGsVertex *p=malloc(capacity*sizeof(*p));if(!p)return DR_GS_MEMORY;free(copy);copy=p;copy_cap=capacity;}}
+    {uint32_t need=(uint32_t)((size_t)capacity*12);if(need>vu_cap){float *p=malloc((size_t)need*sizeof(*p));if(!p)return DR_GS_MEMORY;free(vu);vu=p;vu_cap=need;}}
+    DrXenosTargetCommand *tlist=saved?targets:NULL; /* stale `targets` from a previous saved call must not leak into a non-saved frame */
     uint32_t total=0,ntargets=0;int error=0;
     for(uint32_t i=0;i<n;i++) {
         error=translate(r,&draws[i],vertex_count,&commands[i]);
         if(!error && commands[i].count>capacity-total) error=DR_XENOS_FULL;
         if(error) {if(failed) *failed=i;break;}
         if(draws[i].native==4 || draws[i].native==5) {
-            targets[ntargets].target=(unsigned)draws[i].target;targets[ntargets++].snapshot=draws[i].native==5?1:2;
+            tlist[ntargets].target=(unsigned)draws[i].target;tlist[ntargets++].snapshot=draws[i].native==5?1:2;
             continue;
         }
         if(draws[i].native==1 || draws[i].native==3 || draws[i].native==100 || draws[i].native==101) {
@@ -154,23 +159,24 @@ int dr_gs_replay(const DrGsReplay *r,const GsDraw *draws,uint32_t n,
             }
             if(error)break;
         } else {
-            commands[i].vertices=copy+total;
-            memcpy(copy+total,vertices+draws[i].first,commands[i].count*sizeof(*copy));
+            /* Same Vtx layout as DrGsVertex (asserted above): reference the
+             * caller's arena directly; replay never mutates source vertices. */
+            commands[i].vertices=(const DrGsVertex *)vertices+draws[i].first;
         }
         total+=commands[i].count;
-        if(targets) {
+        if(tlist) {
             int start=commands[i].draw.stencil && (i==0 || draws[i-1].native ||
                 draws[i-1].target!=draws[i].target || !commands[i-1].draw.stencil);
-            if(start) targets[ntargets++]=(DrXenosTargetCommand){.target=(unsigned)draws[i].target,
+            if(start) tlist[ntargets++]=(DrXenosTargetCommand){.target=(unsigned)draws[i].target,
                 .snapshot=3,.command={.texture=r->white_texture}};
             DrXenosTargetCommand next={.target=(unsigned)draws[i].target,.command=commands[i]};
-            if(ntargets && dr_gs_batch_merge(&targets[ntargets-1],&next))last_profile.merged_draws++;
-            else targets[ntargets++]=next;
+            if(ntargets && dr_gs_batch_merge(&tlist[ntargets-1],&next))last_profile.merged_draws++;
+            else tlist[ntargets++]=next;
         }
     }
-    last_profile.replay_commands=targets?ntargets:n;
+    last_profile.replay_commands=tlist?ntargets:n;
     last_profile.build_us=replay_us()-started;last_profile.vertices=total;started=replay_us();
-    if(!error && targets) error=dr_xenos_replay_targets(targets,ntargets);
+    if(!error && tlist) error=dr_xenos_replay_targets(tlist,ntargets);
     else if(!error) {
         error=dr_xenos_begin(r->physical_width,r->physical_height);
         if(!error) {
@@ -180,5 +186,5 @@ int dr_gs_replay(const DrGsReplay *r,const GsDraw *draws,uint32_t n,
         }
     }
     last_profile.submit_us=replay_us()-started;
-    free(vu);free(targets);free(copy);free(commands);return error;
+    return error;
 }

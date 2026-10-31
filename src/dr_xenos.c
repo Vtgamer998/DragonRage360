@@ -16,8 +16,13 @@
 #include "dr_gs_shaders.h"
 #include "dr_vu_shaders.h"
 #include "dr_effects_shaders.h"
+#include <time.h>
 enum { MAX_TEXTURES=256,MAX_VERTICES=DR_XENOS_VERTEX_CAPACITY,ARENA_VERTICES=DR_XENOS_FRAME_VERTICES,VERTEX_WORDS=12 };
 static DrXenosProfile profile;
+static uint64_t xenos_now_us(void)
+{
+    struct timespec t;return clock_gettime(CLOCK_MONOTONIC,&t)?0:(uint64_t)t.tv_sec*1000000u+t.tv_nsec/1000u;
+}
 void dr_xenos_profile(DrXenosProfile *p){if(p)*p=profile;}
 static struct {
     int opened,active,targets,saved_target;uint32_t used,textures,fence,width,height,target_id;
@@ -233,7 +238,9 @@ uint32_t dr_xenos_target_texture(unsigned id)
 int dr_xenos_snapshot(unsigned kind)
 {
     if(!backend.active || !backend.saved_target || !dr_targets_is_gs(backend.target_id)) return DR_XENOS_STATE;
-    return dr_targets_snapshot(kind);
+    uint64_t started=xenos_now_us();profile.target_snapshots++;
+    int error=dr_targets_snapshot(kind);
+    profile.select_us+=xenos_now_us()-started;return error;
 }
 int dr_xenos_target_drop(unsigned id)
 {
@@ -251,9 +258,11 @@ int dr_xenos_begin_target(unsigned id)
 int dr_xenos_select_target(unsigned id)
 {
     if(!backend.active || !backend.saved_target) return DR_XENOS_STATE;
+    uint64_t started=xenos_now_us();
     uint32_t w,h;int error=dr_targets_size(id,&w,&h);if(error) return error;
     error=dr_targets_bind(id);if(error) return error;
-    backend.width=w;backend.height=h;backend.target_id=id;return 0;
+    backend.width=w;backend.height=h;backend.target_id=id;
+    profile.target_selects++;profile.select_us+=xenos_now_us()-started;return 0;
 }
 static int validate_draw(const void *data,uint32_t count,uint32_t texture,const DrXenosDraw *draw,
                          uint32_t width,uint32_t height)
@@ -396,16 +405,15 @@ static int draw_impl(const void *data,uint32_t count,uint32_t texture,const DrXe
     if(!gs || state_cache.epoch!=epoch){memset(&state_cache,0,sizeof(state_cache));state_cache.epoch=epoch;}
     uint32_t first=backend.used*VERTEX_WORDS;
     const DrGsVertex *vertices=data;
-    for(uint32_t i=0;i<count;i++) {
-        if(draw->vu_program) {
-            const float *raw=data;
-            for(unsigned j=0;j<12;j++) {uint32_t word;memcpy(&word,raw+i*12+j,4);backend.vertices[first+i*12+j]=word;}
-            continue;
-        }
-        const DrGsVertex *v=&vertices[i];
-        const float values[VERTEX_WORDS]={v->x,v->y,v->z,v->r/128.0f,v->g/128.0f,v->b/128.0f,v->a/128.0f,v->s,v->t,v->q,0,0};
-        for(uint32_t j=0;j<VERTEX_WORDS;j++) {
-            uint32_t word;memcpy(&word,&values[j],4);backend.vertices[first+i*VERTEX_WORDS+j]=word;
+    if(draw->vu_program) {
+        /* Raw CPU float words; the arena is float storage, so the copy is
+         * bit-identical without per-word conversions. */
+        memcpy(backend.vertices+first,data,(size_t)count*VERTEX_WORDS*4);
+    } else {
+        for(uint32_t i=0;i<count;i++) {
+            const DrGsVertex *v=&vertices[i];
+            const float values[VERTEX_WORDS]={v->x,v->y,v->z,v->r/128.0f,v->g/128.0f,v->b/128.0f,v->a/128.0f,v->s,v->t,v->q,0,0};
+            memcpy(backend.vertices+first+i*VERTEX_WORDS,values,sizeof(values));
         }
     }
     uint32_t address=xsdk_gpu_address(backend.vertices)+first*4,bytes=count*VERTEX_WORDS*4;
@@ -529,6 +537,7 @@ int dr_xenos_replay_targets(const DrXenosTargetCommand *commands,uint32_t count)
     if(!commands || !count)return DR_XENOS_INVALID;
     if(count>32768)return DR_XENOS_FULL;
     uint32_t total=0;int date_target=-1,effect_target=-1;
+    uint64_t preflight_started=xenos_now_us();
     for(uint32_t i=0;i<count;i++){
         uint32_t w,h;int error=dr_targets_size(commands[i].target,&w,&h);if(error)return error;
         const DrXenosCommand *c=&commands[i].command;
@@ -570,7 +579,9 @@ int dr_xenos_replay_targets(const DrXenosTargetCommand *commands,uint32_t count)
         if(needs_effect_snapshot(&c->draw) && effect_target>=0 && effect_target!=(int)commands[i].target)return DR_XENOS_STATE;
         error=validate_features(&c->draw,c->texture,commands[i].target,1,w,h,date_target==(int)commands[i].target,effect_target==(int)commands[i].target);if(error)return error;
     }
+    profile.preflight_us+=xenos_now_us()-preflight_started;
     int error=dr_xenos_begin_target(commands[0].target);if(error)return error;
+    uint64_t emit_started=xenos_now_us();
     for(uint32_t i=0;i<count && !error;i++){
         const DrXenosTargetCommand *t=&commands[i];const DrXenosCommand *c=&t->command;
         error=dr_xenos_select_target(t->target);if(error)break;
@@ -592,6 +603,7 @@ int dr_xenos_replay_targets(const DrXenosTargetCommand *commands,uint32_t count)
             error=draw_impl(data,n,c->texture,&c->draw,1);at+=n;
         }
     }
+    profile.emit_us+=xenos_now_us()-emit_started;
     if(backend.active){int end=dr_xenos_end();if(!error)error=end;}
     return error;
 }

@@ -1,3 +1,11 @@
+# D49 (2026-10-31) — instrumentação e otimização do replay
+
+Instrumentação completa dos estágios do replay (preflight/emit/select/store/bind/movie/present)
+e otimizações de cópias (buffers reutilizados, ponteiro direto a Vtx, arena memcpy único).
+Testes host PASS. 8 arquivos alterados (dr_gs_backend.{c,h}, dr_gs_replay.c, dr_targets.{c,h},
+dr_xenos.{c,h}, xb_fresh_boot.c). Próxima rodada: Actions compila novo XEX → roda probe Xenia →
+log do console com métricas novas → correlação dos estágios quentes.
+
 # D48 (2026-10-31) — atualização
 
 XEX D47 recompilado pelas Actions (console e xenia, verificação estática OK)
