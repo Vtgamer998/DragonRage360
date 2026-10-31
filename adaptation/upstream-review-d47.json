@@ -1,0 +1,42 @@
+{
+  "checked_on": "2026-10-30",
+  "repository": "https://github.com/z3xox/Tenkaichi3Decomp",
+  "branch": "main",
+  "reviewed_head": "363e92c20af366db9a9050abe395b3416e2195fc",
+  "capture_base": "3ca419c7966b11438e2dc3c9a7e1914f102ed545",
+  "comparison": {
+    "status": "diverged",
+    "ahead_by": 484,
+    "behind_by": 56,
+    "merge_base": "153b81a32b65ca43cdc95f11b590a9d51747b906",
+    "warning": "Compare is against merge base; selected functions were also compared directly with recovered D46 source."
+  },
+  "reviewed_files": [
+    "port/src/gs/gs_draw.c",
+    "port/src/gs/gs_core.c",
+    "port/src/gs/gs_vu1.c",
+    "port/src/gs/gs_draw.h",
+    "port/src/gs/gs_internal.h",
+    "README.md",
+    "LICENSE"
+  ],
+  "adapted": [
+    "clut_texture: fold upper palette bits into hash",
+    "sClutPx: exact palette identity after hash hit"
+  ],
+  "local_preserved": [
+    "PowerPC RGBA byte serialization",
+    "D46 DMA/resource ownership guards",
+    "current-frame texture protection",
+    "NOT_READY=2"
+  ],
+  "local_addition": "Invalidate destroyed CLUT handle before fallible allocation or creation.",
+  "not_integrated": [
+    "pthread/SDL texture decode workers",
+    "reduced resolution glow",
+    "new PC menu/network services"
+  ],
+  "XEX_built": false,
+  "hardware_tested": false,
+  "FPS_measured": false
+}

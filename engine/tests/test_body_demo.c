@@ -60,3 +60,24 @@ int main(void)
 
 int dr_body_pipeline_face(const dr_disc *d,const char *p,DrGsVertex *v,size_t cap,uint64_t *k,size_t kcap,int face,size_t *n,DrBodyPipelineStats *s)
 {assert(face>=-1 && face<8);return dr_body_pipeline_materials(d,p,v,cap,k,kcap,n,s);}
+
+/* Memory-source contract for the cache-aware viewer; real formats/VU are covered
+ * separately by body_cache_real.c, not by these synthetic ownership fixtures. */
+struct DrBodySource {unsigned unused;};
+static struct DrBodySource cached_source;
+static unsigned char cached_pack[32];
+int dr_body_source_open(const dr_disc*d,const char*p,DrBodySource**out){assert(d&&p&&out);*out=NULL;if(load_error)return load_error;*out=&cached_source;return 0;}
+void dr_body_source_free(DrBodySource*s){assert(!s||s==&cached_source);}
+const void*dr_body_source_pack(const DrBodySource*s,size_t*n){assert(s==&cached_source&&n);*n=sizeof(cached_pack);return cached_pack;}
+int dr_body_source_build(const DrBodySource*s,DrGsVertex*v,size_t cap,uint64_t*k,size_t kc,int face,int only,size_t*n,DrBodyPipelineStats*st,DrBodyFaceSpan*span){
+ assert(s==&cached_source);int rc=dr_body_pipeline_face((dr_disc*)&cached_source,"pzs3us1/01423.bin",v,cap,k,kc,face,n,st);
+ if(!rc&&only)*n=3;
+ if(span)*span=(DrBodyFaceSpan){.first=3,.count=3,.present=1};
+ return rc;
+}
+int dr_pack_memory_entry(const void*p,size_t n,uint32_t index,size_t*at,size_t*bytes,unsigned*flags){assert(p==cached_pack&&n==32&&(index==0||index==11));*at=index==0?0:16;*bytes=16;*flags=0;return 0;}
+int dr_texfile_material(const void*p,size_t n,uint64_t key,uint32_t*index){assert(p==cached_pack+16&&n==16&&key<2);*index=(uint32_t)key;return 0;}
+int dr_texfile_decode(const void*p,size_t n,uint32_t index,void*rgba,size_t cap,DrTexFileImage*info){assert(n==16);
+ if(p==cached_pack)return dr_texfile_model_image((dr_disc*)&cached_source,"pzs3us1/01423.bin",index,rgba,cap,info);
+ uint32_t found;assert(p==cached_pack+16);return dr_texfile_body_material((dr_disc*)&cached_source,"pzs3us1/01423.bin",index,rgba,cap,info,&found);
+}

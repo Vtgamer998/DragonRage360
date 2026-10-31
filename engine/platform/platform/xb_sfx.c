@@ -30,6 +30,7 @@ static const uint8_t *chunk(const uint8_t *p,size_t n,const char *tag,size_t min
  for(size_t i=0;i+minimum<=n;i+=4)if(!memcmp(p+i,tag,8)){*size=n-i;return p+i;}
  return NULL;
 }
+#include "xb_sfx_banks.inc"
 static int slot(int mask){if(mask<=0 || mask>255 || (mask&(mask-1)))return -1;int s=0;while((mask>>s)!=1)s++;return s;}
 static int span(uint32_t at,size_t n){if(at>SPU || n>SPU-at)return 0;for(size_t i=0;i<n;i++)if(!written[at+i])return 0;return 1;}
 static int lookup(const Bank *b,unsigned id,uint32_t *start,uint32_t *end,uint32_t *rate,int require_pcm){

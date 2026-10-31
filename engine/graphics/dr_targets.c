@@ -10,36 +10,61 @@
 #include "dr_restore_shaders.h"
 #include "dr_gs_targets_shaders.h"
 #include <string.h>
-enum { COUNT=24,BUDGET=128*1024*1024 };
+#ifdef DR_XBOX360
+#include <xsdk/log.h>
+#endif
+enum { COUNT=24,BUDGET=128*1024*1024,COMMAND_SLOTS=8 };
+static DrTargetProfile profile;
+static uint32_t wait_timeout_ms=1000;
+static int checked_gpu_status(NTSTATUS status,const char *operation,uint32_t detail)
+{
+    if(NT_SUCCESS(status))return 0;
+#ifdef DR_XBOX360
+    xsdk_log_write("GS GPU failure operation=%s status=%08x detail=%u",operation,(unsigned)status,detail);
+#else
+    (void)operation;(void)detail;
+#endif
+    return DR_XENOS_GPU;
+}
+void dr_targets_profile(DrTargetProfile *p){if(p)*p=profile;}
+uint32_t dr_targets_epoch(void){return profile.loads;}
 static struct {
     int opened,current;
     uint32_t bytes,fence;
     XsdkShader vertex,pixel;
     XsdkSamplerState sampler;
     volatile uint32_t *quad;
-    struct {XsdkTexture color,depth,aux,depth_bytes;uint32_t bytes;int made,valid,gs;} slots[COUNT];
+    struct {XsdkTexture color,depth,aux,depth_bytes;uint32_t bytes;int made,valid,gs,stencil_written;} slots[COUNT];
     int gs_open;
     XsdkShader gs_restore,stencil;
-    XsdkCommandBuffer recording;
-    XsdkTexture snapshot[2];
+    XsdkCommandBuffer recording[COMMAND_SLOTS];
+    uint32_t command_fence[COMMAND_SLOTS];unsigned next_command,active_command;
+    XsdkTexture snapshot[2],snapshot_view[2];
     uint32_t snapshot_width[2],snapshot_height[2],snapshot_id[2];
 } pool;
+int dr_targets_set_wait_timeout(uint32_t milliseconds)
+{
+    if(pool.opened || pool.quad)return DR_XENOS_STATE;
+    if(!milliseconds || milliseconds>60000)return DR_XENOS_INVALID;
+    wait_timeout_ms=milliseconds;return 0;
+}
 static uint64_t allocation_bytes(const XsdkTexture *t)
 {return ((uint64_t)t->size_bytes+65535u)&~(uint64_t)65535u;}
 static int wait_idle(void)
 {
-    if(pool.fence && !NT_SUCCESS(xsdk_gpu_wait(pool.fence,1000))) return DR_XENOS_GPU;
+    if(pool.fence){profile.fence_waits++;int e=checked_gpu_status(xsdk_gpu_wait(pool.fence,wait_timeout_ms),"target-wait",pool.fence);if(e)return e;}
     pool.fence=0;return 0;
 }
 int dr_targets_open(void)
 {
     if(pool.opened || pool.quad) return DR_XENOS_STATE;
-    pool.current=-1;
+    pool.current=-1;memset(&profile,0,sizeof(profile));
     NTSTATUS s=xsdk_shader_load(&pool.vertex,dr_restore_vert.container,dr_restore_vert.container_bytes);
     if(NT_SUCCESS(s)) s=xsdk_shader_load(&pool.pixel,dr_restore_frag.container,dr_restore_frag.container_bytes);
     const XsdkVertexElement layout[]={
         {.usage=XSDK_USAGE_POSITION,.format=XSDK_VERTEX_FLOAT4,.offset_bytes=0},
-        {.usage=XSDK_USAGE_TEXCOORD,.format=XSDK_VERTEX_FLOAT2,.offset_bytes=16}};
+        /* The compiled restore shader maps location 1 to COLOR0. */
+        {.usage=XSDK_USAGE_COLOR,.format=XSDK_VERTEX_FLOAT2,.offset_bytes=16}};
     if(NT_SUCCESS(s)) s=xsdk_shader_set_vertex_layout(&pool.vertex,layout,2,(const uint32_t[]){24});
     if(NT_SUCCESS(s)) pool.quad=xsdk_gpu_alloc(6*24);
     if(!NT_SUCCESS(s) || !pool.quad) {
@@ -102,14 +127,14 @@ static int gs_open(void)
     if(pool.bytes+2*allocation_bytes(&layout)>BUDGET) return DR_XENOS_FULL;
     NTSTATUS s=xsdk_shader_load(&pool.gs_restore,dr_gs_restore_frag.container,dr_gs_restore_frag.container_bytes);
     if(NT_SUCCESS(s)) s=xsdk_shader_load(&pool.stencil,dr_gs_stencil_frag.container,dr_gs_stencil_frag.container_bytes);
-    if(NT_SUCCESS(s)) s=xsdk_gpu_command_buffer_create(&pool.recording,262144);
+    for(unsigned i=0;i<COMMAND_SLOTS && NT_SUCCESS(s);i++)s=xsdk_gpu_command_buffer_create(&pool.recording[i],0xfffff);
     /* Shared snapshots cover the largest supported target, allocated outside drawing. */
     if(NT_SUCCESS(s)) s=xsdk_texture_create(&pool.snapshot[0],XSDK_FORMAT_R8G8B8A8,1280,1024,1,true);
     if(NT_SUCCESS(s)) s=xsdk_texture_create(&pool.snapshot[1],XSDK_FORMAT_R8G8B8A8,1280,1024,1,true);
     if(!NT_SUCCESS(s)) {
         if(pool.snapshot[1].texels) xsdk_texture_free(&pool.snapshot[1]);
         if(pool.snapshot[0].texels) xsdk_texture_free(&pool.snapshot[0]);
-        if(pool.recording.dwords) xsdk_gpu_command_buffer_free(&pool.recording);
+        for(unsigned i=0;i<COMMAND_SLOTS;i++)if(pool.recording[i].dwords)xsdk_gpu_command_buffer_free(&pool.recording[i]);
         xsdk_shader_free(&pool.stencil);xsdk_shader_free(&pool.gs_restore);
         memset(pool.snapshot,0,sizeof(pool.snapshot));memset(&pool.recording,0,sizeof(pool.recording));
         return DR_XENOS_GPU;
@@ -167,7 +192,7 @@ int dr_targets_ensure_gs(unsigned id,uint32_t w,uint32_t h)
     }
     pool.slots[id].color=color;pool.slots[id].depth=depth;pool.slots[id].aux=aux;pool.slots[id].depth_bytes=view;
     for(unsigned i=0;i<2;i++) if(pool.snapshot_id[i]==id) pool.snapshot_width[i]=0;
-    pool.slots[id].bytes=(uint32_t)added;pool.slots[id].made=1;pool.slots[id].gs=1;pool.slots[id].valid=0;
+    pool.slots[id].bytes=(uint32_t)added;pool.slots[id].made=1;pool.slots[id].gs=1;pool.slots[id].valid=0;pool.slots[id].stencil_written=0;
     pool.bytes+=(uint32_t)added;return 0;
 }
 static int gs_store(int snapshot)
@@ -179,22 +204,52 @@ static int gs_store(int snapshot)
         {.target=1,.texture=&pool.slots[id].aux,.drawn_back=pool.slots[id].valid!=0}};
     XsdkTexture view;
     if(snapshot>=0) {
-        view=pool.snapshot[snapshot];
-        view.width=pool.slots[id].color.width;view.height=pool.slots[id].color.height;
+        /* Resolve pitch is also the eDRAM source pitch in the pinned SDK.
+         * A 1280-wide descriptor scrambles a 1024-wide pass. Borrow the larger
+         * allocation with the pass's exact layout, retaining its owner/fence. */
+        NTSTATUS status=xsdk_texture_init(&view,XSDK_FORMAT_R8G8B8A8,
+            pool.slots[id].color.width,pool.slots[id].color.height,1,true);
+        int e=checked_gpu_status(status,"snapshot-layout",id);if(e)return e;
+        if(view.pitch!=pool.slots[id].color.pitch || view.size_bytes>pool.snapshot[snapshot].size_bytes)return DR_XENOS_INVALID;
+        xsdk_texture_attach(&view,pool.snapshot[snapshot].texels);
         xsdk_texture_base_at_corner(&view);
-        /* Keep the snapshot's allocated pitch: sampling divides by its full extent. */
         resolves[3]=(XsdkTileResolve){.target=1,.texture=&view,.drawn_back=true};
     }
+    profile.stores++;
     NTSTATUS status=xsdk_gpu_end_tiles(resolves,snapshot<0?3:4);
-    pool.current=-1;pool.fence=xsdk_gpu_fence();
-    if(!NT_SUCCESS(status)) return DR_XENOS_GPU;
+    pool.current=-1;pool.fence=xsdk_gpu_fence();pool.command_fence[pool.active_command]=pool.fence;
+    {int e=checked_gpu_status(status,"end-tiles",id);if(e)return e;}
     pool.slots[id].valid=1;
     if(snapshot>=0) {
+        pool.snapshot_view[snapshot]=view;
         pool.snapshot_width[snapshot]=pool.slots[id].color.width;
         pool.snapshot_height[snapshot]=pool.slots[id].color.height;
         pool.snapshot_id[snapshot]=id;
     }
     return 0;
+}
+/* The pinned SDK updates buffer.count lazily while its write window is open.
+ * reserve(0) exposes the current cursor without emitting or modifying commands.
+ * Never infer remaining room from the stale count field. */
+static int command_room(uint32_t reserve)
+{
+    const XsdkCommandBuffer *b=&pool.recording[pool.active_command];
+    uintptr_t lo=(uintptr_t)b->dwords,at=(uintptr_t)xsdk_gpu_reserve(0);
+    size_t span=(size_t)b->capacity_dwords*4;
+    if(!lo || at<lo || at-lo>span || (at-lo)%4)return DR_XENOS_GPU;
+    return reserve<=(span-(at-lo))/4?1:0;
+}
+int dr_targets_ensure_commands(uint32_t reserve)
+{
+    if(!pool.opened || pool.current<0)return DR_XENOS_STATE;
+    if(!reserve || reserve>0x80000)return DR_XENOS_INVALID;
+    unsigned id=(unsigned)pool.current;
+    if(!pool.slots[id].gs)return 0;
+    int room=command_room(reserve);if(room)return room<0?room:0;
+    int e=gs_store(-1);if(e)return e;
+    e=dr_targets_bind(id);if(e)return e;
+    profile.command_splits++;
+    room=command_room(reserve);return room>0?0:room<0?room:DR_XENOS_FULL;
 }
 int dr_targets_store(void)
 {
@@ -212,6 +267,7 @@ int dr_targets_store(void)
     xsdk_gpu_resolve_texture(&pool.slots[id].color,0);
     pool.slots[id].valid=1;pool.current=-1;pool.fence=xsdk_gpu_fence();return 0;
 }
+void dr_targets_stencil_written(void){if(pool.current>=0 && pool.slots[pool.current].gs)pool.slots[pool.current].stencil_written=1;}
 int dr_targets_bind(unsigned id)
 {
     if(!pool.opened) return DR_XENOS_STATE;
@@ -219,11 +275,21 @@ int dr_targets_bind(unsigned id)
     if(pool.current==(int)id) return 0;
     if(pool.current>=0) {int error=dr_targets_store();if(error) return error;}
     if(pool.slots[id].gs) {
-        int error=wait_idle();if(error) return error;
+        /* Only this ring slot will be overwritten. Resolves already carry GPU
+         * ordering/cache barriers; unrelated immutable recordings may run ahead.
+         * Resource resize/drop/close still wait for the last submitted fence. */
+        unsigned slot=pool.next_command;
+        if(pool.command_fence[slot]){
+            profile.fence_waits++;
+            int e=checked_gpu_status(xsdk_gpu_wait(pool.command_fence[slot],wait_timeout_ms),"command-wait",pool.command_fence[slot]);if(e)return e;
+            pool.command_fence[slot]=0;
+        }
         const XsdkTiling tiling={.width=pool.slots[id].color.width,.height=pool.slots[id].color.height,
             .samples=1,.count=2,.targets={{.format=XSDK_TARGET_8_8_8_8},{.format=XSDK_TARGET_8_8_8_8}},.depth=true};
         xsdk_gpu_set_depth_clear(0,0);
-        if(!NT_SUCCESS(xsdk_gpu_begin_tiles(&tiling,&pool.recording))) return DR_XENOS_GPU;
+        profile.loads++;
+        {int e=checked_gpu_status(xsdk_gpu_begin_tiles(&tiling,&pool.recording[slot]),"begin-tiles",id);if(e)return e;}
+        pool.active_command=slot;pool.next_command=(slot+1)%COMMAND_SLOTS;
         pool.current=(int)id;
         if(pool.slots[id].valid) {
             const XsdkDepthStencil depth={.depth_test=true,.depth_write=true,.depth_compare=XSDK_COMPARE_ALWAYS};
@@ -237,6 +303,10 @@ int dr_targets_bind(unsigned id)
             xsdk_gpu_set_texture(DR_GS_RESTORE_FRAG_SAMPLER_0_1,&pool.slots[id].depth,&pool.sampler);
             xsdk_gpu_set_texture(DR_GS_RESTORE_FRAG_SAMPLER_0_2,&pool.slots[id].aux,&pool.sampler);
             xsdk_gpu_set_vertices(0,xsdk_gpu_address(pool.quad),6*24);xsdk_gpu_draw(XSDK_PRIMITIVE_TRIANGLE_LIST,6);
+            /* A newly cleared target with no stencil-writing draws still has
+             * exact zero stencil. SDK begin_tiles already clears it to zero.
+             * Once a writer ran, keep restoring all bits conservatively. */
+            if(pool.slots[id].stencil_written){
             /* Restore every stencil bit from the raw resolved word, never from sampled depth. */
             XsdkBlend masked=plain;masked.write_mask=0;
             xsdk_gpu_blend_state(&blends[0],&masked);blends[1]=blends[0];xsdk_gpu_set_blends(blends,2);
@@ -244,6 +314,7 @@ int dr_targets_bind(unsigned id)
             xsdk_built_shader_set_literals(&dr_restore_vert);xsdk_built_shader_set_literals(&dr_gs_stencil_frag);
             xsdk_gpu_set_texture(DR_GS_STENCIL_FRAG_SAMPLER_0_0,&pool.slots[id].depth_bytes,&pool.sampler);
             for(unsigned pass=0;pass<=8;pass++) {
+                profile.stencil_restore_passes++;
                 uint8_t bit=pass?(uint8_t)(1u<<(pass-1)):0;
                 const XsdkDepthStencil stencil={.depth_test=true,.depth_compare=XSDK_COMPARE_ALWAYS,
                     .stencil_test=true,.stencil_compare=XSDK_COMPARE_ALWAYS,.stencil_fail=XSDK_STENCIL_KEEP,
@@ -254,6 +325,8 @@ int dr_targets_bind(unsigned id)
                 xsdk_gpu_set_pixel_constants(DR_GS_STENCIL_FRAG_PUSH,params,DR_GS_STENCIL_FRAG_PUSH_REGISTERS);
                 xsdk_gpu_draw(XSDK_PRIMITIVE_TRIANGLE_LIST,6);
             }
+            }else profile.zero_stencil_restores++;
+
         }
         return 0;
     }
@@ -289,7 +362,7 @@ int dr_targets_snapshot(unsigned kind)
 const XsdkTexture *dr_targets_snapshot_texture(unsigned kind,unsigned id,uint32_t w,uint32_t h)
 {
     if(kind>1 || !pool.gs_open || pool.snapshot_id[kind]!=id || pool.snapshot_width[kind]!=w || pool.snapshot_height[kind]!=h) return NULL;
-    return &pool.snapshot[kind];
+    return &pool.snapshot_view[kind];
 }
 int dr_targets_drop(unsigned id)
 {
@@ -313,7 +386,7 @@ int dr_targets_close(void)
     }
     if(pool.gs_open) {
         xsdk_texture_free(&pool.snapshot[1]);xsdk_texture_free(&pool.snapshot[0]);
-        xsdk_gpu_command_buffer_free(&pool.recording);
+        for(unsigned i=0;i<COMMAND_SLOTS;i++)xsdk_gpu_command_buffer_free(&pool.recording[i]);
         xsdk_shader_free(&pool.stencil);xsdk_shader_free(&pool.gs_restore);
     }
     xsdk_gpu_free(pool.quad);xsdk_shader_free(&pool.pixel);xsdk_shader_free(&pool.vertex);

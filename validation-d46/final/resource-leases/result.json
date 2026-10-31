@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "live_spans": 512,
+  "no_live_eviction": true,
+  "overflow_preserves_existing_spans": true,
+  "revocation_and_decoded_spans": true,
+  "scope": "actual registry with host sanitizer tests; runtime separately logged"
+}

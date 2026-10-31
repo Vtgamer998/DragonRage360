@@ -1,11 +1,13 @@
 xb_a11y_text.c
 xb_adxt.c
 xb_battle_common.c
+xb_battle_boot.c
 xb_battle_consumers.c
 xb_battle_fighter.c
 xb_battle_runtime.c
 xb_battle_stage.c
 xb_bpe.c
+xb_common_items.c
 xb_demo_resources.c
 xb_disc.c
 xb_fighter_registry.c
@@ -15,6 +17,7 @@ xb_gamedata.c
 xb_iop.c
 xb_iso_file.c
 xb_model_native.c
+xb_motion_pack.c
 xb_movie_clock.c
 xb_movie_source.c
 xb_mpeg.c
@@ -29,5 +32,15 @@ xb_platform.c
 xb_resconv.c
 xb_resource_map.c
 xb_sfx.c
+xb_sound_bank.c
 xb_tbo_text.c
 xb_text.c
+xb_stage_camera.c
+xb_stage_effects.c
+xb_common_pack.c
+xb_transport_probe.c
+xb_model_pack.c
+xb_effect_pack.c
+xb_stage_pack.c
+xb_match_ui_pack.c
+xb_fresh_boot.c

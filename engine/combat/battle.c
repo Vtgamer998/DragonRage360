@@ -1,3 +1,4 @@
+extern void XbFreshBoot_TraceInit(const char *);
 #include "common.h"
 #include "battle/battle.h"
 #include "sys/adx.h"
@@ -59,7 +60,7 @@ extern void Dbg_ProfMark(s32 *prof);
 extern void Dbg_ProfColor(s32 *prof, u32 rgba);
 
 extern void Battle_ResetWork(void);
-extern void Battle_Load(void);
+extern s32 Battle_Load(void);
 extern void Battle_Unload(void);
 extern void Battle_UpdateWork(void);
 
@@ -148,17 +149,40 @@ s32 Battle_Restart(void) {
 
 /* Loads the battle data, creates every battle subsystem, then starts the first match. */
 s32 Battle_Init(void) {
-    Battle_Load();
+    extern void XbFreshBoot_TraceInit(const char *);
+    extern int XbRes_LastError(void);
+    XbFreshBoot_TraceInit("Battle_Load");
+    if (!Battle_Load()) return -1;
+    XbFreshBoot_TraceInit("StgFx_Init");
     StgFx_Init();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("StgModel_InitStage");
     StgModel_InitStage();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("BtlChar_AllocAll");
     BtlChar_AllocAll(2);
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("BtlAiMgr_Init");
     BtlAiMgr_Init();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("BtlCam_Init");
     BtlCam_Init();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("StgNav_Init");
     StgNav_Init();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("BtlGame_Init");
     BtlGame_Init();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("Ot_Init");
     Ot_Init();
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("BtlScene_Init");
     BtlScene_Init(0);
+    if(XbRes_LastError())return -1;
+    XbFreshBoot_TraceInit("Battle_Restart");
     Battle_Restart();
+    if(XbRes_LastError())return -1;
     return 0;
 }
 
@@ -186,16 +210,23 @@ s32 Battle_Term(void) {
 s32 Battle_Update(void) {
     s32 i;
     s32 singleView;
+    extern void XbFreshBoot_TraceInit(const char *);
 
+    XbFreshBoot_TraceInit("BtlChars_UpdateInput");
     BtlChars_UpdateInput();
+    XbFreshBoot_TraceInit("BtlChars_UpdateMain");
     BtlChars_UpdateMain();
+    XbFreshBoot_TraceInit("BtlScene_Update");
     BtlScene_Update();
+    XbFreshBoot_TraceInit("EftDet_Update");
     EftDet_Update();
+    XbFreshBoot_TraceInit("BtlScene_PostUpdate");
     BtlScene_PostUpdate();
     BtlChars_PostScene();
     BtlScene_CheckStageChange();
     BtlLoad_PollCharaRequest();
     BtlLoad_PollObjectRequest();
+    XbFreshBoot_TraceInit("BtlStage_Update");
     BtlStage_Update();
     BtlCam_SelectView(0);
     BtlCam_UpdateView(0);
@@ -203,6 +234,7 @@ s32 Battle_Update(void) {
     BtlCam_UpdateView(1);
     singleView = BtlCam_UpdateOverride();
     BtlChars_EndFrame();
+    XbFreshBoot_TraceInit("BtlObj_UpdateAll");
     BtlObj_UpdateAll();
     if (Battle_IsSplitScreen() && !singleView) {
         for (i = 0; i < 2; i++) {
@@ -226,15 +258,19 @@ s32 Battle_Draw(void) {
 
     Dbg_ProfMark(prof);
     Gfx_MarkPass(1);
+    XbFreshBoot_TraceInit("StgModel_Cull");
     StgModel_Cull(view);
+    XbFreshBoot_TraceInit("StgModel_Draw");
     StgModel_Draw(view);
     Dbg_ProfColor(prof, 0x80FF4040);
     Dbg_ProfMark(prof);
     Gfx_MarkPass(3);
+    XbFreshBoot_TraceInit("StgFx_DrawPre");
     StgFx_DrawPre();
     Dbg_ProfColor(prof, 0x80FFFFFF);
     Dbg_ProfMark(prof);
     Gfx_MarkPass(2);
+    XbFreshBoot_TraceInit("BtlObjDraw_Draw");
     BtlObjDraw_Draw();
     Dbg_ProfColor(prof, 0x8040FF40);
     Dbg_ProfMark(prof);
@@ -244,24 +280,30 @@ s32 Battle_Draw(void) {
     Dbg_ProfMark(prof);
     Gfx_MarkPass(4);
     Gfx_AddDefaultEnv();
+    XbFreshBoot_TraceInit("BtlScene_Draw");
     BtlScene_Draw(1);
+    XbFreshBoot_TraceInit("Ot_Draw");
     Ot_Draw();
     Dbg_ProfColor(prof, 0x804040FF);
     Dbg_ProfMark(prof);
     Gfx_MarkPass(3);
+    XbFreshBoot_TraceInit("StgFx_DrawPost");
     StgFx_DrawPost();
     Dbg_ProfColor(prof, 0x80FFFFFF);
     Dbg_ProfMark(prof);
     Gfx_MarkPass(0);
+    XbFreshBoot_TraceInit("BtlGame_Draw");
     BtlGame_Draw();
     Dbg_ProfColor(prof, 0x80FF40FF);
     Dbg_ProfMark(prof);
     Gfx_MarkPass(0);
+    XbFreshBoot_TraceInit("Font_FlushAll");
     Font_FlushAll();
     FontIcon_Stub23D1E0();
     Dbg_ProfColor(prof, 0x80FF40FF);
     Dbg_ProfMark(prof);
     Gfx_MarkPass(3);
+    XbFreshBoot_TraceInit("StgFx_DrawOverlay");
     StgFx_DrawOverlay();
     Dbg_ProfColor(prof, 0x80FFFFFF);
     Gfx_MarkPass(0);
@@ -325,45 +367,53 @@ s32 Battle_DrawSplit(void) {
 }
 
 /* Runs battle frames until the sequence reports the end; restarts the match when BATTLE_FLAG_RESTART is raised. */
+/* One original loop iteration, shared by the loop and a bounded probe.
+ * Presentation hooks are inactive outside a fresh original session. */
+s32 Battle_StepFrame(void) {
+    s32 draw,done;
+    extern void XbFreshBoot_TraceInit(const char *);
+    if (Battle_GetWork()->flags & BATTLE_FLAG_RESTART) {
+        Battle_Restart();
+        Battle_GetWork()->flags &= ~BATTLE_FLAG_RESTART;
+    }
+    Job_Run();
+    {extern int XbFreshBoot_Frame(int);if(XbFreshBoot_Frame(1))return -1;}
+    Gfx_BeginFrame();
+    if (!(Battle_GetWork()->flags & BATTLE_FLAG_PAUSE)) {
+        Gsc_Update();
+        BtlScript_Update();
+    }
+    BtlChars_CheckStart();
+    Pad_Update();
+    Snd_Update();
+    Snd_SendFighters();
+    BtlGame_PreUpdate();
+    Battle_UpdateWork();
+    BtlAiMgr_Update();
+    BtlChars_SampleInput();
+    XbFreshBoot_TraceInit("Battle_Update");
+    draw = Battle_Update();
+    XbFreshBoot_TraceInit("Battle_Update returned");
+    done = BtlGame_Update();
+    if (Battle_IsSplitScreen() && draw) {
+        Battle_DrawSplit();
+    } else {
+        XbFreshBoot_TraceInit("Battle_Draw");
+        Battle_Draw();
+        XbFreshBoot_TraceInit("Battle_Draw returned");
+    }
+    Gfx_EndFrame(2);
+    Dma_Flush();
+    {extern int XbFreshBoot_Frame(int);if(XbFreshBoot_Frame(2))return -1;}
+    return done;
+}
 void Battle_Loop(void) {
-    s32 draw;
-    s32 done;
-
-    do {
-        if (Battle_GetWork()->flags & BATTLE_FLAG_RESTART) {
-            Battle_Restart();
-            Battle_GetWork()->flags &= ~BATTLE_FLAG_RESTART;
-        }
-        Job_Run();
-        Gfx_BeginFrame();
-        if (!(Battle_GetWork()->flags & BATTLE_FLAG_PAUSE)) {
-            Gsc_Update();
-            BtlScript_Update();
-        }
-        BtlChars_CheckStart();
-        Pad_Update();
-        Snd_Update();
-        Snd_SendFighters();
-        BtlGame_PreUpdate();
-        Battle_UpdateWork();
-        BtlAiMgr_Update();
-        BtlChars_SampleInput();
-        draw = Battle_Update();
-        done = BtlGame_Update();
-        if (Battle_IsSplitScreen() && draw) {
-            Battle_DrawSplit();
-        } else {
-            Battle_Draw();
-        }
-        Gfx_EndFrame(2);
-        Dma_Flush();
-    } while (!done);
+    while(!Battle_StepFrame()) {}
 }
 
 /* Runs one whole battle scene; called by Game_Main after the menu overlay returns. */
 #ifdef PORT_BIGENDIAN
 extern int XbTypedData_RequireBattleData(void);
-extern void xsdk_log_write(const char *,...);
 #endif
 s32 Battle_Main(void) {
 #ifdef PORT_BIGENDIAN
@@ -374,7 +424,13 @@ s32 Battle_Main(void) {
     }
 #endif
     Battle_GetWork()->running = 1;
-    Battle_Init();
+    if (Battle_Init() < 0) {
+#ifdef PORT_BIGENDIAN
+        xsdk_log_write("engine: original load failed; fight not started");
+#endif
+        Battle_GetWork()->running = 0;
+        return 0;
+    }
     Battle_Loop();
     Battle_Term();
     Battle_GetWork()->running = 0;

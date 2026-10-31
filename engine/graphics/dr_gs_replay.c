@@ -1,3 +1,6 @@
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
 /* SPDX-License-Identifier: AGPL-3.0-or-later
  * Descriptor/pipeline encoding: Tenkaichi3DecompAndroid revision
  * 3ca419c7966b11438e2dc3c9a7e1914f102ed545, port/src/gs/gs_draw.{c,h}.
@@ -5,11 +8,16 @@
  */
 #include "dr_gs_replay.h"
 #include "dr_targets.h"
+#include "dr_gs_batch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
 #include <math.h>
-enum { CAPACITY=1024 };
+#include <time.h>
+static DrGsReplayProfile last_profile;
+void dr_gs_replay_profile(DrGsReplayProfile *p){if(p)*p=last_profile;}
+static uint64_t replay_us(void){struct timespec t;if(clock_gettime(CLOCK_MONOTONIC,&t))return 0;return (uint64_t)t.tv_sec*1000000u+t.tv_nsec/1000u;}
+enum { CAPACITY=DR_XENOS_VERTEX_CAPACITY, FRAME_VERTICES=262144, FRAME_DRAWS=16384 };
 _Static_assert(sizeof(Vtx)==sizeof(DrGsVertex),"native vertex ABI size");
 #define FIELD(field) _Static_assert(offsetof(Vtx,field)==offsetof(DrGsVertex,field),"vertex ABI: " #field)
 FIELD(x);FIELD(y);FIELD(z);FIELD(r);FIELD(g);FIELD(b);FIELD(a);FIELD(s);FIELD(t);FIELD(q);
@@ -75,7 +83,7 @@ static int translate(const DrGsReplay *r,const GsDraw *d,uint32_t vertex_count,D
        d->native || d->wall || d->target<0 || (!r->saved_targets && d->target!=r->target) ||
        d->sampler<0 || d->sampler>15 || d->mode[0]<0 || d->mode[0]>2 || ((d->mode[0]==2)!=(d->tex_is_target!=0)) ||
        d->mode[1]<0 || d->mode[1]>3 || d->mode[2]<0 || d->mode[2]>1 ||
-       d->mode[3]<0 || d->mode[3]>8 || (d->mode[0]!=0 && d->misc[3]!=0) ||
+       d->mode[3]<0 || d->mode[3]>8 || (d->mode[0]!=0 && d->misc[3]!=0 && !(d->mode[0]==1 && (d->misc[3]==-1 || d->misc[3]==1) && !d->vu && !d->tex_is_target)) ||
        ((blend>>1)&7)>5 || ((blend>>4)&7)>5 || ((blend>>7)&3)>2 || ((k>>13)&3)>2) return DR_GS_UNSUPPORTED;
     if((k&(1u<<24)) && (!r->saved_targets || d->vu!=1 || !dr_targets_is_gs((unsigned)d->target))) return DR_GS_UNSUPPORTED;
     if(!isfinite(d->misc[3]))return DR_XENOS_INVALID;
@@ -90,6 +98,7 @@ static int translate(const DrGsReplay *r,const GsDraw *d,uint32_t vertex_count,D
     out->draw.vu_uniform=d->vu?(const float *)&r->vu_uniforms[d->uniform]:NULL;
     out->draw.depth_quantize=(k&(1u<<23))?0:r->depth_max;
     if(d->vu && !(k&(1u<<23)))out->draw.depth_quantize=r->vu_uniforms[d->uniform].misc[2]>0?r->vu_uniforms[d->uniform].misc[2]:0;
+    out->draw.sprite_clamp=d->mode[0]==1 && d->misc[3]==-1;
     out->draw.sampler=(uint32_t)d->sampler;out->draw.gs_material=1;out->draw.textured=(uint32_t)d->mode[0];
     out->draw.tfx=(uint32_t)d->mode[1];out->draw.tcc=(uint32_t)d->mode[2];
     out->draw.alpha_test=(uint32_t)d->mode[3];out->draw.alpha_reference=(uint32_t)d->misc[0];
@@ -101,29 +110,34 @@ static int translate(const DrGsReplay *r,const GsDraw *d,uint32_t vertex_count,D
     out->count=d->count;
     /* An untextured draw must ignore a stale texture handle in the descriptor. */
     out->texture=d->mode[0]==0?r->white_texture:(r->texture?r->texture(d->tex,r->opaque):0);
+    /* Positive sprite grid is harmless only for the constant white texture.
+     * Real textured pixel-grid sampling still requires an explicit implementation. */
+    if(d->mode[0]!=0 && d->misc[3]==1 && out->texture!=r->white_texture)return DR_GS_UNSUPPORTED;
     return out->texture?DR_XENOS_OK:DR_GS_TEXTURE;
 }
 int dr_gs_replay(const DrGsReplay *r,const GsDraw *draws,uint32_t n,
                  const Vtx *vertices,uint32_t vertex_count,uint32_t *failed)
 {
+    uint64_t started=replay_us();last_profile=(DrGsReplayProfile){.source_draws=n};
     if(failed) *failed=UINT32_MAX;
     if(!r || !draws || (!vertices && vertex_count) || !n || !r->pipeline_keys || !r->pipeline_count || r->saved_targets>1 ||
        (!r->saved_targets && (r->target<0 || !r->physical_width || !r->physical_height ||
        r->physical_width>1280 || r->physical_height>720 || (r->physical_width&31))) ||
        !r->logical_width || !r->logical_height ||
        r->logical_width>4096 || r->logical_height>4096) return DR_XENOS_INVALID;
-    if(n>CAPACITY) return DR_XENOS_FULL;
+    uint32_t capacity=r->saved_targets?FRAME_VERTICES:CAPACITY;
+    if(n>(r->saved_targets?FRAME_DRAWS:CAPACITY)) return DR_XENOS_FULL;
     DrXenosCommand *commands=calloc(n,sizeof(*commands));
     DrXenosTargetCommand *targets=r->saved_targets?calloc(n*2,sizeof(*targets)):NULL;
-    DrGsVertex *copy=malloc(CAPACITY*sizeof(*copy));
-    float *vu=malloc(CAPACITY*48);
+    DrGsVertex *copy=malloc(capacity*sizeof(*copy));
+    float *vu=malloc((size_t)capacity*48);
     if(!commands || !copy || !vu || (r->saved_targets && !targets)) {
         free(vu);free(targets);free(commands);free(copy);return DR_GS_MEMORY;
     }
     uint32_t total=0,ntargets=0;int error=0;
     for(uint32_t i=0;i<n;i++) {
         error=translate(r,&draws[i],vertex_count,&commands[i]);
-        if(!error && commands[i].count>CAPACITY-total) error=DR_XENOS_FULL;
+        if(!error && commands[i].count>capacity-total) error=DR_XENOS_FULL;
         if(error) {if(failed) *failed=i;break;}
         if(draws[i].native==4 || draws[i].native==5) {
             targets[ntargets].target=(unsigned)draws[i].target;targets[ntargets++].snapshot=draws[i].native==5?1:2;
@@ -149,9 +163,13 @@ int dr_gs_replay(const DrGsReplay *r,const GsDraw *draws,uint32_t n,
                 draws[i-1].target!=draws[i].target || !commands[i-1].draw.stencil);
             if(start) targets[ntargets++]=(DrXenosTargetCommand){.target=(unsigned)draws[i].target,
                 .snapshot=3,.command={.texture=r->white_texture}};
-            targets[ntargets++]=(DrXenosTargetCommand){.target=(unsigned)draws[i].target,.command=commands[i]};
+            DrXenosTargetCommand next={.target=(unsigned)draws[i].target,.command=commands[i]};
+            if(ntargets && dr_gs_batch_merge(&targets[ntargets-1],&next))last_profile.merged_draws++;
+            else targets[ntargets++]=next;
         }
     }
+    last_profile.replay_commands=targets?ntargets:n;
+    last_profile.build_us=replay_us()-started;last_profile.vertices=total;started=replay_us();
     if(!error && targets) error=dr_xenos_replay_targets(targets,ntargets);
     else if(!error) {
         error=dr_xenos_begin(r->physical_width,r->physical_height);
@@ -161,5 +179,6 @@ int dr_gs_replay(const DrGsReplay *r,const GsDraw *draws,uint32_t n,
             if(!error) error=end;
         }
     }
+    last_profile.submit_us=replay_us()-started;
     free(vu);free(targets);free(copy);free(commands);return error;
 }

@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "vertex_microcode_cases": 128,
+  "fragment_depth_cases": 30,
+  "programs": [
+    "model skinning / toon / layer variants",
+    "stage",
+    "shadow projection"
+  ],
+  "GPU_execution": false,
+  "input": "exact shipped native shader containers; no shader recompilation",
+  "pixels_verified": false,
+  "battle_simulation": false,
+  "reference": "independent scalar matrix, lighting and projection equations from upstream shaders"
+}

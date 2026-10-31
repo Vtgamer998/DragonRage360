@@ -1,0 +1,27 @@
+{
+  "same_synthetic_strip_VM_instructions": {
+    "reference": 245,
+    "shader_path": 36,
+    "GPU_FPS_benchmark": false
+  },
+  "result": "PASS",
+  "program_hashes": [
+    "0x931162449bb92b6f",
+    "0x1a6a4fafbcad4df0",
+    "0xc81f82b235544790",
+    "0x1a9bf60fb69a640f"
+  ],
+  "fixture": "original VSM assembled with official scripts/vuasm.py; transient binaries excluded from delivery",
+  "scope": "classification, endian-safe bounded layout, callback and refusal paths; no GPU pixels or console FPS measurement",
+  "shadow_tests": "PASS",
+  "shadow_instruction_counts": [
+    {
+      "reference": 202,
+      "shader": 16
+    },
+    {
+      "reference": 211,
+      "shader": 16
+    }
+  ]
+}

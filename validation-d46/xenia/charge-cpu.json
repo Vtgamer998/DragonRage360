@@ -1,0 +1,35 @@
+{
+  "result": "PASS",
+  "tested_XEX_sha256": "5ba5c43a3cfcf7a9426cfb9c66edeaf93709b22a76d6702cc9ac7890466576bf",
+  "completed_steps": 386,
+  "FIGHT_frames": 384,
+  "GPU_replay_and_presentation": false,
+  "clean_close": true,
+  "DMA_error": false,
+  "files_converted": 106,
+  "ki_start": 40000,
+  "ki_max_seen": 60010,
+  "passed_former_failures_at_frames": [
+    211,
+    212,
+    249
+  ],
+  "ready_prelude_accelerated": true,
+  "FIGHT_simulation_accelerated": false,
+  "held_input_schedule": [
+    [
+      4,
+      239
+    ],
+    [
+      272,
+      351
+    ]
+  ],
+  "opponent_AI_enabled": true,
+  "uninterrupted_MAX_POWER_charge_verified": false,
+  "physical_console_FPS_verified": false,
+  "complete_match_to_KO": false,
+  "audible_audio_verified": false,
+  "scope": "Xenia CPU producers/decode only"
+}

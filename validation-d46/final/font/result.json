@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "cases": 9,
+  "observed_faulty_tag": "00bd000000008000",
+  "expected_tag": "64000000000000bd",
+  "PPC_fixture_compiled": true,
+  "PPC_fixture_executed": false
+}

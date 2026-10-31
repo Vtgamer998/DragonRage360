@@ -19,10 +19,12 @@ def main():
     a = p.parse_args()
     root = Path(__file__).resolve().parents[1]
     out = a.output.resolve(); out.mkdir(parents=True, exist_ok=True)
+    # Test the same current sources linked into the title, not older snapshots.
+    source_root = root.parent/'src'
     flags = ['gcc', '-std=c17', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
-             '-I'+str(root/'resource'), '-I'+str(root/'graphics')]
-    sources = [root/'graphics/dr_texfile.c', root/'graphics/dr_gs_texture.c'] + [
-        root/'resource'/(n+'.c') for n in ['dr_disc', 'dr_container', 'dr_anim', 'dr_bpe', 'dr_skeleton']]
+             '-I'+str(source_root)]
+    sources = [source_root/(n+'.c') for n in [
+        'dr_texfile', 'dr_gs_texture', 'dr_disc', 'dr_container', 'dr_anim', 'dr_bpe', 'dr_skeleton']]
     if not a.reference_only:
         san = ['-fsanitize=address,undefined', '-fno-omit-frame-pointer'] if a.sanitize else []
         for test in ['test_texfile', 'texfile_real']:

@@ -10,7 +10,7 @@ platform=root/'engine/platform/platform'
 common=['-std=gnu99','-O1','-g','-ffunction-sections','-fdata-sections','-I'+str(platform),'-I'+str(root/'src'),'-I'+str(a.xsdk.resolve()/'include')]
 if a.sanitize:common+=['-fsanitize=address,undefined','-fno-omit-frame-pointer']
 sets={
- 'pipeline':(['-DXB_HOST_TEST'],[root/'engine/tests/test_xb_pipeline.c',*[platform/n for n in ['xb_resconv.c','xb_resource_map.c','xb_bpe.c','xb_demo_resources.c']],*[root/'src'/n for n in ['dr_bpe.c','dr_anim.c','dr_skeleton.c']]]),
+ 'pipeline':(['-DXB_HOST_TEST'],[root/'engine/tests/test_xb_pipeline.c',*[platform/n for n in ['xb_resconv.c','xb_resource_map.c','xb_bpe.c','xb_demo_resources.c']],*[root/'src'/n for n in ['dr_bpe.c','dr_anim.c','dr_skeleton.c','dr_texfile.c','dr_gs_texture.c','dr_container.c']]]),
  'files':([],[root/'engine/tests/test_xb_file.c',platform/'xb_plat_file.c',platform/'xb_resconv.c'])}
 for name,(flags,sources) in sets.items():
     exe=out/name

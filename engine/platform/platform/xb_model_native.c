@@ -19,7 +19,7 @@ _Static_assert(offsetof(ObjMdlObj,parts)==0xd60 && offsetof(BObj,face)==0x1664,"
 #endif
 struct XbNativeModel {
  unsigned char *model;size_t model_size;DrBodyPart part[256];unsigned count;int bound;
- TexFile *tex[7];void *face[8],*lip[100];unsigned char chain[0x350];
+ TexFile *tex[7];void *face[8],*lip[100];size_t face_bytes[8];unsigned char chain[0x350];
 };
 static uint32_t rd(const void *p){return dr_resource_le32(p);}
 static void scalar(void *out,const void *p,unsigned width){
@@ -46,9 +46,9 @@ static int texture(const void *src,size_t size,TexFile **out){
  if(size<32 || size>16*1024*1024)return -870;
  unsigned count=rd(src),off=rd((const unsigned char *)src+4)*4u;
  if(!count || count>256 || off<32 || off>size || count>(size-off)/64)return -870;
- void *scratch=malloc(4*1024*1024);if(!scratch)return -851;
- for(unsigned i=0;i<count;i++){DrTexFileImage im;int e=dr_texfile_decode(src,size,i,scratch,4*1024*1024,&im);if(e){free(scratch);return e;}}
- free(scratch);unsigned char *copy=malloc(size);if(!copy)return -851;memcpy(copy,src,size);
+ /* Native consumers use bounded upload packets; decoding is a separate check. */
+ for(unsigned i=0;i<count;i++){int e=dr_texfile_validate_transfers(src,size,i);if(e)return e;}
+ unsigned char *copy=malloc(size);if(!copy)return -851;memcpy(copy,src,size);
  fields(copy,src,0,8,4);TexFile *f=(TexFile *)copy;f->ent=(TexEntry *)(copy+off);
  for(unsigned i=0;i<count;i++){
   const unsigned char *s=(const unsigned char *)src+off+i*64;TexEntry *e=&f->ent[i];
@@ -92,7 +92,7 @@ int XbNativeModel_Prepare(const void *pack,size_t size,XbNativeModel **out){
  for(unsigned i=2;i<7;i++)if(m->tex[i])for(unsigned j=0;j<m->tex[i]->count;j++)if(!m->tex[i]->ent[j].clut || m->tex[i]->ent[j].clutSize<160){e=-870;goto fail;}
  for(unsigned i=0;i<8;i++){
   e=dr_pack_memory_entry(pack,size,3+i,&off,&n,NULL);if(e==DR_NOT_FOUND){e=0;continue;}if(e)goto fail;
-  m->face[i]=malloc(n);if(!m->face[i]){e=-851;goto fail;}memcpy(m->face[i],(const unsigned char *)pack+off,n);
+  m->face[i]=malloc(n);if(!m->face[i]){e=-851;goto fail;}memcpy(m->face[i],(const unsigned char *)pack+off,n);m->face_bytes[i]=n;
   Rebase r={.chain=m->face[i],.min_tbp=0,.min_cbp=0,.single=1};for(r.phase=1;r.phase<3;r.phase++){e=visit(&r,n);if(e)goto fail;}
  }
  e=dr_pack_memory_entry(pack,size,22,&off,&n,NULL);if(e || n<sizeof(m->chain)){e=-870;goto fail;}
@@ -137,6 +137,17 @@ int XbNativeTexture_Prepare(const void *bytes,size_t size,void **out){
  if(!out)return -870;
  *out=NULL;if(sizeof(void *)!=4 || !bytes)return -870;
  TexFile *file=NULL;int e=texture(bytes,size,&file);if(!e)*out=file;return e;
+}
+int XbNativeModel_ChainSpan(XbNativeModel *m,const void *ptr,size_t *bytes){
+ if(bytes)*bytes=0;
+ if(!m || !ptr || !bytes || ((uintptr_t)ptr&15))return 0;
+ for(unsigned i=0;i<m->count;i++){
+  DrBodyPart *p=&m->part[i];
+  if(p->chain_bytes && p->chain_offset<=m->model_size && p->chain_bytes<=m->model_size-p->chain_offset &&
+     ptr==m->model+p->chain_offset){*bytes=p->chain_bytes;return 1;}
+ }
+ for(unsigned i=0;i<8;i++)if(ptr==m->face[i] && m->face_bytes[i]){*bytes=m->face_bytes[i];return 1;}
+ return 0;
 }
 void XbNativeTexture_Free(void *file){free(file);}
 void *XbNativeModel_Header(XbNativeModel *model){return model?model->model:NULL;}

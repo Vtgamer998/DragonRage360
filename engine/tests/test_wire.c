@@ -15,7 +15,7 @@ int main(void)
  packet(native,5,1);put(native+8,0x12345678,1);
  assert(bt3_wire_encode(wire,native,12,1)==12 && !memcmp(wire,ping,12));
  assert(bt3_wire_decode(back,ping,12,1)==12 && !memcmp(back,native,12));
- for(unsigned type=1;type<=11;type++) {
+ for(unsigned type=1;type<=12;type++) {
   size_t n=8;
   packet(native,type,1);
   switch(type) {
@@ -25,6 +25,7 @@ int main(void)
   case 4:case 5:case 6:n=12;put(native+8,0x12345678,1);break;
   case 10:n=22;put(native+8,123,1);put(native+12,6,1);memcpy(native+16,"Olá!\n",6);break;
   case 11:n=16;put(native+8,120,1);put(native+12,1,1);break;
+  case 12:n=20;put(native+8,0x46505231,1);put(native+12,0x55667788,1);put(native+16,0x11223344,1);break;
   }
   assert(bt3_wire_encode(wire,native,n,1)==n);
   assert(bt3_wire_decode(back,wire,n,1)==n && !memcmp(back,native,n));
@@ -32,6 +33,10 @@ int main(void)
   if(type==2 || type==7)assert(!memcmp(wire+24,native+24,20));
   if(type==3)assert(!memcmp(wire+44,native+44,n-44));
   if(type==10)assert(!memcmp(wire+16,native+16,n-16));
+  if(type==12){
+   const uint8_t fp[]={0x42,0x54,0x33,0x4e,12,0,0,0,0x31,0x52,0x50,0x46,0x88,0x77,0x66,0x55,0x44,0x33,0x22,0x11};
+   assert(!memcmp(wire,fp,sizeof(fp)));
+  }
   assert(bt3_wire_encode(back,wire,n,0)==n && !memcmp(back,wire,n));
   assert(bt3_wire_decode(wire,wire,n,1)==n && !memcmp(wire,native,n));
  }
@@ -41,6 +46,9 @@ int main(void)
  packet(native,3,1);put(native+12,17,1);assert(!bt3_wire_encode(wire,native,44,1));
  assert(!bt3_wire_decode(back,ping,7,1));
  packet(native,99,1);assert(!bt3_wire_encode(wire,native,8,1));
- puts("PASS: all 11 protocol types; Xbox/LE conversion; names, UTF-8 and pad bytes; malformed sizes");
+ packet(native,12,1);put(native+8,0x46505231,1);
+ for(size_t n=0;n<28;n++)if(n!=20)assert(!bt3_wire_encode(wire,native,n,1));
+ put(native+8,0,1);assert(!bt3_wire_encode(wire,native,20,1));
+ puts("PASS: 12 shared packet types; exact fingerprint word order; Xbox/LE conversion; malformed sizes");
  return 0;
 }

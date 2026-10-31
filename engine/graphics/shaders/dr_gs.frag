@@ -11,6 +11,9 @@ layout(set=0,binding=1) uniform sampler2D u_date;
 layout(push_constant) uniform Material { vec4 mode; vec4 test; vec4 snapshot_extent; vec4 rect; } pc;
 void main() {
     vec2 uv=v_stq.xy/v_stq.z;
+    // Original smooth sprite branch (misc.w=-1 at native scale), held
+    // inside the piece by the centres of its edge texels.
+    if(pc.snapshot_extent.w>0.0)uv=min(max(uv,pc.rect.xy),pc.rect.zw);
     vec4 texel=texture(u_texture,uv);
     float ta=texel.a*(255.0/128.0);
     vec3 modulate=texel.rgb*v_color.rgb;

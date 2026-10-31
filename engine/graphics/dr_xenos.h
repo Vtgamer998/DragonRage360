@@ -2,6 +2,8 @@
 #ifndef DR_XENOS_H
 #define DR_XENOS_H
 #include <stdint.h>
+#define DR_XENOS_VERTEX_CAPACITY 1024u
+#define DR_XENOS_FRAME_VERTICES 262144u
 /* Same field order as upstream Vtx; CPU-produced, not a file representation. */
 typedef struct {float x,y,z;uint8_t r,g,b,a;float s,t,q;} DrGsVertex;
 typedef struct {
@@ -26,6 +28,7 @@ typedef struct {
     const float *vu_uniform; /* 76 CPU-native floats, Vu0Uniform; valid until replay finishes */
     float depth_quantize; /* 0 fractional; otherwise 65535, 16777215 or 4294967295 */
     uint32_t sampler; /* upstream: bit0 linear, bit1 clamp U, bit2 clamp V, bit3 permit mips */
+    uint32_t sprite_clamp; /* original smooth 2D art: inset rectangle in texture pixels */
     uint32_t preserve_aux; /* color-only targetCopy must leave raw alpha unchanged */
 } DrXenosDraw;
 typedef struct {const void *pixels;uint32_t bytes;} DrXenosMip;
@@ -42,7 +45,13 @@ typedef struct {unsigned target;DrXenosCommand command;unsigned snapshot; /* 1 D
  * At most 1024 vertices per batch and 256 textures. Source RGBA keeps GS alpha.
  * TFX/TCC/ATST and GS blend keys are available; DATE/FBA on GS surfaces; indexed model/stage/shadow VU shaders; native outline/depth-ID CLUT consumers; no full GS emulation.
  * Saved native color/depth surfaces are available through the target API below.
- * begin waits for the previous batch before reusing its vertex arena. */
+ * A bounded 12 MiB frame arena keeps earlier draws immutable across batches;
+ * begin waits for the previous fence before reusing this arena. */
+typedef struct {uint32_t draws,arena_restarts,fence_waits,literal_sets,literal_skips,constant_registers,constant_skips,validated_vertices,reused_validation_vertices,state_sets,state_skips;} DrXenosProfile;
+void dr_xenos_profile(DrXenosProfile *);
+/* Closed renderer only, 1..60000 ms. Default 1000; Xenia's software GPU
+ * diagnostic selects 30000 explicitly. A timeout never releases live memory. */
+int dr_xenos_set_wait_timeout(uint32_t milliseconds);
 int dr_xenos_open(void);
 int dr_xenos_texture_create(uint32_t width,uint32_t height,const void *rgba,uint32_t *handle);
 int dr_xenos_texture_allocate(uint32_t width,uint32_t height,uint32_t levels,uint32_t *handle);
@@ -70,7 +79,9 @@ int dr_xenos_draw(const DrGsVertex *,uint32_t count,uint32_t texture,const DrXen
 /* Validates the complete list before emitting any draw. An active batch is required.
  * This is CPU-side validation, not an atomic GPU transaction. */
 int dr_xenos_draw_list(const DrXenosCommand *,uint32_t count);
-/* Owns begin/select/end, with complete preflight before touching eDRAM. */
+/* Owns begin/select/end, with complete preflight before touching eDRAM.
+ * Commands, vertex arrays and uniforms must remain immutable until return.
+ * Emission reuses this checked data; public standalone draw calls still validate. */
 int dr_xenos_replay_targets(const DrXenosTargetCommand *,uint32_t count);
 int dr_xenos_draw_vu(const float *vertices,uint32_t count,uint32_t texture,const DrXenosDraw *);
 int dr_xenos_end(void);

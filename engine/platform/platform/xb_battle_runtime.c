@@ -2,11 +2,16 @@
 #include "port_compat.h"
 #undef malloc
 #include "xb_battle_runtime.h"
+#include "xb_battle_boot.h"
 #include "xb_battle_common.h"
 #include "xb_battle_stage.h"
 #include "xb_model_native.h"
 #include "xb_mem.h"
 #include "xb_heap.h"
+#include "xb_sfx.h"
+#include "xb_adxt.h"
+#include "sys/snd.h"
+#include "battle/eft_det_b.h"
 #include "dr_container.h"
 #include "battle/btl_obj.h"
 #include "battle/btl_char_mgr.h"
@@ -18,13 +23,19 @@
 #include "sys/heap.h"
 #include "sys/pad.h"
 #include <stdint.h>
+#include <float.h>
 #include <stdlib.h>
 #include <string.h>
 
-struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers;};
+struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio,files,scene,scene_chars;XbBattleStageCollision *stage_geometry;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images,common3_prepared;uint8_t common3_type[638];};
 static XbBattleRuntime *active;
+static XbBattleBootGate boot_gate;
 extern AiThMgr *gBtlAi;
+#include "sys/job.h"
+extern s32 gGscActive;
 extern ViewProgress *gProgress;
+extern SndMgr *gSndMgr;
+extern SndRpc *gSndRpc;
 extern void BtlChar_AllocAll(s32);
 extern void BtlChar_FreeAll(void);
 extern void BtlAiMgr_Init(void);
@@ -32,13 +43,21 @@ extern void BtlAiMgr_Term(void);
 extern void Battle_ClearWork(void);
 
 int XbBattleRuntime_HasResources(void){return active && gCommonRes==&active->view;}
+int XbBattleRuntime_EnterOriginal(void){
+ if(active || gCommonRes || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress || gSndMgr || gSndRpc || gJobQueue || gGscActive)return XB_BATTLE_BOOT_BUSY;
+ return XbBattleBoot_Enter(&boot_gate,XB_BATTLE_BOOT_ORIGINAL);
+}
+int XbBattleRuntime_LeaveOriginal(void){
+ if(active || gCommonRes || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress || gSndMgr || gSndRpc || gJobQueue || gGscActive)return XB_BATTLE_BOOT_BUSY;
+ return XbBattleBoot_Leave(&boot_gate,XB_BATTLE_BOOT_ORIGINAL);
+}
 int XbBattleRuntime_BindLight(void **out){
  if(!XbBattleRuntime_HasResources())return 0;
  *out=active->light;return 1;
 }
 int XbBattleRuntime_Open(const void *common2,size_t n2,const void *common4,size_t n4,XbBattleRuntime **out){
  if(!out)return -890;
- *out=NULL;if(sizeof(void *)!=4 || active || gCommonRes || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress)return -891;
+ *out=NULL;if(sizeof(void *)!=4 || !XbBattleBoot_ReadyForOriginal(&boot_gate) || active || gCommonRes || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress)return -891;
  XbBattleRuntime *r=calloc(1,sizeof(*r));if(!r)return -851;
  XbBattleCommonInfo info;int e=XbBattleCommon_Prepare(common2,n2,&r->common,&info);if(e)goto fail;
  e=XbBattleCommon_AttachItems(r->common,common4,n4);if(e)goto fail;
@@ -60,16 +79,20 @@ int XbBattleRuntime_Open(const void *common2,size_t n2,const void *common4,size_
  header[214]=(uint32_t)at;r->view.data[0]=file;r->view.size[0]=(s32)total;
  /* Heap_Init is idempotent in the native engine and never erases live data. */
  if(XbMem_InitHeap()){e=-851;goto fail;}Heap_Init();if(!XbHeap_Ready()){e=-851;goto fail;}
+ if(XbBattleBoot_Enter(&boot_gate,XB_BATTLE_BOOT_DIAGNOSTIC)){e=-891;goto fail;}
  active=r;gCommonRes=&r->view;*out=r;return 0;
 fail:
  XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return e;
 }
 int XbBattleRuntime_Close(XbBattleRuntime *r){
  if(!r || active!=r || gCommonRes!=&r->view || r->managers || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress)return -891;
- gCommonRes=NULL;active=NULL;XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return 0;
+ if(XbBattleBoot_Leave(&boot_gate,XB_BATTLE_BOOT_DIAGNOSTIC))return -891;
+ gCommonRes=NULL;active=NULL;
+ if(r->common3){for(unsigned i=1;i<=r->common3_count;i++)XbNativeTexture_Free(r->common3[i]);free(r->common3);}
+ XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return 0;
 }
 int XbBattleRuntime_BeginManagers(XbBattleRuntime *r){
- if(!r || active!=r || !XbBattleRuntime_HasResources() || r->managers || gBtlChars || gBtlAi || gSaveData || gProgress || !gBtlObjWork)return -891;
+ if(!r || active!=r || !XbBattleRuntime_HasResources() || r->managers || gBtlChars || gBtlAi || gSaveData || gProgress || gStgNav || !gBtlObjWork)return -891;
  /* Validate every stage start before AllocAll performs its immediate reset. */
  for(int side=0;side<2;side++){
   BtlObj *obj=BtlObj_Get(side);float pos[4],rot[4];int zone=-1;
@@ -85,10 +108,12 @@ int XbBattleRuntime_BeginManagers(XbBattleRuntime *r){
  }
  BattleSetup_Finish();
  for(int side=0;side<2;side++){BattleSide_SetObjId(side,side);BattleSide_SetModelSlot(side,side);}
- BtlChar_AllocAll(2);BtlAiMgr_Init();r->managers=1;return 0;
+ BtlChar_AllocAll(2);BtlAiMgr_Init();if(XbBattleStage_HasParameters())StgNav_Init();r->managers=1;return 0;
 }
 int XbBattleRuntime_EndManagers(XbBattleRuntime *r){
  if(!r || active!=r || !r->managers || !gBtlChars || !gBtlAi || !gSaveData || !gProgress)return -891;
+ if(r->audio){int e=XbBattleRuntime_EndAudio(r);if(e)return e;}
+ if(XbBattleStage_HasParameters())StgNav_Term();
  BtlAiMgr_Term();BtlChar_FreeAll();
  Heap_Free(gSaveData);gSaveData=NULL;
  Heap_Free(gProgress->loadSprites);Heap_Free(gProgress->loadRes);Heap_Free(gProgress->loadPack);Heap_Free(gProgress);gProgress=NULL;
@@ -106,3 +131,10 @@ int XbBattleRuntime_GetInfo(XbBattleRuntime *r,XbBattleRuntimeInfo *out){
  }
  return 0;
 }
+
+#include "xb_battle_audio.inc"
+
+#include "xb_battle_common3.inc"
+#include "xb_character_effects.inc"
+
+#include "xb_battle_files.inc"

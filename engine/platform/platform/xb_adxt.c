@@ -61,6 +61,7 @@ void *ADXT_Create(int channels,void *work,int worksize) {
     }
     reject(MEMORY);return NULL;
 }
+int XbAdx_Destroy(void *h){Player *p=player(h);if(!p)return BAD;stop(p);p->used=0;return 0;}
 void ADXT_SetReloadSct(void *h,int n){Player *p=player(h);if(p && n>0 && n<=512)p->reload=n;else reject(BAD);}
 void ADXT_SetSvrFreq(void *h,int n){Player *p=player(h);if(p && n>0 && n<=60)p->freq=n;else reject(BAD);}
 void ADXT_Stop(void *h){Player *p=player(h);if(p)stop(p);}

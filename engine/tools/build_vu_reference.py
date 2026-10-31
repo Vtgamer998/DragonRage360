@@ -27,11 +27,11 @@ s=s.replace('''        if (len + qw * 16 > sizeof(buf)) {
         }''')
 s=s.replace('    Gs_Gif(buf, len / 16);','    if (gif_callback != NULL) gif_callback(gif_opaque, buf, len / 16);')
 s=s.replace('static void run(uint32_t start)', 'static int run(uint32_t start, uint32_t budget)')
-# A NaN-to-integer cast is undefined in C. Reject it rather than inventing
-# unsupported PS2 NaN behavior or invoking a host-dependent conversion.
-needle='double v = (double)A(c) * k[sp - 0x14];'
-assert s.count(needle)==1
-s=s.replace(needle,needle+'\n                    if (isnan(v)) return DR_VU_INVALID;')
+# Defined VU saturating conversion; no C cast of NaN or unrepresentable values.
+s=s.replace('#include "dr_vu1.h"', '#include "dr_vu1.h"\n#include "dr_vu_ftoi.h"')
+a=s.index('                static const float k[4] = {1.0f, 16.0f, 4096.0f, 32768.0f};')
+b=s.index('                wr = &vu.vf[ft]; wmask = dest; break;',a)
+s=s[:a]+"                static const unsigned fraction[4]={0,4,12,15};\n                res = vu.vf[ft];\n                EACH res.u[c]=dr_vu_ftoi(vu.vf[fs].u[c],fraction[sp-0x14]);\n"+s[b:]
 s=s.replace('guard < 4000000','guard < budget')
 s=s.replace('''            sProg[slot].kicks += sStatKicks - kbefore;
             return;''','''            sProg[slot].kicks += sStatKicks - kbefore;

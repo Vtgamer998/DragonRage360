@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "cases": 6,
+  "actual_frontend_sweep": true,
+  "current_frame_textures_preserved": true,
+  "scope": "host lifetime mocks; native pixels separately tested"
+}

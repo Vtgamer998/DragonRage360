@@ -4,6 +4,7 @@
 #include "test_xenos.c"
 #undef main
 #include "dr_gs_replay.h"
+#include <stdlib.h>
 static unsigned resolutions;
 static uint32_t resolve(GsTex tex,void *opaque)
 {assert(opaque==&resolutions);resolutions++;return tex==123?1:0;}
@@ -25,6 +26,20 @@ int main(void)
     assert(dr_gs_replay(&r,d,2,v,6,&failed)==0 && draws==before+2 && failed==UINT32_MAX && resolutions==1);
     assert(vertex_address==0x100000+144 && vertex_bytes==144);
     GsDraw saved=d[1];
+    d[1].misc[3]=-1;d[1].rect[0]=d[1].rect[1]=0;d[1].rect[2]=d[1].rect[3]=1;
+    assert(dr_gs_replay(&r,d,2,v,6,&failed)==0);
+    d[1].rect[0]=-1;d[1].rect[1]=-1;d[1].rect[2]=2;d[1].rect[3]=2;
+    assert(dr_gs_replay(&r,d,2,v,6,&failed)==0);
+    d[1].rect[0]=-4097;before=draws;
+    assert(dr_gs_replay(&r,d,2,v,6,&failed)==DR_XENOS_INVALID && draws==before);
+    d[1].rect[0]=NAN;before=draws;
+    assert(dr_gs_replay(&r,d,2,v,6,&failed)==DR_XENOS_INVALID && draws==before);
+    d[1]=saved;d[1].misc[3]=1;
+    assert(dr_gs_replay(&r,d,2,v,6,&failed)==0); /* resolved white: constant sampling */
+    r.white_texture=2;before=draws;
+    assert(dr_gs_replay(&r,d,2,v,6,&failed)==DR_GS_UNSUPPORTED && draws==before);
+    r.white_texture=1;d[1]=saved;
+
 #define REJECT(change,code) do {unsigned b=draws;d[1]=saved;change;assert(dr_gs_replay(&r,d,2,v,6,&failed)==code);assert(draws==b && failed==1);} while(0)
     REJECT(d[1].vu=4,DR_GS_UNSUPPORTED);
     REJECT(d[1].native=1,DR_GS_UNSUPPORTED);
@@ -36,7 +51,7 @@ int main(void)
     REJECT(d[1].mode[3]=9,DR_GS_UNSUPPORTED);
     REJECT(d[1].misc[1]=1,DR_GS_UNSUPPORTED); /* DATE */
     REJECT(d[1].misc[2]=1,DR_GS_UNSUPPORTED); /* FBA */
-    REJECT(d[1].misc[3]=1,DR_GS_UNSUPPORTED);
+    REJECT(d[1].misc[3]=2,DR_GS_UNSUPPORTED);
     REJECT(d[1].tex=999,DR_GS_TEXTURE);
     REJECT(d[1].pipeline=-1,DR_XENOS_INVALID);
     REJECT(d[1].pipeline=2,DR_XENOS_INVALID);
@@ -82,10 +97,14 @@ int main(void)
     r.white_texture=1;d[0]=saved;d[0].first=0;d[1].mode[0]=0;r.white_texture=15;
     assert(dr_gs_replay(&r,d,2,v,6,&failed)==DR_XENOS_INVALID && draws==before);
     r.white_texture=1;d[0]=saved;d[0].first=0;d[1]=saved;
-    Vtx many[1023];for(unsigned i=0;i<1023;i++) many[i]=v[i%3];
-    d[0].first=0;d[0].count=1023;d[1].first=0;d[1].count=3;
-    assert(dr_gs_replay(&r,d,2,many,1023,&failed)==DR_XENOS_FULL && failed==1 && draws==before);
-    assert(dr_gs_replay(&r,d,1025,many,1023,&failed)==DR_XENOS_FULL && failed==UINT32_MAX);
+    Vtx many[DR_XENOS_VERTEX_CAPACITY-1];
+    for(unsigned i=0;i<DR_XENOS_VERTEX_CAPACITY-1;i++)many[i]=v[i%3];
+    d[0].first=0;d[0].count=180;d[1].first=0;d[1].count=6;
+    /* A valid real loading frame needs 186 vertices. Keep the hard limit. */
+    assert(dr_gs_replay(&r,d,2,many,DR_XENOS_VERTEX_CAPACITY-1,&failed)==0);
+    before=draws;d[0].count=DR_XENOS_VERTEX_CAPACITY-1;d[1].count=3;
+    assert(dr_gs_replay(&r,d,2,many,DR_XENOS_VERTEX_CAPACITY-1,&failed)==DR_XENOS_FULL && failed==1 && draws==before);
+    assert(dr_gs_replay(&r,d,DR_XENOS_VERTEX_CAPACITY+1,many,DR_XENOS_VERTEX_CAPACITY-1,&failed)==DR_XENOS_FULL && failed==UINT32_MAX);
     assert(dr_gs_replay(NULL,d,2,v,6,&failed)==DR_XENOS_INVALID);
     assert(dr_xenos_begin(640,480)==0);
     d[0]=saved;d[0].first=0;d[1]=saved;
@@ -101,7 +120,33 @@ int main(void)
     commands[1].texture=1;assert(dr_xenos_draw_list(commands,2)==0 && draws==before+2);
     assert(dr_xenos_end()==0);
     assert(dr_xenos_target_create(0,640,480)==0 && dr_xenos_target_create(1,640,480)==0);
+    { /* Consecutive simple GS draws merge, while late bad vertices still reject the whole list. */
+        GsDraw simple[3];Vtx triangles[9];DrXenosProfile xp0,xp1;
+        assert(dr_xenos_target_create(2,640,480)==0);
+        for(unsigned i=0;i<9;i++)triangles[i]=v[i%3];
+        for(unsigned i=0;i<3;i++)simple[i]=(GsDraw){.first=i*3,.count=3,.target=2,.scissor={0,0,640,480}};
+        r.saved_targets=1;before=draws;dr_xenos_profile(&xp0);
+        assert(dr_gs_replay(&r,simple,3,triangles,9,&failed)==0 && draws==before+1);
+        dr_xenos_profile(&xp1);assert(xp1.validated_vertices-xp0.validated_vertices==9 && xp1.reused_validation_vertices-xp0.reused_validation_vertices==9);
+        DrGsReplayProfile batch;dr_gs_replay_profile(&batch);assert(batch.merged_draws==2 && batch.replay_commands==1);
+        before=draws;triangles[8].q=0;
+        assert(dr_gs_replay(&r,simple,3,triangles,9,&failed)==DR_XENOS_INVALID && draws==before);
+        triangles[8].q=1;simple[1].pipeline=1;dr_xenos_profile(&xp0);
+        assert(dr_gs_replay(&r,simple,3,triangles,9,&failed)==0);
+        dr_xenos_profile(&xp1);assert(xp1.draws-xp0.draws==3);
+        assert(dr_xenos_target_drop(2)==0);
+    }
     r.saved_targets=1;r.white_texture=1;d[0]=saved;d[0].first=0;d[0].target=0;d[1]=saved;d[1].target=1;
+    { /* Several draw calls share the frame arena, without a vertex spill. */
+        Vtx *frame=malloc(2046*sizeof(*frame));assert(frame);for(unsigned j=0;j<2046;j++)frame[j]=v[j%3];
+        GsDraw large[2]={d[0],d[1]};large[0].count=2046;large[1].first=0;large[1].count=3;
+        unsigned oldwaits=waits;before=draws;
+        assert(dr_gs_replay(&r,large,2,frame,2046,&failed)==0 && draws==before+3 && waits<=oldwaits+1);
+        before=draws;frame[2045].x=NAN;
+        assert(dr_gs_replay(&r,large,2,frame,2046,&failed)==DR_XENOS_INVALID && draws==before);
+        free(frame);
+    }
+
     model_enabled=1;next_color=0x12345678;next_depth=.5f;
     assert(dr_gs_replay(&r,d,2,v,6,&failed)==0);
     assert(dr_xenos_begin_target(0)==0 && edram_color==0x12345678 && edram_depth==.5f);

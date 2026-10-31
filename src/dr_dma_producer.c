@@ -7,13 +7,17 @@
 #include "dr_dma_producer.h"
 #include <stdlib.h>
 #include <string.h>
-enum { BYTES=0x100000, TAIL=64 };
+#ifdef DR_XBOX360
+#include <xsdk/log.h>
+#endif
+enum { BYTES=0x100000, TAIL=64, REF_BYTES=0x800000 };
 enum { PENDING_MAX=16384, DIRECT_MAX=0x10000 };
 typedef struct {uint32_t offset,bytes;uint8_t kind;} Pending;
 static struct {
     unsigned char *buffer[2];size_t used[2];unsigned current;
     unsigned char *owner[3];int direct_active;
     DrDmaSubmit submit;void *opaque;int error;
+    unsigned char *refs;size_t refs_used;
     unsigned char *sink;Pending pending[PENDING_MAX];unsigned npending;
     DrDmaSubmitMapped mapped_submit;
     struct {const unsigned char *bytes;size_t size;DrDmaKind kind;uint32_t address;} maps[16];
@@ -49,7 +53,15 @@ static void le32(unsigned char *p,uint32_t x)
 {for(unsigned i=0;i<4;i++)p[i]=(unsigned char)(x>>(i*8));}
 static void le64(unsigned char *p,uint64_t x)
 {for(unsigned i=0;i<8;i++)p[i]=(unsigned char)(x>>(i*8));}
-static int fail(int error) {if(!dma.error)dma.error=error;return dma.error;}
+static __attribute__((noinline)) int fail(int error) {
+    if(!dma.error){
+#ifdef DR_XBOX360
+        xsdk_log_write("DMA first error=%d caller=%p used=%u pending=%u maps=%u direct=%d",error,__builtin_return_address(0),(unsigned)dma.used[dma.current],dma.npending,dma.nmaps,dma.direct_active);
+#endif
+        dma.error=error;
+    }
+    return dma.error;
+}
 static int ready(void)
 {return (!dma.submit && !dma.mapped_submit)?fail(DR_DMA_STATE):dma.error;}
 static unsigned char *reserve(size_t n)
@@ -57,7 +69,12 @@ static unsigned char *reserve(size_t n)
     if(ready())return NULL;
     if(dma.direct_active){fail(DR_DMA_STATE);return NULL;}
     if(!n || n%16) {fail(DR_DMA_INVALID);return NULL;}
-    if(n>BYTES-TAIL-dma.used[dma.current]) {fail(DR_DMA_FULL);return NULL;}
+    if(n>BYTES-TAIL-dma.used[dma.current]) {
+#ifdef DR_XBOX360
+        xsdk_log_write("DMA reserve overflow requested=%u used=%u caller=%p",(unsigned)n,(unsigned)dma.used[dma.current],__builtin_return_address(0));
+#endif
+        fail(DR_DMA_FULL);return NULL;
+    }
     unsigned char *p=dma.buffer[dma.current]+dma.used[dma.current];
     dma.used[dma.current]+=n;return p;
 }
@@ -86,7 +103,7 @@ int dr_dma_producer_open_mapped(DrDmaSubmitMapped submit,void *opaque)
 int dr_dma_producer_close(void)
 {
     if(!dma.submit && !dma.mapped_submit)return DR_DMA_STATE;
-    free(dma.owner[2]);free(dma.owner[1]);free(dma.owner[0]);memset(&dma,0,sizeof(dma));return 0;
+    free(dma.refs);free(dma.owner[2]);free(dma.owner[1]);free(dma.owner[0]);memset(&dma,0,sizeof(dma));return 0;
 }
 int dr_dma_producer_error(void) {return dma.error;}
 int dr_dma_producer_is_open(void) {return dma.submit || dma.mapped_submit;}
@@ -105,6 +122,16 @@ int dr_dma_append_canonical(const void *data,size_t bytes)
     if(!data || !bytes || bytes%16)return fail(DR_DMA_INVALID);
     unsigned char *p=reserve(bytes);if(!p)return dma.error;
     memcpy(p,data,bytes);return 0;
+}
+/* Exact TexBltPacket ABI: four native u32 DMA/VIF words, then four
+ * native u64 GIF/A+D words. File IMAGE payloads remain canonical bytes. */
+int dr_dma_add_texture_header(const void *packet)
+{
+    if(ready())return dma.error;
+    if(!packet)return fail(DR_DMA_INVALID);
+    unsigned char *p=reserve(48);if(!p)return dma.error;
+    memcpy(p,packet,48);convert(p,16,DR_DMA_W32);convert(p+16,32,DR_DMA_W64);
+    return 0;
 }
 int dr_dma_append_words(const uint32_t *words,size_t count)
 {
@@ -136,7 +163,7 @@ void Dma_Flush(void)
     chain_tag(p,2);le64(p+16,0x1000000000008001ull);le64(p+24,14);
     ad(p+32,0x61,0);end_tag(p+48);
     DrGsSpan span={0x41000000u+dma.current*BYTES,dma.buffer[dma.current],dma.used[dma.current]+TAIL};
-    DrGsSpan spans[17];unsigned char *copies[16]={0};unsigned i;
+    DrGsSpan spans[18];unsigned char *copies[16]={0};unsigned i;
     spans[0]=span;int error=0;
     for(i=0;i<dma.nmaps;i++) {
         copies[i]=malloc(dma.maps[i].size);
@@ -145,16 +172,18 @@ void Dma_Flush(void)
         convert(copies[i],dma.maps[i].size,dma.maps[i].kind);
         spans[i+1]=(DrGsSpan){dma.maps[i].address,copies[i],dma.maps[i].size};
     }
-    if(!error)error=dma.mapped_submit?dma.mapped_submit(dma.opaque,spans,dma.nmaps+1,span.address):dma.submit(dma.opaque,&span,span.address);
+    size_t nspans=dma.nmaps+1;
+    if(dma.refs_used)spans[nspans++]=(DrGsSpan){0x43000000u,dma.refs,dma.refs_used};
+    if(!error)error=dma.mapped_submit?dma.mapped_submit(dma.opaque,spans,nspans,span.address):dma.submit(dma.opaque,&span,span.address);
     for(i=0;i<dma.nmaps;i++)free(copies[i]);
     if(error) {fail(error);return;} // Failed work is not silently reused/swapped.
     dma.current^=1;dma.used[dma.current]=0;end_tag(dma.buffer[dma.current]);
-    dma.nmaps=0;dma.mapped_bytes=0;
+    dma.nmaps=0;dma.mapped_bytes=0;dma.refs_used=0;
 }
 void Dma_ResetBuffers(void)
 {
     if(!dma.submit && !dma.mapped_submit) {fail(DR_DMA_STATE);return;}
-    dma.used[0]=dma.used[1]=0;dma.npending=0;dma.direct_active=0;dma.nmaps=0;dma.mapped_bytes=0;end_tag(dma.buffer[0]);end_tag(dma.buffer[1]);
+    dma.used[0]=dma.used[1]=0;dma.npending=0;dma.direct_active=0;dma.nmaps=0;dma.mapped_bytes=0;dma.refs_used=0;end_tag(dma.buffer[0]);end_tag(dma.buffer[1]);
 }
 int32_t Dma_GetBufSize(void) {return (dma.submit || dma.mapped_submit)?BYTES-TAIL:0;}
 int32_t Dma_GetUsedSize(void) {return (dma.submit || dma.mapped_submit)?(int32_t)dma.used[dma.current]:0;}
@@ -293,10 +322,83 @@ void dr_dma_add_ref_kind(const void *addr,int32_t size,DrDmaKind kind)
     if(ready())return;
     if(size<0 || (unsigned)kind>DR_DMA_W64 || (size>0 && !addr) || size/16>0xFFFF) {fail(DR_DMA_INVALID);return;}
     size_t n=(size_t)size/16*16;
+    /* Mapped submissions keep REF payloads out of the command list. Copy at
+     * enqueue time preserves this adapter's existing snapshot semantics. A
+     * single canonical span is bounded separately; no guest pointer is tagged. */
+    if(dma.mapped_submit && n){
+        if(n>REF_BYTES-dma.refs_used){fail(DR_DMA_FULL);return;}
+        if(!dma.refs){dma.refs=malloc(REF_BYTES);if(!dma.refs){fail(DR_DMA_MEMORY);return;}}
+        unsigned char *p=reserve(16);if(!p)return;
+        memcpy(dma.refs+dma.refs_used,addr,n);convert(dma.refs+dma.refs_used,n,kind);
+        le32(p,0x30000000u|(uint32_t)(n/16));le32(p+4,0x43000000u+(uint32_t)dma.refs_used);le32(p+8,0);le32(p+12,0);
+        dma.refs_used+=n;return;
+    }
     unsigned char *p=reserve(16+n);if(!p)return;
     le32(p,0x10000000u|(uint32_t)(n/16));le32(p+4,0);le32(p+8,0);le32(p+12,0);
     if(n){memcpy(p+16,addr,n);convert(p+16,n,kind);}
 }
+static uint32_t read_native_word(const unsigned char *,int);
+/* GfxClut_InitPacket ABI: native u32 control headers and byte RGBA image.
+ * The ten reviewed callers pass ref at offset 0x494, not arbitrary REF tags. */
+int dr_dma_add_clut_ref(const void *reference) {
+    if(ready())return dma.error;
+    if(!reference)return fail(DR_DMA_INVALID);
+    const unsigned char *ref=reference,*base=ref-0x494;int big=must_swap();
+    if(read_native_word(ref,big)!=0x30000049u || read_native_word(ref+4,big)!=(uint32_t)(uintptr_t)base || read_native_word(ref+8,big) || read_native_word(ref+12,big))return fail(DR_DMA_INVALID);
+    unsigned char packet[0x490] __attribute__((aligned(16)));
+    memcpy(packet,base,sizeof(packet));convert(packet,0x70,DR_DMA_W32);convert(packet+0x470,0x20,DR_DMA_W32);
+    dr_dma_add_ref_kind(packet,sizeof(packet),DR_DMA_RAW);return dma.error;
+}
+/* ScrXfade_StoreHalf's fixed 512x224 RGB24 upload. The caller supplies
+ * the owned buffer explicitly; a REF pointer is never reconstructed. */
+int dr_dma_add_xfade_ref(const void *reference,const void *source,size_t capacity) {
+    if(ready())return dma.error;
+    enum { IMAGE=512*224*3, PACKET=IMAGE+0x90 };
+    if(!reference || !source || capacity<PACKET)return fail(DR_DMA_INVALID);
+    const unsigned char *ref=reference,*src=source;int big=must_swap();
+    if(read_native_word(ref,big)!=(0x30000000u+IMAGE/16+9) ||
+       read_native_word(ref+4,big)!=(uint32_t)(uintptr_t)src ||
+       read_native_word(ref+8,big) || read_native_word(ref+12,big) ||
+       read_native_word(src,big) || read_native_word(src+4,big) ||
+       read_native_word(src+8,big) || read_native_word(src+12,big)!=(0x50000000u+IMAGE/16+8))return fail(DR_DMA_INVALID);
+    unsigned char *packet=malloc(PACKET);if(!packet)return fail(DR_DMA_MEMORY);
+    memcpy(packet,src,PACKET);
+    convert(packet,0x10,DR_DMA_W32);convert(packet+0x10,0x60,DR_DMA_W64);
+    convert(packet+0x70+IMAGE,0x20,DR_DMA_W64);
+    static const unsigned offsets[]={0x28,0x38,0x48,0x58,0x54088};
+    static const unsigned regs[]={0x50,0x51,0x52,0x53,0x3f};
+    int valid=1;
+    for(unsigned i=0;i<5;i++){
+        const unsigned char *at=packet+offsets[i];
+        if(read_native_word(at,0)!=regs[i] || read_native_word(at+4,0))valid=0;
+    }
+    /* Validate every fixed GIF/control word before publishing a snapshot.
+     * Image bytes remain untouched. BITBLTBUF destination base is dynamic. */
+    if(read_native_word(packet+0x10,0)!=0x8004u || read_native_word(packet+0x14,0)!=0x10000000u ||
+       read_native_word(packet+0x18,0)!=14 || read_native_word(packet+0x1c,0) ||
+       read_native_word(packet+0x20,0)!=0x01000000u ||
+       (read_native_word(packet+0x24,0)&0xffffc000u)!=0x01080000u ||
+       read_native_word(packet+0x30,0) || read_native_word(packet+0x34,0) ||
+       read_native_word(packet+0x40,0)!=512 || read_native_word(packet+0x44,0)!=224 ||
+       read_native_word(packet+0x50,0) || read_native_word(packet+0x54,0) ||
+       read_native_word(packet+0x60,0)!=(IMAGE/16|0x8000u) || read_native_word(packet+0x64,0)!=0x08000000u ||
+       read_native_word(packet+0x68,0) || read_native_word(packet+0x6c,0) ||
+       read_native_word(packet+IMAGE+0x70,0)!=0x8001u || read_native_word(packet+IMAGE+0x74,0)!=0x10000000u ||
+       read_native_word(packet+IMAGE+0x78,0)!=14 || read_native_word(packet+IMAGE+0x7c,0) ||
+       read_native_word(packet+IMAGE+0x80,0) || read_native_word(packet+IMAGE+0x84,0))valid=0;
+    if(!valid){free(packet);return fail(DR_DMA_INVALID);}
+    dr_dma_add_ref_kind(packet,PACKET,DR_DMA_RAW);free(packet);return dma.error;
+}
+/* Explicit immutable inline chain snapshot; caller proves source extent. */
+static int snapshot_chain(const void *src,size_t bytes,uint32_t *address,DrDmaKind kind) {
+    if(ready())return dma.error;
+    if(!dma.mapped_submit || !src || !address || !bytes || bytes%16 || bytes>REF_BYTES-dma.refs_used)return fail(DR_DMA_INVALID);
+    if(!dma.refs){dma.refs=malloc(REF_BYTES);if(!dma.refs)return fail(DR_DMA_MEMORY);}
+    memcpy(dma.refs+dma.refs_used,src,bytes);convert(dma.refs+dma.refs_used,bytes,kind);
+    *address=0x43000000u+(uint32_t)dma.refs_used;dma.refs_used+=bytes;return 0;
+}
+int dr_dma_snapshot_chain(const void *src,size_t bytes,uint32_t *address){return snapshot_chain(src,bytes,address,DR_DMA_RAW);}
+int dr_dma_snapshot_words(const void *src,size_t bytes,uint32_t *address){return snapshot_chain(src,bytes,address,DR_DMA_W32);}
 void Dma_AddRef(void *addr,int32_t size) {dr_dma_add_ref_kind(addr,size,DR_DMA_RAW);}
 
 /* Explicit chain address map. No masked native pointer is accepted as a

@@ -37,7 +37,7 @@ sys.path.insert(0,str(up/'port/tools'));import portsrc
 original=[]
 for stem in ('col_a','eft_det_b'):
  s,_,_=portsrc.enable_attempts((up/'src/battle'/(stem+'.c')).read_text());f=out/(stem+'.c');f.write_text(s);original.append(f)
-sources=[fixture,e/'platform/platform/xb_battle_stage.c',*original,*[project/'src'/(n+'.c') for n in ('dr_stage_collision','dr_container','dr_disc','dr_anim','dr_bpe','dr_skeleton')]]
+sources=[fixture,e/'platform/platform/xb_battle_stage.c',e/'platform/platform/xb_stage_camera.c',e/'platform/platform/xb_stage_effects.c',*original,*[project/'src'/(n+'.c') for n in ('dr_stage_collision','dr_container','dr_disc','dr_anim','dr_bpe','dr_skeleton')]]
 common=['gcc','-std=gnu99','-O1','-g','-fcommon','-fno-strict-aliasing','-ffunction-sections','-fdata-sections','-fsanitize=address,undefined','-fno-omit-frame-pointer','-I'+str(e/'platform/platform'),'-I'+str(project/'src'),'-I'+str(up/'include'),'-I'+str(up/'port/include'),'-I'+str(up/'port/src')]
 objects=[];logs=[]
 for i,src in enumerate(sources):

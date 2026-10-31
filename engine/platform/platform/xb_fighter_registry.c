@@ -1,8 +1,16 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "port_compat.h"
 #undef malloc
+#include "xb_battle_boot.h"
+#include "xb_resconv.h"
 #include "battle/btl_obj.h"
 #include "sys/gfxm_e.h"
+#include "sys/file.h"
+#include "sys/job.h"
+#include "sys/common.h"
+#include "sys/loading.h"
+#include "sys/save.h"
+#include "sys/snd.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,6 +43,28 @@ static int init_shadows(void){
 extern void BtlObj_Init(s32);
 extern void BtlObj_Term(void);
 extern int XbBattleRuntime_HasResources(void);
+extern FileReqQueue gFileReq;
+extern s32 gGscActive;
+static int original_roots_present(void){
+ if(!XbRes_HasCheckedConverter(2) || !XbRes_HasCheckedConverter(3) ||
+    !XbRes_HasCheckedConverter(4) || !XbRes_HasCheckedConverter(5))return 0;
+ if(!gCommonRes || !gCommonRes->boot || !gSaveData || !gProgress || !gSndMgr || !gSndRpc)return 0;
+ if(!gProgress->loadPack || !gProgress->loadRes || !gProgress->loadSprites)return 0;
+ for(unsigned i=0;i<COMMON_FILE_COUNT;i++)if(!gCommonRes->data[i] || gCommonRes->size[i]<=0)return 0;
+ return 1;
+}
+int XbBattleBoot_ObjectStateClear(void){
+ return XbRes_CheckedReadsActive() && original_roots_present()
+     && !diagnostic_work && !gBtlObjWork && !XbBattleRuntime_HasResources()
+     && !gGscActive && gJobQueue && gJobQueue->nodes && gJobQueue->capacity>=JOB_MAX
+     && Job_GetCount()==0 && !File_IsBusy() && !gFileReq.adxf
+     && File_GetPendingCount()==0 && List_GetCount(&gFileReq.free)==FILE_REQ_MAX;
+}
+int XbBattleBoot_OriginalObjectStateActive(void){
+ return XbRes_CheckedReadsActive() && !diagnostic_work && gBtlObjWork && !XbBattleRuntime_HasResources()
+     && gGscActive && gJobQueue && gJobQueue->nodes && gJobQueue->capacity>=JOB_MAX
+     && List_GetCount(&gFileReq.free)+File_GetPendingCount()==FILE_REQ_MAX;
+}
 extern int XbHeap_Ready(void);
 int XbFighterRegistry_BeginOriginal(void){
  if(sizeof(void *)!=4 || diagnostic_work || gBtlObjWork || !XbBattleRuntime_HasResources() || !XbHeap_Ready())return -865;

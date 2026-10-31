@@ -13,16 +13,23 @@ int dr_gs_native_open(DrStreamGif gif,void *opaque)
     int e=dr_gs_stream_init(&native.stream,gif,opaque);if(e)return e;
     native.opened=1;return 0;
 }
+int dr_gs_native_limits(uint32_t tags,uint32_t words,uint32_t instructions) {
+    if(!native.opened || native.busy || native.count || native.stream.error || !tags || tags>65536 || !words || words>4194304 || !instructions || instructions>4000000)return DR_STREAM_INVALID;
+    native.stream.tag_budget=tags;native.stream.word_budget=words;native.stream.vu_budget=instructions;return 0;
+}
 int dr_gs_native_close(void)
 {
     if(!native.opened || native.busy)return DR_STREAM_INVALID;
-    dr_vu1_reset(NULL,NULL);memset(&native,0,sizeof(native));return 0;
+    dr_vu1_model_renderer(NULL,NULL);dr_vu1_stage_renderer(NULL,NULL);dr_vu1_reset(NULL,NULL);memset(&native,0,sizeof(native));return 0;
 }
 int dr_gs_native_reset(void)
 {
     if(!native.opened || native.busy || native.count)return DR_STREAM_INVALID;
     DrStreamGif gif=native.stream.gif;void *opaque=native.stream.opaque;
-    return dr_gs_stream_init(&native.stream,gif,opaque);
+    uint32_t tags=native.stream.tag_budget,words=native.stream.word_budget,instructions=native.stream.vu_budget;
+    int e=dr_gs_stream_init(&native.stream,gif,opaque);
+    if(!e){native.stream.tag_budget=tags;native.stream.word_budget=words;native.stream.vu_budget=instructions;}
+    return e;
 }
 int dr_gs_native_bind(const DrGsSpan *spans,size_t count)
 {

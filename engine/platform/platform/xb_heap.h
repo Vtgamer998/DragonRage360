@@ -7,4 +7,6 @@ enum {XB_HEAP_OK=0,XB_HEAP_NOT_READY=-510,XB_HEAP_ARGUMENT=-511,
       XB_HEAP_FULL=-512,XB_HEAP_BAD_FREE=-513};
 int XbHeap_Ready(void);
 int XbHeap_LastError(void);
+/* Exact live allocation base only; zero for unknown/freed/interior pointers. */
+unsigned XbHeap_AllocationBytes(const void *);
 #endif

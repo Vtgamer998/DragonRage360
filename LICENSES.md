@@ -1,5 +1,10 @@
 # Licenças do projeto
 
+D47: cache CLUT em `engine/capture/port/src/gs/gs_draw.c` adaptado de
+`port/src/gs/gs_draw.c` de z3xox/Tenkaichi3Decomp, revisão
+363e92c20af366db9a9050abe395b3416e2195fc, AGPL-3.0-only.
+Licença preservada em engine/LICENSE-UPSTREAM-AGPL-3.0.txt.
+
 O módulo de desbloqueio deriva de src/sys/save.c e do formato descrito por
 Tenkaichi3DecompAndroid, de z3xox e colaboradores. save_unlock.c, save_export.c
 e os testes de referência são AGPL-3.0-only. O texto está em LICENSE.

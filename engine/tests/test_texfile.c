@@ -15,6 +15,11 @@ int main(void)
     put(p+80,UINT64_C(0x0800000000008040),8);
     for(unsigned i=0;i<1024;i++)p[96+i]=(unsigned char)i;
     put(p+1120,UINT64_C(0x1000000000008001),8);put(p+1128,14,8);put(p+1144,0x3f,8);
+    assert(!dr_texfile_validate_transfers(file,sizeof(file),0));
+    /* Even CT32 entries may carry a CLUT pointer: never publish an unchecked one. */
+    put(file+36,0xffffffff,4);put(file+44,192,4);
+    assert(dr_texfile_validate_transfers(file,sizeof(file),0));
+    put(file+36,0,4);put(file+44,0,4);
     DrTexFileImage info;assert(!dr_texfile_decode(file,sizeof(file),0,rgba,sizeof(rgba),&info));
     assert(info.width==16 && info.height==16 && !info.psm && info.rgba_bytes==1024);
     for(unsigned i=0;i<1024;i++)assert(rgba[i]==(unsigned char)i);

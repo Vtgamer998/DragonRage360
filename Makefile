@@ -5,13 +5,13 @@ CC := $(TOOLCHAIN)gcc
 # Retain real native component APIs for static verification in the diagnostic.
 NATIVE_API_ROOTS := -Wl,--undefined=sceMpegInit -Wl,--undefined=sceMpegCreate -Wl,--undefined=sceMpegDelete -Wl,--undefined=sceMpegReset -Wl,--undefined=sceMpegIsEnd -Wl,--undefined=sceMpegAddCallback -Wl,--undefined=sceMpegAddStrCallback -Wl,--undefined=sceMpegDemuxPss -Wl,--undefined=sceMpegGetPicture -Wl,--undefined=sceGsResetPath -Wl,--undefined=sceGsResetGraph -Wl,--undefined=dr_gs_movie_build -Wl,--undefined=dr_gs_movie_send -Wl,--undefined=XbAdx_Clock -Wl,--undefined=ADXT_Init -Wl,--undefined=ADXT_Create -Wl,--undefined=ADXT_SetReloadSct -Wl,--undefined=ADXT_SetSvrFreq -Wl,--undefined=ADXT_StartAfs -Wl,--undefined=ADXT_StartFname -Wl,--undefined=ADXT_Stop -Wl,--undefined=ADXT_Pause -Wl,--undefined=ADXT_SetOutVol -Wl,--undefined=ADXT_GetOutVol -Wl,--undefined=ADXT_SetOutPan -Wl,--undefined=ADXT_SetOutputMono -Wl,--undefined=ADXT_GetStat -Wl,--undefined=XbOverlay_PrepareBuild -Wl,--undefined=XbOverlay_Load -Wl,--undefined=XbMpeg_Open -Wl,--undefined=XbMpeg_Next -Wl,--undefined=XbMpeg_Close
 CFLAGS := -mcpu=cell -fno-pic -std=gnu17 -MMD -MP -O2 -g -ffunction-sections -fdata-sections -Wall -Wextra -Werror -I$(XSDK)/include -Isrc -Iengine/graphics -Iengine/capture/port/src/gs -Iengine/platform/platform -DDR_XBOX360
-OBJECTS := build/dr_gs_movie.o build/dr_dma_engine.o build/dr_gs_native.o build/dr_dma_producer.o build/dr_gs_stream.o build/gs_draw.o build/gs_core.o build/gs_sony.o build/dr_gs_backend.o build/dr_gs_replay.o build/dr_capture_demo.o build/dr_capture_platform.o build/main.o build/demo_ui.o build/dr_disc.o build/bt3_wire.o build/net_check.o build/lobby.o build/dr_anim.o build/dr_bpe.o build/dr_resource_selftest.o build/dr_container.o build/dr_stage_collision.o build/dr_skeleton.o build/dr_xenos.o build/dr_gs_texture.o build/dr_graphics_demo.o build/dr_body_demo.o build/dr_texfile.o build/dr_body_pipeline.o build/dr_body_model.o build/dr_elf.o build/dr_face_vif.o build/dr_targets.o build/dr_vu1.o build/dr_vu1_selftest.o build/save_unlock.o build/save_export.o
+OBJECTS := build/dr_ot_native.o build/dr_gs_movie.o build/dr_dma_engine.o build/dr_gs_native.o build/dr_dma_producer.o build/dr_gs_stream.o build/gs_draw.o build/gs_core.o build/gs_sony.o build/dr_gs_backend.o build/dr_gs_replay.o build/dr_gs_batch.o build/dr_capture_demo.o build/dr_capture_platform.o build/main.o build/demo_ui.o build/dr_disc.o build/bt3_wire.o build/net_check.o build/lobby.o build/dr_anim.o build/dr_bpe.o build/dr_resource_selftest.o build/dr_container.o build/dr_stage_collision.o build/dr_skeleton.o build/dr_xenos.o build/dr_gs_texture.o build/dr_graphics_demo.o build/dr_body_demo.o build/dr_texfile.o build/dr_body_pipeline.o build/dr_body_model.o build/dr_elf.o build/dr_face_vif.o build/dr_targets.o build/dr_vu1.o build/dr_vu1_selftest.o build/save_unlock.o build/save_export.o
 .PHONY: all clean host-test
 PLATFORM_SOURCES := $(addprefix engine/platform/platform/,$(shell cat engine/platform/platform-sources.txt))
 PLATFORM_OBJECTS := $(patsubst engine/platform/platform/%.c,build/%.o,$(PLATFORM_SOURCES))
 OBJECTS += $(PLATFORM_OBJECTS)
 $(PLATFORM_OBJECTS): build/%.o: engine/platform/platform/%.c
-	$(CC) $(CFLAGS) -DPORT_BIGENDIAN -DXB_USE_NTALLOC -DXB_USE_XAM -DXB_USE_NTDELAY -c $< -o $@
+	$(CC) $(CFLAGS) -I$(UPSTREAM)/include -I$(UPSTREAM)/port/include -DPORT_BIGENDIAN -DXB_USE_NTALLOC -DXB_USE_XAM -DXB_USE_NTDELAY -c $< -o $@
 all: build/default.xex
 build/%.o: src/%.c
 	mkdir -p build
@@ -135,3 +135,94 @@ build/xb_model_native.o: CFLAGS += -I$(UPSTREAM)/include -I$(UPSTREAM)/port/incl
 build/xb_battle_consumers.o: CFLAGS += -I$(UPSTREAM)/include -I$(UPSTREAM)/port/include -mcheck-fpr-alignment
 
 build/xb_battle_runtime.o: CFLAGS += -I$(UPSTREAM)/include -I$(UPSTREAM)/port/include -mcheck-fpr-alignment
+
+# D19 isolated-session ownership gate (host-only until original boot prerequisites are met).
+.PHONY: battle-boot-test
+battle-boot-test:
+	mkdir -p build
+	gcc -std=c17 -Wall -Wextra -Werror -Iengine/platform/platform engine/platform/platform/xb_battle_boot.c engine/tests/test_battle_boot.c -o build/test-battle-boot
+	./build/test-battle-boot
+
+.PHONY: stage-camera-test
+stage-camera-test:
+	mkdir -p build
+	gcc -std=c17 -Wall -Wextra -Werror -fsanitize=address,undefined -Iengine/platform/platform engine/platform/platform/xb_stage_camera.c engine/tests/test_stage_camera.c -o build/test-stage-camera
+	./build/test-stage-camera
+
+.PHONY: checked-reads-test
+checked-reads-test:
+	mkdir -p build
+	gcc -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -DXB_HOST_TEST -Iengine/platform/platform engine/platform/platform/xb_resconv.c engine/tests/test_checked_reads.c -o build/test-checked-reads
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-checked-reads
+
+.PHONY: checked-file-test
+checked-file-test:
+	mkdir -p build
+	gcc -std=c17 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -DXB_HOST_TEST -Iengine/tests/host -Isrc -Iengine/platform/platform engine/platform/platform/xb_resconv.c engine/platform/platform/xb_plat_file.c engine/tests/test_checked_file_transport.c -o build/test-checked-file
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-checked-file
+
+.PHONY: bpe-failure-test
+bpe-failure-test:
+	mkdir -p build
+	gcc -std=c17 -O1 -Wall -Wextra -Werror -fsanitize=address,undefined -DXB_HOST_TEST -Isrc -Iengine/platform/platform engine/platform/platform/xb_resconv.c engine/platform/platform/xb_bpe.c src/dr_bpe.c engine/tests/test_bpe_failures.c -o build/test-bpe-failures
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-bpe-failures
+
+.PHONY: loading-errors-test
+loading-errors-test:
+	python3 engine/tools/test_loading_errors.py $(UPSTREAM) build/loading-errors-test
+
+# Private input files extracted from the user's disc; never packaged.
+.PHONY: loading-resources-test
+loading-resources-test:
+	mkdir -p build
+	gcc -std=c17 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -ffunction-sections -fdata-sections -DXB_HOST_TEST -Isrc -Iengine/platform/platform engine/platform/platform/xb_resconv.c engine/platform/platform/xb_bpe.c engine/platform/platform/xb_demo_resources.c src/dr_bpe.c src/dr_texfile.c src/dr_gs_texture.c src/dr_container.c engine/tests/test_loading_resources.c -Wl,--gc-sections -o build/test-loading-resources
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-loading-resources $(LOADING_INPUTS)
+
+.PHONY: heap-capacity-test
+heap-capacity-test:
+	mkdir -p build
+	gcc -std=gnu17 -O1 -g -fno-builtin -ffunction-sections -fdata-sections -fsanitize=undefined -DPORT_BIGENDIAN -Dmalloc=TestHeapMalloc -I$(UPSTREAM)/include -Iengine/platform/platform -c engine/combat/heap.c -o build/heap-capacity.o
+	gcc -std=gnu17 -O1 -g -fno-builtin -ffunction-sections -fdata-sections -fsanitize=undefined -I$(UPSTREAM)/include -c $(UPSTREAM)/src/sys/align.c -o build/heap-capacity-align.o
+	gcc -std=gnu17 -O1 -g -Wall -Wextra -Werror -fsanitize=undefined -I$(UPSTREAM)/include -Iengine/platform/platform engine/tests/test_heap_capacity.c build/heap-capacity.o build/heap-capacity-align.o -Wl,--gc-sections -o build/test-heap-capacity
+	./build/test-heap-capacity
+
+.PHONY: sound-bank-test initial-audio-job-test
+sound-bank-test:
+	python3 engine/tools/test_sound_bank_transport.py $(UPSTREAM) build/sound-bank-test $(BANK_INPUTS)
+initial-audio-job-test:
+	python3 engine/tools/test_initial_audio_job.py $(UPSTREAM) build/initial-audio-job-test $(BANK_INPUTS)
+
+.PHONY: motion-transport-test member-transport-test
+motion-transport-test:
+	python3 engine/tools/test_motion_transport.py $(UPSTREAM) build/motion-transport-test $(MOTION_INPUTS)
+member-transport-test:
+	mkdir -p build
+	gcc -std=c17 -O1 -g -Wall -Wextra -Werror -ffunction-sections -fdata-sections -fsanitize=address,undefined -DXB_HOST_TEST -Isrc -Iengine/platform/platform engine/tests/test_member_transport.c engine/platform/platform/xb_resconv.c engine/platform/platform/xb_demo_resources.c src/dr_texfile.c src/dr_gs_texture.c src/dr_bpe.c -Wl,--gc-sections -o build/test-member-transport
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-member-transport $(MEMBER_INPUTS)
+
+.PHONY: embedded-sources-test
+embedded-sources-test:
+	mkdir -p build
+	gcc -std=c17 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined -DXB_HOST_TEST -Iengine/platform/platform engine/tests/test_embedded_sources.c engine/platform/platform/xb_resconv.c -o build/test-embedded-sources
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-embedded-sources
+
+.PHONY: initial-load-ownership-test res-load-ownership-test
+initial-load-ownership-test:
+	python3 engine/tools/test_initial_load_ownership.py $(UPSTREAM) build/initial-load-ownership-test
+res-load-ownership-test:
+	python3 engine/tools/test_res_load_ownership.py $(UPSTREAM) build/res-load-ownership-test
+
+.PHONY: common-boot-test common4-transport-test
+common-boot-test:
+	python3 engine/tools/test_common_boot.py $(UPSTREAM) build/common-boot-test
+common4-transport-test:
+	python3 engine/tools/test_common4_transport.py $(UPSTREAM) $(COMMON4_INPUT) build/common4-transport-test
+
+.PHONY: common-pack-transport-test
+common-pack-transport-test:
+	python3 engine/tools/test_common_pack_transport.py build/common-pack-transport-test $(COMMON_PACK_INPUTS)
+
+# Original game/menu source snapshot; integrity + host syntax, not an Xbox runtime test.
+.PHONY: original-source-audit
+original-source-audit:
+	python3 adaptation/tools/audit_original.py

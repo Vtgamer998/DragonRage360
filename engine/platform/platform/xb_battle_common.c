@@ -129,18 +129,28 @@ static int item_layout(const uint8_t *p,size_t n,unsigned *nc,unsigned *ni){
  for(size_t i=0;i<items;i++)if(p[b+i*40]>3)return FORMAT;
  *nc=(unsigned)chars;*ni=(unsigned)items;return 0;
 }
+/* All validation precedes the first write, including the aliasing API. */
+static void item_encode(uint8_t *p,const uint8_t *s,unsigned nc,unsigned ni,int be){
+ size_t at=r32(s+4)&~3u,items=r32(s+8)&~3u;
+ fields(p,0,16,4,be);
+ for(unsigned i=0;i<nc;i++,at+=60){fields(p,at,at+8,4,be);fields(p,at+8,at+16,2,be);fields(p,at+16,at+44,4,be);fields(p,at+48,at+56,4,be);}
+ at=items;
+ for(unsigned i=0;i<ni;i++,at+=40){fields(p,at+12,at+20,2,be);fields(p,at+20,at+40,4,be);}
+}
+int XbBattleCommon_PrepareItems(void *p,size_t n,int be){
+ unsigned nc,ni;int e;
+ if(!p || (be!=0 && be!=1))return FORMAT;
+ e=item_layout(p,n,&nc,&ni);if(e)return e;
+ item_encode(p,p,nc,ni,be);return 0;
+}
 int XbBattleCommon_ConvertItems(const void *src,size_t n,int be,void *dst,size_t cap){
+ unsigned nc,ni;int e;
  if(!src || !dst || (be!=0 && be!=1))return FORMAT;
  if(cap<n)return BOUNDS;
  uintptr_t a=(uintptr_t)src,b=(uintptr_t)dst;
  if((a<=b && b-a<n) || (b<a && a-b<n))return STATE;
- unsigned nc,ni;int e=item_layout(src,n,&nc,&ni);if(e)return e;
- const uint8_t *s=src;uint8_t *p=dst;memcpy(p,s,n);fields(p,0,16,4,be);
- size_t at=r32(s+4)&~3u;
- for(unsigned i=0;i<nc;i++,at+=60){fields(p,at,at+8,4,be);fields(p,at+8,at+16,2,be);fields(p,at+16,at+44,4,be);fields(p,at+48,at+56,4,be);}
- at=r32(s+8)&~3u;
- for(unsigned i=0;i<ni;i++,at+=40){fields(p,at+12,at+20,2,be);fields(p,at+20,at+40,4,be);}
- return 0;
+ e=item_layout(src,n,&nc,&ni);if(e)return e;
+ memcpy(dst,src,n);item_encode(dst,src,nc,ni,be);return 0;
 }
 int XbBattleCommon_AttachItems(XbBattleCommon *c,const void *src,size_t n){
  if(!c || !src || c->items)return STATE;

@@ -7,11 +7,16 @@
 #include "dr_gs_native.h"
 #include "dr_dma_producer.h"
 #include "dr_dma_engine.h"
+#include "dr_vu1.h"
 #include "dr_gs_sdk.h"
 #include "gs_internal.h"
 #include "xsdk/log.h"
 #include <string.h>
 #include <math.h>
+#include <time.h>
+static DrCaptureProfile capture_profile;
+void dr_capture_original_profile(DrCaptureProfile *p){if(p)*p=capture_profile;}
+static uint64_t capture_us(void){struct timespec t;if(clock_gettime(CLOCK_MONOTONIC,&t))return 0;return (uint64_t)t.tv_sec*1000000u+(uint64_t)t.tv_nsec/1000u;}
 extern int gGsMainFbp;
 extern int sceGsSetDefDBuff(void *,int,int,int,int,int,int);
 extern int sceGsSwapDBuff(void *,int);
@@ -20,6 +25,32 @@ static int opened;
 static int stream_error;
 static int stream_gif(void *opaque,const unsigned char *bytes,uint32_t count)
 {(void)opaque;Gs_Gif(bytes,count);return 0;}
+static int stage_shader(void *opaque,const uint8_t *env,uint32_t prim,const float *v,uint32_t n,const float *matrix){
+    (void)opaque;if(!GsGpu_Enabled())return DR_VU_INVALID;
+    uint32_t before=gsVuVertCount,indices=gsVuIdxCount,skipped=gsSkipped;
+    Gs_Gif(env,2);Gs_RegWrite(0,prim);GsGpu_DrawVu4((int)((prim>>9)&1),v,n,matrix);
+    /* draw_state explicitly skips GS memory reinterpretation/stale-target passes.
+     * They emit no VU geometry; treating that successful cull as a broken strip
+     * used to abort longer actions. Never accept partial emission or backend errors. */
+    if(!dr_gs_backend_error(NULL) && gsVuVertCount==before && gsVuIdxCount==indices && gsSkipped-skipped==1u){capture_profile.culled_strips++;return 0;}
+    if(gsVuVertCount-before!=n || gsVuIdxCount-indices!=(n-2)*3 || dr_gs_backend_error(NULL)){
+        xsdk_log_write("HLE strip rejected n=%u vertices=%u indices=%u skipped=%u prim=%08x frame0=%016llx frame1=%016llx tex0=%016llx tex1=%016llx",n,gsVuVertCount-before,gsVuIdxCount-indices,gsSkipped,prim,(unsigned long long)gGs.frame[0],(unsigned long long)gGs.frame[1],(unsigned long long)gGs.tex0[0],(unsigned long long)gGs.tex0[1]);
+        dr_gs_backend_reject();return DR_VU_INVALID;
+    }return 0;
+}
+static int model_shader(void *opaque,const uint8_t *env,uint32_t prim,const float *v,uint32_t n,const float *constants,unsigned layer){
+    (void)opaque;if(!GsGpu_Enabled())return DR_VU_INVALID;
+    uint32_t before=gsVuVertCount,indices=gsVuIdxCount,skipped=gsSkipped;
+    Gs_Gif(env,2);Gs_RegWrite(0,prim);GsGpu_DrawVu0((int)layer,(int)(((layer==2?gGs.prim:prim)>>9)&1),v,n,constants);
+    /* draw_state explicitly skips GS memory reinterpretation/stale-target passes.
+     * They emit no VU geometry; treating that successful cull as a broken strip
+     * used to abort longer actions. Never accept partial emission or backend errors. */
+    if(!dr_gs_backend_error(NULL) && gsVuVertCount==before && gsVuIdxCount==indices && gsSkipped-skipped==1u){capture_profile.culled_strips++;return 0;}
+    if(gsVuVertCount-before!=n || gsVuIdxCount-indices!=(n-2)*3 || dr_gs_backend_error(NULL)){
+        xsdk_log_write("HLE strip rejected n=%u vertices=%u indices=%u skipped=%u prim=%08x frame0=%016llx frame1=%016llx tex0=%016llx tex1=%016llx",n,gsVuVertCount-before,gsVuIdxCount-indices,gsSkipped,prim,(unsigned long long)gGs.frame[0],(unsigned long long)gGs.frame[1],(unsigned long long)gGs.tex0[0],(unsigned long long)gGs.tex0[1]);
+        dr_gs_backend_reject();return DR_VU_INVALID;
+    }return 0;
+}
 static void le64(uint8_t *p,uint64_t v) {for(unsigned i=0;i<8;i++)p[i]=(uint8_t)(v>>(i*8));}
 static void le32(uint8_t *p,uint32_t v) {for(unsigned i=0;i<4;i++)p[i]=(uint8_t)(v>>(i*8));}
 /* Synthetic VU upload and XGKICK through the very Port_GsVif1Chain entry
@@ -136,7 +167,7 @@ int dr_capture_demo_open(uint32_t width,uint32_t height)
 }
 int dr_capture_demo_draw(void)
 {
-    if(!opened)return -1;
+    if(opened!=1)return -1;
     if(stream_error)return stream_error;
     Dma_AddFrame(0,8,0);Dma_AddZbuf(64,1);
     Dma_AddScissor(0,511,0,447);Dma_AddXyOffset(0,0);Dma_Flush();
@@ -195,3 +226,56 @@ int dr_capture_demo_close(void)
     e=dr_dma_engine_close();if(e)return e;
     dr_gs_native_close();Gs_XenosCaptureEnable(0);opened=0;return 0;
 }
+/* Real original producer session: no palette, synthetic VIF or fixture draws. */
+int dr_capture_original_open(uint32_t width,uint32_t height)
+{
+    if(opened)return -1;
+    int e=dr_gs_backend_attach(width,height);if(e)return e;
+    if(!GsGpu_Init())return -2;
+    e=dr_gs_native_open(stream_gif,NULL);
+    if(e){GsDraw_XenosClose();return e;}
+    /* Real geometry has clipped 63-vertex batches; the synthetic 10k VU
+     * limit expires while clipping the last vertex. Retain finite guards. */
+    e=dr_gs_native_limits(8192,2359296,250000);
+    if(e){dr_gs_native_close();GsDraw_XenosClose();return e;}
+    Dma_InitBuffers();e=dr_dma_engine_error();
+    if(e){dr_dma_engine_close();dr_gs_native_close();GsDraw_XenosClose();return e;}
+    Dma_ResetBuffers();Gs_XenosCaptureEnable(1);opened=2;stream_error=0;
+    dr_vu1_stage_renderer(stage_shader,NULL);
+    dr_vu1_model_renderer(model_shader,NULL);
+    xsdk_log_write("D36 original renderer opened; no synthetic packets submitted");
+    return 0;
+}
+static int original_submit(int gpu)
+{
+    if(opened!=2)return -1;
+    uint64_t started=capture_us();Dma_Flush();capture_profile.dma_us=capture_us()-started;
+    capture_profile.draws=gsDrawCount;capture_profile.vertices=gsVertCount;capture_profile.vu_vertices=gsVuVertCount;
+    int e=dr_dma_engine_error();if(!e)e=dr_gs_native_error();
+    if(e)return e;
+    if(!gsDrawCount || !gsVertCount)return -3;
+    static unsigned frames;
+    if(!frames){
+        xsdk_log_write("D36 original loading capture draws=%u vertices=%u targets=%d frame=%08x offset=%08x",gsDrawCount,gsVertCount,gsTargetCount,(unsigned)gGs.frame[0],(unsigned)gGs.xyoffset[0]);
+        for(unsigned i=0;i<gsDrawCount && i<8;i++){
+            GsDraw *d=&gsDraws[i];Vtx empty={0};
+            Vtx *v=d->count && d->first<gsVertCount?&gsVerts[d->first]:&empty;
+            xsdk_log_write("D36 draw %u target=%d fbp=%u count=%u texmode=%d tex=%08x xy=%.1f,%.1f rgba=%u,%u,%u,%u",i,d->target,d->target>=0 && d->target<gsTargetCount?(unsigned)gsTargets[d->target].fbp:999,d->count,d->mode[0],(unsigned)d->tex,(double)v->x,(double)v->y,v->r,v->g,v->b,v->a);
+        }
+    }
+    frames++;gGsFrame++;
+    started=capture_us();
+    if(gpu)e=GsDraw_XenosSubmit();
+    else {
+        /* Same bounded CPU frame retirement as the pinned native frame_end.
+         * No queued arena is allowed to auto-flush through the GPU backend. */
+        for(int i=0;i<gsTargetCount;i++)gsTargets[i].draws=0;
+        gsDrawCount=gsVertCount=gsVuVertCount=gsVuIdxCount=gsVuUniCount=0;
+        gsAnchor=0;gsSkipped=gsNative=0;
+        extern unsigned gGsFbUploads;gGsFbUploads=0;
+    }
+    capture_profile.replay_us=capture_us()-started;return e;
+}
+
+int dr_capture_original_submit(void){return original_submit(1);}
+int dr_capture_original_decode(void){return original_submit(0);}

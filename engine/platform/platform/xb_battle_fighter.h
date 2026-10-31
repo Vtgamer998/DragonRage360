@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "xb_fighter_tables.h"
+#include "xb_character_effects.h"
 typedef struct XbBattleFighter XbBattleFighter;
 typedef struct XbFighterMesh {unsigned node;const void *vif;size_t vif_bytes;float world[16],pivot_a[4],pivot_b[4];} XbFighterMesh;
 typedef struct XbFighterTexture {unsigned family,index,width,height;size_t bytes;const void *rgba;} XbFighterTexture;
@@ -16,6 +17,7 @@ typedef struct XbFighterFaceState {int eye,mode,shape;unsigned lip_index,lip_cou
  * not initialized, and this API cannot authorize Battle_Main. */
 int XbBattleFighter_PrepareModelAnimation(const void *model,size_t model_size,
  const void *motions,size_t motions_size,XbBattleFighter **out,XbFighterPrepared *);
+int XbBattleFighter_AttachEffectManagers(XbBattleFighter *,const void *,size_t,XbCharacterEffectsInfo *);
 void XbBattleFighter_FreeModelAnimation(XbBattleFighter *);
 /* Actual original PlayModel/Step functions, operating on the owned BobjObj. */
 int XbBattleFighter_PlayModel(XbBattleFighter *,unsigned index,unsigned mode);

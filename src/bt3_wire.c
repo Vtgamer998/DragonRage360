@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: MIT
  * Protocol field positions verified in Tenkaichi3DecompAndroid net.c,
- * commit 3ca419c7966b11438e2dc3c9a7e1914f102ed545. Numeric fields are LE on wire;
+ * commit 3ca419c7966b11438e2dc3c9a7e1914f102ed545; fingerprint packet verified
+ * against official z3xox/Tenkaichi3Decomp 7b43a75bd8b0aeabcce0a22c45e1ad66162ac9d7.
+ * Numeric fields are LE on wire;
  * names, chat UTF-8 and 18-byte pad records remain byte arrays.
  */
 #include "bt3_wire.h"
@@ -43,6 +45,9 @@ static size_t convert(void *dst,const void *src,size_t n,int source_big,int dest
     case 8: case 9: if(n!=8) return 0;break;
     case 10: if(n<16 || number(s+12,4,source_big)!=n-16) return 0;header=16;break;
     case 11: if(n!=16) return 0;header=16;break;
+    /* The digest travels as TWO u32 words, low first, not a native u64.
+     * Swapping it as a u64 on Xbox would exchange its two halves. */
+    case 12: if(n!=20 || number(s+8,4,source_big)!=0x46505231u)return 0;header=20;break;
     default: return 0;
     }
     uint8_t *d=dst;memmove(d,s,n);

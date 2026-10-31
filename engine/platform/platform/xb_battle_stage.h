@@ -6,8 +6,8 @@ typedef struct XbBattleStageCollision XbBattleStageCollision;
 enum {XB_STAGE_STATE=-850,XB_STAGE_MEMORY=-851};
 /* Prepare a private native collision arena, including zones/neighbours,
  * static/destructible meshes and initial unbroken object state. This is NOT
- * full stage initialization: render objects, MAPD, animation and physics
- * bodies are still absent. Installation keeps the stage NOT-READY flag. */
+ * full stage initialization: render objects, animation and physics
+ * bodies are still absent. MAPD/navigation use a separate preparation step. Installation keeps the stage NOT-READY flag. */
 int XbBattleStage_PrepareCollision(const void *,size_t,XbBattleStageCollision **);
 int XbBattleStage_InstallCollision(XbBattleStageCollision *);
 int XbBattleStage_UninstallCollision(XbBattleStageCollision *);
@@ -24,4 +24,18 @@ int XbBattleStage_PrepareStarts(XbBattleStageCollision *,const void *,size_t);
 int XbBattleStage_GetPlacement(XbBattleStageCollision *,unsigned,unsigned,float[4],float[4],int *);
 /* Native dispatch for the adapted original GetStartPlace/GetPlace. */
 int XbStage_TryStartPlace(int,void *,void *,int,int *);
+int XbBattleStage_PrepareParameters(XbBattleStageCollision *,const void *,size_t);
+int XbStage_TryBindNav(void **);
+int XbBattleStage_HasParameters(void);
+typedef struct XbStageGeometryInfo {unsigned groups,materials,meshes,parts,nodes,cells,objects,timers,textures;} XbStageGeometryInfo;
+int XbBattleStage_PrepareGeometry(XbBattleStageCollision *,const void *,size_t,XbStageGeometryInfo *);
+int XbBattleStage_FreeGeometry(XbBattleStageCollision *);
+int XbBattleStage_BeginGeometry(XbBattleStageCollision *);
+int XbBattleStage_EndGeometry(XbBattleStageCollision *);
+int XbStage_TryBindGeometryData(void *);
+int XbStage_TryBindGeometryTexture(void *,void **);
+int XbBattleStage_CheckCameras(XbBattleStageCollision *,unsigned *);
+int XbBattleStage_CheckEffects(XbBattleStageCollision *,unsigned *,unsigned *);
+int XbBattleStage_CheckSurfaces(XbBattleStageCollision *,unsigned *,unsigned *);
+int XbBattleStage_CheckAllCameras(unsigned *,unsigned *);
 #endif

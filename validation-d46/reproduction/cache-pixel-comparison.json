@@ -1,0 +1,17 @@
+{
+  "scope": "state-cache-only candidate, not final D46 visual proof",
+  "comparisons": [
+    {
+      "frame": 32,
+      "pixel_identical": true,
+      "D45_SHA256": "ae518e85b79a2de52610f6c4464eb8ea31bb8e781492874cc101f3789a40df88",
+      "cache_candidate_SHA256": "ae518e85b79a2de52610f6c4464eb8ea31bb8e781492874cc101f3789a40df88"
+    },
+    {
+      "frame": 64,
+      "pixel_identical": true,
+      "D45_SHA256": "9c7d8f17a2b848762b57824228f1df9bc93ff1adf585f4e673677ff5eb700a71",
+      "cache_candidate_SHA256": "9c7d8f17a2b848762b57824228f1df9bc93ff1adf585f4e673677ff5eb700a71"
+    }
+  ]
+}

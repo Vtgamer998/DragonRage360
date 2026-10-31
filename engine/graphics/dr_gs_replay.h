@@ -3,6 +3,7 @@
 #define DR_GS_REPLAY_H
 #include "gs_draw.h" /* The pinned engine's actual ABI, not a copied descriptor. */
 #include "dr_xenos.h"
+#include "dr_gs_profile.h"
 enum { DR_GS_UNSUPPORTED=-200,DR_GS_TEXTURE=-201,DR_GS_MEMORY=-202 };
 typedef struct {
     const float *vu_vertices;

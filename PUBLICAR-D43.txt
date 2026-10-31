@@ -1,0 +1,17 @@
+A publicacao automatica nao foi concluida: a sessao nao tem credenciais
+de escrita para o GitHub. Nenhuma credencial acompanha os arquivos.
+
+O bundle Git separado preserva o historico remoto e o commit D43 preparado.
+Com Git autenticado em sua maquina:
+
+  git clone DragonRage360-D43-git.bundle DragonRage360
+  cd DragonRage360
+  git remote set-url origin https://github.com/Vtgamer998/DragonRage360.git
+  git push origin main
+
+Se o remoto mudou desde a criacao do bundle, integre as mudancas normalmente;
+nao use force push. Outra opcao e usar adaptation/tools/publish.py com um
+checkout limpo e autenticado.
+
+O commit/bundle contem os fontes, testes e fluxo de compilacao; o XEX e o
+kit de build sao entregues nos pacotes separados. A ISO nao e distribuida.

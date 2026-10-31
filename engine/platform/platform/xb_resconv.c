@@ -17,9 +17,10 @@ extern void (*gXbFilePostRead)(int ptid, int flid, uint64_t off, uint64_t fileSi
 
 #define MAX_RANGES 64
 #define MAX_PENDING 32
+#define MAX_READS 512
 #define MAX_SEEN 512
 
-static struct { int first, last, packed; XbResFn fn; XbResCheckedFn checked; } sRanges[MAX_RANGES];
+static struct { int first, last, packed; XbResFn fn; XbResCheckedFn checked; XbResEmbeddedFn embedded; } sRanges[MAX_RANGES];
 static int sRangeCount;
 static struct { const uint8_t *buf; size_t n; int id; XbResFn fn; XbResCheckedFn checked; } sPending[MAX_PENDING];
 static int sPendingNext;
@@ -27,16 +28,61 @@ static int *sSeen;
 static size_t sSeenCount, sSeenCapacity;
 static unsigned sConverted, sUnconverted, sPartial, sFailedConversions;
 static int sLastError;
-static struct { uintptr_t buf; size_t n; } sReads[64];
-static unsigned sReadNext;
+static int sCheckedReads,sCheckedFailure;
+static struct { uintptr_t buf; size_t n,file_size;int id,prepared;XbResEmbeddedFn embedded; } sReads[MAX_READS];
+static unsigned sReadHigh;
 size_t XbRes_SourceSize(const void *src) {
     uintptr_t p=(uintptr_t)src;
     unsigned i;
-    for(i=0;i<64;i++)if(sReads[i].n && p>=sReads[i].buf && p-sReads[i].buf<sReads[i].n)
+    for(i=0;i<sReadHigh;i++)if(sReads[i].n && p>=sReads[i].buf && p-sReads[i].buf<sReads[i].n)
         return sReads[i].n-(p-sReads[i].buf);
     return 0;
 }
-int XbRes_LastError(void) { return sLastError; }
+int XbRes_ReadFile(const void *src,const void **base,size_t *size,int *id){
+    uintptr_t at=(uintptr_t)src;
+    if(!base||!size||!id)return 0;
+    *base=NULL;*size=0;*id=0;
+    for(unsigned i=0;i<sReadHigh;i++)if(sReads[i].n && sReads[i].prepared && at>=sReads[i].buf && at-sReads[i].buf<sReads[i].file_size){
+        *base=(const void *)sReads[i].buf;*size=sReads[i].file_size;*id=sReads[i].id;return 1;
+    }
+    return 0;
+}
+int XbRes_LastError(void) { return sCheckedFailure?sCheckedFailure:sLastError; }
+int XbRes_BeginCheckedReads(void){
+ if(sCheckedReads)return -897;
+ for(unsigned i=0;i<MAX_PENDING;i++)if(sPending[i].buf)return -897;
+ for(unsigned i=0;i<sReadHigh;i++)if(sReads[i].n && sReads[i].embedded)return -897;
+ sCheckedReads=1;sCheckedFailure=0;sLastError=0;return 0;
+}
+void XbRes_EndCheckedReads(void){
+ if(!sCheckedReads)return;
+ for(unsigned i=0;i<MAX_PENDING;i++)sPending[i].buf=NULL;
+ for(unsigned i=0;i<sReadHigh;i++)sReads[i].n=0;
+ sPendingNext=0;sReadHigh=0;
+ sCheckedReads=0;sCheckedFailure=0;sLastError=0;
+}
+int XbRes_HasCheckedConverter(int id){
+ for(int i=0;i<sRangeCount;i++)if(id>=sRanges[i].first && id<=sRanges[i].last)return sRanges[i].checked!=NULL;
+ return 0;
+}
+static void checked_failure(int error){sLastError=error;if(sCheckedReads && !sCheckedFailure)sCheckedFailure=error;}
+/* Live tracked resources are leases, not an evicting cache. Heap_Free and
+ * overlapping reads revoke them; a new read must never erase a live owner. */
+static int read_slot(void){
+ for(unsigned i=0;i<MAX_READS;i++)if(!sReads[i].n){if(sReadHigh<=i)sReadHigh=i+1;return (int)i;}
+ XB_LOG("res: live read registry full (%u); no live span evicted",MAX_READS);
+ checked_failure(-898);return -1;
+}
+void XbRes_SetReadError(int error){if(error)checked_failure(error<0?error:-898);}
+int XbRes_CheckedReadsActive(void){return sCheckedReads;}
+int XbRes_PreflightRead(int id){
+ if(!sCheckedReads)return 0;
+ if(sCheckedFailure)return sCheckedFailure;
+ if(!XbRes_HasCheckedConverter(id)){XB_LOG("res: strict preflight refused id=0x%x: no checked converter",id);checked_failure(-897);}
+ return XbRes_LastError();
+}
+
+
 
 int XbRes_Id(int ptid, int flid) {
     if (flid < 0 || flid > INT_MAX - 0xD48) { return INT_MIN; }
@@ -74,12 +120,65 @@ int XbRes_RegisterChecked(int firstId, int lastId, XbResCheckedFn fn, int packed
     sRanges[sRangeCount].packed=packed!=0; sRanges[sRangeCount].checked=fn;
     sRangeCount++; return 0;
 }
+int XbRes_RegisterCheckedBatch(const XbResCheckedRange *ranges,size_t count){
+    if(!ranges || !count || count>(size_t)(MAX_RANGES-sRangeCount) || sCheckedReads)return -1;
+    for(size_t i=0;i<count;i++){
+        const XbResCheckedRange *r=&ranges[i];
+        if(!r->fn || r->first>r->last || (r->packed!=0 && r->packed!=1))return -1;
+        for(int j=0;j<sRangeCount;j++)if(r->first<=sRanges[j].last && r->last>=sRanges[j].first)return -1;
+        for(size_t j=0;j<i;j++)if(r->first<=ranges[j].last && r->last>=ranges[j].first)return -1;
+    }
+    for(size_t i=0;i<count;i++){
+        int at=sRangeCount++;sRanges[at].first=ranges[i].first;sRanges[at].last=ranges[i].last;
+        sRanges[at].checked=ranges[i].fn;sRanges[at].packed=ranges[i].packed;
+    }
+    return 0;
+}
+int XbRes_RegisterContainer(int first,int last,XbResCheckedFn prepare,XbResEmbeddedFn resolve){
+    if(!resolve || sCheckedReads)return -1;
+    if(XbRes_RegisterChecked(first,last,prepare,0))return -1;
+    sRanges[sRangeCount-1].embedded=resolve;return 0;
+}
+int XbRes_RegisterContainerBatch(const XbResContainerRange *r,size_t count){
+    if(!r || !count || sCheckedReads || count>(size_t)(MAX_RANGES-sRangeCount))return -1;
+    for(size_t i=0;i<count;i++){
+        if(!r[i].prepare || !r[i].resolve || r[i].first>r[i].last)return -1;
+        for(int j=0;j<sRangeCount;j++)if(r[i].first<=sRanges[j].last && r[i].last>=sRanges[j].first)return -1;
+        for(size_t j=0;j<i;j++)if(r[i].first<=r[j].last && r[i].last>=r[j].first)return -1;
+    }
+    for(size_t i=0;i<count;i++){
+        unsigned at=(unsigned)sRangeCount++;sRanges[at].first=r[i].first;sRanges[at].last=r[i].last;
+        sRanges[at].checked=r[i].prepare;sRanges[at].embedded=r[i].resolve;
+    }
+    return 0;
+}
+static int embedded_source(const void *src,size_t *n,XbResCheckedFn *fn,int *id){
+    uintptr_t p=(uintptr_t)src;
+    for(unsigned i=0;i<sReadHigh;i++)if(sReads[i].n && sReads[i].embedded && p>=sReads[i].buf && p-sReads[i].buf<sReads[i].file_size){
+        *n=0;*fn=NULL;*id=sReads[i].id;
+        int e=sReads[i].embedded((const void *)sReads[i].buf,sReads[i].file_size,src,n,fn);
+        if(e || !*fn || *n<8 || *n>sReads[i].file_size-(p-sReads[i].buf)){
+            checked_failure(e?e:-897);return -1;
+        }
+        return 1;
+    }
+    return 0;
+}
+size_t XbRes_BpeSourceSize(const void *src){
+    if(sCheckedReads && sCheckedFailure)return 0;
+    for(unsigned i=0;i<MAX_PENDING;i++)if(sPending[i].buf && sPending[i].buf==src)return sPending[i].n;
+    size_t n=0;XbResCheckedFn fn=NULL;int id;
+    int found=embedded_source(src,&n,&fn,&id);
+    if(found)return found>0?n:0;
+    if(sCheckedReads){checked_failure(-897);return 0;}
+    return XbRes_SourceSize(src);
+}
 
 static void convert(XbResFn fn, XbResCheckedFn checked, void *buf, size_t n, int id) {
     int rc=0;
     if(checked) rc=checked(buf,n,id); else if(fn) fn(buf,n,id); else rc=-1;
     if(rc) {
-        sLastError=rc; sFailedConversions++;
+        checked_failure(rc); sFailedConversions++;
         XB_LOG("res: file id %d conversion failed (%d): resource rejected",id,rc);
     } else sConverted++;
 }
@@ -115,9 +214,9 @@ static void forget_overlapping(const uint8_t *buf, size_t n) {
 }
 
 void XbRes_Forget(const void *buf,size_t n) {
-    int i;
+    unsigned i;
     forget_overlapping((const uint8_t *)buf, n);
-    for(i=0;i<64;i++) {
+    for(i=0;i<sReadHigh;i++) {
         uintptr_t a=(uintptr_t)buf,b=sReads[i].buf;
         if(sReads[i].n && (a<=b ? b-a<n : a-b<sReads[i].n))sReads[i].n=0;
     }
@@ -125,12 +224,18 @@ void XbRes_Forget(const void *buf,size_t n) {
 
 static void post_read(int ptid, int flid, uint64_t off, uint64_t fileSize, void *buf, size_t n) {
     int id = XbRes_Id(ptid, flid), i;
+    int slot;
 
     sLastError=0;
-    if(!buf && n) { sLastError=-1; return; }
+    if(sCheckedReads && sCheckedFailure)return;
+    if(!buf && n) { checked_failure(-1); return; }
+    if(sCheckedReads && (id==INT_MIN || off || (uint64_t)n<fileSize || !XbRes_HasCheckedConverter(id))){checked_failure(-897);return;}
     XbRes_Forget(buf,n);
-    sReads[sReadNext].buf=(uintptr_t)buf;sReads[sReadNext].n=n;
-    sReadNext=(sReadNext+1)%64;
+    slot=read_slot();if(slot<0)return;
+    sReads[slot].buf=(uintptr_t)buf;sReads[slot].n=n;
+    sReads[slot].file_size=fileSize<=n?(size_t)fileSize:n;
+    sReads[slot].id=id;sReads[slot].embedded=NULL;sReads[slot].prepared=0;
+
     if (id == INT_MIN) {
         return;
     }
@@ -146,14 +251,24 @@ static void post_read(int ptid, int flid, uint64_t off, uint64_t fileSize, void 
             return;
         }
         if (sRanges[i].packed) {
+            if(sCheckedReads){
+                unsigned free_slot=MAX_PENDING;
+                for(unsigned k=0;k<MAX_PENDING;k++)if(!sPending[k].buf){free_slot=k;break;}
+                if(free_slot==MAX_PENDING){checked_failure(-897);return;}
+                sPendingNext=(int)free_slot;
+            }
             sPending[sPendingNext].buf = (const uint8_t *)buf;
-            sPending[sPendingNext].n = n;
+            sPending[sPendingNext].n = (size_t)fileSize;
             sPending[sPendingNext].id = id;
             sPending[sPendingNext].fn = sRanges[i].fn;
             sPending[sPendingNext].checked = sRanges[i].checked;
             sPendingNext = (sPendingNext + 1) % MAX_PENDING;
         } else {
             convert(sRanges[i].fn,sRanges[i].checked,buf,(size_t)fileSize,id);
+            if(!XbRes_LastError()){
+                sReads[slot].embedded=sRanges[i].embedded;
+                sReads[slot].prepared=sRanges[i].checked && !off && (uint64_t)n>=fileSize;
+            }
         }
         return;
     }
@@ -171,21 +286,45 @@ void XbRes_Install(void) {
 /* host tests drive the hook directly */
 void XbRes_TestRead(int ptid, int flid, uint64_t off, uint64_t fileSize, void *buf, size_t n) { post_read(ptid, flid, off, fileSize, buf, n); }
 
+/* Decoded resources are new owned allocations, distinct from the packed read.
+ * Record only after checked conversion. Heap_Free revokes these spans through
+ * XbRes_Forget, just as for direct reads; never infer ownership from an address. */
+static void decoded_convert(XbResFn fn,XbResCheckedFn checked,void *out,size_t size,int id){
+ XbRes_Forget(out,size);
+ convert(fn,checked,out,size,id);
+ if(!checked || XbRes_LastError() || !size)return;
+ int slot=read_slot();if(slot<0)return;
+ sReads[slot].buf=(uintptr_t)out;sReads[slot].n=size;sReads[slot].file_size=size;
+ sReads[slot].id=id;sReads[slot].embedded=NULL;sReads[slot].prepared=1;
+}
+
 void XbRes_AfterBpe(const void *src, void *out, int32_t size) {
     int i;
 
     sLastError=0;
-    if(size<0 || (!out && size)) { sLastError=-1; return; }
+    if(sCheckedReads && sCheckedFailure)return;
+    if(size<0 || (!out && size)) { checked_failure(-1); return; }
 
     for (i = 0; i < MAX_PENDING; i++) {
-        if (sPending[i].buf == (const uint8_t *)src) {
+        if (sPending[i].buf && sPending[i].buf == (const uint8_t *)src) {
             if(sPending[i].n<8 || XbRes_Le32(src)!=(uint32_t)size) {
-                sLastError=-1;return;
+                checked_failure(-1);return;
             }
-            convert(sPending[i].fn,sPending[i].checked,out,(size_t)size,sPending[i].id);
+            XbResFn fn=sPending[i].fn;XbResCheckedFn checked=sPending[i].checked;int id=sPending[i].id;
+            decoded_convert(fn,checked,out,(size_t)size,id);
             return;
         }
     }
+    {
+        size_t n=0;XbResCheckedFn fn=NULL;int id;
+        int found=embedded_source(src,&n,&fn,&id);
+        if(found){
+            if(found<0)return;
+            if(XbRes_Le32(src)!=(uint32_t)size){checked_failure(-897);return;}
+            decoded_convert(NULL,fn,out,(size_t)size,id);return;
+        }
+    }
+    if(sCheckedReads){checked_failure(-897);return;}
     {
         static unsigned said;
         if (said++ < 16) {

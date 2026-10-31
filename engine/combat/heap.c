@@ -125,6 +125,17 @@ HeapBlock *Heap_FindBlock(u32 data) {
     }
     return found;
 }
+#ifdef PORT_BIGENDIAN
+unsigned XbHeap_AllocationBytes(const void *ptr) {
+    HeapBlock *block;
+    if(!xb_heap_ready || !ptr)return 0;
+#if UINTPTR_MAX > UINT32_MAX
+    if((uintptr_t)ptr>UINT32_MAX)return 0;
+#endif
+    block=Heap_FindBlock((u32)(uintptr_t)ptr);
+    return block && block->dataSize>0?(unsigned)block->dataSize:0;
+}
+#endif
 
 HeapBlock *Heap_FindFreeFromHead(s32 heap, s32 size);
 

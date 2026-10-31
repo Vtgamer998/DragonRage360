@@ -43,7 +43,7 @@ cmd = ['gcc', '-std=gnu17', '-O2', '-Wall', '-Wextra', '-Werror',
        '-I' + str(engine / 'tests'), '-I' + str(engine / 'graphics'),
        '-I' + str(repo / 'port/src/gs'), '-I' + str(sdk / 'include'), str(generated)]
 cmd += [str(engine / 'graphics' / f) for f in
-        ['dr_gs_backend.c', 'dr_gs_replay.c', 'dr_xenos.c', 'dr_targets.c',
+        ['dr_gs_backend.c', 'dr_gs_replay.c','dr_gs_batch.c', 'dr_xenos.c', 'dr_targets.c',
          'dr_gs_texture.c', 'dr_graphics_demo.c']]
 cmd += ['-lm', '-o', str(out / 'test-gs-backend')]
 if '--sanitize' in sys.argv:

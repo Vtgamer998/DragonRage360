@@ -47,7 +47,7 @@ int demo_input(DemoUi *u,uint16_t b)
     }
     if(b&DEMO_Y) return u->page==DEMO_CONTROLS?DEMO_BODY_TEST:DEMO_SCAN;
     if((b&DEMO_X) && u->page==DEMO_CONTROLS) return DEMO_GRAPHICS_TEST;
-    if((b&DEMO_X) && u->page==DEMO_LIBRARY && u->count) return DEMO_RESOURCE_TEST;
+    if((b&DEMO_X) && u->page==DEMO_LIBRARY && u->count) return DEMO_VERIFY;
     int n=rows(u);
     if(n && b&DEMO_UP) u->selection=(u->selection+n-1)%n;
     if(n && b&DEMO_DOWN) u->selection=(u->selection+1)%n;
@@ -59,7 +59,7 @@ int demo_input(DemoUi *u,uint16_t b)
         return DEMO_SAVE;
     }
     if(!(b&(DEMO_A|DEMO_START))) return DEMO_NONE;
-    if(u->page==DEMO_LIBRARY && u->count) return DEMO_VERIFY;
+    if(u->page==DEMO_LIBRARY && u->count) return DEMO_PLAY;
     if(u->page==DEMO_ONLINE) {
         const int actions[]={DEMO_LOBBY_HOST,DEMO_LOBBY_SEARCH,DEMO_LOBBY_DIRECT,DEMO_LOBBY_STOP};
         return actions[u->selection];
@@ -99,9 +99,9 @@ void demo_draw(const DemoUi *u,const DemoPaint *p,unsigned tick)
     p->rect(52,52,68,68,ORANGE);
     text(p,66,66,2,0xFF211000,"DR");
     text(p,144,48,2,WHITE,"DRAGON RAGE");
-    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.44-D10");
+    text(p,146,94,1,GOLD,"XBOX 360  /  DIAGNOSTICO D46");
     text(p,930,56,1,u->connected?0xFF3DDC84:GOLD,u->connected?"CONTROLE CONECTADO":"CONECTE O CONTROLE");
-    text(p,930,88,1,MUTED,"Interface + leitor de ISO");
+    text(p,930,88,1,MUTED,"Jogo local · Biblioteca de ISOs");
     p->rect(52,154,300,480,PANEL);
     for(int i=0;i<DEMO_PAGES;i++) {
         int y=174+i*64;
@@ -127,9 +127,9 @@ void demo_draw(const DemoUi *u,const DemoPaint *p,unsigned tick)
             int start=(u->selection/4)*4;
             for(int i=start;i<u->count && i<start+4;i++) {
                 char label[110]; snprintf(label,sizeof(label),"%02d  %.85s",i+1,u->names[i]);
-                row(u,p,i,254+(i-start)*76,label,"A  Verificar arquivos internos da ISO");
+                row(u,p,i,254+(i-start)*76,label,"A  Iniciar jogo / luta local");
             }
-            snprintf(b,sizeof(b),"%d de %d · Y atualizar · X testar recurso",u->selection+1,u->count);
+            snprintf(b,sizeof(b),"%d de %d · Y atualizar · X verificar ISO",u->selection+1,u->count);
             text(p,410,574,1,BLUE,b);
         }
     } else if(u->page==DEMO_CONTROLS) {

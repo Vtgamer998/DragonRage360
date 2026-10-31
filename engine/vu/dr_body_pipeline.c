@@ -106,33 +106,52 @@ static int program(DrGsStream *stream,const unsigned char *p,size_t size,uint32_
     }
     return *instructions==127?0:PIPE_FORMAT;
 }
-static int build(const dr_disc *disc,const char *path,DrGsVertex *vertices,size_t capacity,
-                 uint64_t *tex0,size_t material_capacity,int face,size_t *written,DrBodyPipelineStats *stats)
-{
-    if(written) {*written=0;}if(stats) {memset(stats,0,sizeof(*stats));}
-    if(!disc || !path || !vertices || !capacity || !written || !stats || face< -1 || face>7)return PIPE_FORMAT;
-    dr_span pack,elf,micro;int rc=dr_game_file(disc,path,&pack);if(rc)return rc;
-    if(!pack.size || pack.size>16*1024*1024)return PIPE_FORMAT;
-    unsigned char *bytes=malloc((size_t)pack.size);DrBodyPart *parts=malloc(256*sizeof(*parts));
-    if(!bytes || !parts) {free(bytes);free(parts);return PIPE_MEMORY;}
-    Builder b={.vertices=vertices,.capacity=capacity,.tex0=tex0,.material_capacity=material_capacity};
-    rc=dr_read(disc,&pack,0,bytes,(size_t)pack.size);size_t offset=0,size=0;
-    if(!rc)rc=dr_pack_memory_entry(bytes,(size_t)pack.size,2,&offset,&size,NULL);
-    DrBodyModel model={0};size_t bad;
-    if(!rc)rc=dr_body_model_read(bytes+offset,size,parts,256,&model,&bad);
-    if(!rc)for(unsigned i=0;i<8;i++) {
-        size_t at,bytes_in_face;int r=dr_pack_memory_entry(bytes,(size_t)pack.size,3+i,&at,&bytes_in_face,NULL);
-        if(!r)b.stats.face_mask|=1u<<i;
-        else if(r!=DR_NOT_FOUND) {rc=r;break;}
+struct DrBodySource {
+    unsigned char *bytes;size_t size,model_offset;
+    DrBodyPart parts[256];DrBodyModel model;
+    unsigned char microcode[0x400];uint32_t face_mask;
+};
+void dr_body_source_free(DrBodySource*s){if(s){free(s->bytes);free(s);}}
+const void *dr_body_source_pack(const DrBodySource*s,size_t*n){if(n)*n=s?s->size:0;return s?s->bytes:NULL;}
+int dr_body_source_open(const dr_disc*disc,const char*path,DrBodySource**out){
+    if(!out)return PIPE_FORMAT;
+    *out=NULL;if(!disc||!path)return PIPE_FORMAT;
+    DrBodySource*s=calloc(1,sizeof(*s));if(!s)return PIPE_MEMORY;
+    dr_span pack,elf,micro;int rc=dr_game_file(disc,path,&pack);size_t offset=0,size=0,bad;
+    if(!rc&&(!pack.size||pack.size>16*1024*1024))rc=PIPE_FORMAT;
+    if(!rc){s->size=(size_t)pack.size;s->bytes=malloc(s->size);if(!s->bytes)rc=PIPE_MEMORY;}
+    if(!rc)rc=dr_read(disc,&pack,0,s->bytes,s->size);
+    if(!rc)rc=dr_pack_memory_entry(s->bytes,s->size,2,&offset,&size,NULL);
+    if(!rc)rc=dr_body_model_read(s->bytes+offset,size,s->parts,256,&s->model,&bad);
+    s->model_offset=offset;
+    if(!rc)for(unsigned i=0;i<8;i++){
+        size_t at,n;int e=dr_pack_memory_entry(s->bytes,s->size,3+i,&at,&n,NULL);
+        if(!e)s->face_mask|=1u<<i;else if(e!=DR_NOT_FOUND){rc=e;break;}
     }
-    size_t face_offset=0,face_bytes=0;
-    if(!rc && face>=0)rc=dr_pack_memory_entry(bytes,(size_t)pack.size,3+(unsigned)face,&face_offset,&face_bytes,NULL);
-    if(!rc && face>=0)rc=dr_face_vif_parse(bytes+face_offset,face_bytes,NULL,NULL,NULL,&bad);
     if(!rc)rc=dr_find(disc,"SLUS_216.78",&elf);
     if(!rc)rc=dr_elf_mips_span(disc,&elf,0x2bf6b0,0x400,&micro);
-    unsigned char microcode[0x400];if(!rc)rc=dr_read(disc,&micro,0,microcode,sizeof(microcode));
+    if(!rc)rc=dr_read(disc,&micro,0,s->microcode,sizeof(s->microcode));
+    if(rc){dr_body_source_free(s);return rc;}
+    *out=s;return 0;
+}
+int dr_body_source_build(const DrBodySource*source,DrGsVertex*vertices,size_t capacity,
+                        uint64_t*tex0,size_t material_capacity,int face,int only_face,
+                        size_t*written,DrBodyPipelineStats*stats,DrBodyFaceSpan*span){
+    if(written)*written=0;
+    if(stats)memset(stats,0,sizeof(*stats));
+    if(span)memset(span,0,sizeof(*span));
+    if(!source||!vertices||!capacity||!written||!stats||face< -1||face>7||(only_face!=0&&only_face!=1))return PIPE_FORMAT;
+    unsigned char*bytes=source->bytes;size_t offset=source->model_offset;
+    const DrBodyPart*parts=source->parts;DrBodyModel model=source->model;
+    const unsigned char*microcode=source->microcode;
+    Builder b={.vertices=vertices,.capacity=capacity,.tex0=tex0,.material_capacity=material_capacity};
+    b.stats.face_mask=source->face_mask;
+    size_t face_offset=0,face_bytes=0,bad;int rc=0;
+    if(face>=0)rc=dr_pack_memory_entry(bytes,source->size,3+(unsigned)face,&face_offset,&face_bytes,NULL);
+    if(!rc&&face>=0)rc=dr_face_vif_parse(bytes+face_offset,face_bytes,NULL,NULL,NULL,&bad);
     if(!rc)for(unsigned i=0;i<model.parts;i++) {
-        DrBodyPart *part=&parts[i];if(!part->chain_bytes || !part->enabled)continue;
+        const DrBodyPart *part=&parts[i];if(!part->chain_bytes || !part->enabled || (only_face && part->node!=0x30))continue;
+        size_t part_start=b.used;
         unsigned char constants[34*16]={0};
         for(unsigned axis=0;axis<3;axis++) {
             vector(constants,axis,axis==0,axis==1,axis==2,0);
@@ -153,7 +172,7 @@ static int build(const dr_disc *disc,const char *path,DrGsVertex *vertices,size_
         b.part=part->node;b.chain=bytes+offset+part->chain_offset;
         if(face>=0 && part->node==0x30) {b.chain=bytes+face_offset;chain_bytes=face_bytes;}
         rc=dr_gs_stream_init(&b.stream,stream_gif,&b);if(rc)break;
-        rc=program(&b.stream,microcode,sizeof(microcode),&b.stats.program_instructions);if(rc)break;
+        rc=program(&b.stream,microcode,sizeof(source->microcode),&b.stats.program_instructions);if(rc)break;
         rc=command(&b.stream,0x6c220000,constants,sizeof(constants));if(rc)break;
         rc=command(&b.stream,0x03000022,NULL,0);if(rc)break;
         rc=command(&b.stream,0x020001ef,NULL,0);if(rc)break;
@@ -161,11 +180,21 @@ static int build(const dr_disc *disc,const char *path,DrGsVertex *vertices,size_
         rc=dr_face_vif_parse(b.chain,chain_bytes,commands,&b,NULL,&bad);
         if(!rc)rc=dr_gs_stream_finish(&b.stream);
         if(b.error) {rc=b.error;}if(rc)break;
+        if(part->node==0x30 && span){span->present=1;span->first=part_start;span->count=b.used-part_start;}
         b.stats.body_chains++;
     }
-    free(parts);free(bytes);
+
     if(rc)return rc;
-    b.stats.parts=model.parts;*stats=b.stats;*written=b.used;return b.used?0:PIPE_FORMAT;
+    b.stats.parts=only_face?b.stats.body_chains:model.parts;*stats=b.stats;*written=b.used;return b.used?0:PIPE_FORMAT;
+}
+static int build(const dr_disc*disc,const char*path,DrGsVertex*vertices,size_t capacity,
+                 uint64_t*tex0,size_t material_capacity,int face,size_t*written,DrBodyPipelineStats*stats){
+    if(written)*written=0;
+    if(stats)memset(stats,0,sizeof(*stats));
+    if(!disc||!path||!vertices||!capacity||!written||!stats||face< -1||face>7)return PIPE_FORMAT;
+    DrBodySource*s=NULL;int rc=dr_body_source_open(disc,path,&s);
+    if(!rc)rc=dr_body_source_build(s,vertices,capacity,tex0,material_capacity,face,0,written,stats,NULL);
+    dr_body_source_free(s);return rc;
 }
 int dr_body_pipeline_build(const dr_disc *d,const char *p,DrGsVertex *v,size_t cap,size_t *n,DrBodyPipelineStats *s)
 {return build(d,p,v,cap,NULL,0,-1,n,s);}

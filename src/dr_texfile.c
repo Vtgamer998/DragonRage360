@@ -9,6 +9,34 @@
 enum {INVALID=-300,UNSUPPORTED=-301,CAPACITY=-302,MEMORY=-303};
 static uint32_t word(const unsigned char *p) {return dr_resource_le32(p);}
 static uint64_t wide(const unsigned char *p) {return word(p)|(uint64_t)word(p+4)<<32;}
+int dr_texfile_prepare(void *data,size_t size,int big_endian)
+{
+    if(!data || size<32 || size>16u*1024*1024)return INVALID;
+    unsigned char *p=data;uint32_t count=word(p);
+    uint64_t table=(uint64_t)word(p+4)*4;
+    if(!count || count>256 || table<32 || (table&15) ||
+       table>size || count>(size-table)/64)return INVALID;
+    /* Complete validation precedes every write, including pointer clearing. */
+    for(uint32_t i=0;i<count;i++) {
+        int rc=dr_texfile_validate_transfers(data,size,i);if(rc)return rc;
+        if(p[(size_t)table+i*64+0x2c]>=16)return UNSUPPORTED;
+    }
+    if(big_endian) {
+        for(unsigned at=0;at<8;at+=4)
+            for(unsigned j=0;j<2;j++){unsigned char t=p[at+j];p[at+j]=p[at+3-j];p[at+3-j]=t;}
+    }
+    memset(p+0x10,0,4);
+    for(uint32_t i=0;i<count;i++) {
+        unsigned char *e=p+(size_t)table+i*64;
+        if(big_endian) {
+            for(unsigned at=0;at<0x28;at+=4)
+                for(unsigned j=0;j<2;j++){unsigned char t=e[at+j];e[at+j]=e[at+3-j];e[at+3-j]=t;}
+            for(unsigned j=0;j<4;j++){unsigned char t=e[0x30+j];e[0x30+j]=e[0x37-j];e[0x37-j]=t;}
+        }
+        memset(e+0x38,0,8);
+    }
+    return 0;
+}
 typedef struct {const unsigned char *pixels;uint32_t width,height,bw;} Upload;
 static int packet(const unsigned char *p,size_t size,uint32_t blt,Upload *u)
 {
@@ -41,10 +69,66 @@ static int upload(unsigned char *vram,unsigned char *covered,const Upload *u,uin
     }
     return 0;
 }
+int dr_font_prepare(void *data,size_t size,int be)
+{
+    if(!data || size<128 || size>1024*1024 || (be!=0 && be!=1))return INVALID;
+    unsigned char *p=data;
+    if(memcmp(p,"5tnF 2SP",8) || word(p+8)!=1 || word(p+12)!=64 || word(p+16)!=1)return INVALID;
+    size_t glyph=word(p+20),count=word(p+24);
+    if(!count || count>4096 || glyph<128 || glyph>size || count>(size-glyph)/6 || !word(p+32) || word(p+32)>128)return INVALID;
+    unsigned char *e=p+64;uint64_t tex=wide(e+48);
+    unsigned width=1u<<((tex>>26)&15),height=1u<<((tex>>30)&15),psm=(tex>>20)&63;
+    if(width>1024 || height>1024 || (psm!=19 && psm!=20) || ((tex>>51)&1023))return UNSUPPORTED;
+    Upload image,palette;uint32_t a=word(e),b=word(e+4),an=word(e+8),bn=word(e+12);
+    if(a<128 || a>size || an>size-a || b<128 || b>size || bn>size-b || (a<b?an>b-a:bn>a-b) || a+an>glyph || b+bn>glyph)return INVALID;
+    int rc=packet(p+a,an,word(e+24),&image);if(rc)return rc;
+    rc=packet(p+b,bn,word(e+28),&palette);if(rc)return rc;
+    size_t expected=(size_t)width*height;if(psm==20)expected/=2;
+    if((size_t)image.width*image.height*4!=expected || palette.width!=16 || palette.height!=16)return UNSUPPORTED;
+    if(be){
+        for(unsigned at=12;at<36;at+=4)for(unsigned j=0;j<2;j++){unsigned char t=p[at+j];p[at+j]=p[at+3-j];p[at+3-j]=t;}
+        for(unsigned at=0;at<40;at+=4)for(unsigned j=0;j<2;j++){unsigned char t=e[at+j];e[at+j]=e[at+3-j];e[at+3-j]=t;}
+        for(unsigned j=0;j<4;j++){unsigned char t=e[48+j];e[48+j]=e[55-j];e[55-j]=t;}
+        for(size_t at=glyph;at<glyph+count*6;at+=2){unsigned char t=p[at];p[at]=p[at+1];p[at+1]=t;}
+    }
+    memset(e+56,0,8);return 0;
+}
 static int present(const unsigned char *covered,uint32_t bp,uint32_t bw,uint32_t psm,uint32_t x,uint32_t y)
 {
     size_t off;unsigned shift,bits;int rc=dr_gs_address(bp,bw,psm,x,y,&off,&shift,&bits);
     return !rc && (covered[off>>5]&(1u<<((off>>2)&7)));
+}
+/* Palette-only entries intentionally pair alternate palettes with another image. */
+int dr_texfile_validate_palette(const void *data,size_t size,uint32_t index){
+ if(!data || size<32)return INVALID;
+ const unsigned char *p=data;uint32_t count=word(p);uint64_t table=(uint64_t)word(p+4)*4,end=table+(uint64_t)count*64;
+ if(!count || count>1024 || index>=count || table<32 || end>size)return INVALID;
+ const unsigned char *e=p+(size_t)table+index*64;
+ if(word(e) || word(e+8) || word(e+16) || wide(e+48))return INVALID;
+ Upload pal;int rc=locate(p,size,(size_t)end,word(e+4),word(e+12),word(e+28),&pal);
+ if(rc)return rc;
+ return ((pal.width==16 && pal.height==16) || (pal.width==8 && pal.height==2))?0:UNSUPPORTED;
+}
+/* Validate the transfer representation without claiming that the upload
+ * initializes every texel in TEX0. Some original stage textures upload only
+ * part of a GS block. Indexed pixel-only entries may use an external CLUT,
+ * as Tex_UploadClut deliberately skips clutOfs==0. The RGBA decoder still
+ * requires its own palette and complete coverage. */
+int dr_texfile_validate_transfers(const void *data,size_t size,uint32_t index){
+ if(!data || size<32)return INVALID;
+ const unsigned char *p=data;uint32_t count=word(p);uint64_t table=(uint64_t)word(p+4)*4,end=table+(uint64_t)count*64;
+ if(!count || count>1024 || index>=count || table<32 || end>size)return INVALID;
+ const unsigned char *e=p+(size_t)table+index*64;uint64_t tex=wide(e+48);
+ if(!word(e))return dr_texfile_validate_palette(data,size,index);
+ unsigned width=1u<<((tex>>26)&15),height=1u<<((tex>>30)&15),psm=(tex>>20)&63;
+ if(width>1024 || height>1024 || (psm!=0 && psm!=19 && psm!=20) || ((tex>>51)&1023))return UNSUPPORTED;
+ Upload pix,pal;int rc=locate(p,size,(size_t)end,word(e),word(e+8),word(e+24),&pix);if(rc)return rc;
+ size_t expected=(size_t)width*height;if(psm==0)expected*=4;else if(psm==20)expected=(expected+1)/2;
+ if((size_t)pix.width*pix.height*4!=expected)return UNSUPPORTED;
+ if(word(e+4) || word(e+12)){rc=locate(p,size,(size_t)end,word(e+4),word(e+12),word(e+28),&pal);if(rc)return rc;
+  if((psm==19 && (pal.width!=16 || pal.height!=16)) || (psm==20 && (pal.width!=8 || pal.height!=2)))return UNSUPPORTED;
+ }
+ return 0;
 }
 int dr_texfile_decode(const void *data,size_t size,uint32_t index,void *rgba,size_t capacity,DrTexFileImage *info)
 {

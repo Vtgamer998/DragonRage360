@@ -49,7 +49,7 @@ static GsTex tex_create(uint32_t w,uint32_t h,int format,int levels)
 {
     if(state.error || format!=GS_TEXFMT_RGBA8 || levels<1 || state.serial==0x3fffff) return 0;
     uint32_t native;int e=dr_xenos_texture_allocate(w,h,(uint32_t)levels,&native);
-    if(e) {fail(e,UINT32_MAX);return 0;}
+    if(e) {xsdk_log_write("GS texture allocation error=%d width=%u height=%u levels=%d slots=%u",e,w,h,levels,dr_xenos_texture_slots());fail(e,UINT32_MAX);return 0;}
     GsTex handle=(GsTex)(++state.serial<<9)|native;
     state.texture[native-1].handle=handle;state.texture[native-1].width=w;
     state.texture[native-1].height=h;state.texture[native-1].levels=(uint32_t)levels;
@@ -79,7 +79,7 @@ static int tex_slots(void) {return state.error?0:(int)dr_xenos_texture_slots();}
 static int pipe_get(uint32_t key)
 {
     for(uint32_t i=0;i<state.pipe_count;i++) if(state.keys[i]==key) return (int)i;
-    if(state.pipe_count==PIPES) {fail(DR_XENOS_FULL,UINT32_MAX);return -1;}
+    if(state.pipe_count==PIPES) {xsdk_log_write("GS pipeline table full key=%08x",key);fail(DR_XENOS_FULL,UINT32_MAX);return -1;}
     state.keys[state.pipe_count]=key;return (int)state.pipe_count++;
 }
 static void target_ensure(int id)
@@ -210,7 +210,12 @@ static void frame_end(void)
         .texture=native_texture};
     uint32_t failed=UINT32_MAX;int e=0;
     if(gsDrawCount) e=dr_gs_replay(&replay,gsDraws,gsDrawCount,gsVerts,gsVertCount,&failed);
-    if(e) {fail(e,failed);return;}
+    if(e) {
+        if(failed<gsDrawCount){const GsDraw *d=&gsDraws[failed];
+            xsdk_log_write("D36 rejected state: key=%08x target=%d vu=%d native=%d wall=%d sampler=%d mode=%d,%d,%d,%d misc=%.2f,%.2f,%.2f,%.2f target_tex=%d",d->pipeline>=0 && (unsigned)d->pipeline<state.pipe_count?state.keys[d->pipeline]:0,d->target,d->vu,d->native,d->wall,d->sampler,d->mode[0],d->mode[1],d->mode[2],d->mode[3],(double)d->misc[0],(double)d->misc[1],(double)d->misc[2],(double)d->misc[3],d->tex_is_target);
+        }
+        fail(e,failed);return;
+    }
     for(int i=0;i<gsTargetCount;i++) if(dr_targets_ready((unsigned)i)) gsTargets[i].cleared=1;
     int best=-1;
     for(int i=0;i<gsTargetCount;i++) if(dr_targets_ready((unsigned)i)) {

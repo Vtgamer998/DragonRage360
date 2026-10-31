@@ -175,6 +175,7 @@ int Port_HudLayout(void) {
 int gsDepthByteIsFog;
 unsigned gsNative;
 unsigned gsSkipped;
+unsigned gGsTexturePressureSweeps,gGsTexturePressureFallbacks;
 unsigned gGpuNewTex, gGpuNewTexPixels, gGpuNewPipes; /* created since the front end last cleared them (slow-frame report) */
 unsigned gGpuTexReplaced; /* textures taken from a texture pack so far */
 uint64_t gGpuTexNs, gGpuPipeNs, gGpuEndNs; /* time spent decoding textures, creating pipelines, in GsGpu_FrameEnd */
@@ -202,8 +203,10 @@ static Tex sTex[MAX_TEX];
 static uint16_t sTexBucket[TEX_BUCKETS]; /* index + 1 of a cache entry, 0 = empty (open addressing) */
 static Tex *sLast; /* the entry the previous lookup returned */
 
-/* The 256-colour tables as textures, by hash of the palette entries they use (64 slots). */
+/* Hash narrows the lookup; exact palette equality establishes identity. Adapted from
+   Tenkaichi3Decomp 363e92c (AGPL-3.0-only); preserve native Xbox upload byte order. */
 static struct { uint32_t hash, last; GsTex tex; } sCluts[MAX_CLUTS];
+static uint32_t sClutPx[MAX_CLUTS][256];
 
 static uint32_t tex_bucket(uint64_t t0, uint64_t texa, uint32_t gen) {
     uint64_t h = (t0 ^ (texa * 0x9E3779B97F4A7C15ull) ^ ((uint64_t)gen << 17)) * 0xD6E8FEB86659FD93ull;
@@ -492,15 +495,13 @@ static GsTex texture_get(int ctx) {
             h = (h + 1) & (TEX_BUCKETS - 1);
         }
     }
-    if (sBackend->texSlotsLeft() <= 0) {
-        return gsWhite;
-    }
-    if (gsTexCount >= TEX_CAP || sTexBytes > TEX_BYTES_CAP) {
+    if (gsTexCount >= TEX_CAP || sTexBytes > TEX_BYTES_CAP || sBackend->texSlotsLeft() <= 0) {
         /* full (by count, or by size: a texture pack's replacements are large): drop everything not used for two
            seconds (or, failing that, not used this frame) in one sweep */
+        if(sBackend->texSlotsLeft()<=0)gGsTexturePressureSweeps++;
         unsigned keep = gGsFrame > 120 ? gGsFrame - 120 : 0;
         int pass, n;
-        for (pass = 0; pass < 2 && (gsTexCount >= TEX_CAP || sTexBytes > TEX_BYTES_CAP); pass++, keep = gGsFrame) {
+        for (pass = 0; pass < 2 && (gsTexCount >= TEX_CAP || sTexBytes > TEX_BYTES_CAP || sBackend->texSlotsLeft() <= 0); pass++, keep = gGsFrame) {
             for (n = 0, i = 0; i < (uint32_t)gsTexCount; i++) {
                 if (sTex[i].last >= keep) {
                     sTex[n++] = sTex[i];
@@ -520,7 +521,8 @@ static GsTex texture_get(int ctx) {
             }
             sTexBucket[h] = (uint16_t)(i + 1);
         }
-        if (gsTexCount >= TEX_CAP) {
+        if (gsTexCount >= TEX_CAP || sBackend->texSlotsLeft() <= 0) {
+            gGsTexturePressureFallbacks++;
             return gsWhite; /* this one frame uses more textures than the cache holds */
         }
     }
@@ -710,10 +712,10 @@ static GsTex clut_texture(uint32_t cbp) {
     for (i = 0; i < 256; i++) {
         uint32_t n = (i & 0xE7) | ((i & 8) << 1) | ((i & 0x10) >> 1);
         px[i] = Gs_VramRead(cbp, 1, 0, n & 15, n >> 4);
-        hash = (hash ^ px[i]) * 16777619u;
+        hash = (hash ^ px[i] ^ (px[i] >> 16)) * 16777619u;
     }
     for (k = 0; k < MAX_CLUTS; k++) {
-        if (sCluts[k].tex != 0 && sCluts[k].hash == hash) {
+        if (sCluts[k].tex != 0 && sCluts[k].hash == hash && memcmp(sClutPx[k], px, sizeof(px)) == 0) {
             sCluts[k].last = gGsFrame;
             return sCluts[k].tex;
         }
@@ -726,6 +728,8 @@ static GsTex clut_texture(uint32_t cbp) {
     }
     if (sCluts[old].tex != 0) {
         sBackend->texDestroy(sCluts[old].tex);
+        /* A failed allocation must never leave a destroyed handle cacheable. */
+        sCluts[old].tex = 0;
     }
     upload = malloc(sizeof(px));
     if (!upload) { dr_gs_backend_reject(); return 0; }
@@ -745,6 +749,7 @@ static GsTex clut_texture(uint32_t cbp) {
     sBackend->texUpload(tex, 0, 256, 1, GS_TEXFMT_RGBA8, upload, sizeof(px));
     sCluts[old].tex = tex;
     sCluts[old].hash = hash;
+    memcpy(sClutPx[old], px, sizeof(px));
     sCluts[old].last = gGsFrame;
     return tex;
 }

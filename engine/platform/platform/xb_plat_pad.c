@@ -105,9 +105,9 @@ int Port_PadRead(int socket, unsigned char *data) {
     return 18;
 }
 
-int sceDbcInit() { return 1; }
-int scePad2Init() { return 1; }
 static int sPadSockets;
+int sceDbcInit() { return 1; }
+int scePad2Init() { sPadSockets=0;return 1; }
 int scePad2CreateSocket() { return sPadSockets++; }
 int scePad2GetState() { return 1; } /* connected and ready, as on the PC (a missing controller reads as idle) */
 int scePad2GetButtonProfile(int socket, unsigned char *profile) {

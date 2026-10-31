@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "uniform_mutations": 228,
+  "synthetic_compatible_draws_before": 1000,
+  "synthetic_compatible_draws_after": 3,
+  "vertex_count_unchanged": 3000,
+  "max_triangle_vertices_per_draw": 1023,
+  "render_order_preserved": true,
+  "GPU_rasterization": false,
+  "physical_FPS_benchmark": false,
+  "scope": "exact state, values, immutable rejection, barriers, topology boundaries and checked address arithmetic"
+}

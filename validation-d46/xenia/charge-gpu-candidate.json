@@ -1,0 +1,21 @@
+{
+  "result": "INCOMPLETE",
+  "tested_XEX_sha256": "f3b741d9e8c8991d6b3fbe0187b2c82f6ae2ce2326e8d419bc777791386692aa",
+  "FIGHT_frames": 276,
+  "FIGHT_frames_is_lower_bound": true,
+  "last_logged_action_tick": 276,
+  "GPU_replay_and_presentation": true,
+  "former_failure_frames_passed": [
+    107,
+    211,
+    212,
+    249
+  ],
+  "clean_close": false,
+  "game_error_logged": false,
+  "host_process_exit": -7,
+  "observed_host_shm_full": true,
+  "host_shared_memory_cleanup_performed": true,
+  "scope": "Intermediate candidate before EftMesh_SendTri fix; interrupted by host SIGBUS while /dev/shm was full, no completed 384-frame GPU run",
+  "physical_console_FPS_verified": false
+}

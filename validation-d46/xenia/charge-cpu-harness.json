@@ -1,0 +1,24 @@
+{
+  "elapsed_seconds": 131.56100772399986,
+  "frames_seen": [
+    0,
+    32,
+    64,
+    96,
+    128,
+    160,
+    192,
+    224,
+    256,
+    288,
+    320,
+    352,
+    384
+  ],
+  "process_exit": null,
+  "token": "original-charge-cpu",
+  "renderer": "llvmpipe; no physical-console performance claim",
+  "llvmpipe_threads": 1,
+  "host_audio_output": "dummy",
+  "audible_audio_verified": false
+}

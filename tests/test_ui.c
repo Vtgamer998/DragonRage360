@@ -11,8 +11,8 @@ int main(void)
  assert(demo_input(&u,DEMO_A)==DEMO_NONE);
  u.count=8;demo_input(&u,DEMO_UP);assert(u.selection==7);
  demo_input(&u,DEMO_DOWN);assert(u.selection==0);
- assert(demo_input(&u,DEMO_A)==DEMO_VERIFY);
- assert(demo_input(&u,DEMO_X)==DEMO_RESOURCE_TEST);
+ assert(demo_input(&u,DEMO_A)==DEMO_PLAY);
+ assert(demo_input(&u,DEMO_X)==DEMO_VERIFY);
  demo_input(&u,DEMO_B);assert(u.page==DEMO_HOME);
  u.page=DEMO_CONTROLS;assert(demo_input(&u,DEMO_X)==DEMO_GRAPHICS_TEST);
  assert(demo_input(&u,DEMO_Y)==DEMO_BODY_TEST);

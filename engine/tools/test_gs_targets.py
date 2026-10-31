@@ -24,7 +24,7 @@ result = subprocess.run([str(out / 'test-gs-targets')], check=True, capture_outp
 (out / 'gs-targets.txt').write_text(result.stdout)
 report = {'result': 'PASS', 'scope': ['GS MRT/tiled call order', 'A/B/A color/raw-alpha/depth/stencil model',
           'independent DATE and effect snapshots', 'target sampling and feedback resolve with independent raw-alpha binding and matching sampler',
-          'timeout ownership', 'recording failure cleanup'], 'GPU_execution': False,
+          'timeout ownership and bounded closed-renderer timeout selection', 'recording failure cleanup', 'live SDK cursor with stale count', 'pre-draw command split preserves color/raw-alpha/depth/stencil', 'exact margin and invalid cursor rejection', 'snapshot resolve pitch matches active eDRAM source pitch at 1024 and 64 pixels', 'DATE/outline/CLUT coordinates use actual borrowed-view dimensions; allocation owner stays unchanged'], 'GPU_execution': False,
           'not_verified': ['actual D24S8/RGBA8 alias', 'tiling bands on hardware', 'rasterized pixels'],
           'sanitizers': 'ASan/UBSan' if '--sanitize' in sys.argv else 'not enabled',
           'leak_detection': 'disabled' if 'detect_leaks=0' in os.environ.get('ASAN_OPTIONS', '') else 'runtime default'}

@@ -1,0 +1,41 @@
+{
+  "upstream_url": "https://github.com/z3xox/Tenkaichi3Decomp.git",
+  "upstream_commit": "7b43a75bd8b0aeabcce0a22c45e1ad66162ac9d7",
+  "native_legacy_base": "3ca419c7966b11438e2dc3c9a7e1914f102ed545",
+  "native_binary_delivery": "D42",
+  "Xbox_full_upstream_port_complete": false,
+  "Xbox_online_complete": false,
+  "game_rewritten": false,
+  "uploaded_reference": {
+    "filename": "Tenkaichi3Decomp-linux-x64.zip",
+    "sha256": "3db6f66436f1f5c53b74cce5cc9838f5c74725eacf9a091cf16586911ab8a0d1",
+    "bytes": 9697830,
+    "platform": "Linux x86-64",
+    "source_commit_of_binary": "not inferred; source integration pin is recorded separately"
+  },
+  "new_test_report": "validation-adaptation/result.json",
+  "archive_meaning": "downloadable ZIP snapshot; repository remains writable",
+  "github_publication": {
+    "repository": "Vtgamer998/DragonRage360",
+    "base_commit": "1261aaa410511c153bc0ee0318a09b5928b07c23",
+    "published": false,
+    "error": "403 Resource not accessible by integration",
+    "attempted_endpoints": [
+      "Git Trees create",
+      "Contents create"
+    ],
+    "local_publish_script": "adaptation/tools/publish.py"
+  },
+  "imported_game_sources": {
+    "directory": "vendor/tenkaichi-original",
+    "files": 566,
+    "game_C_units": 272,
+    "menu_C_units": 72,
+    "host_syntax_units": 74,
+    "integrity_report": "validation-original/report.json",
+    "recompiled_into_XEX": false
+  },
+  "current_source_delivery": "D43",
+  "new_XEX_built": false,
+  "source_test_evidence": "RESULTADO-D43.json"
+}

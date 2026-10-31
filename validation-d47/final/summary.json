@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "groups": 5,
+  "scope": "host regressions and original source audit",
+  "XEX_built": false,
+  "GPU_execution": false,
+  "hardware_FPS_measured": false
+}

@@ -13,6 +13,8 @@ BtlObj *gBtlObjTbl[BTL_OBJ_MAX];
 /* Storage for the original's unused table-retarget branch. Tests use
  * per-skeleton retargeting; these values are never read. */
 void *Bpe_Decode(void *src,void *dst,int *size){(void)src;(void)dst;(void)size;abort();} /* forbidden legacy fallback in owned-motion tests */
+size_t XbRes_BpeSourceSize(const void *p){(void)p;abort();}
+void *XbBpe_DecodeBounded(void *s,void *d,unsigned n,int *z){(void)s;(void)d;(void)n;(void)z;abort();}
 float D_002F2420[213];
 #ifdef HAVE_REAL_REFERENCE
 extern const float real_reference[213];

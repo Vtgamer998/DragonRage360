@@ -1,0 +1,17 @@
+{
+  "kind": "native diagnostic with linked combat code; NOT a playable game",
+  "version": "D43",
+  "Battle_Main_address": "0x82102820",
+  "Battle_Main_linked": true,
+  "Game_Main_linked": false,
+  "battle_called": false,
+  "strong_or_weak_undefined": 0,
+  "native_game_data_loaded": false,
+  "typed_catalog_linked": true,
+  "partial_preview_available": true,
+  "boot_combat_available": false,
+  "hardware_executed": false,
+  "xenia_display_policy": false,
+  "sha256": "76c018b9ccd312df3bc476cb639d3acaca237e62b1a12c1e320438d9aa38dbe1",
+  "bytes": 3047424
+}

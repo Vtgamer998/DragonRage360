@@ -26,6 +26,7 @@ float D_002F2420[213],D_002EC2C0[4]={0,0,0,1},D_003337D0[4];
 extern const float real_reference[213];
 extern s32 Heap_GetFreeSize(void),Heap_GetUsedSize(void);
 void *Bpe_Decode(void *s,void *d,int *n){(void)s;(void)d;(void)n;abort();}
+void *XbBpe_DecodeBounded(void *s,void *d,unsigned n,int *z){(void)s;(void)d;(void)n;(void)z;abort();}
 void xsdk_log_write(const char *fmt,...){va_list ap;va_start(ap,fmt);vfprintf(stderr,fmt,ap);fputc('\n',stderr);va_end(ap);}
 static void *load(const char *name,size_t *n){FILE *f=fopen(name,"rb");assert(f && !fseek(f,0,SEEK_END));long s=ftell(f);assert(s>0 && !fseek(f,0,SEEK_SET));*n=(size_t)s;void *p=malloc(*n);assert(p && fread(p,1,*n,f)==*n);fclose(f);return p;}
 int main(int argc,char **argv){

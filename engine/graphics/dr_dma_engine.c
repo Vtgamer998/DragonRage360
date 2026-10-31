@@ -4,6 +4,9 @@
 #include "dr_gs_native.h"
 #include <stdlib.h>
 #include <string.h>
+#ifdef DR_XBOX360
+#include <xsdk/log.h>
+#endif
 static int error,owned;
 static DrGsSpan gif;
 static int fail(int e) {if(e && !error)error=e;return error;}
@@ -11,7 +14,11 @@ int dr_dma_engine_error(void) {return error?error:dr_dma_producer_error();}
 static int submit(void *opaque,const DrGsSpan *spans,size_t n,uint32_t address) {
     (void)opaque;int e=dr_gs_native_bind(spans,n);
     if(e)return e;
-    e=dr_gs_native_vif1(address,1);dr_gs_native_unbind();return e;
+    e=dr_gs_native_vif1(address,1);
+#ifdef DR_XBOX360
+    if(e){DrGsStreamStats s={0};dr_gs_native_stats(&s);xsdk_log_write("VIF submit error=%d address=%08x command=%08x tags=%u words=%u calls=%u",e,s.fail_address,s.fail_command,s.tags,s.words,s.vu_calls);for(size_t i=0;i<n;i++)if(s.fail_address>=spans[i].address){size_t at=s.fail_address-spans[i].address;if(at<=spans[i].size && 16<=spans[i].size-at){const unsigned char *p=(const unsigned char*)spans[i].bytes+at;uint32_t w[4];for(unsigned k=0;k<4;k++)w[k]=p[k*4]|(uint32_t)p[k*4+1]<<8|(uint32_t)p[k*4+2]<<16|(uint32_t)p[k*4+3]<<24;xsdk_log_write("VIF failing DMA tag %08x %08x %08x %08x",w[0],w[1],w[2],w[3]);break;}}}
+#endif
+    dr_gs_native_unbind();return e;
 }
 int dr_dma_engine_init(void) {
     if(error)return error;

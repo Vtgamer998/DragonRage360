@@ -27,6 +27,9 @@
 #include "gs_internal.h"
 #ifdef DR_XBOX360
 #include "dr_gs_native.h"
+#include "dr_vu1.h"
+#include <xsdk/log.h>
+#include <math.h>
 #include "gs_draw.h"
 static void run_chain(uint32_t,int);
 #endif
@@ -595,6 +598,14 @@ static void vertex(uint32_t x, uint32_t y, uint32_t z, int kick) {
     memcpy(&v.s, &gs.st, 4);
     { uint32_t tt = (uint32_t)(gs.st >> 32); memcpy(&v.t, &tt, 4); }
     v.q = gs.q;
+#ifdef DR_XBOX360
+    if(!isfinite(v.q)){
+        static unsigned invalid_q;
+        if(invalid_q++<12){DrVuTrace t;dr_vu1_trace(&t);uint32_t qb;memcpy(&qb,&v.q,4);
+            xsdk_log_write("D43 nonfinite GS Q=%08x prim=%llx tex0=%llx rgbaq=%llx xyz=%u,%u,%u kick=%d VU_active=%u program=%u pc=%u kick_addr=%u top=%u vu_q=%08x",qb,(unsigned long long)gs.prim,(unsigned long long)gs.tex0[ctx],(unsigned long long)gs.rgbaq,x,y,z,kick,t.active,t.program,t.pc,t.kick,t.top,t.q_bits);
+        }
+    }
+#endif
     v.u = gs.uv & 0x3FFF; v.v = (gs.uv >> 16) & 0x3FFF;
     if (gs.vcount < 3) {
         gs.vtx[gs.vcount++] = v;
@@ -829,7 +840,12 @@ static void reg_write(uint32_t addr, uint64_t d) {
     case 0x42: case 0x43: gs.alpha[addr - 0x42] = d; break;
     case 0x47: case 0x48: gs.test[addr - 0x47] = d; break;
     case 0x4A: case 0x4B: gs.fba[addr - 0x4A] = d & 1; break;
-    case 0x4C: case 0x4D: gs.frame[addr - 0x4C] = d; break;
+    case 0x4C: case 0x4D:
+#ifdef DR_XBOX360
+        static unsigned unusual_frames;
+        if(((d>>16)&63)>16 && unusual_frames++<4){DrVuTrace t;dr_vu1_trace(&t);xsdk_log_write("GS unusual FRAME reg=%x value=%016llx VUactive=%u program=%u pc=%u kick=%u top=%u",addr,(unsigned long long)d,t.active,t.program,t.pc,t.kick,t.top);}
+#endif
+        gs.frame[addr - 0x4C] = d; break;
     case 0x4E: case 0x4F: gs.zbuf[addr - 0x4E] = d; break;
     case 0x50: gs.bitbltbuf = d; break;
     case 0x51: gs.trxpos = d; break;
@@ -868,6 +884,10 @@ void Gs_Gif(const uint8_t *p, uint32_t qwc) {
 
         if (loops == 0) {
             sStat[3]++;
+#ifdef DR_XBOX360
+            static unsigned bad_tags;
+            if((gif_le64(q)&0x00003fffffff0000ull) && bad_tags++<4){DrVuTrace t;dr_vu1_trace(&t);xsdk_log_write("GIF reserved tag offset=%u call_qwc=%u previous=%016llx first=%016llx,%016llx bad=%016llx,%016llx active=%u prog=%u pc=%u caller=%p",(unsigned)((q-p)/16),qwc,(unsigned long long)tag_lo,(unsigned long long)gif_le64(p),(unsigned long long)gif_le64(p+8),(unsigned long long)gif_le64(q),(unsigned long long)gif_le64(q+8),t.active,t.program,t.pc,__builtin_return_address(0));}
+#endif
             tag_lo = gif_le64(q);
             tag_hi = gif_le64(q+8);
             q += 16;
@@ -1565,7 +1585,7 @@ void Gs_StoreImage(unsigned bp, unsigned w, unsigned h, unsigned char *rgb) {
 void Gs_XenosCaptureEnable(int enabled) {
     if(enabled) {
         tables_init(); memset(&gs,0,sizeof(gs)); gs.prmodecont=1;
-        Gs_GifReset();gGsFbUploads=0;
+        Gs_GifReset();gGsFbUploads=0;gGsTexturePressureSweeps=gGsTexturePressureFallbacks=0;
         for(unsigned i=0;i<512;i++)gGsPageGen[i]++;
     }
     sGpu=enabled!=0;

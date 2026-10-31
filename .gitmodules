@@ -1,0 +1,6 @@
+[submodule "upstream/Tenkaichi3Decomp"]
+	path = upstream/Tenkaichi3Decomp
+	url = https://github.com/z3xox/Tenkaichi3Decomp.git
+[submodule "upstream/Tenkaichi3Decomp-xbox-base"]
+	path = upstream/Tenkaichi3Decomp-xbox-base
+	url = https://github.com/z3xox/Tenkaichi3Decomp.git

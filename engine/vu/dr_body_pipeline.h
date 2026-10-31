@@ -22,4 +22,13 @@ int dr_body_pipeline_materials(const dr_disc *,const char *,DrGsVertex *,size_t 
 int dr_body_pipeline_face(const dr_disc *,const char *,DrGsVertex *,size_t capacity,
                          uint64_t *triangle_tex0,size_t triangle_capacity,int face,
                          size_t *vertices,DrBodyPipelineStats *);
+/* Owned, immutable model+microprogram cache. No borrowed ISO handle survives open.
+ * only_face=1 rebuilds node0x30 only; span describes its position in a full build. */
+typedef struct DrBodySource DrBodySource;
+typedef struct DrBodyFaceSpan {size_t first,count;unsigned present;} DrBodyFaceSpan;
+int dr_body_source_open(const dr_disc*,const char*,DrBodySource**);
+void dr_body_source_free(DrBodySource*);
+const void *dr_body_source_pack(const DrBodySource*,size_t*);
+int dr_body_source_build(const DrBodySource*,DrGsVertex*,size_t,uint64_t*,size_t,
+                         int face,int only_face,size_t*,DrBodyPipelineStats*,DrBodyFaceSpan*);
 #endif

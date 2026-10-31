@@ -1,0 +1,14 @@
+D46 — XEX NATIVO EXPERIMENTAL. O JOGO AINDA NAO ESTA COMPLETO.
+
+No RGH: default.xex da raiz. A variante xenia/default.xex e para emulacao.
+Coloque sua ISO em isos/. A ISO nao acompanha o pacote.
+startup_test.txt contem menu. Na Biblioteca: A inicia a luta; X verifica a ISO.
+Back + Start encerra entre quadros completos.
+
+Corrigidos: cabecalho GIF da fonte em PowerPC e retencao de recursos vivos.
+Adicionado cache de estados graficos identicos e diagnostico por etapa.
+Leia README-D46.md e RESULTADO-D46.json para os resultados e limites.
+
+30 FPS no Xbox e a correcao completa dos efeitos nao estao comprovados.
+Menus originais, KO/resultados, saves, online e audio audivel seguem pendentes.
+NOT_READY permanece 2; o loop experimental continua limitado a 3600 passos.

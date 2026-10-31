@@ -11,6 +11,7 @@ void XbNativeModel_BindTables(XbNativeModel *,void *object,const void *mdl,size_
 void XbNativeModel_BindFiles(XbNativeModel *,void *object);
 unsigned XbNativeModel_Parts(XbNativeModel *);
 int XbNativeModel_Mesh(XbNativeModel *,unsigned,const void **,size_t *);
+int XbNativeModel_ChainSpan(XbNativeModel *,const void *,size_t *);
 /* Native TexFile for original consumers; pix/clut pointers are rebuilt. */
 int XbNativeTexture_Prepare(const void *,size_t,void **);
 void XbNativeTexture_Free(void *);

@@ -21,6 +21,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "dr_vu1.h"
+#include "dr_vu_ftoi.h"
+#ifdef DR_XBOX360
+#include <xsdk/log.h>
+#endif
 static DrVuGif gif_callback;
 static void *gif_opaque;
 static int kick_error;
@@ -75,6 +79,8 @@ static void vu_store_vector(void *target, const uint32_t *values) {
 static unsigned sUnknown[2][128];
 static unsigned sStatRuns, sStatInstr, sStatKicks;
 static unsigned sProgSize;
+static uint32_t trace_active,trace_kick;
+void dr_vu1_trace(DrVuTrace *t){if(t){*t=(DrVuTrace){trace_active,sProgSize,vu.pc,trace_kick,vu.top,0};memcpy(&t->q_bits,&vu.q,4);}}
 
 static struct { unsigned size, runs, instr, kicks; } sProg[16]; /* per loaded program, this frame */
 
@@ -245,7 +251,7 @@ static void kick(uint32_t addr) {
             break;
         }
     }
-    if (gif_callback != NULL) gif_callback(gif_opaque, buf, len / 16);
+    if (gif_callback != NULL){trace_active=1;trace_kick=addr;gif_callback(gif_opaque, buf, len / 16);trace_active=0;}
 }
 
 #define DEST(n) ((dest >> (3 - (n))) & 1) /* field order in the instruction: x y z w */
@@ -349,13 +355,9 @@ static int run(uint32_t start, uint32_t budget) {
             case 0x12: res = vu.vf[ft]; EACH res.f[c] = (float)vu.vf[fs].i[c] * (1.0f / 4096.0f); wr = &vu.vf[ft]; wmask = dest; break;
             case 0x13: res = vu.vf[ft]; EACH res.f[c] = (float)vu.vf[fs].i[c] * (1.0f / 32768.0f); wr = &vu.vf[ft]; wmask = dest; break;
             case 0x14: case 0x15: case 0x16: case 0x17: {
-                static const float k[4] = {1.0f, 16.0f, 4096.0f, 32768.0f};
+                static const unsigned fraction[4]={0,4,12,15};
                 res = vu.vf[ft];
-                EACH {
-                    double v = (double)A(c) * k[sp - 0x14];
-                    if (isnan(v)) return DR_VU_INVALID;
-                    res.i[c] = v >= 2147483647.0 ? 0x7FFFFFFF : v <= -2147483648.0 ? (int32_t)0x80000000u : (int32_t)v;
-                }
+                EACH res.u[c]=dr_vu_ftoi(vu.vf[fs].u[c],fraction[sp-0x14]);
                 wr = &vu.vf[ft]; wmask = dest; break;
             }
             case 0x18: case 0x19: case 0x1A: case 0x1B: EACH res.f[c] = clampf(A(c) * BC); TO_ACC; break;
@@ -497,15 +499,22 @@ upper_done:
             vu.pc = next;
         }
     }
+#ifdef DR_XBOX360
+    xsdk_log_write("VU budget exhausted start=%u pc=%u prog_instructions=%u top=%u tops=%u base=%u ofst=%u itop=%u",start,vu.pc,sProgSize,vu.top,vu.tops,vu.base,vu.ofst,vu.itop);
+    xsdk_log_write("VU vi: %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u; top2=%08x",vu.vi[1],vu.vi[2],vu.vi[3],vu.vi[4],vu.vi[5],vu.vi[6],vu.vi[7],vu.vi[8],vu.vi[9],vu.vi[10],vu.vi[11],vu.vi[12],vu.vi[13],vu.vi[14],vu.vi[15],vu_le(vu.mem+(((vu.top+2)&1023)*16),4));
+#endif
     return DR_VU_BUDGET;
 }
 
 /* Checked interface. Drawing state only; not a combat snapshot/rollback API. */
+#include "dr_vu1_stage.inc"
+#include "dr_vu1_model.inc"
 void dr_vu1_reset(DrVuGif callback, void *opaque) {
     memset(&vu, 0, sizeof(vu));
     memset(sUnknown, 0, sizeof(sUnknown));
     memset(sProg, 0, sizeof(sProg));
     sStatRuns = sStatInstr = sStatKicks = sProgSize = 0;
+    stage_active=stage_header=stage_since_vm=0;stage_draws=stage_fallbacks=0;stage_dirty=1;model_dirty=1;model_active=model_since_vm=0;model_draws=model_fallbacks=0;
     vu.cl = vu.wl = 1;
     vu.vf[0].f[3] = 1.0f;
     gif_callback = callback; gif_opaque = opaque; kick_error = 0;
@@ -550,6 +559,7 @@ int dr_vu1_vif_control(uint32_t code,const void *payload,size_t bytes) {
 int dr_vu1_program(uint32_t address, const void *bytes, size_t size) {
     if (address > 2047 || bytes == NULL || !size || size > 16384 || size % 8) return DR_VU_INVALID;
     legacy_program(address, bytes, (uint32_t)(size / 4));
+    stage_dirty=1;model_dirty=1;model_active=model_since_vm=0;stage_active=stage_header=stage_since_vm=0;
     return DR_VU_OK;
 }
 int dr_vu1_unpack(uint32_t cmd, uint32_t num, uint32_t immediate, const void *bytes, size_t size) {
@@ -566,10 +576,26 @@ int dr_vu1_call(int entry, uint32_t budget) {
     if (vu.dbf) { vu.tops = vu.base; vu.dbf = 0; }
     else { vu.tops = vu.base + vu.ofst; vu.dbf = 1; }
     memset(sUnknown, 0, sizeof(sUnknown)); kick_error = 0;
+    int model=model_renderer?model_program():0;
+    if(entry>=0)model_active=model_since_vm=0;
+    if(model && model_active && entry<0 && budget>=64){
+        int e=model_batch(model);if(e)return e==1?DR_VU_OK:e;
+        model_fallbacks++;
+        if(model_since_vm){int e=run(0,budget);if(e)return e;vu.pc=model==1?36:model==2?15:16;model_since_vm=0;}
+    }
+    int known=stage_renderer && stage_program();
+    if(entry>=0)stage_active=stage_header=stage_since_vm=0;
+    if(known && stage_active && entry<0 && stage_header && budget>=64){
+        int e=stage_batch();if(e)return e==1?DR_VU_OK:e;
+        stage_fallbacks++;
+        if(stage_since_vm){int e=run(0,budget);if(e)return e;vu.pc=21;stage_since_vm=0;}
+    }
     int status = run(entry < 0 ? vu.pc : (uint32_t)entry, budget);
     for (unsigned i = 0; i < 2; i++) for (unsigned j = 0; j < 128; j++)
         if (sUnknown[i][j]) return DR_VU_UNKNOWN;
     if (kick_error) return DR_VU_TRUNCATED;
+    if(!status && model && entry==0)model_active=1;
+    if(!status && known){if(entry==0)stage_active=1;else if(entry<0 && stage_active)stage_header=1;}
     return status;
 }
 int dr_vu1_read(uint32_t offset, void *out, size_t bytes) {

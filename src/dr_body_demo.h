@@ -12,4 +12,13 @@ int dr_body_demo_next_face(int current);
 int dr_body_demo_draw(uint32_t width,uint32_t height);
 int dr_body_demo_close(void);
 unsigned dr_body_demo_material_count(void);
+typedef struct DrBodyDemoProfile {
+ uint64_t source_us,body_us,texture_us,total_us,expression_us;
+ size_t source_bytes;unsigned model_reads,body_builds,face_builds,texture_uploads,face_cache_hit,face_vertices;
+} DrBodyDemoProfile;
+typedef struct DrBodyDemoProbe {unsigned x,y;uint32_t argb,rgba;} DrBodyDemoProbe;
+/* No ISO access or body re-interpretation. Lazy per-expression geometry cache. */
+int dr_body_demo_select_face(int,DrBodyPipelineStats*);
+void dr_body_demo_profile(DrBodyDemoProfile*);
+int dr_body_demo_probe(unsigned,DrBodyDemoProbe*);
 #endif

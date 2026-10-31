@@ -189,7 +189,9 @@ void Gfx_Init(void) {
 }
 
 /* Start of a frame: debug hook, rebuilds the battle object table, advances the screen fades. */
+unsigned gXbGfxBeginFrames,gXbGfxEndFrames;
 void Gfx_BeginFrame(void) {
+    gXbGfxBeginFrames++;
     Dbg_BeginFrame();
     BtlObj_RebuildTable();
     Fade_UpdateAll();
@@ -219,6 +221,7 @@ void Gfx_EndFrame(s32 vsyncs) {
     sceGsSwapDBuff(&gGfx.db, gGfx.frame);
     Gfx_SetDisplayRegs(gGfx.field, 1);
     sceGsSyncPath(0, 0);
+    gXbGfxEndFrames++;
 }
 
 /* Always 1. */

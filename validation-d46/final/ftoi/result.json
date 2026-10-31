@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "full_interpreter_lane_cases": 80160,
+  "host_sanitizers": true,
+  "PPC_fixture_compiled": true,
+  "PPC_fixture_executed": false
+}

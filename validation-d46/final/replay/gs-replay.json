@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "ABI": "original pinned port/src/gs/gs_draw.h",
+  "scope": "single diagnostic surface or multiple saved color/depth targets, actual GsDraw descriptors, ordinary CPU vertices, TFX/TCC/ATST, blend-key translation, color masks, GS DATE/FBA and snapshots via separate backend test, complete-list validation",
+  "unsupported": "remaining native effects, original GS mip registers, complete GS precision/masks; outline/CLUT and VU tested separately through full capture",
+  "immutable_replay_validation_reused": true,
+  "late_invalid_vertex_prevents_all_emission": true,
+  "GPU_execution": false,
+  "XEX_rebuilt": false,
+  "game_engine_linked": false,
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

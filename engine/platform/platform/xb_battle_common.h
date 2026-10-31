@@ -22,6 +22,9 @@ int XbBattleCommon_Convert(unsigned,const void *,size_t,int,void *,size_t,size_t
 /* Transactional native common-4 tables; every character/item scalar is typed.
  * This does not supply common file 3 or initialize fighter managers. */
 int XbBattleCommon_AttachItems(XbBattleCommon *,const void *,size_t);
+/* In-place raw file 4; validates the entire file before any mutation.
+ * Relative offsets stay relative; this does not bind consumers or init a fight. */
+int XbBattleCommon_PrepareItems(void *,size_t,int);
 int XbBattleCommon_ConvertItems(const void *,size_t,int,void *,size_t);
 int XbBattleCommon_GetItems(XbBattleCommon *,void **,size_t *,unsigned *,unsigned *);
 typedef struct XbBattleConsumerProbe {unsigned animations,voices,characters,items;int first_cost,first_ai;} XbBattleConsumerProbe;

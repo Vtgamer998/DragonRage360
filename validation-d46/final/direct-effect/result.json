@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "actual_adapted_function": "EftMesh_SendTri",
+  "host_serialization_and_rejection": true,
+  "PPC_fixture_compiled": true,
+  "BE_struct_conversion": "separate actual PPC/LE OT fixture",
+  "specific_user_effect_visually_verified": false
+}

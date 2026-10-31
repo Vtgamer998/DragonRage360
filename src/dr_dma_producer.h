@@ -25,6 +25,8 @@ int dr_dma_producer_view(DrGsSpan *); /* read-only queued bytes, before FINISH/E
  * quadwords. Native numeric u32 arrays are serialized word by word. Neither
  * operation guesses the format of a mixed engine buffer. */
 int dr_dma_append_canonical(const void *,size_t);
+/* Only the 48-byte native TexBltPacket, not an arbitrary mixed buffer. */
+int dr_dma_add_texture_header(const void *);
 int dr_dma_append_words(const uint32_t *,size_t words);
 int dr_dma_write_ad(uint32_t address,unsigned long long value);
 /* Producers whose callers fill memory themselves (0.25).
@@ -39,6 +41,10 @@ int dr_dma_write_ad(uint32_t address,unsigned long long value);
  * caller must be split or rewritten. Defaults: Alloc=W32, BeginDirect=W64,
  * AddData=W32, AddRef=RAW. Use the *_kind variants to override. */
 typedef enum { DR_DMA_RAW=0, DR_DMA_W32=1, DR_DMA_W64=2 } DrDmaKind;
+int dr_dma_add_clut_ref(const void *);
+int dr_dma_add_xfade_ref(const void *,const void *,size_t);
+int dr_dma_snapshot_chain(const void *,size_t,uint32_t *);
+int dr_dma_snapshot_words(const void *,size_t,uint32_t *);
 int dr_dma_map_chain(void *,size_t,DrDmaKind,uint32_t *address);
 int dr_dma_chain_address(const void *,uint32_t *address);
 void Dma_AddNext(void *addr,uint32_t *retTag);
@@ -72,9 +78,9 @@ void *Dma_Alloc(int32_t size);                  /* floors to 16; default W32 */
 unsigned long long *Dma_BeginDirect(void);      /* 16-byte aligned; room for 64 KiB */
 void Dma_EndDirect(unsigned long long *end);    /* writes CNT + VIF FLUSHE/DIRECT */
 void Dma_AddData(void *src,int32_t size);       /* copies floor(size/16)*16 bytes */
-/* Dma_AddRef COPIES the referenced bytes behind a CNT tag at call time. The
- * original REF stored a PS2 address and the data was read later; the stream
- * seen by VIF/GS is identical when the source does not change before Flush.
- * Sources that change, or are larger than the free space, are not supported. */
+/* Mapped submissions use REF tags into a separate canonical snapshot arena
+ * (8 MiB maximum per Flush). The command buffers remain 1 MiB each.
+ * The single-span API retains its historical inline CNT copy. Both snapshot
+ * at call time and floor the size to 16; no source pointer enters a tag. */
 void Dma_AddRef(void *addr,int32_t size);
 #endif

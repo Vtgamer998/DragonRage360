@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "cases": 78,
+  "source": "six actual adapted helpers from pinned btl_tech_b.c",
+  "host_sanitizers": "ASAN/UBSAN",
+  "PPC_compiled": true,
+  "PPC_fixture_executed": false,
+  "scope": "dependency ordering and owner/kind/value forwarding; native gameplay evidence separate"
+}

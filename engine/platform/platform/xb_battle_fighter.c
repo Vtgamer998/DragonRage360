@@ -23,6 +23,7 @@ typedef struct XbNativeNode {BobjPart part;Vec4 previous;} XbNativeNode;
 _Static_assert(sizeof(XbNativeNode)==0xe0,"native object node pool stride");
 typedef struct XbCachedImage {unsigned family,index;DrTexFileImage image;void *rgba;} XbCachedImage;
 struct XbBattleFighter {
+ XbCharacterEffects *effects;
  BobjObj template_obj;XbNativeModel *native_model;int model_lifecycle,model_side;size_t motions_size;
  BobjObj owned_obj;BobjObj *obj;int registered_id;BobjBone *bones;DrBodyPart *parts;
  uint8_t *model_pack,*motions_pack;size_t model_size,mesh_offset;
@@ -42,6 +43,13 @@ _Static_assert(sizeof(BobjAnimLayer)==0x98,"BobjAnimLayer ABI");
 extern void BtlObjAnim_PlayModel(BobjObj *,s32,s32);
 extern void BtlObjAnim_Step(BobjObj *);
 static XbBattleFighter *owners[16];
+int XbFighter_ChainSpan(const void *ptr,size_t *bytes){
+ if(bytes)*bytes=0;
+ if(!ptr || !bytes)return 0;
+ for(unsigned i=0;i<16;i++)if(owners[i] && owners[i]->model_lifecycle && owners[i]->registered_id>=0 &&
+    XbNativeModel_ChainSpan(owners[i]->native_model,ptr,bytes))return 1;
+ return 0;
+}
 static XbBattleFighter *find_owner(void *p){for(unsigned i=0;i<16;i++)if(owners[i] && owners[i]->obj==p)return owners[i];return NULL;}
 int XbFighter_ResolveNode(void *obj,int id,void **out){XbBattleFighter *f=find_owner(obj);if(!f)return 0;if(f->model_lifecycle){*out=NULL;if(id>=0 && id<162)memcpy(out,(unsigned char *)obj+0xd6c+(size_t)id*4,4);return 1;}*out=(id>=0 && id<162 && f->present[id])?&f->node[id].part:NULL;return 1;}
 int XbFighter_LoadDecoded(void *obj,void *buf,int id,int *size,void **out){
@@ -72,11 +80,15 @@ void XbBattleFighter_FreeModelAnimation(XbBattleFighter *f){
  for(unsigned i=0;i<16;i++)if(owners[i]==f)owners[i]=NULL;
  for(unsigned i=0;i<f->image_count;i++)free(f->images[i].rgba);
  for(unsigned i=0;i<XB_FIGHTER_TABLES;i++)free(f->tables[i]);
- XbNativeModel_Free(f->native_model);free(f->images);free(f->model_pack);free(f->motions_pack);
+ XbCharacterEffects_Free(f->effects);XbNativeModel_Free(f->native_model);free(f->images);free(f->model_pack);free(f->motions_pack);
  free(f->obj->work);free(f->body_data);
  for(unsigned i=0;i<BOBJ_ANIM_MAX;i++)free(f->decoded[i]);
  for(unsigned i=0;i<8;i++)free(f->obj->mdl.modelAnims[i]);
  free(f->bones);free(f->parts);free(f);
+}
+int XbBattleFighter_AttachEffectManagers(XbBattleFighter *f,const void *pack,size_t bytes,XbCharacterEffectsInfo *info){
+ if(!f || f->effects || f->registered_id>=0)return -896;
+ return XbCharacterEffects_Prepare(pack,bytes,&f->effects,info);
 }
 int XbBattleFighter_PrepareModelAnimation(const void *model,size_t model_size,const void *motions,size_t motions_size,XbBattleFighter **out,XbFighterPrepared *stats){
  if(!out || !stats)return DR_MODEL_INVALID;
@@ -299,7 +311,13 @@ extern int XbFighterRegistry_Setup(int,void *);
 extern void XbFighterRegistry_DestroyModel(int);
 int XbFighter_BindOwnedTables(void *object){
  XbBattleFighter *f=find_owner(object);if(!f || !f->model_lifecycle)return 0;
- XbNativeModel_BindTables(f->native_model,object,&f->template_obj.mdl,sizeof(f->template_obj.mdl));return 1;
+ XbNativeModel_BindTables(f->native_model,object,&f->template_obj.mdl,sizeof(f->template_obj.mdl));
+ if(f->effects){
+  BObjMdl *mdl=&((BObj *)object)->mdl;
+  mdl->unk40=XbCharacterEffects_Root(f->effects);
+  for(unsigned slot=0;slot<5;slot++)mdl->unk84[slot]=XbCharacterEffects_TechniqueRoot(f->effects,slot);
+ }
+ return 1;
 }
 int XbFighter_BindOwnedFiles(void *object){
  XbBattleFighter *f=find_owner(object);if(!f || !f->model_lifecycle)return 0;

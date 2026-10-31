@@ -1,3 +1,4 @@
+#include <xsdk/thread.h>
 /* SPDX-License-Identifier: MIT
  * xsdk API usage based on samples/template/main.c and src/file.c (MIT, Mena).
  * Xbox ABI and 64-bit reads: xsdk/include/xsdk/kernel.h, publicly documented by xsdk.
@@ -21,15 +22,54 @@
 #include "xb_battle_fighter.h"
 #include "xb_battle_common.h"
 #include "xb_battle_runtime.h"
+#include "xb_transport_probe.h"
 #include <xsdk/log.h>
 static XbBattleCommon *native_common;
 static XbBattleRuntime *native_runtime;
 static int native_managers;
+static int native_audio,native_stage_running,native_scene_running;
+static unsigned native_scene_frames;
 static int native_typed_values_loaded;
+static int fresh_boot_requested;
+#include "xb_fresh_boot.h"
+static int transport_only,transport_model_requested,transport_model_pending;
+#include "xb_disc.h"
+#include "dr_texfile.h"
+#include "dr_xenos.h"
+#include <stdlib.h>
+static uint32_t loading_preview_texture;
+static unsigned loading_preview_frames;
+static int loading_preview_open(void){
+    dr_span span;size_t bytes=0;DrTexFileImage image;
+    int error=XbDisc_FindFile("pzs3us1/00960.bin",&span);
+    if(error || !span.size || span.size>0x6800)return error?error:-938;
+    unsigned char *packed=malloc((size_t)span.size),*raw=malloc(0x6800),*rgba=malloc(1024*1024*4);
+    if(!packed || !raw || !rgba){free(packed);free(raw);free(rgba);return -908;}
+    error=XbDisc_ReadSpan(&span,0,packed,(size_t)span.size);
+    if(!error)error=dr_bpe_decode(packed,(size_t)span.size,raw,0x6800,&bytes);
+    if(!error)error=dr_texfile_decode(raw,bytes,0,rgba,1024*1024*4,&image);
+    if(!error)error=dr_xenos_open();
+    if(!error){
+        error=dr_xenos_texture_create(image.width,image.height,rgba,&loading_preview_texture);
+        if(error)dr_xenos_close();
+        else xsdk_log_write("D46 loading asset GPU upload: file=0x3c1 image=0 size=%ux%u; separate raw asset preview, not original Load_RunBlocking",image.width,image.height);
+    }
+    free(packed);free(raw);free(rgba);return error;
+}
+static int loading_preview_draw(unsigned width,unsigned height){
+    DrGsVertex quad[]={
+        {384,104,0,128,128,128,128,0,0,1},{896,104,0,128,128,128,128,1,0,1},{384,616,0,128,128,128,128,0,1,1},
+        {384,616,0,128,128,128,128,0,1,1},{896,104,0,128,128,128,128,1,0,1},{896,616,0,128,128,128,128,1,1,1}
+    };
+    DrXenosDraw draw={.logical_width=1280,.logical_height=720,.depth=1,.gs_material=1,.textured=1,.tcc=1,.sampler=6,.scissor={0,0,(int)width,(int)height}};
+    int error=dr_xenos_begin(width,height);if(error)return error;
+    error=dr_xenos_draw(quad,6,loading_preview_texture,&draw);int end=dr_xenos_end();return error?error:end;
+}
 static XbBattleFighter *native_fighters[2];
 static int native_object_diagnostic;
 static XbBattleStageCollision *native_stage;
 static void release_native_stage(void){
+ native_audio=0;native_stage_running=0;native_scene_running=0;native_scene_frames=0;
  if(native_managers){int e=XbBattleRuntime_EndManagers(native_runtime);if(e){xsdk_log_write("native manager cleanup refused: %d",e);return;}native_managers=0;}
  for(unsigned i=0;i<2;i++){XbBattleFighter_FreeModelAnimation(native_fighters[i]);native_fighters[i]=NULL;}
  if(native_object_diagnostic){int e=XbBattleFighter_EndObjectDiagnostic();if(e){xsdk_log_write("native object cleanup refused: %d",e);return;}native_object_diagnostic=0;}
@@ -145,6 +185,8 @@ static NTSTATUS open_image(const char *path,HANDLE *handle,uint64_t *size)
     if(!NT_SUCCESS(status)) {NtClose(*handle);*handle=0;return status;}
     *size=info.end_of_file;return STATUS_SUCCESS;
 }
+static unsigned body_draw_report_pending,body_probe_frames;
+static int body_cache_autotest;
 static int open_body_demo(int face)
 {
     if(!ui.count)scan_isos();
@@ -162,6 +204,11 @@ static int open_body_demo(int face)
     if(rc)snprintf(ui.modal,sizeof(ui.modal),"Falha ao carregar o modelo: %d.\nFormato esperado: ISO USA SLUS-21678.\nConsulte default.log.",rc);
     else xsdk_log_write("body reference pose: parts=%u chains=%u MSCNT=%u GIF=%u triangles=%u original_instructions=%u",
         stats.parts,stats.body_chains,stats.mscnt,stats.gif_packets,stats.triangles,stats.program_instructions);
+    if(!rc){
+        body_draw_report_pending=1;body_probe_frames=0;
+        DrBodyDemoProfile p;dr_body_demo_profile(&p);
+        xsdk_log_write("D46 model profile: model_reads=%u bytes=%u body_builds=%u uploads=%u source_ms=%.3f body_ms=%.3f textures_ms=%.3f total_ms=%.3f; CPU cache, not a battle",p.model_reads,(unsigned)p.source_bytes,p.body_builds,p.texture_uploads,p.source_us/1000.0,p.body_us/1000.0,p.texture_us/1000.0,p.total_us/1000.0);
+    }
     if(!rc)xsdk_log_write("body: %u base-layer materials loaded, face=%d mask=%02X",dr_body_demo_material_count(),face,(unsigned)stats.face_mask);
     xsdk_log_write("%s: ISO body diagnostic open rc=%d; no battle; separate package texture previews",rc?"FAIL":"PASS",rc);
     return rc;
@@ -276,6 +323,12 @@ static int prepare_fighter_models(void)
     if(!common_error)common_error=XbBattleRuntime_Open(common_pack,common_bytes,item_pack,item_bytes,&native_runtime);
     free(item_pack);free(common_pack);
     if(common_error)return common_error;
+    void *scene_pack=NULL;size_t scene_bytes=0;XbCommon3Info scene_info={0};
+    common_error=read_battle_resource(3,&scene_pack,&scene_bytes);
+    if(!common_error)common_error=XbBattleRuntime_AttachCommon3(native_runtime,scene_pack,scene_bytes,&scene_info);
+    free(scene_pack);
+    xsdk_log_write("common3 native resources: error=%d entries=%u prepared=%u TexFiles=%u image_or_palette_entries=%u unprepared=%u; complete scene remains unavailable",common_error,scene_info.entries,scene_info.prepared,scene_info.textures,scene_info.images,scene_info.unprepared);
+    if(common_error)return common_error;
     void *ai_data=NULL;size_t ai_bytes=0;
     common_error=XbBattleCommon_GetAiData(native_common,&ai_data,&ai_bytes);
     if(common_error)return common_error;
@@ -290,6 +343,12 @@ static int prepare_fighter_models(void)
         if(!e)e=XbBattleFighter_PrepareModelAnimation(model,mn,anims,an,&native_fighters[side],&stats);
         free(model);free(anims);
         if(e){xsdk_log_write("fighter model-animation preparation: side=%u refused error=%d",side,e);return e;}
+        void *effects=NULL;size_t en=0;XbCharacterEffectsInfo effect_info={0};
+        e=read_battle_resource(0x599+side*10,&effects,&en);
+        if(!e)e=XbBattleFighter_AttachEffectManagers(native_fighters[side],effects,en,&effect_info);
+        free(effects);
+        xsdk_log_write("native character effects: side=%u error=%d sets=%u textures=%u sprites=%u cameras=%u technique_packs_prepared=%u unprepared=%u",side,e,effect_info.emitter_sets,effect_info.textures,effect_info.sprite_packs,effect_info.cameras,effect_info.prepared_technique_packs,effect_info.unprepared_technique_packs);
+        if(e)return e;
         int id=-1;e=XbBattleFighter_CreateModelObject(native_fighters[side],side,&id);
         xsdk_log_write("fighter real BtlObj_CreateChara/Setup: side=%u id=%d error=%d; original BtlObj_Init(1), native CPU resources/pools/materials; BtlChar/BtlAi NOT initialized",side,id,e);
         if(!e)e=XbBattleFighter_PlayModel(native_fighters[side],7,2);
@@ -333,6 +392,40 @@ static int prepare_fighter_models(void)
     if(!boot)boot=XbBattleRuntime_GetInfo(native_runtime,&runtime_info);
     xsdk_log_write("original CPU manager boot: error=%d; BtlObj_Init(1), Save_Init, match setup, BtlChar_AllocAll(2) and BtlAiMgr_Init; Battle_Update NOT called",boot);
     if(!boot)for(unsigned side=0;side<2;side++)xsdk_log_write("original initialized fighter: side=%u HP=%d Ki=%d AI_type=%d AI_level=%d; GPU battle remains unavailable",side,runtime_info.health[side],runtime_info.ki[side],runtime_info.ai_type[side],runtime_info.ai_level[side]);
+    if(!boot){
+        void *banks[4]={0};size_t bytes[4]={0};unsigned ids[4]={0x14a,0x14e,0xbda,0xbdb};int audio=0;
+        for(unsigned i=0;i<4 && !audio;i++)audio=read_battle_resource(ids[i],&banks[i],&bytes[i]);
+        if(!audio)audio=XbBattleRuntime_BeginAudio(native_runtime,(const void *const *)banks,bytes);
+        for(unsigned i=0;i<4;i++)free(banks[i]);
+        if(!audio){extern int Snd_QueuePlay(int,unsigned,unsigned,unsigned,int,int);native_audio=1;audio=Snd_QueuePlay(16,0,96,64,0,0)<0?-894:0;}
+        xsdk_log_write("original audio diagnostic: error=%d; four banks and side-0 voice request; confirm audible output on console",audio);
+        if(!audio){int stage=XbBattleRuntime_BeginStage(native_runtime,native_stage);
+            native_stage_running=!stage;if(stage)audio=stage;
+            xsdk_log_write("original stage init/reset: error=%d; native geometry and original File_Init/ADX players; no Battle_Init or GPU draw",stage);
+            if(!stage){int scene=XbBattleRuntime_BeginScene(native_runtime);native_scene_running=!scene;
+                xsdk_log_write("original camera/effect scene Init: error=%d; GPU scene drawing and Battle_Update still blocked",scene);
+                if(!scene){unsigned endpoints=0;int camera=XbBattleStage_CheckCameras(native_stage,&endpoints);
+                    xsdk_log_write("original stage intro cameras: error=%d endpoints=%u; CPU evaluation only",camera,endpoints);
+                    if(camera)scene=camera;
+                    if(!scene){unsigned textures=0,groups=0;int effects=XbBattleStage_CheckEffects(native_stage,&textures,&groups);
+                        xsdk_log_write("original internal stage effects: error=%d textures=%u mesh_groups=%u; CPU binding only",effects,textures,groups);
+                        if(effects)scene=effects;
+                        if(!scene){unsigned meshes=0,triangles=0;int surface=XbBattleStage_CheckSurfaces(native_stage,&meshes,&triangles);
+                            xsdk_log_write("original stage surfaces: error=%d meshes=%u triangles=%u; original CPU scene, no GPU draw",surface,meshes,triangles);
+                            if(surface)scene=surface;
+                            if(!scene){unsigned cameras=0,points=0;int all=XbBattleStage_CheckAllCameras(&cameras,&points);
+                                xsdk_log_write("original camera evaluator across 39 stages: error=%d cameras=%u endpoints=%u; CPU only",all,cameras,points);
+                                if(all)scene=all;}}}}
+
+
+
+                if(!scene){int chars=XbBattleRuntime_BeginSceneCharacters(native_runtime);
+                    xsdk_log_write("original effect character tasks: error=%d; ten prepared technique packs bound, no shot requests or GPU fight draw",chars);
+                    if(chars)audio=chars;}
+                else audio=scene;}
+        }
+        boot=audio;
+    }
     return boot;
 }
 #endif
@@ -354,6 +447,10 @@ static int test_stage_collision(void)
     if(!error){
         error=XbBattleStage_PrepareCollision(pack,(size_t)span.size,&native_stage);
         if(!error)error=XbBattleStage_PrepareStarts(native_stage,pack,(size_t)span.size);
+        if(!error)error=XbBattleStage_PrepareParameters(native_stage,pack,(size_t)span.size);
+        XbStageGeometryInfo geometry={0};
+        if(!error)error=XbBattleStage_PrepareGeometry(native_stage,pack,(size_t)span.size,&geometry);
+        xsdk_log_write("native stage geometry: error=%d groups=%u materials=%u meshes=%u parts=%u nodes=%u cells=%u textures=%u; GPU not submitted",error,geometry.groups,geometry.materials,geometry.meshes,geometry.parts,geometry.nodes,geometry.cells,geometry.textures);
         if(!error)error=XbBattleStage_InstallCollision(native_stage);
         for(unsigned side=0;!error && side<2;side++){
             float pos[4],rot[4];int zone=-1;
@@ -371,6 +468,59 @@ static int test_stage_collision(void)
 #endif
     free(pack);return error;
 }
+static int original_loading_opened;
+static int original_inject_completed_frame_error;
+static unsigned original_loading_frames;
+static int original_loading_present(void){
+    extern void Gfx_Init(void),Load_DrawScreen(void);
+    extern int dr_gs_backend_display(uint32_t,int,int);
+    if(!original_loading_opened){
+        int e=dr_capture_original_open(display_width,display_height);if(e)return e;
+        original_loading_opened=1;Gfx_Init();
+        {extern int gGsMainFbp;gGsMainFbp=0x70;}
+        e=dr_gs_backend_display(0x70,0,0);if(e)return e;
+    }
+    uint32_t address;NTSTATUS status=xsdk_present_begin(&address,5000);
+    if(!NT_SUCCESS(status))return -950;
+    xsdk_gpu_set_target(display_width,display_height);
+    Load_DrawScreen();int e=dr_capture_original_submit();
+    xsdk_gpu_resolve(address,display_width,display_height,0xff000000);
+    xsdk_present_end();
+    status=xsdk_gpu_wait(xsdk_gpu_fence(),5000);
+    if(!e && !NT_SUCCESS(status))e=-950;
+    if(!original_loading_frames || e)xsdk_log_write("%s: D46 original Load_DrawScreen -> DMA/VIF/GIF -> gs_draw -> Xenos GPU submit result=%d; not battle",e?"FAIL":"PASS",e);
+    original_loading_frames++;return e;
+}
+static uint32_t original_frame_address;
+static int original_full_present(int phase){
+    extern void Gfx_Init(void);
+    if(phase==0){
+        if(!original_loading_opened){int e=dr_capture_original_open(display_width,display_height);if(e)return e;original_loading_opened=1;Gfx_Init();}
+        return 0;
+    }
+    if(phase==1){
+        NTSTATUS s=xsdk_present_begin(&original_frame_address,5000);
+        if(!NT_SUCCESS(s))return -950;
+        xsdk_gpu_set_target(display_width,display_height);return 0;
+    }
+    int e=dr_capture_original_submit();
+    xsdk_gpu_resolve(original_frame_address,display_width,display_height,0xff000000);xsdk_present_end();
+    if(!NT_SUCCESS(xsdk_gpu_wait(xsdk_gpu_fence(),5000)))e=-950;
+    if(!e && original_inject_completed_frame_error){
+        extern int BtlObj_GetCount(void);
+        /* Fixed no-script profile creates its two objects only AFTER the
+         * blocking loading screen. Inject after the completed GPU wait. */
+        if(BtlObj_GetCount()==2){original_inject_completed_frame_error=0;e=-956;xsdk_log_write("D46 injected completed-frame error=-956 after Init/draw and successful GPU wait; recovery diagnostic only");}
+    }
+    original_loading_frames++;return e;
+}
+#ifdef DR_XENIA_DISPLAY
+static int original_cpu_present(int phase){
+    if(phase==0)return original_full_present(0);
+    if(phase==1)return 0;
+    return dr_capture_original_decode();
+}
+#endif
 static void test_typed_data(void)
 {
     if(ui.selection<0 || ui.selection>=ui.count) {
@@ -381,11 +531,21 @@ static void test_typed_data(void)
     if(native_stage){snprintf(ui.modal,sizeof(ui.modal),"Falha ao liberar o cenário anterior. Consulte default.log.");return;}
 #endif
     int error=XbDisc_Mount(ui.paths[ui.selection]);
+#ifdef DR_ENGINE_LINKED
+    if(transport_only){
+        if(!error)error=XbTransportProbe_Run();
+        if(!error && transport_model_requested)transport_model_pending=1;
+        if(!error && !transport_model_requested && !loading_preview_texture){int preview=loading_preview_open();xsdk_log_write("D46 loading asset preview open=%d",preview);}
+        snprintf(ui.modal,sizeof(ui.modal),"Transporte estrito D46: erro %d.\nConsulte default.log.\nEste modo não carrega a sessão da luta.",error);
+        return;
+    }
+#endif
     if(!error){
         unsigned flags=XBTD_ALLOW_PARTIAL;
 #ifdef DR_ENGINE_LINKED
         /* Reapplying DATA would erase live heap pointers while Heap_Init's
          * private ready flag remains set. Subsequent runs validate only. */
+        if(fresh_boot_requested)flags=0;
         if(native_typed_values_loaded)flags|=XBTD_VALIDATE_ONLY;
 #endif
         error=XbTypedData_LoadFromDisc(&gXbTypedMainCatalog,flags);
@@ -396,6 +556,49 @@ static void test_typed_data(void)
     xsdk_log_write("%s: typed native-data load error=%d regions=%u ops=%u complete=%u data_stripped=%u; combat BLOCKED",
         error?"FAIL":"PASS",error,(unsigned)gXbTypedMainCatalog.region_count,
         (unsigned)gXbTypedMainCatalog.op_count,gXbTypedMainCatalog.complete,(unsigned)gPortDataStripped);
+#ifdef DR_ENGINE_LINKED
+    if(!error && !fresh_boot_requested){
+        int transport=XbTransportProbe_Run();
+        xsdk_log_write("%s: D46 full-file original transport probe result=%d",transport?"FAIL":"PASS",transport);
+        if(transport)error=transport;
+    }
+#endif
+ #ifdef DR_ENGINE_LINKED
+    if(fresh_boot_requested){
+        if(!error && fresh_boot_requested==4)error=XbFreshBoot_SetPresentation(original_loading_present);
+        if(!error && fresh_boot_requested==3)error=XbFreshBoot_RecoveryProbe();
+        for(unsigned cycle=0;!error && cycle<(fresh_boot_requested==8?2u:fresh_boot_requested>=6?1u:fresh_boot_requested==5?3u:2u);cycle++){
+            xsdk_log_write("D46 fresh session cycle=%u mode=%d",cycle+1,fresh_boot_requested);
+            #ifdef DR_XENIA_DISPLAY
+            if((fresh_boot_requested==18 || fresh_boot_requested==20)){xsdk_log_write("D46 CPU-only action diagnostic: original producers/decode; NO GPU replay or presentation");error=XbFreshBoot_SetOriginalLoading((int)cycle,original_cpu_present);}else
+#endif
+            if(fresh_boot_requested>=5)error=XbFreshBoot_SetOriginalLoading((int)cycle,original_full_present);
+            if(fresh_boot_requested==8 && cycle==0)original_inject_completed_frame_error=1;
+            if(!error)error=fresh_boot_requested>=19?XbFreshBoot_ChargeCheck():fresh_boot_requested>=17?XbFreshBoot_ActionFastCheck():fresh_boot_requested==16?XbFreshBoot_ActionCheck():fresh_boot_requested==15?XbFreshBoot_BattleCheck():fresh_boot_requested==14?XbFreshBoot_BattleProbe():fresh_boot_requested==13?XbFreshBoot_FightProbe():fresh_boot_requested==12?XbFreshBoot_StageProbe():fresh_boot_requested==11?XbFreshBoot_FighterProbe():fresh_boot_requested==10?XbFreshBoot_IntroProbe():fresh_boot_requested==9?XbFreshBoot_FramesProbe():(fresh_boot_requested==7 || (fresh_boot_requested==8 && cycle==0))?XbFreshBoot_FrameProbe():(fresh_boot_requested==6 || fresh_boot_requested==8)?XbFreshBoot_InitProbe():fresh_boot_requested>=2?XbFreshBoot_LoadProbe():XbFreshBoot_Probe();
+            if(!error && fresh_boot_requested!=18 && fresh_boot_requested!=20 && (fresh_boot_requested==7 || fresh_boot_requested>=9 || (fresh_boot_requested==8 && cycle==0))){
+                xsdk_log_write("D46 frame submitted; holding presented image 3 seconds for external capture; not a continuous battle loop");
+                xsdk_thread_sleep(3000);
+            }
+            if(fresh_boot_requested==8 && cycle==0 && error==-955){
+                int clean=XbFreshBoot_SetOriginalLoading(-1,NULL);
+                if(!clean && original_loading_opened){clean=dr_capture_demo_close();if(!clean)original_loading_opened=0;}
+                xsdk_log_write("%s: D46 rejected frame recovery gate/backend=%d; next cycle must Init without executable restart",clean?"FAIL":"PASS",clean);
+                if(!clean)error=0;
+            }
+        }
+        if(fresh_boot_requested>=4){
+            int retained=0;
+            if(fresh_boot_requested>=5){retained=XbFreshBoot_SetOriginalLoading(-1,NULL);if(!error)error=retained;}
+            int detach=XbFreshBoot_SetPresentation(NULL);if(!error)error=detach;
+            if(!retained && !detach && original_loading_opened){int close=dr_capture_demo_close();if(!close)original_loading_opened=0;if(!error)error=close;}
+            if(retained || detach)xsdk_log_write("FAIL: original session still owns resources; backend retained; restart executable");
+            xsdk_log_write("D46 original loading presentation frames=%u result=%d",original_loading_frames,error);
+        }
+        if(error)snprintf(ui.modal,sizeof(ui.modal),"Batalha experimental interrompida: %d. Consulte default.log.",error);
+        else snprintf(ui.modal,sizeof(ui.modal),"Sessão experimental encerrada. Consulte default.log. O jogo completo ainda está em desenvolvimento.");
+        return;
+    }
+ #endif
     int collision_error=error?error:test_stage_collision();
 #ifdef DR_ENGINE_LINKED
     if(!error && !collision_error)collision_error=prepare_fighter_models();
@@ -450,10 +653,45 @@ static int startup_test_load(void)
     FILE *f=fopen("game:/startup_test.txt","r");
     if(!f)return DEMO_NONE;
     char kind[32],extra[2];int n=fscanf(f,"%31s %1s",kind,extra);fclose(f);
+    if(n==1 && !strcmp(kind,"menu"))return DEMO_SCAN;
     if(n==1 && !strcmp(kind,"graphics"))return DEMO_GRAPHICS_TEST;
+    if(n==1 && !strcmp(kind,"model-cache-test")){body_cache_autotest=1;return DEMO_BODY_TEST;}
     if(n==1 && !strcmp(kind,"model"))return DEMO_BODY_TEST;
 #ifdef DR_TYPED_CATALOG
     if(n==1 && !strcmp(kind,"typed-data"))return DEMO_TYPED_TEST;
+#ifdef DR_ENGINE_LINKED
+#ifdef DR_XENIA_DISPLAY
+    if(n==1 && !strcmp(kind,"original-charge-cpu")){fresh_boot_requested=20;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-charge-check")){fresh_boot_requested=19;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-actions-cpu")){fresh_boot_requested=18;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-actions-fast")){fresh_boot_requested=17;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-actions-check")){fresh_boot_requested=16;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-battle-check")){fresh_boot_requested=15;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-battle")){fresh_boot_requested=14;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-fight")){fresh_boot_requested=13;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-stage")){fresh_boot_requested=12;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-fighter")){fresh_boot_requested=11;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-intro")){fresh_boot_requested=10;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-frame")){fresh_boot_requested=7;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-frames")){fresh_boot_requested=9;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-recovery")){fresh_boot_requested=8;return DEMO_TYPED_TEST;}
+#else
+    if(n==1 && !strcmp(kind,"original-battle")){fresh_boot_requested=14;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-fight")){fresh_boot_requested=13;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-stage")){fresh_boot_requested=12;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-fighter")){fresh_boot_requested=11;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-frames")){fresh_boot_requested=9;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-frame")){xsdk_log_write("BLOCKED: original-frame is an emulator-only investigation; native combat DMA path incomplete, NOT_READY=2");return DEMO_NONE;}
+#endif
+    if(n==1 && !strcmp(kind,"original-init")){fresh_boot_requested=6;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-load")){fresh_boot_requested=5;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"fresh-gpu")){fresh_boot_requested=4;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"fresh-recovery")){fresh_boot_requested=3;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"fresh-load")){fresh_boot_requested=2;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"fresh-boot")){fresh_boot_requested=1;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"transport-model")){transport_only=1;transport_model_requested=1;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"transport")){transport_only=1;return DEMO_TYPED_TEST;}
+#endif
 #endif
     xsdk_log_write("FAIL: unsupported startup_test.txt diagnostic token");
     return DEMO_NONE;
@@ -466,10 +704,10 @@ int main(void)
 #ifdef DR_ENGINE_LINKED
     extern int Battle_Main(void);
     extern volatile uint32_t gPortDataStripped;
-    xsdk_log_write("DragonRage360 0.44-D10: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
-    xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: character/AI managers, common resources and battle boot are incomplete",(unsigned)gPortDataStripped);
+    xsdk_log_write("DragonRage360 D46: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
+    xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: full Battle_Load/Battle_Init and scene presentation remain incomplete",(unsigned)gPortDataStripped);
 #else
-    xsdk_log_write("DragonRage360 0.44-D10: component diagnostic; Battle_Main not linked in this build.");
+    xsdk_log_write("DragonRage360 D46: component diagnostic; Battle_Main not linked in this build.");
 #endif
     xsdk_log_write("%s: BPE decode + animation endian synthetic self-test",dr_resource_selftest()?"PASS":"FAIL");
     xsdk_log_write("%s: bounded BIN + motion + skeleton synthetic self-test",dr_container_selftest()?"PASS":"FAIL");
@@ -478,16 +716,27 @@ int main(void)
     NTSTATUS status=xsdk_gpu_open();
     if(!NT_SUCCESS(status)) {xsdk_log_write("FAIL: gpu_open 0x%08X",(unsigned)status);return 1;}
     xsdk_gpu_set_depth_clear(0,0); /* Reference GS depth is reversed (greater is nearer). */
+#ifdef DR_XENIA_DISPLAY
+    if(dr_xenos_set_wait_timeout(30000)){xsdk_log_write("FAIL: Xenia GPU wait policy");return 1;}
+    xsdk_log_write("GPU wait policy: Xenia software rasterizer 30000 ms; console default remains 1000 ms");
+    xsdk_log_write("display policy: explicit Xenia test; retaining kernel viewport and gamma LUT");
+    status=xsdk_present_open(XSDK_DISPLAY_KERNEL_KEEP_LUT,2,1,&display_width,&display_height);
+#else
     status=xsdk_present_open(XSDK_DISPLAY_720P,2,1,&display_width,&display_height);
+#endif
     if(!NT_SUCCESS(status)) {xsdk_log_write("FAIL: present_open 0x%08X",(unsigned)status);return 1;}
     status=xsdk_text_open();
     if(!NT_SUCCESS(status)) {xsdk_log_write("FAIL: text_open 0x%08X",(unsigned)status);xsdk_present_close();return 1;}
     xsdk_log_write("PASS: display and text opened %ux%u",(unsigned)display_width,(unsigned)display_height);
-    bool graphics_mode=false,body_mode=false,capture_mode=false;unsigned graphics_frames=0;int body_face=-1;
+    bool graphics_mode=false,body_mode=false,capture_mode=false;unsigned graphics_frames=0;int body_face=-1,body_request=-2;unsigned body_loading_shown=0,body_auto_step=0;uint64_t body_auto_next=0;
     int startup_test=startup_test_load();
     xsdk_log_write("startup: requested action=%d; automatic probe after interface pixel check",startup_test);
     uint16_t last=0,repeat_direction=0;uint64_t next_repeat=0;bool running=true;
     for(unsigned tick=0;running;tick++) {
+        if(body_request>=-1 && body_loading_shown>=2){
+            body_face=body_request;body_request=-2;body_loading_shown=0;
+            body_mode=open_body_demo(body_face)==0;body_auto_next=now_ms()+300;
+        }
         INPUT_STATE input={0}; unsigned port;
         ui.connected=false;
         for(port=0;port<4;port++) if(XamInputGetState(port,0,&input)==ERROR_SUCCESS) {ui.connected=true;break;}
@@ -509,8 +758,18 @@ int main(void)
         if(pressed&DEMO_A) confirm_seen=true;
         if(pressed&DEMO_B) back_seen=true;
         if(pressed&15) navigation_seen=true;
+        if(body_mode&&body_cache_autotest&&body_auto_step<9&&now>=body_auto_next){
+            pressed|=DEMO_X;body_auto_step++;body_auto_next=now+300;
+            xsdk_log_write("D46 automatic cache diagnostic: selection %u/9",body_auto_step);
+        }
         int action=DEMO_NONE;
-        if(capture_mode) {
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
+        if(loading_preview_texture){
+            if(pressed&(DEMO_B|DEMO_BACK)){int close=dr_xenos_close();if(!close)loading_preview_texture=0;}
+        } else
+#endif
+        if(body_request>=-1){if(pressed&(DEMO_B|DEMO_BACK)){body_request=-2;body_loading_shown=0;}}
+        else if(capture_mode) {
             if(pressed&(DEMO_B|DEMO_BACK)) {
                 int error=dr_capture_demo_close();if(!error)capture_mode=false;
                 xsdk_log_write("capture integration close: %d",error);
@@ -520,9 +779,10 @@ int main(void)
                 int error=dr_body_demo_close();if(!error)body_mode=false;
                 xsdk_log_write("body diagnostic close: %d",error);
             } else if(pressed&DEMO_X) {
-                int next=dr_body_demo_next_face(body_face),error=dr_body_demo_close();
-                if(!error) {body_face=next;body_mode=open_body_demo(body_face)==0;}
-                else xsdk_log_write("body expression close failed: %d",error);
+                int next=dr_body_demo_next_face(body_face);DrBodyPipelineStats stats;
+                int error=dr_body_demo_select_face(next,&stats);DrBodyDemoProfile p;dr_body_demo_profile(&p);
+                xsdk_log_write("D46 expression: face=%d result=%d cache_hit=%u time_ms=%.3f model_reads=%u body_builds=%u face_builds=%u uploads=%u facial_vertices=%u; no body rebuild",next,error,p.face_cache_hit,p.expression_us/1000.0,p.model_reads,p.body_builds,p.face_builds,p.texture_uploads,p.face_vertices);
+                if(!error){body_face=next;body_draw_report_pending=1;body_probe_frames=0;}
             }
         } else if(graphics_mode) {
             if(pressed&DEMO_Y) {
@@ -542,7 +802,14 @@ int main(void)
             if(action==DEMO_BODY_TEST || action==DEMO_TYPED_TEST)scan_isos();
         }
 #ifdef DR_TYPED_CATALOG
-        if(action==DEMO_TYPED_TEST)test_typed_data();
+        if(action==DEMO_TYPED_TEST){test_typed_data();
+#ifdef DR_ENGINE_LINKED
+            xsdk_log_write("typed-data diagnostic returned to UI loop; scene=%d stage=%d",native_scene_running,native_stage_running);
+#endif
+        }
+#endif
+#ifdef DR_ENGINE_LINKED
+        if(transport_model_pending){transport_model_pending=0;body_request=-1;body_loading_shown=0;}
 #endif
         if(action==DEMO_GRAPHICS_TEST) {
             int error=dr_graphics_demo_open();
@@ -550,10 +817,21 @@ int main(void)
             graphics_mode=error==0;graphics_frames=0;
             if(error) snprintf(ui.modal,sizeof(ui.modal),"Falha ao preparar o diagnóstico gráfico: %d.\nConsulte default.log.",error);
         }
-        if(action==DEMO_BODY_TEST) {body_face=-1;body_mode=open_body_demo(body_face)==0;}
+        if(action==DEMO_BODY_TEST) {body_request=-1;body_loading_shown=0;}
         if(action==DEMO_EXIT) running=false;
         if(action==DEMO_SCAN) scan_isos();
         if(action==DEMO_VERIFY) verify_iso();
+        if(action==DEMO_PLAY){
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
+            if(ui.selection>=0 && ui.selection<ui.count){
+                ui.selected_iso=ui.selection;fresh_boot_requested=14;
+                test_typed_data();fresh_boot_requested=0;last=0;repeat_direction=0;
+                xsdk_log_write("D46 library play returned to menu");
+            }
+#else
+            snprintf(ui.modal,sizeof(ui.modal),"Esta compilação não inclui o caminho de batalha.");
+#endif
+        }
         if(action==DEMO_RESOURCE_TEST) test_iso_resource();
         if(action==DEMO_SAVE) settings_save();
         if(action==DEMO_NET_CHECK) demo_net_check(ui.modal,sizeof(ui.modal));
@@ -588,10 +866,29 @@ int main(void)
             xsdk_log_write("%s: separate unlocked save export",ok?"PASS":"FAIL");
         }
         if(!running) break;
+#if defined(DR_TYPED_CATALOG) && defined(DR_ENGINE_LINKED)
+        if(native_stage_running){if(native_scene_running && !native_scene_frames)xsdk_log_write("native frame: entering original BtlStage_Update");
+            int e=XbBattleRuntime_ServiceStage(native_runtime);if(e){xsdk_log_write("stage service failed: %d",e);native_stage_running=0;}
+            else if(native_scene_running && !native_scene_frames)xsdk_log_write("native frame: original BtlStage_Update returned");}
+        if(native_scene_running){if(!native_scene_frames)xsdk_log_write("native frame: entering original scene Update/PostUpdate");
+            int e=XbBattleRuntime_ServiceScene(native_runtime);if(e){xsdk_log_write("scene service failed: %d",e);native_scene_running=0;}
+            else {native_scene_frames++;if(native_scene_frames==1 || native_scene_frames==3 || native_scene_frames==60)
+                xsdk_log_write("original effect scene CPU Update/PostUpdate: frame=%u; no scene GPU draw",native_scene_frames);}}
+        if(native_audio){int e=XbBattleRuntime_ServiceAudio(native_runtime);if(e){xsdk_log_write("audio service failed: %d",e);native_audio=0;}}
+#endif
         uint32_t address;
         status=xsdk_present_begin(&address,5000);
         if(!NT_SUCCESS(status)) {xsdk_log_write("FAIL: present_begin 0x%08X",(unsigned)status);break;}
         xsdk_gpu_set_target(display_width,display_height);
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
+        if(loading_preview_texture){
+            int error=loading_preview_draw(display_width,display_height);
+            if(!loading_preview_frames || error)xsdk_log_write("D46 real loading asset GPU draw: result=%d; no battle frame",error);
+            loading_preview_frames++;
+            xsdk_text_draw(50,44,2,0xffe0e0ff,"RECURSO REAL DA TELA DE CARGA - D46");
+            xsdk_text_draw(52,650,1,0xffe0e0ff,"Prévia da imagem da ISO - sem luta - B voltar");
+        } else
+#endif
         if(capture_mode) {
             int error=dr_capture_demo_draw();
             if(error) {xsdk_log_write("FAIL: actual capture draw rc=%d",error);if(!dr_capture_demo_close())capture_mode=false;}
@@ -600,11 +897,13 @@ int main(void)
             xsdk_text_draw(52,650,1,0xffe0e0ff,"Dados sintéticos · sem combate · B voltar");
         } else if(body_mode) {
             int error=dr_body_demo_draw(display_width,display_height);
+            if(body_draw_report_pending||error)xsdk_log_write("%s: D46 real ISO model GPU draw: result=%d; fixed reference pose, direct Xenos viewer, not original gs_draw/Battle",error?"FAIL":"PASS",error);
+            body_draw_report_pending=0;
             if(error) {
                 xsdk_log_write("FAIL: real body diagnostic draw rc=%d",error);
                 if(!dr_body_demo_close())body_mode=false;
             }
-            xsdk_text_draw(50,44,2,0xffe0e0ff,"MODELO DA ISO · POSE DE REFERÊNCIA · 0.33");
+            xsdk_text_draw(50,44,2,0xffe0e0ff,"MODELO DA ISO · POSE DE REFERÊNCIA · D46");
             xsdk_text_draw(52,100,1,0xffe0e0ff,"Corpo e materiais reais / programa 0 da VU1");
             xsdk_text_draw(950,175,1,0xffe0e0ff,"Texturas do pacote");
             xsdk_text_draw(52,650,1,0xffe0e0ff,"Pose fixa / sem combate · X expressão · B voltar");
@@ -614,12 +913,29 @@ int main(void)
                 xsdk_log_write("FAIL: native graphics diagnostic draw, error=%d",error);
                 dr_graphics_demo_close();graphics_mode=false;
             }
-            xsdk_text_draw(50,44,2,0xff101020,"DIAGNÓSTICO GS · DATE/FBA · 0.33");
+            xsdk_text_draw(50,44,2,0xff101020,"DIAGNÓSTICO GS · DATE/FBA · D46");
             xsdk_text_draw(52,100,1,0xff101020,"PSMT8 / paleta / MODULATE / alpha / aditivo");
             xsdk_text_draw(52,650,1,0xff101020,"Dados sintéticos · Y captura original · B voltar");
+        } else if(body_request>=-1){
+            xsdk_text_draw(120,300,2,0xffe0e0ff,"Carregando modelo da ISO...");
+            xsdk_text_draw(120,350,1,0xffe0e0ff,"Preparando modelo e texturas. B cancela antes da preparação.");
+            body_loading_shown++;
         } else demo_draw(&ui,&paint,tick);
         xsdk_gpu_resolve(address,display_width,display_height,0xFF0D0F1C);
         if(tick==1 && !graphics_mode && !body_mode && !capture_mode) check_rendered_frame(address);
+        if(body_mode && ++body_probe_frames==2 && display_width==1280 && display_height==720){
+            NTSTATUS ready=xsdk_gpu_wait(xsdk_gpu_fence(),1000);XsdkTexture frame;
+            if(NT_SUCCESS(ready))ready=xsdk_texture_init(&frame,XSDK_FORMAT_A8R8G8B8,display_width,display_height,1,true);
+            if(NT_SUCCESS(ready)){
+                xsdk_texture_attach(&frame,xsdk_present_pixels(address));static uint32_t pixels[1280];
+                for(unsigned i=0;i<2;i++){
+                    DrBodyDemoProbe p;if(dr_body_demo_probe(i,&p))continue;
+                    xsdk_texture_download_rows(&frame,0,p.y,1,pixels,sizeof(pixels));uint32_t got=__builtin_bswap32(pixels[p.x]);
+                    int match=1;for(unsigned k=0;k<3;k++)if(abs((int)((got>>(k*8))&255)-(int)((p.argb>>(k*8))&255))>1)match=0;
+                    xsdk_log_write("%s: D46 texture color probe %u xy=%u,%u source_RGBA=%08X expected_blended=%08X GPU=%08X tolerance=1; RGB before display LUT, not a color calibration",match?"PASS":"FAIL",i,p.x,p.y,(unsigned)p.rgba,(unsigned)p.argb,(unsigned)got);
+                }
+            }else xsdk_log_write("FAIL: D46 texture color readback status=%08X",(unsigned)ready);
+        }
         if(graphics_mode && ++graphics_frames==2) {
             NTSTATUS ready=xsdk_gpu_wait(xsdk_gpu_fence(),1000);
             if(NT_SUCCESS(ready)) {
@@ -643,6 +959,7 @@ int main(void)
     if(graphics_mode) dr_graphics_demo_close();
     if(body_mode) dr_body_demo_close();
 #if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
+    if(loading_preview_texture)dr_xenos_close();
     release_native_stage();
 #endif
     dr_lobby_stop(&lobby);

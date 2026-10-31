@@ -31,8 +31,20 @@ static void mapped(int big){
     assert(dr_dma_chain_address(ext,&address)==DR_DMA_INVALID);
     assert(!dr_dma_producer_close());
 }
+static int snapshot_submit(void *opaque,const DrGsSpan *spans,size_t n,uint32_t start){
+ (void)opaque;(void)start;assert(n==2 && spans[1].address==0x43000000u && spans[1].size==64);
+ const unsigned char*p=spans[1].bytes;assert(p[0]==3&&p[1]==0&&p[2]==0&&p[3]==0x60);
+ assert(p[16]==0x44&&p[17]==0x33&&p[18]==0x22&&p[19]==0x11);return 0;
+}
+static void snapshot_words(int big){
+ _Alignas(16) uint32_t ext[16]={0};uint32_t address;ext[0]=native(0x60000003,big);ext[4]=native(0x11223344,big);
+ assert(!dr_dma_producer_open_mapped(snapshot_submit,NULL));dr_dma_native_swap(big);
+ assert(!dr_dma_snapshot_words(ext,sizeof(ext),&address)&&address==0x43000000u);
+ memset(ext,0,sizeof(ext));Dma_Flush();assert(!dr_dma_producer_error());assert(!dr_dma_producer_close());
+ assert(!dr_dma_producer_open_mapped(snapshot_submit,NULL));assert(dr_dma_snapshot_words(ext,15,&address)==DR_DMA_INVALID);assert(!dr_dma_producer_close());
+}
 int main(void){
-    mapped(0);mapped(1);assert(submits==2);
+    mapped(0);mapped(1);assert(submits==2);snapshot_words(0);snapshot_words(1);
     _Alignas(16) uint32_t ext[8]={0};uint32_t a;
     assert(!dr_dma_producer_open_mapped(submit,&stream));
     assert(!dr_dma_map_chain(ext,sizeof(ext),DR_DMA_RAW,&a));
