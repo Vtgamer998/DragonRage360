@@ -1,0 +1,14 @@
+patching file LEIA-ME.txt
+patching file PENDENCIAS.md
+patching file README.md
+patching file RELATORIO-0.38-D4.md
+patching file engine/platform/platform/xb_battle_fighter.c
+patching file engine/platform/platform/xb_battle_fighter.h
+patching file engine/tests/test_native_fighter.c
+patching file engine/tools/build_engine_diagnostic.py
+patching file engine/tools/fixed_profile_source.py
+patching file engine/tools/link_battle.py
+patching file engine/tools/test_native_fighter.py
+patching file src/demo_ui.c
+patching file src/main.c
+patching file tests/check_xex.py

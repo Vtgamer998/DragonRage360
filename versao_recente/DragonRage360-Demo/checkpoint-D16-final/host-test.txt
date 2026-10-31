@@ -1,0 +1,232 @@
+typed data: 0
+runtime: 0
+PASS seven corrupt common3 set/parameter/sprite/palette/mesh fixtures rejected without commit
+common3 preparation: 0 entries=637 textures=116 images=204 unprepared=2
+PASS original common3 consumers: 24 sets, 50 sprite packs, 197 layers, 309 particle keys, 2000 sprite steps, 2 meshes; heap restored
+PASS four original character effect sets: Load/BeginFrame/Free; heap restored
+PASS original character camera fixup/evaluation: 24 exact channel endpoints; heap restored
+PASS ten malformed character effect fixtures rejected without publication
+PASS eight malformed real-stage animation fixtures rejected without publication
+real stage 00 conversion: 0; timers=0 meshes=2243
+real stage 01 conversion: 0; timers=0 meshes=1968
+real stage 02 conversion: 0; timers=0 meshes=785
+real stage 03 conversion: 0; timers=0 meshes=712
+real stage 04 conversion: 0; timers=9 meshes=675
+real stage 05 conversion: 0; timers=0 meshes=1444
+real stage 06 conversion: 0; timers=0 meshes=2076
+real stage 07 conversion: 0; timers=0 meshes=825
+real stage 08 conversion: 0; timers=1 meshes=887
+real stage 09 conversion: 0; timers=0 meshes=2227
+real stage 10 conversion: 0; timers=0 meshes=1200
+real stage 11 conversion: 0; timers=0 meshes=658
+real stage 12 conversion: 0; timers=0 meshes=1259
+real stage 13 conversion: 0; timers=0 meshes=1492
+real stage 14 conversion: 0; timers=0 meshes=1442
+real stage 15 conversion: 0; timers=0 meshes=814
+real stage 16 conversion: 0; timers=0 meshes=1563
+real stage 17 conversion: 0; timers=0 meshes=2390
+real stage 18 conversion: 0; timers=0 meshes=1173
+real stage 19 conversion: 0; timers=0 meshes=1222
+real stage 20 conversion: 0; timers=0 meshes=1342
+real stage 21 conversion: 0; timers=0 meshes=1159
+real stage 22 conversion: 0; timers=0 meshes=1639
+real stage 23 conversion: 0; timers=0 meshes=2249
+real stage 24 conversion: 0; timers=0 meshes=2203
+real stage 25 conversion: 0; timers=0 meshes=1967
+real stage 26 conversion: 0; timers=0 meshes=1968
+real stage 27 conversion: 0; timers=9 meshes=652
+real stage 28 conversion: 0; timers=0 meshes=2072
+real stage 29 conversion: 0; timers=0 meshes=2223
+real stage 30 conversion: 0; timers=0 meshes=2223
+real stage 31 conversion: 0; timers=0 meshes=1228
+real stage 32 conversion: 0; timers=0 meshes=1241
+real stage 33 conversion: 0; timers=0 meshes=1200
+real stage 34 conversion: 0; timers=0 meshes=1490
+real stage 35 conversion: 0; timers=0 meshes=149
+real stage 36 conversion: 0; timers=0 meshes=203
+real stage 37 conversion: 0; timers=0 meshes=283
+real stage 38 conversion: 0; timers=0 meshes=113
+PASS 39 real stage converters: 6 animated packs, 19 timers; no stage draw
+stage parameters: 0
+stage geometry prepare: 0 groups=7 materials=34 meshes=2243 parts=1959 nodes=172 cells=30 textures=25
+PASS seven corrupt stage parameter/path/nav fixtures rejected
+PASS five corrupt geometry/root/mesh/key/cycle fixtures rejected
+PASS 20 MAPD sections against original binder
+character effects side=0 error=0 sets=7 textures=31 sprites=15 cameras=2 techniques=3/2
+character effects side=1 error=0 sets=8 textures=41 sprites=16 cameras=1 techniques=4/1
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+original audio load: 0
+original stage init: 0 ready=1
+entering original full effect scene init
+original camera and effect scene init returned
+original effect characters created
+original effect slots: 7 prepared packs bound, 3 fallback slots
+original effect scene frame 0 returned
+original effect scene frame 1 returned
+original effect scene frame 2 returned
+original effect characters freed
+original full effect scene term returned
+PASS original navigation route: 0 -> 1, 3 points
+PASS original rigid body: y=-100.000000 -> -90.489632
+PASS original stage timers and CPU culling: 983 visible meshes; no GPU draw
+PASS original stage relocation/init/reset/update: zone=44 y=-0.442377
+entering real stage 0 original initialization
+real stage 0 original init result 0
+PASS real stage 0 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 1 original initialization
+real stage 1 original init result 0
+PASS real stage 1 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 2 original initialization
+real stage 2 original init result 0
+PASS real stage 2 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 3 original initialization
+real stage 3 original init result 0
+PASS real stage 3 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 4 original initialization
+real stage 4 original init result 0
+PASS real stage 4 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 5 original initialization
+real stage 5 original init result 0
+PASS real stage 5 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 6 original initialization
+real stage 6 original init result 0
+PASS real stage 6 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 7 original initialization
+real stage 7 original init result 0
+PASS real stage 7 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 8 original initialization
+real stage 8 original init result 0
+PASS real stage 8 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 9 original initialization
+real stage 9 original init result 0
+PASS real stage 9 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 10 original initialization
+real stage 10 original init result 0
+PASS real stage 10 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 11 original initialization
+real stage 11 original init result 0
+PASS real stage 11 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 12 original initialization
+real stage 12 original init result 0
+PASS real stage 12 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 13 original initialization
+real stage 13 original init result 0
+PASS real stage 13 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 14 original initialization
+real stage 14 original init result 0
+PASS real stage 14 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 15 original initialization
+real stage 15 original init result 0
+PASS real stage 15 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 16 original initialization
+real stage 16 original init result 0
+PASS real stage 16 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 17 original initialization
+real stage 17 original init result 0
+PASS real stage 17 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 18 original initialization
+real stage 18 original init result 0
+PASS real stage 18 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 19 original initialization
+real stage 19 original init result 0
+PASS real stage 19 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 20 original initialization
+real stage 20 original init result 0
+PASS real stage 20 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 21 original initialization
+real stage 21 original init result 0
+PASS real stage 21 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 22 original initialization
+real stage 22 original init result 0
+PASS real stage 22 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 23 original initialization
+real stage 23 original init result 0
+PASS real stage 23 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 24 original initialization
+real stage 24 original init result 0
+PASS real stage 24 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 25 original initialization
+real stage 25 original init result 0
+PASS real stage 25 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 26 original initialization
+real stage 26 original init result 0
+PASS real stage 26 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 27 original initialization
+real stage 27 original init result 0
+PASS real stage 27 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 28 original initialization
+real stage 28 original init result 0
+PASS real stage 28 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 29 original initialization
+real stage 29 original init result 0
+PASS real stage 29 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 30 original initialization
+real stage 30 original init result 0
+PASS real stage 30 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 31 original initialization
+real stage 31 original init result 0
+PASS real stage 31 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 32 original initialization
+real stage 32 original init result 0
+PASS real stage 32 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 33 original initialization
+real stage 33 original init result 0
+PASS real stage 33 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 34 original initialization
+real stage 34 original init result 0
+PASS real stage 34 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 35 original initialization
+real stage 35 original init result 0
+PASS real stage 35 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 36 original initialization
+real stage 36 original init result 0
+PASS real stage 36 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 37 original initialization
+real stage 37 original init result 0
+PASS real stage 37 original Init/12 Updates/Cull/Term; no GPU draw
+entering real stage 38 original initialization
+real stage 38 original init result 0
+PASS real stage 38 original Init/12 Updates/Cull/Term; no GPU draw
+PASS real stage cycles: 39 stages, 31 animated object definitions, 57 timer wraps
+PASS original audio: 96 frames, 30384 nonzero samples; SDK device simulated
+PASS original input sample/remap/press/release with physical-pad fixture
+PASS original roster reset / AI init / reset / terminate: pass=0 heap restored
+character effects side=0 error=0 sets=7 textures=31 sprites=15 cameras=2 techniques=3/2
+character effects side=1 error=0 sets=8 textures=41 sprites=16 cameras=1 techniques=4/1
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+original audio load: 0
+original stage init: 0 ready=1
+entering original full effect scene init
+original camera and effect scene init returned
+original effect characters created
+original effect slots: 7 prepared packs bound, 3 fallback slots
+original effect scene frame 0 returned
+original effect scene frame 1 returned
+original effect scene frame 2 returned
+original effect characters freed
+original full effect scene term returned
+PASS original navigation route: 0 -> 1, 3 points
+PASS original rigid body: y=-100.000000 -> -90.489632
+PASS original stage timers and CPU culling: 983 visible meshes; no GPU draw
+PASS original stage relocation/init/reset/update: zone=44 y=-0.442377
+PASS original audio: 192 frames, 79528 nonzero samples; SDK device simulated
+PASS original input sample/remap/press/release with physical-pad fixture
+PASS original roster reset / AI init / reset / terminate: pass=1 heap restored
+PASS no Battle_Update/Battle_Main or hardware execution; audio SDK simulated; marker stays 2
+disc: mounted game:/test.iso (3020816384 bytes)
+typed-data: 2738 ops validated; complete=1; commit=1; combat NOT started
+mem: game arena at 0x4193e000 (29630464 bytes); fixed register windows separate
+common3 preparation refused: id=12 type=2 error=-890
+common3 preparation refused: id=14 type=3 error=-890
+common3 preparation refused: id=29 type=4 error=-890
+common3 preparation refused: id=3 type=1 error=-300
+common3 preparation refused: id=569 type=5 error=-890
+common3 preparation refused: id=12 type=2 error=-890
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started

@@ -1,0 +1,4 @@
+PASS same-ABI link; PASS rejection of mixed xsdk/SysV calling convention; PASS unaligned byte-to-float compile with -mcheck-fpr-alignment
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: sysv.o: built for another calling convention than the Xbox 360 console's (-mcall-xsdk), which modules before it use
+/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: failed to merge target specific data of file sysv.o
+collect2: error: ld returned 1 exit status

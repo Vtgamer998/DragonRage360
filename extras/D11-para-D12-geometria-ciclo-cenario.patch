@@ -1,0 +1,898 @@
+--- a/BUILD.md
++++ b/BUILD.md
+@@ -233,3 +233,19 @@
+ Veja `engine/combat/README.md` e `RELATORIO-Battle_Main.md`.
+ O executável distribuído continua sendo o diagnóstico 0.24.
+ 
++
++## Revisão 0.46-D12
++
++O vínculo nativo usa as mesmas opções fixadas do D11. A nova geometria depende
++dos arquivos xb_stage_geometry.inc e xb_battle_files.inc; preserve os .inc ao
++copiar fontes. O transformador fixed_profile_source.py inclui adaptações
++verificadas por âncoras para relocação/texturas do cenário e alinhamento da
++origem da esfera em rigid.c e das consultas de chão em stg_a_b.c.
++
++O teste test_native_managers.py agora aceita --iso /caminho/ISO-USA-local.iso,
++além dos argumentos anteriores. Sem essa opção procura stage-fixture.iso ao
++lado da pasta de recursos. O leitor precisa das partições AFS e do stream de
++ambiente AFS2/65116.bin. Os recursos usados não acompanham a distribuição.
++Nenhum teste host executa Battle_Update/Battle_Main ou o dispositivo GPU/áudio
++físico do Xbox. O carregador tipado grava em ordem nativa do host nos testes;
++a saída do compilador PowerPC continua big-endian.
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,7 @@
++0.46-D12: geometria nativa do cenário 0 e ciclo original de inicialização, física, navegação, culling e ambiente sonoro testados em CPU. Novo XEX de diagnóstico; não desenha o cenário nem executa Battle_Update/Battle_Main. Comum 3 ainda tem 526 recursos indisponíveis. Veja RELATORIO-0.46-D12.md.
++
++--- Histórico anterior ---
++
+ 0.45-D11: MAPD, caminhos e navegação nativos; 111 recursos de textura do comum 3 (154 imagens), com 526 recursos ainda indisponíveis; ciclo original de áudio/mixer testado em CPU. A batalha completa, HUD/cena e GPU continuam pendentes. Marcador 2/NOT_READY mantidos. Veja RELATORIO-0.45-D11.md.
+ 
+ # 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
+--- /dev/null
++++ b/RELATORIO-0.46-D12.md
+@@ -0,0 +1,113 @@
++# D12 — geometria e ciclo original do cenário em CPU
++
++O pedido completo continua pendente. Esta revisão executa o ciclo original do
++cenário e prepara suas estruturas gráficas; não executa a partida completa,
++Battle_Update/Battle_Main, HUD ou desenho GPU. Os 526 recursos restantes do
++comum 3 continuam indisponíveis. Não representa uma luta jogável.
++
++## Implementação
++
++O arquivo real do cenário 0 passa a ter uma cópia própria com descritores
++numéricos nativos e offsets validados: sete grupos, 34 materiais, 2.243 malhas,
++1.959 partes, 172 nós, 30 células de visibilidade, onze objetos e 25 texturas.
++São convertidas as tabelas e estruturas lidas pelo código original; os fluxos
++DMA/VIF/GIF e pixels mantêm sua representação canônica. A validação dos fluxos
++confere seus limites e o DMA RET externo, sem afirmar interpretação VU ou
++desenho dessas malhas. Malhas de colisão nulas recebem uma malha vazia própria,
++evita-se interpretar o cabeçalho do cenário como uma malha.
++
++O diagnóstico inicializa File_Init original, três partições, buffers de trabalho
++e seis players ADX. Depois executa StgModel_InitStage/BtlStage_Init originais:
++relocação, associação de dados, física, reset dos objetos e ambiente sonoro.
++A interface atende BtlStage_Update e o serviço de áudio; a finalização chama
++BtlStage_Term e libera players, buffers e recursos na ordem inversa.
++
++A prontidão **do cenário** passa a ser produzida pelo inicializador original;
++não se limpa NOT_READY manualmente. O marcador **do combate** permanece em 2.
++A prontidão do cenário não libera Battle_Main nem declara todos os recursos
++internos ou a apresentação concluídos.
++
++O conversor recusa cenários com o membro de objetos animados presente. O cenário
++0 usado nos testes não contém esse membro nem temporizadores. Os nós e suas
++chaves são preparados, mas isso não prova reprodução de todos os formatos de
++animação dos demais cenários. A animação de textura não foi exercitada por esse
++cenário. Ambiente gráfico, cena e efeitos continuam dependentes do restante do
++boot e do produtor de pacotes.
++
++## Correção importante dos testes anteriores
++
++O carregador tipado escrevia valores em ordem PowerPC mesmo no teste i386. Agora
++escreve os campos e ponteiros na ordem nativa da CPU, preservando a representação
++PowerPC no Xbox. Os testes com consumidores originais foram repetidos com essa
++correção; os resultados antigos do host não devem ser usados como evidência de
++que todos os valores tipados eram interpretados corretamente. O carregador BT3X
++legado não foi alterado.
++
++Foram corrigidos também locais de consulta de chão e a origem da esfera na
++física para cumprir o contrato de alinhamento de 16 bytes das rotinas de
++colisão. As adaptações exigem correspondência exata com o upstream fixado.
++
++## Execução e limites da evidência
++
++Teste i386 sob QEMU com UBSan/bounds, programas e recursos originais, leitor de
++ISO da plataforma e transporte de arquivo host. A ISO de teste é esparsa: os
++setores necessários são reais; isso não testa todos os setores do disco. Os
++arquivos reais não acompanham a entrega.
++
++- Dois ciclos completos de BtlObj/BtlChar/BtlAi, cenário, navegação, áudio e
++  encerramento, com heap do motor restaurado em cada ciclo.
++- Relocação, inicialização, reset, atualizações e finalização originais do
++  cenário. BtlStage_GetStartPlace original encontrou a zona 44.
++- Busca original de uma rota adjacente: nós 0 → 1, três pontos.
++- Corpo físico ativo criado, lançado, atualizado e liberado pelo código
++  original: y de -100 a aproximadamente -90,489632 em doze atualizações.
++  Esse teste não prova colisão de detritos contra triângulos do cenário.
++- Culling original na CPU marcou 983 malhas visíveis para a câmera de teste.
++  Não houve submissão GPU dessas malhas.
++- Temporizador original: avanço e término exercitados com um exemplo sintético
++  não vazio, identificado separadamente do cenário real, cujo total é zero.
++- Sete corrupções de parâmetros/caminhos/navegação e cinco corrupções de
++  geometria, ponteiros, malha, chaves e ciclo da árvore recusadas.
++- Reinício do cenário/players mantendo o dispositivo de áudio aberto, seguido
++  de encerramento completo. O descarte ADX agora libera também o slot do player.
++- As vinte seções MAPD continuam comparadas ao binder original. O consumidor
++  original das 111 texturas/154 imagens do comum 3 continua verificado.
++- 192 blocos de áudio, 98.288 valores PCM não nulos, finitos e limitados; os
++  demais canais ficam zerados. Inclui o stream real do ambiente do cenário.
++  O dispositivo SDK é um coletor PCM simulado: não comprova saída audível.
++
++As exceções anteriores para aritmética de bits da biblioteca newlib permanecem
++limitadas ao código de terceiros. Não houve execução PowerPC, Xbox ou Xenia.
++Resultados de compilação e integridade do novo XEX ficam na validação JSON e
++em checkpoint-D12-final; não devem ser confundidos com execução no console.
++
++## Pendências do pedido
++
++| Item | Estado nesta revisão |
++|---|---|
++| Cenário gráfico completo | Estruturas do cenário 0 preparadas e código de CPU executado; animações de outros cenários, todos os recursos internos e desenho ainda pendentes. |
++| Comum 3 | 111 recursos/154 imagens preparados; 526 recursos indisponíveis, sem avanço nesta revisão. |
++| Battle_Load/Battle_Init | Ciclo completo pendente. Inicialização do cenário não equivale ao boot integral. |
++| Battle_Update/Battle_Main | Não executados. Marcador 2 preservado. |
++| HUD, cena, auras e efeitos | Integração completa pendente. |
++| Skinning/pixels/mandíbula/lábios na GPU | Não comprovados. Os modelos anteriores não têm mandíbula animada. |
++| Vozes e ambiente sonoro | Mixer/stream executados em CPU; saída física e sincronização facial pendentes. |
++
++## Reprodução
++
++Upstream 3ca419c7966b11438e2dc3c9a7e1914f102ed545; SDK
++57b02f1e60667e37d22c3aa613d23d2486514ff8. Veja BUILD.md e TESTAR-PRIMEIRO.md.
++O teste test_native_managers.py mantém a ordem de argumentos anterior e aceita
++--iso /caminho/da/ISO-USA-local.iso. Por padrão procura stage-fixture.iso ao lado
++da pasta de recursos. A imagem pode ser a ISO completa original. Ela deve
++conter os diretórios ISO, tabelas AFS e recursos usados, incluindo o ambiente
++AFS2/65116.bin. O teste não substitui dados ausentes por recursos fictícios.
++
++## Binário e verificações finais
++
++Novo default.xex D12: 13770752 bytes; SHA-256 e81885660384fe3788e37f8353223bb16eaa1fdaebba1583e67c666aee9bb139.
++405/405 unidades PowerPC compiladas; zero símbolos pendentes e conflitos ABI.
++XEX2/PE, integridade e 33 regiões/2.738 operações do catálogo final: PASS.
++Isolamento das tabelas antigas: PASS (103 nomes originais não implementados
++continuam recusados; o probe Game_Main mantém 69 nomes ausentes). O XEX D11
++anterior foi preservado em diagnostico-anterior-D11/default.xex.
+--- a/TESTAR-PRIMEIRO.md
++++ b/TESTAR-PRIMEIRO.md
+@@ -1,22 +1,25 @@
+-# Testar D11 no Xbox 360 RGH
++# Testar D12 no Xbox 360 RGH
+ 
+-Copie default.xex e startup_test.txt do pacote D11 para a pasta do aplicativo.
+-Mantenha a ISO USA na pasta isos e inicie pelo Aurora. startup_test.txt
+-seleciona typed-data. O teste continua sendo diagnóstico, sem partida jogável.
++Copie default.xex e startup_test.txt do pacote D12 para a pasta do aplicativo.
++Mantenha a ISO USA na pasta isos e inicie pelo Aurora. startup_test.txt seleciona
++typed-data. Continua sendo um diagnóstico, sem partida jogável.
+ 
+ Procure em default.log:
+ 
+-- common3 native texture subset: error=0 entries=637 textures=111 images=154
+-  unprepared=526
++- native stage geometry: error=0, com 2.243 malhas e 25 texturas
++- common3 native texture subset: error=0 entries=637 textures=111 images=154 unprepared=526
+ - original CPU manager boot: error=0
+-- original initialized fighter: dois lados com HP=40000, Ki=40000,
+-  AI_type=0, AI_level=13
++- original initialized fighter: dois lados com HP=40000, Ki=40000, AI_level=13
+ - original audio diagnostic: error=0
++- original stage init/reset: error=0
+ 
+-O programa solicita uma voz do lado 0. Confira se há som no console.
+-error=0 não comprova saída audível: o teste em CPU usou um coletor PCM
+-simulado. audio service failed indica falha de serviço registrada no log.
++O programa solicita uma voz e inicia o ambiente sonoro pelo inicializador
++original do cenário. Confira se há som no console. error=0 não comprova saída
++audível: o teste host usou um coletor PCM simulado. Falhas de serviço de cenário
++ou áudio são registradas no log.
+ 
+-Não retire o marcador 2 nem NOT_READY. Battle_Load/Battle_Init completos,
+-Battle_Update/Battle_Main, cenário gráfico, demais recursos do comum 3,
+-HUD/cena e apresentação GPU continuam pendentes. Veja RELATORIO-0.45-D11.md.
++O inicializador original controla a prontidão do cenário. Não retire bloqueios
++manualmente. O marcador do combate continua em 2; Battle_Load/Battle_Init
++completos, Battle_Update/Battle_Main, os 526 recursos restantes do comum 3,
++HUD/cena e apresentação GPU continuam pendentes. Veja RELATORIO-0.46-D12.md.
++O cenário não será desenhado por esse diagnóstico.
+--- a/engine/platform/platform/xb_adxt.c
++++ b/engine/platform/platform/xb_adxt.c
+@@ -61,6 +61,7 @@
+     }
+     reject(MEMORY);return NULL;
+ }
++int XbAdx_Destroy(void *h){Player *p=player(h);if(!p)return BAD;stop(p);p->used=0;return 0;}
+ void ADXT_SetReloadSct(void *h,int n){Player *p=player(h);if(p && n>0 && n<=512)p->reload=n;else reject(BAD);}
+ void ADXT_SetSvrFreq(void *h,int n){Player *p=player(h);if(p && n>0 && n<=60)p->freq=n;else reject(BAD);}
+ void ADXT_Stop(void *h){Player *p=player(h);if(p)stop(p);}
+--- a/engine/platform/platform/xb_adxt.h
++++ b/engine/platform/platform/xb_adxt.h
+@@ -7,6 +7,7 @@
+ int XbAdx_EnsureOutput(void);
+ void XbAdx_SetEffectsMixer(int (*)(float *),void (*)(void));
+ void *ADXT_Create(int,void *,int);
++int XbAdx_Destroy(void *);
+ void ADXT_SetReloadSct(void *,int);
+ void ADXT_SetSvrFreq(void *,int);
+ void ADXT_StartAfs(void *,int,int);
+--- a/engine/platform/platform/xb_battle_audio.inc
++++ b/engine/platform/platform/xb_battle_audio.inc
+@@ -18,6 +18,7 @@
+ }
+ int XbBattleRuntime_EndAudio(XbBattleRuntime *r){
+  if(!r || active!=r || !r->audio)return -891;
++ if(r->stage_geometry){int e=XbBattleRuntime_EndStage(r);if(e)return e;}
+  Snd_Term();r->audio=0;
+  for(unsigned i=0;i<4;i++){XbSfx_FreeBank(r->banks[i]);r->banks[i]=NULL;}
+  return XbAdx_Close();
+--- /dev/null
++++ b/engine/platform/platform/xb_battle_files.inc
+@@ -0,0 +1,47 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later */
++#include "xb_disc.h"
++#include "sys/file.h"
++extern AdxPlayer gAdxPlayerTbl[];
++extern AfsPartition gAfsPartitionTbl[];
++extern AdxFcacheParam gAdxFcacheParam;
++extern s32 Heap_GetFreeSize(void);
++static void runtime_end_files(XbBattleRuntime *r){
++ File_CancelRequests();
++ for(unsigned i=0;i<ADX_PLAYER_COUNT;i++){
++  if(gAdxPlayerTbl[i].adxt)XbAdx_Destroy(gAdxPlayerTbl[i].adxt);
++  Heap_Free(gAdxPlayerTbl[i].work);gAdxPlayerTbl[i].work=NULL;gAdxPlayerTbl[i].adxt=NULL;
++ }
++ for(unsigned i=0;i<FILE_PT_COUNT;i++){Heap_Free(gAfsPartitionTbl[i].info);gAfsPartitionTbl[i].info=NULL;}
++ Heap_Free(gAdxFcacheParam.buf);gAdxFcacheParam.buf=NULL;r->files=0;
++}
++int XbBattleRuntime_BeginStage(XbBattleRuntime *r,void *stage){
++ if(!r || active!=r || !r->managers || !r->audio || r->files || r->stage_geometry || !stage || !XbDisc_Get())return -891;
++ size_t need=4096;
++ if(gAdxFcacheParam.buf)return -891;
++ for(unsigned i=0;i<FILE_PT_COUNT;i++){
++  if(gAfsPartitionTbl[i].info || gAfsPartitionTbl[i].infoSize<=0 || gAfsPartitionTbl[i].infoSize>0x200000)return -891;
++  need+=(size_t)gAfsPartitionTbl[i].infoSize+64;
++ }
++ for(unsigned i=0;i<ADX_PLAYER_COUNT;i++){
++  if(gAdxPlayerTbl[i].adxt || gAdxPlayerTbl[i].work || gAdxPlayerTbl[i].workSize<128 || gAdxPlayerTbl[i].workSize>0x200000)return -891;
++  need+=(size_t)gAdxPlayerTbl[i].workSize+64;
++ }
++ if(need>(size_t)Heap_GetFreeSize())return -851;
++ /* Require the ambience stream before the original stage initializer starts
++  * it. File_Init brings up the original queue, players and partitions. */
++ dr_span stream;if(XbDisc_FindFile("pzs3us2/65116.bin",&stream))return -894;
++ File_Init();File_LoadPartitionNw(2);File_WaitPartition(2);r->files=1;
++ int e=XbAdx_LastError();if(!e)e=XbBattleStage_BeginGeometry(stage);
++ if(e){runtime_end_files(r);return e;}
++ r->stage_geometry=stage;return 0;
++}
++int XbBattleRuntime_EndStage(XbBattleRuntime *r){
++ if(!r || active!=r || !r->stage_geometry || !r->files)return -891;
++ int e=XbBattleStage_EndGeometry(r->stage_geometry);if(e)return e;
++ r->stage_geometry=NULL;runtime_end_files(r);return 0;
++}
++
++int XbBattleRuntime_ServiceStage(XbBattleRuntime *r){
++ if(!r || active!=r || !r->stage_geometry || !r->files)return -891;
++ extern void BtlStage_Update(void);BtlStage_Update();return XbAdx_LastError();
++}
+--- a/engine/platform/platform/xb_battle_runtime.c
++++ b/engine/platform/platform/xb_battle_runtime.c
+@@ -25,7 +25,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images;};
++struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio,files;XbBattleStageCollision *stage_geometry;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images;};
+ static XbBattleRuntime *active;
+ extern AiThMgr *gBtlAi;
+ extern ViewProgress *gProgress;
+@@ -120,3 +120,5 @@
+ #include "xb_battle_audio.inc"
+ 
+ #include "xb_battle_common3.inc"
++
++#include "xb_battle_files.inc"
+--- a/engine/platform/platform/xb_battle_runtime.h
++++ b/engine/platform/platform/xb_battle_runtime.h
+@@ -25,4 +25,7 @@
+ /* Texture subset only: success does not mean all entries were prepared. */
+ int XbBattleRuntime_AttachCommon3(XbBattleRuntime *,const void *,size_t,XbCommon3Info *);
+ int XbBattleRuntime_TryCommon3Entry(int,void **);
++int XbBattleRuntime_BeginStage(XbBattleRuntime *,void *stage);
++int XbBattleRuntime_ServiceStage(XbBattleRuntime *);
++int XbBattleRuntime_EndStage(XbBattleRuntime *);
+ #endif
+--- a/engine/platform/platform/xb_battle_stage.c
++++ b/engine/platform/platform/xb_battle_stage.c
+@@ -31,6 +31,8 @@
+  float starts[4][8];int has_starts;
+  uint8_t *parameters,*path_bytes,*mef_bytes,*nav_bytes;
+  void *saved_paths,*saved_mef;int parameters_bound;
++ uint8_t *render_pack;size_t render_bytes,render_offset;void *render_texture,*saved_pack;int render_live,render_bound;
++ XbStageGeometryInfo geometry;
+ };
+ extern s32 *gColMeshBase;
+ extern void *gStgColMesh;
+@@ -74,7 +76,8 @@
+ }
+ int XbBattleStage_FreeCollision(XbBattleStageCollision *c){
+  if(!c)return 0;
+- if(c->installed || c->querying)return XB_STAGE_STATE;
++ if(c->installed || c->querying || c->render_live)return XB_STAGE_STATE;
++ XbBattleStage_FreeGeometry(c);
+  if(c->stage.zones)for(uint32_t i=0;i<c->source.zones;i++){free(c->stage.zones[i].near);free(c->stage.zones[i].recs);}
+  free(c->parameters);free(c->path_bytes);free(c->mef_bytes);free(c->nav_bytes);
+  free(c->stage.zones);free(c->stage.objects);free(c->arena);free(c);return 0;
+@@ -116,7 +119,7 @@
+  c->saved_base=gColMeshBase;gColMeshBase=(s32 *)c->arena;gBtlStage=(BtlStage *)(void *)&c->stage;c->installed=1;active=c;publish_parameters(c);return 0;
+ }
+ int XbBattleStage_UninstallCollision(XbBattleStageCollision *c){
+- if(!c || active!=c || !c->installed || c->querying || (void *)gBtlStage!=&c->stage)return XB_STAGE_STATE;
++ if(!c || active!=c || !c->installed || c->querying || c->render_live || (void *)gBtlStage!=&c->stage)return XB_STAGE_STATE;
+ #if UINTPTR_MAX==UINT32_MAX
+  if(c->nav_bytes && gStgNav && (void *)gStgNav->data==c->nav_bytes)return XB_STAGE_STATE;
+ #endif
+@@ -203,3 +206,5 @@
+ }
+ 
+ #include "xb_stage_parameters.inc"
++
++#include "xb_stage_geometry.inc"
+--- a/engine/platform/platform/xb_battle_stage.h
++++ b/engine/platform/platform/xb_battle_stage.h
+@@ -27,4 +27,11 @@
+ int XbBattleStage_PrepareParameters(XbBattleStageCollision *,const void *,size_t);
+ int XbStage_TryBindNav(void **);
+ int XbBattleStage_HasParameters(void);
++typedef struct XbStageGeometryInfo {unsigned groups,materials,meshes,parts,nodes,cells,objects,timers,textures;} XbStageGeometryInfo;
++int XbBattleStage_PrepareGeometry(XbBattleStageCollision *,const void *,size_t,XbStageGeometryInfo *);
++int XbBattleStage_FreeGeometry(XbBattleStageCollision *);
++int XbBattleStage_BeginGeometry(XbBattleStageCollision *);
++int XbBattleStage_EndGeometry(XbBattleStageCollision *);
++int XbStage_TryBindGeometryData(void *);
++int XbStage_TryBindGeometryTexture(void *,void **);
+ #endif
+--- a/engine/platform/platform/xb_gamedata.c
++++ b/engine/platform/platform/xb_gamedata.c
+@@ -232,9 +232,15 @@
+         const uint8_t *p=src[r->source_file]+r->source_offset+op->offset;
+         if(op->kind==XBTD_POINTER) {
+             uint32_t value=(uint32_t)op->native_pointer;
+-            for(unsigned k=0;k<4;k++)dst[k]=(uint8_t)(value>>(24-8*k));
+-        }else for(uint32_t at=0;at<op->length;at+=op->width)
+-            for(uint32_t k=0;k<op->width;k++)dst[at+k]=p[at+op->width-1-k];
++            memcpy(dst,&value,4); /* native pointer representation, including host tests */
++        }else {
++#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
++            memcpy(dst,p,op->length);
++#else
++            for(uint32_t at=0;at<op->length;at+=op->width)
++                for(uint32_t k=0;k<op->width;k++)dst[at+k]=p[at+op->width-1-k];
++#endif
++        }
+     }
+     XB_LOG("typed-data: %u ops validated; complete=%u; commit=%u; combat NOT started",(unsigned)no,complete,!(flags&XBTD_VALIDATE_ONLY));
+ typed_done:
+--- /dev/null
++++ b/engine/platform/platform/xb_stage_geometry.inc
+@@ -0,0 +1,207 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later
++ * Native stage model: typed draw/collision structures; canonical VIF/GIF.
++ * The original BtlStage_Init/Term own the physics/reset/ambience lifecycle. */
++#include "xb_model_native.h"
++#include "xb_adxt.h"
++#include "battle/stg_d.h"
++#include "battle/stgm_a.h"
++#include "sys/common.h"
++#include "sys/file.h"
++#include "sys/heap.h"
++extern s32 Heap_GetFreeSize(void);
++typedef struct StageBuild {XbBattleStageCollision *owner;DrStageCollision input;uint8_t *dest,*seen;uint32_t visibility,texture_count;XbStageGeometryInfo info;} StageBuild;
++static uint16_t geom_half(const uint8_t *p){return (uint16_t)(p[0]|(unsigned)p[1]<<8);}
++static int geom_span(StageBuild *b,uint32_t word,size_t count,size_t stride,size_t *at){
++ if(count>b->input.size/stride)return DR_STAGE_BOUNDS;
++ return range(&b->input,word,count*stride,at);
++}
++static int geom_words(StageBuild *b,size_t at,size_t n){
++ if(at>b->input.size || n>b->input.size-at || (n&3))return DR_STAGE_BOUNDS;
++ words(b->dest+at,b->input.base+at,n);return 0;
++}
++static int geom_seen(StageBuild *b,size_t at,unsigned bit){
++ unsigned char *p=b->seen+at/4;if(*p&bit)return 1;*p|=(uint8_t)bit;return 0;
++}
++static void geom_halves(StageBuild *b,size_t at,unsigned n){param_halves(b->dest+at,b->input.base+at,n);}
++static int geom_node(StageBuild *b,uint32_t word){
++ size_t at;if(geom_span(b,word,1,80,&at) || (at&15))return DR_STAGE_BOUNDS;
++ if(geom_seen(b,at,4))return 0;
++ const uint8_t *p=b->input.base+at;if(param_finite(p,16))return DR_STAGE_NUMBER;
++ uint32_t count=rd(p+64);size_t keys;if(geom_span(b,rd(p+68),count,32,&keys))return DR_STAGE_BOUNDS;
++ geom_words(b,at,80);
++ uint32_t previous=0;
++ for(uint32_t i=0;i<count;i++){
++  const uint8_t *q=b->input.base+keys+(size_t)i*32;uint32_t frame=rd(q+12);
++  if((i && frame<previous) || param_finite(q,3) || param_finite(q+16,3))return DR_STAGE_NUMBER;
++  previous=frame;geom_words(b,keys+(size_t)i*32,32);
++ }
++ b->info.nodes++;return 0;
++}
++static int geom_mesh(StageBuild *b,uint32_t word){
++ size_t at;if(geom_span(b,word,1,16,&at))return DR_STAGE_BOUNDS;
++ if(geom_seen(b,at,1))return 0;
++ const uint8_t *p=b->input.base+at;
++ if(geom_half(p)>=b->visibility)return DR_STAGE_BOUNDS;
++ size_t chain,mtx;if(geom_span(b,rd(p+8),1,16,&chain) || (chain&15) || geom_span(b,rd(p+12),1,64,&mtx))return DR_STAGE_BOUNDS;
++ uint32_t tag=rd(b->input.base+chain);size_t bytes=((size_t)(tag&65535)+1)*16;
++ /* Inline RET streams: keep every DMA/VIF/GIF word canonical. The GPU
++  * interpreter still validates and executes the payload on submission. */
++ if((tag>>28&7)!=6 || bytes>b->input.size-chain)return DR_STAGE_FORMAT;
++ if(rd(p+12)){
++  if(param_finite(b->input.base+mtx,16))return DR_STAGE_NUMBER;
++  geom_words(b,mtx,64);
++ }
++ geom_halves(b,at,2);geom_words(b,at+8,8);b->info.meshes++;return 0;
++}
++static int geom_part(StageBuild *b,uint32_t word){
++ size_t at;if(geom_span(b,word,1,32,&at))return DR_STAGE_BOUNDS;
++ if(geom_seen(b,at,2))return 0;
++ const uint8_t *p=b->input.base+at;uint32_t n=geom_half(p);size_t list;
++ if(geom_span(b,rd(p+4),n,4,&list) || param_finite(p+12,4))return DR_STAGE_BOUNDS;
++ geom_halves(b,at,4);geom_words(b,at+4,28);geom_words(b,list,(size_t)n*4);
++ for(uint32_t i=0;i<n;i++){int e=geom_mesh(b,rd(b->input.base+list+i*4));if(e)return e;}
++ if(rd(p+8)){int e=geom_node(b,rd(p+8));if(e)return e;}
++ b->info.parts++;return 0;
++}
++static int geom_cell(StageBuild *b,uint32_t word,unsigned depth){
++ size_t at;if(depth>32 || geom_span(b,word,1,64,&at))return DR_STAGE_TREE;
++ if(b->seen[at/4]&8)return DR_STAGE_TREE;
++ if(b->seen[at/4]&16)return 0;
++ b->seen[at/4]|=8;
++ const uint8_t *p=b->input.base+at;uint32_t count=rd(p+56);size_t list;
++ if(rd(p+52)>30 || param_finite(p+40,3) || geom_span(b,rd(p+60),count,4,&list))return DR_STAGE_BOUNDS;
++ geom_words(b,at,64);geom_words(b,list,(size_t)count*4);
++ if(rd(p)){size_t ignored;if(geom_span(b,rd(p),1,4,&ignored))return DR_STAGE_BOUNDS;}
++ for(uint32_t i=0;i<count;i++){uint32_t w=rd(b->input.base+list+i*4);if(w && w!=UINT32_MAX){int e=geom_part(b,w);if(e)return e;}}
++ for(unsigned i=0;i<8;i++)if(rd(p+4+i*4)){int e=geom_cell(b,rd(p+4+i*4),depth+1);if(e)return e;}
++ b->seen[at/4]=(uint8_t)((b->seen[at/4]&~8u)|16);b->info.cells++;return 0;
++}
++static int geom_tables(StageBuild *b){
++ const uint8_t *h=b->input.base;size_t at;
++ if(param_finite(h+76,1) || !(rf(h+76)>0))return DR_STAGE_NUMBER;
++ b->visibility=rd(h+40);if(!b->visibility || b->visibility>65536 || geom_span(b,rd(h+44),b->visibility,1,&at))return DR_STAGE_BOUNDS;
++ geom_words(b,0,96);uint32_t not_ready=1;memcpy(b->dest+8,&not_ready,4);
++ /* Materials and meshes. */
++ uint32_t groups=rd(h+24);if(groups!=7 || geom_span(b,rd(h+28),groups,8,&at))return DR_STAGE_FORMAT;
++ b->info.groups=groups;
++ for(unsigned g=0;g<groups;g++){
++  size_t group=at+g*8;const uint8_t *p=h+group;uint32_t n=geom_half(p+2);size_t mats;
++  if(geom_span(b,rd(p+4),n,16,&mats))return DR_STAGE_BOUNDS;
++  geom_halves(b,group,4);geom_words(b,group+4,4);
++  for(unsigned m=0;m<n;m++){
++   size_t mat=mats+m*16;const uint8_t *q=h+mat;uint32_t count=geom_half(q+2);size_t meshes;
++   if(geom_half(q)>=b->texture_count || geom_span(b,rd(q+4),count,16,&meshes))return DR_STAGE_BOUNDS;
++   geom_halves(b,mat,4);geom_words(b,mat+4,8);geom_halves(b,mat+12,4);
++   if(rd(q+8)){
++    size_t anim,frames;if(geom_span(b,rd(q+8),1,8,&anim))return DR_STAGE_BOUNDS;
++    uint32_t nf=geom_half(h+anim+2);if(!nf || geom_span(b,rd(h+anim+4),nf,4,&frames))return DR_STAGE_BOUNDS;
++    geom_halves(b,anim,4);geom_words(b,anim+4,4);geom_words(b,frames,(size_t)nf*4);
++    for(unsigned f=0;f<nf;f++)if((rd(h+frames+f*4)&65535)>=b->texture_count)return DR_STAGE_BOUNDS;
++   }
++   for(unsigned i=0;i<count;i++){int e=geom_mesh(b,(uint32_t)(meshes/4+i*4));if(e)return e;}
++   b->info.materials++;
++  }
++ }
++ /* Part lists and nodes. */
++ uint32_t lists=rd(h+32);if(geom_span(b,rd(h+36),lists,8,&at))return DR_STAGE_BOUNDS;
++ geom_words(b,at,(size_t)lists*8);
++ for(unsigned i=0;i<lists;i++){
++  const uint8_t *p=h+at+i*8;uint32_t count=rd(p);size_t parts;
++  if(geom_span(b,rd(p+4),count,32,&parts))return DR_STAGE_BOUNDS;
++  for(unsigned j=0;j<count;j++){int e=geom_part(b,(uint32_t)(parts/4+j*8));if(e)return e;}
++ }
++ uint32_t nodes=rd(h+48);if(geom_span(b,rd(h+52),nodes,80,&at))return DR_STAGE_BOUNDS;
++ for(unsigned i=0;i<nodes;i++){int e=geom_node(b,(uint32_t)(at/4+i*20));if(e)return e;}
++ int e=geom_cell(b,rd(h+80),0);if(e)return e;
++ /* Collision zones use word offsets, including their numeric mesh data. */
++ uint32_t zones=rd(h+56);if(geom_span(b,rd(h+60),zones,64,&at))return DR_STAGE_BOUNDS;
++ XbBattleStageCollision converter={0};converter.source=b->input;converter.arena=b->dest;
++ for(unsigned i=0;i<zones;i++){
++  size_t zone=at+i*64;const uint8_t *p=h+zone;size_t near,recs;void *ignored;
++  if(geom_span(b,rd(p+12),rd(p+8),4,&near) || geom_span(b,rd(p+24),rd(p+20),16,&recs))return DR_STAGE_BOUNDS;
++  geom_words(b,zone,64);geom_words(b,near,(size_t)rd(p+8)*4);geom_words(b,recs,(size_t)rd(p+20)*16);
++  e=native_mesh(&converter,rd(p+4),&ignored);if(e)return e;
++  if(!rd(p+4)){uint32_t empty=(uint32_t)((b->owner->render_bytes-b->owner->render_offset-32)/4);memcpy(b->dest+zone+4,&empty,4);}
++  for(unsigned j=0;j<rd(p+20);j++){
++   uint32_t mesh=rd(h+recs+j*16+8);e=native_mesh(&converter,mesh,&ignored);if(e)return e;
++   if(!mesh){uint32_t empty=(uint32_t)((b->owner->render_bytes-b->owner->render_offset-32)/4);memcpy(b->dest+recs+j*16+8,&empty,4);}
++  }
++ }
++ if(geom_span(b,rd(h+64),1,12,&at))return DR_STAGE_BOUNDS;
++ geom_words(b,at,12);
++ /* Destructible objects and their debris lists. */
++ uint32_t objects=rd(h+68);if(objects!=b->input.objects || geom_span(b,rd(h+72),objects,80,&at))return DR_STAGE_BOUNDS;
++ b->info.objects=objects;geom_words(b,at,(size_t)objects*80);
++ for(unsigned i=0;i<objects;i++){
++  const uint8_t *p=h+at+i*80;uint32_t count=rd(p+36);size_t pieces;
++  if(geom_span(b,rd(p+40),count,4,&pieces))return DR_STAGE_BOUNDS;
++  geom_words(b,pieces,(size_t)count*4);
++  for(unsigned k=0;k<6;k++)if(rd(p+12+k*4)){e=geom_part(b,rd(p+12+k*4));if(e)return e;}
++  for(unsigned k=0;k<count;k++){e=geom_part(b,rd(h+pieces+k*4));if(e)return e;}
++ }
++ uint32_t timers=rd(h+16);if(geom_span(b,rd(h+20),timers,16,&at))return DR_STAGE_BOUNDS;
++ for(unsigned i=0;i<timers;i++){geom_halves(b,at+i*16,4);geom_words(b,at+i*16+4,12);if(param_finite(h+at+i*16+8,2))return DR_STAGE_NUMBER;}
++ b->info.timers=timers;return 0;
++}
++int XbBattleStage_FreeGeometry(XbBattleStageCollision *c){
++ if(!c || c->render_live)return XB_STAGE_STATE;
++ free(c->render_pack);XbNativeTexture_Free(c->render_texture);c->render_pack=NULL;c->render_texture=NULL;c->render_bytes=0;c->render_bound=0;memset(&c->geometry,0,sizeof(c->geometry));return 0;
++}
++int XbBattleStage_PrepareGeometry(XbBattleStageCollision *c,const void *pack,size_t n,XbStageGeometryInfo *info){
++ if(info)memset(info,0,sizeof(*info));
++ if(!c || !pack || sizeof(void *)!=4 || !c->parameters || c->render_pack || c->render_live)return XB_STAGE_STATE;
++ DrStageCollision v;int e=dr_stage_collision_open(pack,n,&v);if(e)return e;
++ size_t at,bytes;unsigned flags;if(dr_pack_memory_entry(pack,n,0,&at,&bytes,&flags) || flags || (n&15))return DR_STAGE_FORMAT;
++ /* Animated-object members need a separate VU1-node/track adapter. Refuse
++  * those stages rather than claiming their raw tracks are native. */
++ const uint8_t *p=pack;if(rd(p+36)!=rd(p+40))return DR_STAGE_FORMAT;
++ c->render_pack=malloc(n+32);if(!c->render_pack)return XB_STAGE_MEMORY;
++ c->render_bytes=n+32;c->render_offset=at;memcpy(c->render_pack,pack,n);memset(c->render_pack+n,0,32);
++ words(c->render_pack,pack,(rd(pack)+2)*4);
++ StageBuild b={.owner=c,.input=v,.dest=c->render_pack+at};b.seen=calloc(1,v.size/4+1);
++ if(!b.seen){e=XB_STAGE_MEMORY;goto fail;}
++ size_t tex;if(geom_span(&b,rd(v.base+84),1,32,&tex)){e=DR_STAGE_BOUNDS;goto cleanup;}
++ uint8_t *texture=malloc(v.size);if(!texture){e=XB_STAGE_MEMORY;goto cleanup;}
++ memcpy(texture,v.base,v.size);memcpy(texture,v.base+tex,32);
++ e=XbNativeTexture_Prepare(texture,v.size,&c->render_texture);free(texture);if(e)goto cleanup;
++ b.texture_count=rd(v.base+tex);b.info.textures=b.texture_count;
++ e=geom_tables(&b);if(!e){c->geometry=b.info;if(info)*info=b.info;}
++cleanup:free(b.seen);
++fail:if(e)XbBattleStage_FreeGeometry(c);return e;
++}
++int XbStage_TryBindGeometryData(void *stage){
++ if(!active || !active->render_live || stage!=active->render_pack+active->render_offset)return 0;
++ ((BtlStage *)stage)->data=(StgDataA *)active->parameters;
++ if(!active->render_bound){
++  StgMModel *model=((BtlStageM *)stage)->mdl;
++  for(unsigned g=0;g<7;g++)for(unsigned i=0;i<model->grp[g].count;i++){
++   StgMTexAnim *anim=model->grp[g].mats[i].anim;
++   if(anim && (uintptr_t)anim->frames<active->render_bytes/4)
++    anim->frames=(s32 *)((uint8_t *)stage+(uintptr_t)anim->frames*4);
++  }
++  active->render_bound=1;
++ }
++ return 1;
++}
++int XbStage_TryBindGeometryTexture(void *base,void **out){
++ if(!out || !active || !active->render_live || base!=active->render_pack+active->render_offset)return 0;
++ *out=active->render_texture;return 1;
++}
++int XbBattleStage_BeginGeometry(XbBattleStageCollision *c){
++ if(!c || active!=c || !c->installed || c->render_live || !c->render_pack || !gCommonRes || (void *)gBtlStage!=&c->stage || gStgRigid)return XB_STAGE_STATE;
++ extern AdxPlayer gAdxPlayerTbl[];
++ for(unsigned i=0;i<ADX_PLAYER_COUNT;i++)if(!gAdxPlayerTbl[i].adxt)return XB_STAGE_STATE;
++ if(Heap_GetFreeSize()<(s32)sizeof(StgRigidPool)+4096)return XB_STAGE_MEMORY;
++ void **slot=(void **)((uint8_t *)gCommonRes+0x24);c->saved_pack=*slot;*slot=c->render_pack;c->render_live=1;
++ extern void StgModel_InitStage(void);StgModel_InitStage();
++ if((void *)gBtlStage!=c->render_pack+c->render_offset || !BtlStage_IsReady() || !gStgRigid || XbAdx_LastError()){
++  XbBattleStage_EndGeometry(c);return XB_STAGE_STATE;
++ }
++ return 0;
++}
++int XbBattleStage_EndGeometry(XbBattleStageCollision *c){
++ if(!c || active!=c || !c->render_live || (void *)gBtlStage!=c->render_pack+c->render_offset)return XB_STAGE_STATE;
++ BtlStage_Term();gBtlStage=(BtlStage *)(void *)&c->stage;gColMeshBase=(s32 *)c->arena;
++ void **slot=(void **)((uint8_t *)gCommonRes+0x24);*slot=c->saved_pack;c->render_live=0;
++ return XbBattleStage_FreeGeometry(c);
++}
+--- a/engine/platform/platform/xb_stage_parameters.inc
++++ b/engine/platform/platform/xb_stage_parameters.inc
+@@ -3,7 +3,7 @@
+  * Schemas: stg_a.h, stg_b.h, eft_c.h, eft_z.h and gfxm_a.h. */
+ typedef struct ParamSchema {uint8_t stride;uint16_t words,negate;uint32_t halves;} ParamSchema;
+ static const ParamSchema param_schema[20]={
+- {64,0xf8f,0x600,0},{16,15,4,0},{32,255,0x66,0},{16,15,6,0},
++ {64,0xff8f,0x600,0},{16,15,4,0},{32,255,0x66,0},{16,15,6,0},
+  {32,255,0x66,0},{32,255,0x66,0},{32,255,0x66,0},{16,1,0,0},
+  {16,3,0,0},{16,1,0,0},{32,31,6,1u<<10},
+  {24,31,6,(1u<<10)|(1u<<11)},{24,0x19,0,1u<<10},
+@@ -33,7 +33,7 @@
+    for(unsigned k=0;k<s->stride/4;k++)if(s->words&(1u<<k))words(dst+k*4,src+k*4,4);
+    for(unsigned k=0;k<s->stride/2;k++)if(s->halves&(1u<<k))param_halves(dst+k*2,src+k*2,2);
+    unsigned floats=i==2?8:i>=3&&i<=6?(i==3?4:8):i==10?5:i==11?4:0;
+-   if((floats && param_finite(src,floats)) || (i==0 && param_finite(src+32,4)) || (i==1 && param_finite(src+8,1)) || (i==12 && param_finite(src+12,2)) || (i==19 && param_finite(src+20,1))){e=DR_STAGE_NUMBER;goto fail;}
++   if((floats && param_finite(src,floats)) || (i==0 && param_finite(src+32,8)) || (i==1 && param_finite(src+8,1)) || (i==12 && param_finite(src+12,2)) || (i==19 && param_finite(src+20,1))){e=DR_STAGE_NUMBER;goto fail;}
+    for(unsigned k=0;k<s->stride/4;k++)if(s->negate&(1u<<k)){float f=-rf(src+k*4);memcpy(dst+k*4,&f,4);}
+   }
+   uintptr_t ptr=(uintptr_t)(params+off);memcpy(params+12+i*8,&ptr,4);
+--- a/engine/tests/test_native_managers.c
++++ b/engine/tests/test_native_managers.c
+@@ -1,4 +1,6 @@
+ /* SPDX-License-Identifier: AGPL-3.0-or-later */
++#define _FILE_OFFSET_BITS 64
++#define _POSIX_C_SOURCE 200809L
+ #include "port_compat.h"
+ #undef malloc
+ #include "xb_battle_runtime.h"
+@@ -11,7 +13,11 @@
+ #include "battle/btl_input.h"
+ #include "battle/eft_det_b.h"
+ #include "battle/stg_a.h"
++#include "battle/stg_d.h"
++#include "battle/stgm_a.h"
++#include "xb_disc.h"
+ #include "sys/snd.h"
++#include "sys/file.h"
+ #include "xb_adxt.h"
+ #include "xb_sfx.h"
+ #include "xsdk/audio.h"
+@@ -29,6 +35,20 @@
+ #include <assert.h>
+ #include <math.h>
+ /* Host test SDK device: validates PCM frames; no physical sound output. */
++static const char *image_path;static FILE *image;
++NTSTATUS NtCreateFile(HANDLE *h,uint32_t access,const OBJECT_ATTRIBUTES *a,IO_STATUS_BLOCK *io,const uint64_t *size,uint32_t flags,uint32_t share,uint32_t disp,uint32_t options){
++ (void)access;(void)size;(void)flags;(void)share;(void)disp;(void)options;assert(a && a->name && io && !image);
++ if(strcmp(a->name->pointer,"game:\\test.iso"))return STATUS_INVALID_PARAMETER;
++ image=fopen(image_path,"rb");if(!image)return STATUS_INVALID_PARAMETER;*h=1;io->status=STATUS_SUCCESS;io->information=0;return STATUS_SUCCESS;
++}
++NTSTATUS NtClose(HANDLE h){assert(h==1 && image);fclose(image);image=NULL;return STATUS_SUCCESS;}
++NTSTATUS NtQueryInformationFile(HANDLE h,IO_STATUS_BLOCK *io,void *out,uint32_t n,uint32_t type){
++ assert(h==1 && image && n==sizeof(FILE_NETWORK_OPEN_INFORMATION) && type==FILE_NETWORK_OPEN_INFORMATION_CLASS);
++ FILE_NETWORK_OPEN_INFORMATION *info=out;memset(out,0,n);assert(!fseeko(image,0,SEEK_END));info->end_of_file=(uint64_t)ftello(image);io->information=n;return STATUS_SUCCESS;
++}
++NTSTATUS NtReadFile(HANDLE h,HANDLE event,void *apc,void *ctx,IO_STATUS_BLOCK *io,void *out,uint32_t n,const uint64_t *at){
++ assert(h==1 && image && !event && !apc && !ctx && at);if(fseeko(image,(off_t)*at,SEEK_SET))return STATUS_INVALID_PARAMETER;io->information=(uint32_t)fread(out,1,n,image);return STATUS_SUCCESS;
++}
+ static float pcm[XSDK_AUDIO_FRAME_FLOATS];static unsigned device_open,pending,frames,played,nonzero;
+ NTSTATUS xsdk_audio_open(uint32_t n){assert(n==8 && !device_open);device_open=1;played=0;return STATUS_SUCCESS;}
+ NTSTATUS xsdk_audio_close(void){assert(device_open && !pending);device_open=0;return STATUS_SUCCESS;}
+@@ -66,8 +86,22 @@
+  }
+  puts("PASS seven corrupt stage parameter/path/nav fixtures rejected");
+ }
++static void geometry_rejections(const uint8_t *pack,size_t size){
++ size_t stage=le32(pack+4),model=stage+le32(pack+stage+28)*4;
++ size_t material=stage+le32(pack+model+4)*4,mesh=stage+le32(pack+material+4)*4;
++ size_t root=stage+le32(pack+stage+80)*4,node=stage+le32(pack+stage+52)*4;
++ size_t loc[]={stage+76,model+4,mesh+8,node+64,root+4};
++ uint32_t val[]={0x7f800000,UINT32_MAX,UINT32_MAX,UINT32_MAX,(uint32_t)((root-stage)/4)};
++ for(unsigned i=0;i<5;i++){
++  XbBattleStageCollision *c=NULL;assert(!XbBattleStage_PrepareCollision(pack,size,&c));assert(!XbBattleStage_PrepareParameters(c,pack,size));
++  uint8_t *copy=malloc(size);assert(copy);memcpy(copy,pack,size);for(unsigned j=0;j<4;j++)copy[loc[i]+j]=(uint8_t)(val[i]>>(8*j));
++  assert(XbBattleStage_PrepareGeometry(c,copy,size,NULL)<0);assert(!XbBattleStage_FreeCollision(c));free(copy);
++ }
++ puts("PASS five corrupt geometry/root/mesh/key/cycle fixtures rejected");
++}
+ int main(int argc,char **argv){
+- setvbuf(stdout,NULL,_IOLBF,0);assert(argc==3);
++ setvbuf(stdout,NULL,_IOLBF,0);assert(argc==4);
++ image_path=argv[3];assert(!XbDisc_Mount("game:/test.iso"));
+  XbDataFiles files={read_program,argv[2]};int rc=XbTypedData_Load(&files,&gXbTypedMainCatalog,0);printf("typed data: %d\n",rc);assert(!rc && gPortDataStripped==2);
+  size_t n2,n4,ns;void *c2=load(argv[1],"common-2.bin",&n2),*c4=load(argv[1],"common-4.bin",&n4),*stage=load(argv[1],"stage.bin",&ns);
+  XbBattleRuntime *runtime=NULL;rc=XbBattleRuntime_Open(c2,n2,c4,n4,&runtime);printf("runtime: %d\n",rc);assert(!rc);free(c2);free(c4);
+@@ -76,8 +110,9 @@
+  assert(!BtlScene_GetCommonEntry(-1) && !BtlScene_GetCommonEntry(638));
+  assert(common3.entries==637 && common3.textures==111 && common3.images==154 && common3.unprepared==526);
+  s32 heap=Heap_GetFreeSize();
+- XbBattleStageCollision *collision=NULL;assert(!XbBattleStage_PrepareCollision(stage,ns,&collision));assert(!XbBattleStage_PrepareStarts(collision,stage,ns));rc=XbBattleStage_PrepareParameters(collision,stage,ns);printf("stage parameters: %d\n",rc);assert(!rc);stage_rejections(stage,ns);assert(!XbBattleStage_InstallCollision(collision));stage_oracle(stage);free(stage);assert(gBtlStage->data && gBtlStage->data->objCount==11 && !BtlStage_IsReady() && BtlStage_GetPathCount()==5);
++ XbBattleStageCollision *collision=NULL;assert(!XbBattleStage_PrepareCollision(stage,ns,&collision));assert(!XbBattleStage_PrepareStarts(collision,stage,ns));rc=XbBattleStage_PrepareParameters(collision,stage,ns);printf("stage parameters: %d\n",rc);assert(!rc);XbStageGeometryInfo geometry;rc=XbBattleStage_PrepareGeometry(collision,stage,ns,&geometry);printf("stage geometry prepare: %d groups=%u materials=%u meshes=%u parts=%u nodes=%u cells=%u textures=%u\n",rc,geometry.groups,geometry.materials,geometry.meshes,geometry.parts,geometry.nodes,geometry.cells,geometry.textures);assert(!rc);stage_rejections(stage,ns);geometry_rejections(stage,ns);assert(!XbBattleStage_InstallCollision(collision));stage_oracle(stage);free(stage);assert(gBtlStage->data && gBtlStage->data->objCount==11 && !BtlStage_IsReady() && BtlStage_GetPathCount()==5);
+  for(unsigned pass=0;pass<2;pass++){
++  if(pass){size_t bytes;void *pack=load(argv[1],"stage.bin",&bytes);assert(!XbBattleStage_PrepareGeometry(collision,pack,bytes,NULL));free(pack);}
+   assert(!XbTypedData_Load(&files,&gXbTypedMainCatalog,XBTD_VALIDATE_ONLY));assert(Heap_GetFreeSize()==heap);
+   assert(!XbBattleFighter_BeginOriginalObjects());XbBattleFighter *fighters[2];
+   for(unsigned side=0;side<2;side++){
+@@ -117,6 +152,42 @@
+   extern SndMgr *gSndMgr;
+   for(unsigned i=0;i<4;i++)assert(gSndMgr->bank[i+2].vagMax==maximum[i] && !memcmp(gSndMgr->bank[i+2].loopBits,loops[i],19));
+   for(unsigned i=0;i<4;i++)free(sound[i]);assert(Snd_IsUploadDone());unsigned before=nonzero;
++  rc=XbBattleRuntime_BeginStage(runtime,collision);printf("original stage init: %d ready=%d\n",rc,BtlStage_IsReady());assert(!rc && BtlStage_IsReady() && gStgRigid);
++  assert(StgNav_IsReady());
++  /* An adjacent graph edge has a short, independently known route. */
++  int start=-1,goal=-1;
++  for(int i=0;i<gStgNav->data->count && start<0;i++){
++   StgNavNode *n=&gStgNav->data->nodes[i];if(n->flags&STGNAV_NODE_OFF)continue;
++   for(unsigned j=0;j<8;j++)if(n->link[j]>=0 && !(gStgNav->data->nodes[n->link[j]].flags&STGNAV_NODE_OFF)){start=i;goal=n->link[j];break;}
++  }
++  assert(start>=0 && goal>=0);StgColVec from;StgNavPoint to __attribute__((aligned(16)));StgNavPath path;
++  memcpy(&from,&gStgNav->data->nodes[start].pos,16);to=gStgNav->data->nodes[goal].pos;
++  StgNav_FindPath(&from,&to,&path);assert(path.count>=2 && path.count<=3 && !memcmp(&path.pts[0],&to,16));
++  printf("PASS original navigation route: %d -> %d, %d points\n",start,goal,path.count);
++  Vec4 bodypos={0,-100,0,1},push={2,0,0,0},spin={0.1f,0,0,0};
++  int body=StgRigid_Create(&bodypos,1,0);assert(body>0);StgRigid_LaunchSpin(body,&push,&spin);
++  float before_y=StgRigid_Find(body)->body.pos.y;
++  for(unsigned i=0;i<12;i++)assert(!XbBattleRuntime_ServiceStage(runtime));
++  StgRigidNode *node=StgRigid_Find(body);assert(node && isfinite(node->body.pos.y) && node->body.pos.y!=before_y && gStgRigid->count==1);
++  Mtx44 bodymatrix;assert(StgRigid_GetMatrix(&bodymatrix,body));
++  printf("PASS original rigid body: y=%f -> %f\n",(double)before_y,(double)node->body.pos.y);
++  StgRigid_Release(body);assert(!StgRigid_Find(body));
++  /* Stage 0 has zero timers: separately exercise the original timer consumer. */
++  struct {unsigned short flags,unused;int pad;float time,period;} timer={0,0,0,0,0.2f};
++  assert(!gBtlStage->timerCount);void *old_timers=gBtlStage->timers;gBtlStage->timers=&timer;gBtlStage->timerCount=1;
++  extern void BtlStage_UpdateTimers(void);BtlStage_UpdateTimers();assert(timer.time>0 && !(timer.flags&4));
++  BtlStage_UpdateTimers();assert(timer.time==0 && (timer.flags&4));gBtlStage->timerCount=0;gBtlStage->timers=old_timers;
++  StgView view={0};for(unsigned i=0;i<4;i++)view.mtx.m[i][i]=1;view.x1=640;view.screenDist=256;view.nearZ=1;view.farZ=100000;
++  StgModel_Cull(&view);BtlStageM *graphics=(BtlStageM *)gBtlStage;unsigned visible=0;
++  for(unsigned i=0;i<graphics->visSize;i++)visible+=graphics->vis[i]!=0;assert(visible>0 && visible<=2243);
++  printf("PASS original stage timers and CPU culling: %u visible meshes; no GPU draw\n",visible);
++  Vec4 pos,rot;int zone=BtlStage_GetStartPlace(0,&pos,&rot,0);assert(zone>=0 && isfinite(pos.y));
++  printf("PASS original stage relocation/init/reset/update: zone=%d y=%f\n",zone,(double)pos.y);
++
++  /* Restart stage/file players without closing the active audio device. */
++  assert(!XbBattleRuntime_EndStage(runtime));size_t restart_bytes;void *restart=load(argv[1],"stage.bin",&restart_bytes);
++  assert(!XbBattleStage_PrepareGeometry(collision,restart,restart_bytes,NULL));free(restart);
++  assert(!XbBattleRuntime_BeginStage(runtime,collision));assert(!XbBattleRuntime_ServiceStage(runtime));
+   assert(Snd_QueuePlay(4,0,100,64,0,0)>=0 && Snd_QueuePlay(16,0,100,64,0,0)>=0 && Snd_QueuePlay(32,0,100,64,0,0)>=0);
+   for(unsigned i=0;i<12;i++)assert(!XbBattleRuntime_ServiceAudio(runtime));assert(nonzero>before && frames>0 && !XbSfx_LastError());
+   assert(!XbBattleRuntime_EndAudio(runtime) && !device_open);printf("PASS original audio: %u frames, %u nonzero samples; SDK device simulated\n",frames,nonzero);
+@@ -136,5 +207,5 @@
+   printf("PASS original roster reset / AI init / reset / terminate: pass=%u heap restored\n",pass);
+  }
+  assert(!XbBattleStage_UninstallCollision(collision));assert(!XbBattleStage_FreeCollision(collision));assert(!XbBattleRuntime_Close(runtime));
+- puts("PASS no Battle_Update/Battle_Main or hardware execution; audio SDK simulated; marker stays 2");return 0;
+-}
++ XbDisc_Unmount();puts("PASS no Battle_Update/Battle_Main or hardware execution; audio SDK simulated; marker stays 2");return 0;
++}
+--- a/engine/tools/build_engine_diagnostic.py
++++ b/engine/tools/build_engine_diagnostic.py
+@@ -45,9 +45,9 @@
+ for name in ['func_002967C0','sceSifCallRpc','XbSfx_Mix','ADXT_Create','_ctype_','gPortDataStripped']:
+     assert name in defined,name
+ subprocess.run(['python3',str(sdk/'tools/elf2xex.py'),'--title-id','0x44523630',
+-                '--title-name','DragonRage360 0.45 D11 Stage Audio Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
++                '--title-name','DragonRage360 0.46 D12 Native Stage Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
+ report={'kind':'native diagnostic with linked combat code; NOT a playable game',
+-        'version':'0.45-D11' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
++        'version':'0.46-D12' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
+         'Battle_Main_linked':True,'Game_Main_linked':False,'battle_called':False,
+         'strong_or_weak_undefined':0,'native_game_data_loaded':False,'typed_catalog_linked':bool(r.get('typed_catalog_linked')),'partial_preview_available':bool(r.get('typed_catalog_linked')), 
+         'boot_combat_available':False,'hardware_executed':False,
+--- a/engine/tools/fixed_profile_source.py
++++ b/engine/tools/fixed_profile_source.py
+@@ -8,6 +8,14 @@
+ import re
+ 
+ def transform(source, text):
++    if source=='src/sys/rigid.c':
++        anchor='    Vec4 zero = { 0.0f, 0.0f, 0.0f, 1.0f };'
++        if text.count(anchor)!=1:raise ValueError('rigid sphere origin changed')
++        return text.replace(anchor,'    Vec4 zero __attribute__((aligned(16))) = { 0.0f, 0.0f, 0.0f, 1.0f };'), []
++    if source=='src/sys/gfxm_e_d.c':
++        anchor='        Res_RelocateOffsets(&gBtlStage->tex, (u8 *)base, (TexFile *)(gBtlStage->base + gBtlStage->texOfs));'
++        if text.count(anchor)!=1:raise ValueError('stage texture binder changed')
++        return text.replace(anchor,'        extern int XbStage_TryBindGeometryTexture(void *,void **);\n        if(!XbStage_TryBindGeometryTexture(base,(void **)&gBtlStage->tex)) {\n'+anchor+'\n        }'), []
+     if source=='src/battle/btl_scene.c':
+         anchor='s32 *BtlScene_GetCommonEntry(s32 idx) {\n'
+         if text.count(anchor)!=1:raise ValueError('common3 entry binding changed')
+@@ -49,6 +57,11 @@
+         text=text.replace(anchor,'            extern int XbFighter_MemberTable(void *,int,void **);\n            void *native_table=NULL;\n            if (XbFighter_MemberTable(obj,i,&native_table)) chr->objTbl[i]=native_table;\n            else '+anchor.strip())
+         return text, []
+     if source=='src/battle/stg_a_b.c':
++        if text.count('    StgGroundHit hit;')!=2:raise ValueError('stage ground locals changed')
++        text=text.replace('    StgGroundHit hit;','    StgGroundHit hit __attribute__((aligned(16)));')
++        bind='void BtlStage_BindFile(BtlStage *stage) {\n'
++        if text.count(bind)!=1:raise ValueError('stage data binder changed')
++        text=text.replace(bind,bind+'    extern int XbStage_TryBindGeometryData(void *);\n    if(XbStage_TryBindGeometryData(stage))return;\n')
+         start='s32 BtlStage_GetStartPlace(s32 side, Vec4 *pos, Vec4 *rot, s32 alt) {\n'
+         place='s32 BtlStage_GetPlace(Vec4 *pos, Vec4 *rot) {\n'
+         for signature,args in ((start,'side,pos,rot,alt'),(place,'0,pos,rot,-1')):
+--- a/engine/tools/test_native_managers.py
++++ b/engine/tools/test_native_managers.py
+@@ -6,7 +6,7 @@
+ """
+ from pathlib import Path
+ import argparse,concurrent.futures,subprocess,json,re,sys,os,hashlib
+-p=argparse.ArgumentParser();p.add_argument('upstream',type=Path);p.add_argument('xsdk',type=Path);p.add_argument('i386_root',type=Path);p.add_argument('qemu',type=Path);p.add_argument('native_build',type=Path);p.add_argument('catalog',type=Path);p.add_argument('resources',type=Path);p.add_argument('programs',type=Path);p.add_argument('output',type=Path);a=p.parse_args()
++p=argparse.ArgumentParser();p.add_argument('upstream',type=Path);p.add_argument('xsdk',type=Path);p.add_argument('i386_root',type=Path);p.add_argument('qemu',type=Path);p.add_argument('native_build',type=Path);p.add_argument('catalog',type=Path);p.add_argument('resources',type=Path);p.add_argument('programs',type=Path);p.add_argument('output',type=Path);p.add_argument('--iso',type=Path,help='ISO USA local; defaults to stage-fixture.iso beside resources');a=p.parse_args()
+ e=Path(__file__).resolve().parents[1];project=e.parent;up=a.upstream.resolve();sdk=a.xsdk.resolve();root=a.i386_root.resolve();build=a.native_build.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+ gen=out/'prepared';gen.mkdir(exist_ok=True);objs=out/'objects';objs.mkdir(exist_ok=True);logs=out/'logs';logs.mkdir(exist_ok=True)
+ sys.path.insert(0,str(up/'port/tools'));import portsrc,eeconst
+@@ -77,7 +77,7 @@
+  link.insert(link.index('-Wl,--gc-sections'),str(obj));r=subprocess.run(link,capture_output=True,text=True);(out/'link.txt').write_text(r.stdout+r.stderr)
+ if r.returncode:
+  print(r.stderr[-8000:]);raise SystemExit('strict host link failed')
+-run=subprocess.run([str(a.qemu.resolve()),'-E','LD_LIBRARY_PATH='+str(root/'usr/lib32'),str(out/'managers'),str(a.resources.resolve()),str(a.programs.resolve())],capture_output=True,text=True,env=dict(os.environ,UBSAN_OPTIONS='halt_on_error=1'))
++run=subprocess.run([str(a.qemu.resolve()),'-E','LD_LIBRARY_PATH='+str(root/'usr/lib32'),str(out/'managers'),str(a.resources.resolve()),str(a.programs.resolve()),str((a.iso or a.resources.parent/'stage-fixture.iso').resolve())],capture_output=True,text=True,env=dict(os.environ,UBSAN_OPTIONS='halt_on_error=1'))
+ (out/'test.txt').write_text(run.stdout+run.stderr);print(run.stdout+run.stderr);run.check_returncode()
+-result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_device':'simulated synchronous PCM sink','original_audio_cycle':True,'audio_frames':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][0]),'nonzero_PCM_values':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][1]),'common3_texture_subset':True,'common3_entries':637,'common3_textures':111,'common3_images':154,'common3_unprepared_entries':526,'original_EftTexSet_Load32_consumer':True,'MAPD_sections_vs_original_binder':20,'stage_corruption_rejections':7,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
++result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_device':'simulated synchronous PCM sink','original_audio_cycle':True,'typed_catalog_native_host_byte_order':True,'original_File_Init_and_three_partitions':True,'original_stage_Init_Reset_Update_Term':True,'original_stage_culling':True,'original_stage_rigid_body':True,'original_navigation_short_route':True,'original_timer_synthetic_fixture':True,'stage_geometry':{'groups':7,'materials':34,'meshes':2243,'parts':1959,'nodes':172,'cells':30,'textures':25,'timers_in_actual_stage':0},'audio_frames':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][0]),'nonzero_PCM_values':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][1]),'common3_texture_subset':True,'common3_entries':637,'common3_textures':111,'common3_images':154,'common3_unprepared_entries':526,'original_EftTexSet_Load32_consumer':True,'MAPD_sections_vs_original_binder':20,'stage_corruption_rejections':7,'stage_geometry_corruption_rejections':5,'stage_restart_with_audio_device_open':True,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
+ (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+--- a/engine/tools/test_typed_manifest.py
++++ b/engine/tools/test_typed_manifest.py
+@@ -4,7 +4,7 @@
+ Only expected hashes, layouts and pointer addresses are compiled into fixtures.
+ """
+ from pathlib import Path
+-import argparse,json,struct,subprocess,os,hashlib
++import argparse,json,struct,subprocess,os,hashlib,sys
+ p=argparse.ArgumentParser();p.add_argument('manifest',type=Path);p.add_argument('disc',type=Path);p.add_argument('output',type=Path);p.add_argument('--sanitize',action='store_true');a=p.parse_args();e=Path(__file__).resolve().parents[1];out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+ r=json.loads(a.manifest.read_text());elf=(a.disc/'SLUS_216.78').read_bytes();flat=bytearray(0x1ff180);shoff=struct.unpack_from('<I',elf,32)[0];step,n=struct.unpack_from('<HH',elf,46)
+ for i in range(n):
+@@ -17,8 +17,8 @@
+  return v
+ for op in r['operations']:
+  rg=r['regions'][op['region']];start=rg['source_offset']+op['offset'];src=sources[rg['source_file']][start:start+op['length']]
+- if op['kind']=='pointer':data=struct.pack('>I',op['native_value_in_reference_link'])
+- else:data=b''.join(src[i:i+op['width']][::-1] for i in range(0,len(src),op['width']))
++ if op['kind']=='pointer':data=op['native_value_in_reference_link'].to_bytes(4,sys.byteorder)
++ else:data=src if sys.byteorder=='little' else b''.join(src[i:i+op['width']][::-1] for i in range(0,len(src),op['width']))
+  expected[op['region']][op['offset']:op['offset']+op['length']]=data
+ s='''#include "xb_typed_data.h"
+ #include <assert.h>
+--- a/src/demo_ui.c
++++ b/src/demo_ui.c
+@@ -99,7 +99,7 @@
+     p->rect(52,52,68,68,ORANGE);
+     text(p,66,66,2,0xFF211000,"DR");
+     text(p,144,48,2,WHITE,"DRAGON RAGE");
+-    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.45-D11");
++    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.46-D12");
+     text(p,930,56,1,u->connected?0xFF3DDC84:GOLD,u->connected?"CONTROLE CONECTADO":"CONECTE O CONTROLE");
+     text(p,930,88,1,MUTED,"Interface + leitor de ISO");
+     p->rect(52,154,300,480,PANEL);
+--- a/src/main.c
++++ b/src/main.c
+@@ -25,13 +25,13 @@
+ static XbBattleCommon *native_common;
+ static XbBattleRuntime *native_runtime;
+ static int native_managers;
+-static int native_audio;
++static int native_audio,native_stage_running;
+ static int native_typed_values_loaded;
+ static XbBattleFighter *native_fighters[2];
+ static int native_object_diagnostic;
+ static XbBattleStageCollision *native_stage;
+ static void release_native_stage(void){
+- native_audio=0;
++ native_audio=0;native_stage_running=0;
+  if(native_managers){int e=XbBattleRuntime_EndManagers(native_runtime);if(e){xsdk_log_write("native manager cleanup refused: %d",e);return;}native_managers=0;}
+  for(unsigned i=0;i<2;i++){XbBattleFighter_FreeModelAnimation(native_fighters[i]);native_fighters[i]=NULL;}
+  if(native_object_diagnostic){int e=XbBattleFighter_EndObjectDiagnostic();if(e){xsdk_log_write("native object cleanup refused: %d",e);return;}native_object_diagnostic=0;}
+@@ -348,6 +348,11 @@
+         for(unsigned i=0;i<4;i++)free(banks[i]);
+         if(!audio){extern int Snd_QueuePlay(int,unsigned,unsigned,unsigned,int,int);native_audio=1;audio=Snd_QueuePlay(16,0,96,64,0,0)<0?-894:0;}
+         xsdk_log_write("original audio diagnostic: error=%d; four banks and side-0 voice request; confirm audible output on console",audio);
++        if(!audio){int stage=XbBattleRuntime_BeginStage(native_runtime,native_stage);
++            native_stage_running=!stage;if(stage)audio=stage;
++            xsdk_log_write("original stage init/reset: error=%d; native geometry and original File_Init/ADX players; no Battle_Init or GPU draw",stage);
++        }
++        boot=audio;
+     }
+     return boot;
+ }
+@@ -371,6 +376,9 @@
+         error=XbBattleStage_PrepareCollision(pack,(size_t)span.size,&native_stage);
+         if(!error)error=XbBattleStage_PrepareStarts(native_stage,pack,(size_t)span.size);
+         if(!error)error=XbBattleStage_PrepareParameters(native_stage,pack,(size_t)span.size);
++        XbStageGeometryInfo geometry={0};
++        if(!error)error=XbBattleStage_PrepareGeometry(native_stage,pack,(size_t)span.size,&geometry);
++        xsdk_log_write("native stage geometry: error=%d groups=%u materials=%u meshes=%u parts=%u nodes=%u cells=%u textures=%u; GPU not submitted",error,geometry.groups,geometry.materials,geometry.meshes,geometry.parts,geometry.nodes,geometry.cells,geometry.textures);
+         if(!error)error=XbBattleStage_InstallCollision(native_stage);
+         for(unsigned side=0;!error && side<2;side++){
+             float pos[4],rot[4];int zone=-1;
+@@ -483,10 +491,10 @@
+ #ifdef DR_ENGINE_LINKED
+     extern int Battle_Main(void);
+     extern volatile uint32_t gPortDataStripped;
+-    xsdk_log_write("DragonRage360 0.45-D11: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
++    xsdk_log_write("DragonRage360 0.46-D12: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
+     xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: character/AI managers, common resources and battle boot are incomplete",(unsigned)gPortDataStripped);
+ #else
+-    xsdk_log_write("DragonRage360 0.45-D11: component diagnostic; Battle_Main not linked in this build.");
++    xsdk_log_write("DragonRage360 0.46-D12: component diagnostic; Battle_Main not linked in this build.");
+ #endif
+     xsdk_log_write("%s: BPE decode + animation endian synthetic self-test",dr_resource_selftest()?"PASS":"FAIL");
+     xsdk_log_write("%s: bounded BIN + motion + skeleton synthetic self-test",dr_container_selftest()?"PASS":"FAIL");
+@@ -606,6 +614,7 @@
+         }
+         if(!running) break;
+ #if defined(DR_TYPED_CATALOG) && defined(DR_ENGINE_LINKED)
++        if(native_stage_running){int e=XbBattleRuntime_ServiceStage(native_runtime);if(e){xsdk_log_write("stage service failed: %d",e);native_stage_running=0;}}
+         if(native_audio){int e=XbBattleRuntime_ServiceAudio(native_runtime);if(e){xsdk_log_write("audio service failed: %d",e);native_audio=0;}}
+ #endif
+         uint32_t address;
+--- a/tests/check_xex.py
++++ b/tests/check_xex.py
+@@ -100,9 +100,10 @@
+     assert {'XbTypedData_Load','XbTypedData_LoadFromDisc','XbTypedData_RequireBattleData','dr_stage_collision_open','dr_stage_collision_query','XbBattleStage_PrepareCollision','XbBattleStage_InstallCollision','XbBattleStage_QueryCollision','XbBattleFighter_PrepareModelAnimation','XbBattleFighter_PlayModel','XbBattleFighter_StepModel','XbBattleFighter_PlayMotion','XbBattleFighter_PlayRetargeted','XbBattleFighter_SamplePose','XbBattleFighter_CalcMatrices','XbBattleFighter_UpdateVolumes','XbBattleFighter_PrepareTextures','XbBattleFighter_GetMesh','XbBattleFighter_GetFaceGeometry','XbFighterTable_Convert','XbBattleFighter_BindCommonReference','XbBattleFighter_PlayCommonRetargeted','XbBattleFighter_CreateModelObject','XbBattleFighter_FreeModelAnimation','XbFighterRegistry_BeginOriginal','BtlObj_Init','BtlObj_Term','XbBattleRuntime_Open','XbBattleRuntime_Close','XbBattleRuntime_BeginManagers','XbBattleRuntime_EndManagers','BtlChar_AllocAll','BtlAiMgr_Init','XbFighterRegistry_ModelCapacity','XbFighterRegistry_ModelSlot','XbFighterRegistry_CreateModel','XbNativeModel_Prepare','XbFighter_BindOwnedTables','XbFighter_BindOwnedFiles','XbFighterRegistry_Remove','XbFighterRegistry_End'}<=defined
+     assert {'XbBattleCommon_Prepare','XbBattleCommon_Convert','XbBattleCommon_GetAiData','XbBattleCommon_Free','XbBattleFighter_SetEye','XbBattleFighter_SetFace','XbBattleFighter_StepFace','BtlObj_UpdateFace','BtlObjFace_StepBlink','BObjFace_StepLipData'}<=defined
+     assert {'XbBattleStage_PrepareParameters','XbStage_TryBindNav','XbBattleRuntime_AttachCommon3','XbBattleRuntime_TryCommon3Entry','XbSfx_PrepareBank','XbBattleRuntime_BeginAudio','XbBattleRuntime_ServiceAudio','XbBattleRuntime_EndAudio','Snd_Init','Snd_Term','Snd_LoadBank','Snd_Update'}<=defined
++    assert {'XbBattleStage_PrepareGeometry','XbBattleStage_BeginGeometry','XbBattleStage_EndGeometry','XbBattleRuntime_BeginStage','XbBattleRuntime_ServiceStage','XbBattleRuntime_EndStage','File_Init','BtlStage_Init','BtlStage_Update','StgRigid_Init'}<=defined
+     assert data_at_symbol('gPortDataStripped',4)==b'\x00\x00\x00\x02'
+     report.update(typed_main_catalog_linked=True,typed_catalog_complete=bool(cat[1]),
+         typed_regions=cat[3],typed_operations=cat[5],partial_data_preview_available=True,
+-        native_game_data_loaded=False,stage_collision_diagnostic_linked=True,stage_collision_original_readers_linked=True,stage_collision_install_path_linked=True,fighter_model_animation_preparation_linked=True,native_pose_body_attack_and_texture_paths_linked=True,full_fighter_spawn=False,original_object_registry_linked=True,active_model_object_lifecycle_linked=True,typed_character_table_windows=8,common_reference_retarget_linked=True,character_and_AI_initialization_path_linked=True,complete_combat_boot_integrated=False,native_common_CPU_resources_linked=True,original_CPU_facial_state_path_linked=True,audio_clock_facial_sync=False,original_BtlObj_Init_Term_boot_linked=True,common4_native_consumer_probe_linked=True,native_grounded_starts_linked=True,native_MAPD_sections=20,native_navigation_binding=True,common3_texture_subset_linked=True,complete_common3=False,original_audio_cycle_integrated=True,hardware_audio_verified=False,scope='0.45-D11: native MAPD, path and navigation data; stage remains NOT_READY. Owned common3 TexFile subset and original four-bank audio cycle with service in the launcher; full scene still unavailable. Original object Init/Term boot with private common resources; six common roster windows and bounded common AI data; eight character reader windows; CPU blink/mouth/lip path; original CreateChara/Setup model lifecycle with native CPU resources/pools/materials; original BtlChar/BtlAi initialization path linked; execution verified separately on i386 only; linked Battle_Main and reviewed native data catalog; original-only pools excluded with native reference proof; explicit typed-data startup preview commits only validated known fields, with readiness marker 2 retained. Native data catalog excludes 46 proven original-only pool bytes; full battle resource initialization, original Game_Main and combat execution remain absent. No hardware validation.')
++        native_game_data_loaded=False,stage_collision_diagnostic_linked=True,stage_collision_original_readers_linked=True,stage_collision_install_path_linked=True,fighter_model_animation_preparation_linked=True,native_pose_body_attack_and_texture_paths_linked=True,full_fighter_spawn=False,original_object_registry_linked=True,active_model_object_lifecycle_linked=True,typed_character_table_windows=8,common_reference_retarget_linked=True,character_and_AI_initialization_path_linked=True,complete_combat_boot_integrated=False,native_common_CPU_resources_linked=True,original_CPU_facial_state_path_linked=True,audio_clock_facial_sync=False,original_BtlObj_Init_Term_boot_linked=True,common4_native_consumer_probe_linked=True,native_grounded_starts_linked=True,native_MAPD_sections=20,native_navigation_binding=True,original_stage_cycle_integrated=True,native_stage_geometry_preparation_linked=True,complete_stage_resources=False,common3_texture_subset_linked=True,complete_common3=False,original_audio_cycle_integrated=True,hardware_audio_verified=False,scope='0.46-D12: native MAPD, path and navigation data; native stage geometry with original Init/Reset/Update/Term integrated; stage readiness comes only from its original initializer. Full battle remains blocked. Owned common3 TexFile subset and original four-bank audio cycle with service in the launcher; full scene still unavailable. Original object Init/Term boot with private common resources; six common roster windows and bounded common AI data; eight character reader windows; CPU blink/mouth/lip path; original CreateChara/Setup model lifecycle with native CPU resources/pools/materials; original BtlChar/BtlAi initialization path linked; execution verified separately on i386 only; linked Battle_Main and reviewed native data catalog; original-only pools excluded with native reference proof; explicit typed-data startup preview commits only validated known fields, with readiness marker 2 retained. Native data catalog excludes 46 proven original-only pool bytes; full battle resource initialization, original Game_Main and combat execution remain absent. No hardware validation.')
+ report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+ print(json.dumps(report,ensure_ascii=False,indent=2))

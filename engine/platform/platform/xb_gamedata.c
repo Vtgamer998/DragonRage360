@@ -232,9 +232,15 @@ int XbTypedData_Load(const XbDataFiles *files,const XbTypedCatalog *c,unsigned f
         const uint8_t *p=src[r->source_file]+r->source_offset+op->offset;
         if(op->kind==XBTD_POINTER) {
             uint32_t value=(uint32_t)op->native_pointer;
-            for(unsigned k=0;k<4;k++)dst[k]=(uint8_t)(value>>(24-8*k));
-        }else for(uint32_t at=0;at<op->length;at+=op->width)
-            for(uint32_t k=0;k<op->width;k++)dst[at+k]=p[at+op->width-1-k];
+            memcpy(dst,&value,4); /* native pointer representation, including host tests */
+        }else {
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+            memcpy(dst,p,op->length);
+#else
+            for(uint32_t at=0;at<op->length;at+=op->width)
+                for(uint32_t k=0;k<op->width;k++)dst[at+k]=p[at+op->width-1-k];
+#endif
+        }
     }
     XB_LOG("typed-data: %u ops validated; complete=%u; commit=%u; combat NOT started",(unsigned)no,complete,!(flags&XBTD_VALIDATE_ONLY));
 typed_done:

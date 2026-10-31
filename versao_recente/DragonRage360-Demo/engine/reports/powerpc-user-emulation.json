@@ -1,0 +1,7 @@
+{
+  "status": "BLOCKED: not an executed PowerPC test",
+  "attempt": "xsdk GCC freestanding ELF32 under qemu-ppc Linux user-mode",
+  "observed": "illegal instruction: xsdk ABI saves full 64-bit GPRs with std/ld even in ELF32; qemu-ppc32 cannot execute them",
+  "qemu-ppc64": "rejects ELF32 image; not an Xbox/XEX environment",
+  "result": "no claim of successful PPC/Xbox emulation; native XEX remains unexecuted"
+}

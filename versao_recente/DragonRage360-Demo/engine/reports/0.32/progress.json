@@ -1,0 +1,33 @@
+{
+  "version": "0.32",
+  "boot_unresolved_before": 221,
+  "boot_unresolved": 207,
+  "resolved": [
+    "ADXT_Create",
+    "ADXT_GetOutVol",
+    "ADXT_GetStat",
+    "ADXT_Init",
+    "ADXT_Pause",
+    "ADXT_SetOutPan",
+    "ADXT_SetOutVol",
+    "ADXT_SetOutputMono",
+    "ADXT_SetReloadSct",
+    "ADXT_SetSvrFreq",
+    "ADXT_StartAfs",
+    "ADXT_StartFname",
+    "ADXT_Stop",
+    "func_00277A70"
+  ],
+  "PowerPC_compiled": 387,
+  "ABI_conflicts": 0,
+  "overlay_native_catalog_units": 72,
+  "overlay_reset_regions": 75,
+  "overlay_persistent_regions": 44,
+  "overlay_mutable_bytes": 83288,
+  "overlay_pointer_relocations": 46,
+  "original_MIPS_overlay_copy_removed": true,
+  "full_main_program_data_manifest_complete": false,
+  "XEX": "diagnostic with real component APIs, no Game_Main/Battle_Main or menu catalogue",
+  "hardware_tested": false,
+  "XEX_sha256": "5ce63416f53ccfc936e81aae3cfe4600c36356d1097e7f1167db53fb87121699"
+}

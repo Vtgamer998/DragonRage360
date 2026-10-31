@@ -1,0 +1,10 @@
+{
+  "soft": {
+    "returncode": 1,
+    "output": "/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: /workspace/scratch/0e938d660765/recovered/source/DragonRage360-Demo/build/float-link-guard/caller.o uses hard float, /workspace/scratch/0e938d660765/recovered/source/DragonRage360-Demo/build/float-link-guard/soft.o uses soft float\n/workspace/scratch/0e938d660765/xsdk-gcc/powerpc-xsdk-elf/bin/ld: failed to merge target specific data of file /workspace/scratch/0e938d660765/recovered/source/DragonRage360-Demo/build/float-link-guard/soft.o\ncollect2: error: ld returned 1 exit status\n"
+  },
+  "hard": {
+    "returncode": 0,
+    "output": ""
+  }
+}

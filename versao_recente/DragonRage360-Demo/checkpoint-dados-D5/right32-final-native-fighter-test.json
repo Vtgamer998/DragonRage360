@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "original_PlayModel_and_Step": true,
+  "frames": 200,
+  "owned_state_survives_source_free": true,
+  "sanitizers": "undefined,bounds",
+  "host_pointer_bits": 32,
+  "host_only": true,
+  "pose_matrix_and_volume_paths": true,
+  "cross_owner_retarget": true,
+  "typed_character_tables": 4,
+  "real_common_reference_supplied": true,
+  "common_table_retarget_executed": true,
+  "original_inactive_object_registry_executed": true,
+  "fighter_spawned_in_combat": false,
+  "rendered": false
+}

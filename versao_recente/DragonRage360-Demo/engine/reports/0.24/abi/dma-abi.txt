@@ -1,0 +1,1 @@
+PASS: adapted producer declarations match original sys/dma.h with PS2 port types on PowerPC xsdk.

@@ -1,0 +1,22 @@
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c: In function 'XbTables_CompleteRemaining':
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c:62:25: error: 'BtlResWork' has no member named 'unk0'
+   62 |         gBtlObjWork->res.unk0 = (s32)(uintptr_t)common4;
+      |                         ^
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c:62:39: error: 'uintptr_t' undeclared (first use in this function)
+   62 |         gBtlObjWork->res.unk0 = (s32)(uintptr_t)common4;
+      |                                       ^~~~~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c:17:1: note: 'uintptr_t' is defined in header '<stdint.h>'; this is probably fixable by adding '#include <stdint.h>'
+   16 | #include <stdlib.h>
+  +++ |+#include <stdint.h>
+   17 | #include <string.h>
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c:62:39: note: each undeclared identifier is reported only once for each function it appears in
+   62 |         gBtlObjWork->res.unk0 = (s32)(uintptr_t)common4;
+      |                                       ^~~~~~~~~
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c:62:49: error: expected ';' before 'common4'
+   62 |         gBtlObjWork->res.unk0 = (s32)(uintptr_t)common4;
+      |                                                 ^~~~~~~
+      |                                                 ;
+incoming/D6/DragonRage360-Demo/engine/platform/platform/xb_tables_complete.c:72:32: error: 'BtlObjState' has no member named 'unk'; did you mean 'unk08'?
+   72 |             memcpy(&obj->state.unk[0], buf, ATTACK_TAIL_BYTES);
+      |                                ^~~
+      |                                unk08

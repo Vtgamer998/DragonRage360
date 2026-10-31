@@ -1,0 +1,74 @@
+{
+  "result": "PASS",
+  "real_resource_endian_output": true,
+  "BE_execution": false,
+  "transactional_rejection": true,
+  "tables": [
+    {
+      "model": "left-model.bin",
+      "tables": [
+        {
+          "kind": 0,
+          "typed_bytes": 256,
+          "source_bytes": 256,
+          "scalar_fields_checked": 35,
+          "unconverted_source_tail": 0
+        },
+        {
+          "kind": 1,
+          "typed_bytes": 7824,
+          "source_bytes": 8512,
+          "scalar_fields_checked": 1304,
+          "unconverted_source_tail": 688
+        },
+        {
+          "kind": 2,
+          "typed_bytes": 676,
+          "source_bytes": 704,
+          "scalar_fields_checked": 143,
+          "unconverted_source_tail": 28
+        },
+        {
+          "kind": 3,
+          "typed_bytes": 160,
+          "source_bytes": 192,
+          "scalar_fields_checked": 40,
+          "unconverted_source_tail": 32
+        }
+      ]
+    },
+    {
+      "model": "right-model.bin",
+      "tables": [
+        {
+          "kind": 0,
+          "typed_bytes": 256,
+          "source_bytes": 256,
+          "scalar_fields_checked": 35,
+          "unconverted_source_tail": 0
+        },
+        {
+          "kind": 1,
+          "typed_bytes": 7824,
+          "source_bytes": 8512,
+          "scalar_fields_checked": 1304,
+          "unconverted_source_tail": 688
+        },
+        {
+          "kind": 2,
+          "typed_bytes": 676,
+          "source_bytes": 704,
+          "scalar_fields_checked": 143,
+          "unconverted_source_tail": 28
+        },
+        {
+          "kind": 3,
+          "typed_bytes": 160,
+          "source_bytes": 192,
+          "scalar_fields_checked": 40,
+          "unconverted_source_tail": 32
+        }
+      ]
+    }
+  ]
+}

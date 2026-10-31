@@ -8,6 +8,35 @@ Body local points get a defined homogeneous W; attack point arguments satisfy
 import re
 
 def transform(source, text):
+    if source=='src/sys/rigid.c':
+        anchor='    Vec4 zero = { 0.0f, 0.0f, 0.0f, 1.0f };'
+        if text.count(anchor)!=1:raise ValueError('rigid sphere origin changed')
+        return text.replace(anchor,'    Vec4 zero __attribute__((aligned(16))) = { 0.0f, 0.0f, 0.0f, 1.0f };'), []
+    if source=='src/sys/gfxm_e_d.c':
+        anchor='        Res_RelocateOffsets(&gBtlStage->tex, (u8 *)base, (TexFile *)(gBtlStage->base + gBtlStage->texOfs));'
+        if text.count(anchor)!=1:raise ValueError('stage texture binder changed')
+        return text.replace(anchor,'        extern int XbStage_TryBindGeometryTexture(void *,void **);\n        if(!XbStage_TryBindGeometryTexture(base,(void **)&gBtlStage->tex)) {\n'+anchor+'\n        }'), []
+    if source=='src/battle/btl_scene.c':
+        anchor='s32 *BtlScene_GetCommonEntry(s32 idx) {\n'
+        if text.count(anchor)!=1:raise ValueError('common3 entry binding changed')
+        return text.replace(anchor,anchor+'    extern int XbBattleRuntime_TryCommon3Entry(int,void **);\n    void *native_entry=NULL;\n    if(XbBattleRuntime_TryCommon3Entry(idx,&native_entry)) return native_entry;\n'), []
+    if source=='src/sys/snd.c':
+        for signature,body in [
+            ('s32 SndHd_GetVagMax(SndBankFile *file) {\n', '    extern int XbSfx_TryVagMax(const void *,int *);\n    int maximum; if(XbSfx_TryVagMax(file,&maximum)) return maximum;\n'),
+            ('void SndHd_GetLoopFlags(SndBankFile *file, u8 *flags) {\n', '    extern int XbSfx_TryLoopFlags(const void *,void *);\n    if(XbSfx_TryLoopFlags(file,flags)) return;\n')]:
+            if text.count(signature)!=1:raise ValueError('sound metadata reader changed')
+            text=text.replace(signature,signature+body)
+        start=text.index('void Snd_Term(void) {');end=text.index('/* Stops everything:',start)
+        block=text[start:end]
+        if block.count('    Snd_RpcTerm();')!=1 or block.count('bank->spuAddr == 0')!=1:raise ValueError('sound termination changed')
+        block=block.replace('    Snd_RpcTerm();\n','').replace('bank->spuAddr == 0','bank->spuAddr != 0')
+        block=block.replace('    IopHeap_Free(gSndMgr->iopBuf);','    Snd_RpcTerm();\n    Heap_Free(gSndRpc);\n    gSndRpc = NULL;\n    IopHeap_Free(gSndMgr->iopBuf);')
+        return text[:start]+block+text[end:], []
+    if source=='src/battle/eft_det_b_b.c':
+        anchor='    file = STGNAV_RES->stageFile;'
+        if text.count(anchor)!=1:raise ValueError('navigation binding changed')
+        code='    extern int XbStage_TryBindNav(void **);\n    void *native_nav=NULL;\n    if (XbStage_TryBindNav(&native_nav)) {\n        gStgNav->data=native_nav;\n        gStgNav->data->nodes=(StgNavNode *)((u8 *)native_nav+16);\n        gStgNav->ready=1;\n        return 0;\n    }\n'
+        return text.replace(anchor,code+anchor), []
     if source=='src/battle/btl_input.c':
         anchor='        u32 bit = 1 << i;'
         if text.count(anchor)!=2:raise ValueError('input bit-counter source changed')
@@ -28,6 +57,11 @@ def transform(source, text):
         text=text.replace(anchor,'            extern int XbFighter_MemberTable(void *,int,void **);\n            void *native_table=NULL;\n            if (XbFighter_MemberTable(obj,i,&native_table)) chr->objTbl[i]=native_table;\n            else '+anchor.strip())
         return text, []
     if source=='src/battle/stg_a_b.c':
+        if text.count('    StgGroundHit hit;')!=2:raise ValueError('stage ground locals changed')
+        text=text.replace('    StgGroundHit hit;','    StgGroundHit hit __attribute__((aligned(16)));')
+        bind='void BtlStage_BindFile(BtlStage *stage) {\n'
+        if text.count(bind)!=1:raise ValueError('stage data binder changed')
+        text=text.replace(bind,bind+'    extern int XbStage_TryBindGeometryData(void *);\n    if(XbStage_TryBindGeometryData(stage))return;\n')
         start='s32 BtlStage_GetStartPlace(s32 side, Vec4 *pos, Vec4 *rot, s32 alt) {\n'
         place='s32 BtlStage_GetPlace(Vec4 *pos, Vec4 *rot) {\n'
         for signature,args in ((start,'side,pos,rot,alt'),(place,'0,pos,rot,-1')):

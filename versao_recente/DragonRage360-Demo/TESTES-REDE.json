@@ -1,0 +1,9 @@
+{
+  "version": "0.5",
+  "host_tests": "PASS: direct-IP UDP discovery, handshake, dropped offer retry, occupied host, invalid/version/length packets, peer source filter, leave, timeout, uint32 clock wrap",
+  "sanitizers": "ASan and UBSan passed; leak detection disabled because runtime /proc task inspection is unavailable",
+  "LAN_broadcast": "implemented, transport test skipped: ENETUNREACH",
+  "Xbox_360": "not tested",
+  "internet": "not tested",
+  "battle_engine": "not integrated; no playable fight"
+}

@@ -45,9 +45,9 @@ assert not [s[0] for s in syms if s[0] and not s[4]]
 for name in ['func_002967C0','sceSifCallRpc','XbSfx_Mix','ADXT_Create','_ctype_','gPortDataStripped']:
     assert name in defined,name
 subprocess.run(['python3',str(sdk/'tools/elf2xex.py'),'--title-id','0x44523630',
-                '--title-name','DragonRage360 0.44 D10 Original Object Boot Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
+                '--title-name','DragonRage360 0.46 D12 Native Stage Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
 report={'kind':'native diagnostic with linked combat code; NOT a playable game',
-        'version':'0.44-D10' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
+        'version':'0.46-D12' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
         'Battle_Main_linked':True,'Game_Main_linked':False,'battle_called':False,
         'strong_or_weak_undefined':0,'native_game_data_loaded':False,'typed_catalog_linked':bool(r.get('typed_catalog_linked')),'partial_preview_available':bool(r.get('typed_catalog_linked')), 
         'boot_combat_available':False,'hardware_executed':False,

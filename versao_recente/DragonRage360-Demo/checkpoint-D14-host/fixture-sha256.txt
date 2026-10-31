@@ -1,0 +1,3 @@
+2db38df077a9e36616cf694b3795f559ed51285fc63dd96ff1fb89bf8cc5ab48  game-input/resources/left-effects.bin
+0ee73268884b200e453ed76c5261bed55980abfad64dceb266d19e569c00dc9c  game-input/resources/right-effects.bin
+217570b491d145f908bf36a96620aef898e41165a374e45c4914a55f3e8dc467  game-input/resources/common-3.bin

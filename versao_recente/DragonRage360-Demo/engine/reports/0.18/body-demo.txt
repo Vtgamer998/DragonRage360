@@ -1,0 +1,2 @@
+PASS: PSMT8 palette diagnostic chain and native renderer calls, vertex arena lifetime, fences/timeouts, failure cleanup, state/capacity/input checks
+PASS body viewer: 1023-vertex chunks, fence before arena reuse, GPU timeout preserves ownership, reopen after close; no GPU execution

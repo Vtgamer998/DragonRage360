@@ -233,3 +233,19 @@ dependências do combate original. Ele ainda falha e não gera XEX.
 Veja `engine/combat/README.md` e `RELATORIO-Battle_Main.md`.
 O executável distribuído continua sendo o diagnóstico 0.24.
 
+
+## Revisão 0.46-D12
+
+O vínculo nativo usa as mesmas opções fixadas do D11. A nova geometria depende
+dos arquivos xb_stage_geometry.inc e xb_battle_files.inc; preserve os .inc ao
+copiar fontes. O transformador fixed_profile_source.py inclui adaptações
+verificadas por âncoras para relocação/texturas do cenário e alinhamento da
+origem da esfera em rigid.c e das consultas de chão em stg_a_b.c.
+
+O teste test_native_managers.py agora aceita --iso /caminho/ISO-USA-local.iso,
+além dos argumentos anteriores. Sem essa opção procura stage-fixture.iso ao
+lado da pasta de recursos. O leitor precisa das partições AFS e do stream de
+ambiente AFS2/65116.bin. Os recursos usados não acompanham a distribuição.
+Nenhum teste host executa Battle_Update/Battle_Main ou o dispositivo GPU/áudio
+físico do Xbox. O carregador tipado grava em ordem nativa do host nos testes;
+a saída do compilador PowerPC continua big-endian.

@@ -1,0 +1,21 @@
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_b.c:33:14: warning: conflicting types for built-in function ‘memset’; expected ‘void *(void *, int,  long unsigned int)’ [-Wbuiltin-declaration-mismatch]
+   33 | extern void *memset(void *dst, s32 c, u32 n);
+      |              ^~~~~~
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_b.c:32:1: note: ‘memset’ is declared in header ‘<string.h>’
+   31 | #include "battle/eft_det_b.h"
+  +++ |+#include <string.h>
+   32 | 
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_b.c:35:14: warning: conflicting types for built-in function ‘memcpy’; expected ‘void *(void *, const void *, long unsigned int)’ [-Wbuiltin-declaration-mismatch]
+   35 | extern void *memcpy(void *dst, const void *src, u32 n);
+      |              ^~~~~~
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_b.c:35:14: note: ‘memcpy’ is declared in header ‘<string.h>’
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_a.c:24:14: warning: conflicting types for built-in function ‘memset’; expected ‘void *(void *, int,  long unsigned int)’ [-Wbuiltin-declaration-mismatch]
+   24 | extern void *memset(void *dst, s32 c, u32 n);
+      |              ^~~~~~
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_a.c:3:1: note: ‘memset’ is declared in header ‘<string.h>’
+    2 | #include "battle/eft_det_a.h"
+  +++ |+#include <string.h>
+    3 | 
+/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/checkpoint-D9/synthetic/eft_det_a.c:36:1: warning: ‘const’ attribute on function returning ‘void’ [-Wattributes]
+   36 | extern void EftTexSet_CheckCount(s32 count, s32 max) __attribute__((const));
+      | ^~~~~~

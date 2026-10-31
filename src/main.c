@@ -25,11 +25,13 @@
 static XbBattleCommon *native_common;
 static XbBattleRuntime *native_runtime;
 static int native_managers;
+static int native_audio,native_stage_running;
 static int native_typed_values_loaded;
 static XbBattleFighter *native_fighters[2];
 static int native_object_diagnostic;
 static XbBattleStageCollision *native_stage;
 static void release_native_stage(void){
+ native_audio=0;native_stage_running=0;
  if(native_managers){int e=XbBattleRuntime_EndManagers(native_runtime);if(e){xsdk_log_write("native manager cleanup refused: %d",e);return;}native_managers=0;}
  for(unsigned i=0;i<2;i++){XbBattleFighter_FreeModelAnimation(native_fighters[i]);native_fighters[i]=NULL;}
  if(native_object_diagnostic){int e=XbBattleFighter_EndObjectDiagnostic();if(e){xsdk_log_write("native object cleanup refused: %d",e);return;}native_object_diagnostic=0;}
@@ -276,6 +278,12 @@ static int prepare_fighter_models(void)
     if(!common_error)common_error=XbBattleRuntime_Open(common_pack,common_bytes,item_pack,item_bytes,&native_runtime);
     free(item_pack);free(common_pack);
     if(common_error)return common_error;
+    void *scene_pack=NULL;size_t scene_bytes=0;XbCommon3Info scene_info={0};
+    common_error=read_battle_resource(3,&scene_pack,&scene_bytes);
+    if(!common_error)common_error=XbBattleRuntime_AttachCommon3(native_runtime,scene_pack,scene_bytes,&scene_info);
+    free(scene_pack);
+    xsdk_log_write("common3 native texture subset: error=%d entries=%u textures=%u images=%u unprepared=%u; complete scene remains unavailable",common_error,scene_info.entries,scene_info.textures,scene_info.images,scene_info.unprepared);
+    if(common_error)return common_error;
     void *ai_data=NULL;size_t ai_bytes=0;
     common_error=XbBattleCommon_GetAiData(native_common,&ai_data,&ai_bytes);
     if(common_error)return common_error;
@@ -333,6 +341,19 @@ static int prepare_fighter_models(void)
     if(!boot)boot=XbBattleRuntime_GetInfo(native_runtime,&runtime_info);
     xsdk_log_write("original CPU manager boot: error=%d; BtlObj_Init(1), Save_Init, match setup, BtlChar_AllocAll(2) and BtlAiMgr_Init; Battle_Update NOT called",boot);
     if(!boot)for(unsigned side=0;side<2;side++)xsdk_log_write("original initialized fighter: side=%u HP=%d Ki=%d AI_type=%d AI_level=%d; GPU battle remains unavailable",side,runtime_info.health[side],runtime_info.ki[side],runtime_info.ai_type[side],runtime_info.ai_level[side]);
+    if(!boot){
+        void *banks[4]={0};size_t bytes[4]={0};unsigned ids[4]={0x14a,0x14e,0xbda,0xbdb};int audio=0;
+        for(unsigned i=0;i<4 && !audio;i++)audio=read_battle_resource(ids[i],&banks[i],&bytes[i]);
+        if(!audio)audio=XbBattleRuntime_BeginAudio(native_runtime,(const void *const *)banks,bytes);
+        for(unsigned i=0;i<4;i++)free(banks[i]);
+        if(!audio){extern int Snd_QueuePlay(int,unsigned,unsigned,unsigned,int,int);native_audio=1;audio=Snd_QueuePlay(16,0,96,64,0,0)<0?-894:0;}
+        xsdk_log_write("original audio diagnostic: error=%d; four banks and side-0 voice request; confirm audible output on console",audio);
+        if(!audio){int stage=XbBattleRuntime_BeginStage(native_runtime,native_stage);
+            native_stage_running=!stage;if(stage)audio=stage;
+            xsdk_log_write("original stage init/reset: error=%d; native geometry and original File_Init/ADX players; no Battle_Init or GPU draw",stage);
+        }
+        boot=audio;
+    }
     return boot;
 }
 #endif
@@ -354,6 +375,10 @@ static int test_stage_collision(void)
     if(!error){
         error=XbBattleStage_PrepareCollision(pack,(size_t)span.size,&native_stage);
         if(!error)error=XbBattleStage_PrepareStarts(native_stage,pack,(size_t)span.size);
+        if(!error)error=XbBattleStage_PrepareParameters(native_stage,pack,(size_t)span.size);
+        XbStageGeometryInfo geometry={0};
+        if(!error)error=XbBattleStage_PrepareGeometry(native_stage,pack,(size_t)span.size,&geometry);
+        xsdk_log_write("native stage geometry: error=%d groups=%u materials=%u meshes=%u parts=%u nodes=%u cells=%u textures=%u; GPU not submitted",error,geometry.groups,geometry.materials,geometry.meshes,geometry.parts,geometry.nodes,geometry.cells,geometry.textures);
         if(!error)error=XbBattleStage_InstallCollision(native_stage);
         for(unsigned side=0;!error && side<2;side++){
             float pos[4],rot[4];int zone=-1;
@@ -466,10 +491,10 @@ int main(void)
 #ifdef DR_ENGINE_LINKED
     extern int Battle_Main(void);
     extern volatile uint32_t gPortDataStripped;
-    xsdk_log_write("DragonRage360 0.44-D10: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
+    xsdk_log_write("DragonRage360 0.46-D12: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
     xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: character/AI managers, common resources and battle boot are incomplete",(unsigned)gPortDataStripped);
 #else
-    xsdk_log_write("DragonRage360 0.44-D10: component diagnostic; Battle_Main not linked in this build.");
+    xsdk_log_write("DragonRage360 0.46-D12: component diagnostic; Battle_Main not linked in this build.");
 #endif
     xsdk_log_write("%s: BPE decode + animation endian synthetic self-test",dr_resource_selftest()?"PASS":"FAIL");
     xsdk_log_write("%s: bounded BIN + motion + skeleton synthetic self-test",dr_container_selftest()?"PASS":"FAIL");
@@ -588,6 +613,10 @@ int main(void)
             xsdk_log_write("%s: separate unlocked save export",ok?"PASS":"FAIL");
         }
         if(!running) break;
+#if defined(DR_TYPED_CATALOG) && defined(DR_ENGINE_LINKED)
+        if(native_stage_running){int e=XbBattleRuntime_ServiceStage(native_runtime);if(e){xsdk_log_write("stage service failed: %d",e);native_stage_running=0;}}
+        if(native_audio){int e=XbBattleRuntime_ServiceAudio(native_runtime);if(e){xsdk_log_write("audio service failed: %d",e);native_audio=0;}}
+#endif
         uint32_t address;
         status=xsdk_present_begin(&address,5000);
         if(!NT_SUCCESS(status)) {xsdk_log_write("FAIL: present_begin 0x%08X",(unsigned)status);break;}

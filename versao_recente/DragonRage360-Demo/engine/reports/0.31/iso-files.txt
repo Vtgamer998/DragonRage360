@@ -1,0 +1,1 @@
+PASS: real ISO through actual xb_disc/dr_disc/Sony byte-file adapter; NT transport mocked; bounds, EOF, short reads, seeks, errors, descriptors, stale mounts and exact ELF/overlay extraction; no game execution

@@ -1,0 +1,1 @@
+D17 — comum 3 637/637 preparado; dez pacotes de técnicas ligados; QEMU i386 dois ciclos e Xenia 55 s com 60 atualizações de cena em CPU. Pixel FF000000, NOT_READY=2, sem Battle_Update/Main e sem teste no Xbox real. Detalhes: RELATORIO-0.51-D17.md.

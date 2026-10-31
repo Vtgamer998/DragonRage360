@@ -1,0 +1,11 @@
+recovered/source/DragonRage360-Demo/build/gs_draw.o
+Attribute Section: gnu
+File Attributes
+  Tag_GNU_Power_ABI_FP: hard float, 64-bit long double
+  Tag_GNU_Power_ABI_Struct_Return: memory
+
+recovered/source/DragonRage360-Demo/build/battle-integration/objects/src_battle_battle_c.o
+Attribute Section: gnu
+File Attributes
+  Tag_GNU_Power_ABI_FP: soft float, unspecified long double
+  Tag_GNU_Power_ABI_Struct_Return: memory

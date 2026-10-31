@@ -1,0 +1,1541 @@
+{
+  "native_menu_units": 72,
+  "regions": [
+    {
+      "object": "src/menu/menu_a.c",
+      "section": ".bss.index.0",
+      "bytes": 16384,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a.c",
+      "section": ".sbss.gMainMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc12",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc11",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc10",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc9",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc8",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc7",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc6",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc5",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc4",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc3",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc2",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc1",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc0",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_c.c",
+      "section": ".sbss.gTitle",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_d.c",
+      "section": ".sbss.gModeMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_b_b.c",
+      "section": ".sbss.gModeBg",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_b_c.c",
+      "section": ".sbss.gHistOutro",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_b_d.c",
+      "section": ".sbss.gHistSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_c.c",
+      "section": ".sbss.gHistResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_d.c",
+      "section": ".sbss.gHistSave",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sBgmIds.0",
+      "bytes": 288,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sAllIds.1",
+      "bytes": 384,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".sbss.gCharSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortStageNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortSongNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortSongsAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortStagesAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sBgmIds.0",
+      "bytes": 288,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sAllIds.1",
+      "bytes": 384,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".sbss.gTeamSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".data.sPortStageRows",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortSongsAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortStagesAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortStageNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortSongNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_g.c",
+      "section": ".sbss.gItemPanel",
+      "bytes": 8,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_g_c.c",
+      "section": ".sbss.gDuelMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_h_b.c",
+      "section": ".sbss.gCharRef",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_h_d.c",
+      "section": ".sbss.gTrain",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_i_b.c",
+      "section": ".sbss.gBootCard",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_i_c.c",
+      "section": ".sbss.gLogo",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_i_d.c",
+      "section": ".sbss.gEntrySel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_j_b.c",
+      "section": ".sbss.gTourMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_k_b.c",
+      "section": ".sbss.gBracket",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_k_d.c",
+      "section": ".sbss.gTourBg",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_l_b.c",
+      "section": ".sbss.gSoloSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_m_b.c",
+      "section": ".sbss.gUbTeamSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_n_b.c",
+      "section": ".sbss.gUbzSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_n_c.c",
+      "section": ".sbss.gUbRank",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_n_d.c",
+      "section": ".sbss.gUbResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_o_b.c",
+      "section": ".sbss.gDiscFusion",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_o_d.c",
+      "section": ".data.gMisSelFaceTex",
+      "bytes": 20,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_o_d.c",
+      "section": ".sbss.gMisSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_p_b.c",
+      "section": ".sbss.gMisResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_p_c.c",
+      "section": ".sbss.gUbMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_q_b.c",
+      "section": ".sbss.gSimDay",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_b.c",
+      "section": ".data.gSimEvent",
+      "bytes": 148,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_c.c",
+      "section": ".sbss.gSimResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".sdata.gSimTopIdleVoice",
+      "bytes": 8,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".sdata.gSimTopUnused",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".data.gSimTopFaceTex",
+      "bytes": 20,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".sbss.gSimTop",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_s_b.c",
+      "section": ".sbss.gSurvSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_s_c.c",
+      "section": ".sbss.gSurvResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_u_g.c",
+      "section": ".sbss.gEvoZ",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_v_c.c",
+      "section": ".sbss.gItemHelp",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_v_d.c",
+      "section": ".sbss.gShop",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_x_c.c",
+      "section": ".sbss.gOption",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_z_d.c",
+      "section": ".data.gDcPassKeys",
+      "bytes": 140,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_b.c",
+      "section": ".data.gPassKeys",
+      "bytes": 56,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_b.c",
+      "section": ".sbss.gPassWin",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_d.c",
+      "section": ".sbss.gReplayMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_e.c",
+      "section": ".sbss.gDcSave",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/port_language.c",
+      "section": ".bss.sLanguageArt",
+      "bytes": 12,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_language.c",
+      "section": ".bss.sLanguageDisplay",
+      "bytes": 32768,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_language.c",
+      "section": ".bss.sLanguage",
+      "bytes": 21504,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPromptCount",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPromptLabel",
+      "bytes": 24,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPromptKind",
+      "bytes": 24,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsShift",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsAlign",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".data.sPsPh",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".data.sPsPw",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPy",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPx",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": "COMMON",
+      "bytes": 4,
+      "common_symbol": "gPortScreen",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.0",
+      "bytes": 64,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.1",
+      "bytes": 40,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.parts.2",
+      "bytes": 96,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.value.4",
+      "bytes": 32,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.5",
+      "bytes": 64,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.6",
+      "bytes": 64,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.7",
+      "bytes": 96,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.value.9",
+      "bytes": 160,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.buf.10",
+      "bytes": 896,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.said.11",
+      "bytes": 224,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.cur.12",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.name.14",
+      "bytes": 7728,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.got.15",
+      "bytes": 161,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.noted.16",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.17",
+      "bytes": 256,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.said.18",
+      "bytes": 160,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.19",
+      "bytes": 224,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.typed.21",
+      "bytes": 40,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.mode.22",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.noItems.23",
+      "bytes": 16,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbSignFrames",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbWinRes",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.sTbTitle",
+      "bytes": 36,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.sTbNameKeys",
+      "bytes": 100,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.sTbKeys",
+      "bytes": 40,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgCode",
+      "bytes": 7,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgFrames",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgQueue",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgKind",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTb",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": "COMMON",
+      "bytes": 4,
+      "common_symbol": "gPortTboSpar",
+      "policy": 2
+    }
+  ],
+  "relocations": [
+    {
+      "region": 58,
+      "offset": 0,
+      "symbol": "SimEv00",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 4,
+      "symbol": "SimEv01",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 8,
+      "symbol": "SimEv02",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 12,
+      "symbol": "SimEv03",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 16,
+      "symbol": "SimEv04",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 20,
+      "symbol": "SimEv05",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 24,
+      "symbol": "SimEv06",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 28,
+      "symbol": "SimEv07",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 32,
+      "symbol": "SimEv08",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 36,
+      "symbol": "SimEv09",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 40,
+      "symbol": "SimEv10",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 44,
+      "symbol": "SimEv11",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 48,
+      "symbol": "SimEv12",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 52,
+      "symbol": "SimEv13",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 56,
+      "symbol": "SimEv14",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 60,
+      "symbol": "SimEv15",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 64,
+      "symbol": "SimEv16",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 68,
+      "symbol": "SimEv17",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 72,
+      "symbol": "SimEv18",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 76,
+      "symbol": "SimEv19",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 80,
+      "symbol": "SimEv20",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 84,
+      "symbol": "SimEv21",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 88,
+      "symbol": "SimEv22",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 92,
+      "symbol": "SimEv23",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 96,
+      "symbol": "SimEv24",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 100,
+      "symbol": "SimEv25",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 104,
+      "symbol": "SimEv26",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 108,
+      "symbol": "SimEv27",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 112,
+      "symbol": "SimEv28",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 116,
+      "symbol": "SimEv29",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 120,
+      "symbol": "SimEv30",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 124,
+      "symbol": "SimEv31",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 128,
+      "symbol": "SimEv32",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 132,
+      "symbol": "SimEv33",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 136,
+      "symbol": "SimEv34",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 140,
+      "symbol": "SimEv35",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 144,
+      "symbol": "SimEv36",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 0,
+      "symbol": "__xbo_target_71_112",
+      "addend": 48,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 4,
+      "symbol": "__xbo_target_71_112",
+      "addend": 80,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 8,
+      "symbol": "__xbo_target_71_112",
+      "addend": 96,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 12,
+      "symbol": "__xbo_target_71_112",
+      "addend": 112,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 16,
+      "symbol": "__xbo_target_71_112",
+      "addend": 128,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 20,
+      "symbol": "__xbo_target_71_112",
+      "addend": 128,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 24,
+      "symbol": "__xbo_target_71_112",
+      "addend": 136,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 28,
+      "symbol": "__xbo_target_71_80",
+      "addend": 16,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 32,
+      "symbol": "__xbo_target_71_112",
+      "addend": 48,
+      "type": 1
+    }
+  ],
+  "exported_local_targets": [
+    {
+      "object": "src/menu/port_tbo.c",
+      "alias": "__xbo_target_71_112",
+      "section": ".rodata.str1.8",
+      "value": 0
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "alias": "__xbo_target_71_80",
+      "section": ".rodata.Tb_WaitUpdate.str1.8",
+      "value": 0
+    }
+  ],
+  "objects": [
+    {
+      "source": "src/menu/menu_a.c",
+      "source_sha256": "a3a080a385d8a228d4ca12c6067558cbb6ab6c4ee5e453c8772877c5bc362614",
+      "object_sha256": "badff613b53360024a08a848ffea4b7a5e363ebe13db65640fadf59797f6b81b"
+    },
+    {
+      "source": "src/menu/menu_a_b.c",
+      "source_sha256": "b17feaf89a82e98f9dcde51dcb1d887353c4455a4f23f5f850a8e77147ae1109",
+      "object_sha256": "85d37baebcde929e3f908fa7e434f105866a4443fb72955881cb5f7a8a1bb934"
+    },
+    {
+      "source": "src/menu/menu_a_c.c",
+      "source_sha256": "995621c8c6790cd2958ca833c486bd116786b98fcccb6c430cd316dbc69d6a1e",
+      "object_sha256": "33c2e7e9cf1d5c62f48d32f99728fd3d74e92217534879d29e08be8f9baecac1"
+    },
+    {
+      "source": "src/menu/menu_a_d.c",
+      "source_sha256": "9e735223ed904924e8063bd448e2cff1c3a57a55e5dd6382fbabd8793c8dc092",
+      "object_sha256": "0ac66085c14be738ed3234f2fed68ef31eeb45bbe0a00a59a39eaf81a7a15a68"
+    },
+    {
+      "source": "src/menu/menu_b_b.c",
+      "source_sha256": "2a27a5d9d2b6860c28660744339079d7a12dcee5c9cc54e1baef2faaaf19975f",
+      "object_sha256": "532ccfc47a735f9ab7b4814e0f9e70bd5194af7f7f96de3de0c5394f8e25953e"
+    },
+    {
+      "source": "src/menu/menu_b_c.c",
+      "source_sha256": "7ece8324e944c978a2ed5100405ac051503155f9687e5e9175abe9ae8f9cb76c",
+      "object_sha256": "09d1063a3e86d6c306b783c069f23c51ed9fbb39fae22bd036dc456b1e69512d"
+    },
+    {
+      "source": "src/menu/menu_b_d.c",
+      "source_sha256": "8ba3ee064b3aeeaa7e4136a8f81fca8b438a7d5d85a73c43d4cae05114c21f30",
+      "object_sha256": "1765a895a7950aa15df16db9c674e4cd6809176da3c6f4c5740051fdaafbb4a7"
+    },
+    {
+      "source": "src/menu/menu_c_b.c",
+      "source_sha256": "c96e7237ccd39a85f30b9dd79e556bdb36868037263489d550eebd537adaa0a8",
+      "object_sha256": "20c9bbc9a48762070b065701907950fdaf7f540235708cd3df55e439f1fabfff"
+    },
+    {
+      "source": "src/menu/menu_c_c.c",
+      "source_sha256": "bec3153df946b4a50c291cbcf242aa24493e7989131ee56d01ec583b41879caf",
+      "object_sha256": "32bde7be1b2bd95987d31b91c29cc708a307a5a696d423764f3269adc6f733cb"
+    },
+    {
+      "source": "src/menu/menu_c_d.c",
+      "source_sha256": "54090161eb812106e48407391baa644f949b2824ff30087cfc6a5f126568ed92",
+      "object_sha256": "ad97810995fea1c30cb88cb13cdcd50d0835b03086f65f7824e686a91ee16bf9"
+    },
+    {
+      "source": "src/menu/menu_c_e.c",
+      "source_sha256": "f9beb034d84f34375a8804711a7dd16f876aa63424e8ac8634dddea6fb87d926",
+      "object_sha256": "366fb7f7a2267d6e05f200c8ec52205f24d9e90e4a0eaefb63809911101f1233"
+    },
+    {
+      "source": "src/menu/menu_e_b.c",
+      "source_sha256": "63052c3f1a596d7779b0589816471d8d7cb76908bec11a3a1e32a2aaa8f7f8a0",
+      "object_sha256": "cb1b83c622a71b79f4f025bf85be8d395f0ed1891090691286651b8f537934c0"
+    },
+    {
+      "source": "src/menu/menu_g.c",
+      "source_sha256": "8ebcbc188b87e8b3f4d4478df824bdcb008593f4e77e7d2973db5a30969da1ba",
+      "object_sha256": "acfc9403e29d9aebb7b3a98ae8983098fade89acca6e29d48e06374ff522752a"
+    },
+    {
+      "source": "src/menu/menu_g_b.c",
+      "source_sha256": "2ddadfc1fea37cb10f97a5c354c4f8deba97079d78c2e0d45293a70e1de69616",
+      "object_sha256": "9377e2b616081be12873732f10934c3bb92e5c9b71bdd8a92da26616fdb432e5"
+    },
+    {
+      "source": "src/menu/menu_g_c.c",
+      "source_sha256": "349f55d47410809ed9681ddf481fc80b21c6bf45f65782ce650a313512dc175f",
+      "object_sha256": "78b7c2abbd88b785040e9dc20bb537310a77d3e5e78c8e23274dc403fb19caa1"
+    },
+    {
+      "source": "src/menu/menu_h_b.c",
+      "source_sha256": "6b8cbffbb464572a95eadc24e0171137a80b13fa853a1bf61616dad04567a2ed",
+      "object_sha256": "36c8f6f27e99848c80e4e818a8eec83131ffb700af0b5e42b60c195bbe65987a"
+    },
+    {
+      "source": "src/menu/menu_h_c.c",
+      "source_sha256": "07dfdb8a0b793bdfe969110478e2a28b79ce86825a3e4e194591cb2400e1ad18",
+      "object_sha256": "ed2e78918c63bc24dcb1038474137dd630d19e851c40f5902791fb88927389f4"
+    },
+    {
+      "source": "src/menu/menu_h_d.c",
+      "source_sha256": "61798cfd10442d7a3bf4c28e575db3763fd564852638fe65a2504a60dd06d9a4",
+      "object_sha256": "e3201e9f9db33ae1607a042b1ae0748106e9e3628b5b8811799b6300286654ec"
+    },
+    {
+      "source": "src/menu/menu_i_b.c",
+      "source_sha256": "59ae8e853c99bef852f5407010a2b42c2a769a31b460f8b2a5c15c1ee1a617c4",
+      "object_sha256": "74cb09e308ab0b364167d9a267487c0ff3acb71bffb87d508707114f21b7dd88"
+    },
+    {
+      "source": "src/menu/menu_i_c.c",
+      "source_sha256": "25b85d30733bbda4d638c0dc440c32817ddc9855d1e7d0367ac46dc65c52d74e",
+      "object_sha256": "f04cf5fb816dc05dd0d9d0306730bd99def95923245dfe2d3c322e9c09c07983"
+    },
+    {
+      "source": "src/menu/menu_i_d.c",
+      "source_sha256": "82cf94d75fb9ac058efb8793a53cf09ad3d31d4d82b1bc7869010a99ad1b32cc",
+      "object_sha256": "976b9840dd75acb14845225ddcc0a84695065b06d11c024e7bf20beb16f5e24b"
+    },
+    {
+      "source": "src/menu/menu_j_b.c",
+      "source_sha256": "d561bb81bb20efe5edecdd7d86dd27cfb83610402c16a27b244fcfc81362605d",
+      "object_sha256": "f8842e5576787dda2091bcf0842a206f483494963095f125950a09a6447ccea0"
+    },
+    {
+      "source": "src/menu/menu_k_b.c",
+      "source_sha256": "17f4735fd9fdd3babcbf3d00121a281a7cb0b5687ae84fe7b576a5d54401ece8",
+      "object_sha256": "7be4468b39269de03327bdfad8213967915c2cbfbda43db1899f6b1f691cd407"
+    },
+    {
+      "source": "src/menu/menu_k_c.c",
+      "source_sha256": "f7df0dafe2d97fc2db9e08d87fe54d38ceeb9c11431d91e27a1c42b4be9c3563",
+      "object_sha256": "062681050456576c5e27a7a9e5b96ee4e82881f77adbeae3db5b38b3792438ef"
+    },
+    {
+      "source": "src/menu/menu_k_d.c",
+      "source_sha256": "461673a3bdb44d91ab6b1cd4c1b5912a0788c4e7f21cfa9e66de13ecaa9562d7",
+      "object_sha256": "25cf67746798d58e4224c9b52602012e0dd10011b57096c515e2213c86e7be29"
+    },
+    {
+      "source": "src/menu/menu_k_e.c",
+      "source_sha256": "b5aa6d5025f290220fdc08c0a87249d6c9930f814006c7ca162ea34261ca56d1",
+      "object_sha256": "3e26a5a655be30cbe9fb950559296656abbeb94f718f034898195a89d4ee4f31"
+    },
+    {
+      "source": "src/menu/menu_k_f.c",
+      "source_sha256": "0785055795eb24ea042f656240be1c72a52a0944d284410931267e67621f3163",
+      "object_sha256": "48c3695766e626fbb8a61a5c9a9a9e004dcfdddf42b1c9b41ad77e3573573ea9"
+    },
+    {
+      "source": "src/menu/menu_l_b.c",
+      "source_sha256": "71d2897eeab2083777e2301b8a7e07b0524e0c8f45f9ee6255ffa04d43e76ddc",
+      "object_sha256": "9485f78184e4e47a3601e5fac4bc69e152d135f30de55578f8c9fce83c3ba44a"
+    },
+    {
+      "source": "src/menu/menu_m_b.c",
+      "source_sha256": "49b532141b758f9769f198a278865684cf9751c601a432807182fdd3a1b0b7a9",
+      "object_sha256": "1a1d550d90176a9b150f6bbc746e37771d06a7ed4f7ac7fdba4f3708e503b50a"
+    },
+    {
+      "source": "src/menu/menu_n_b.c",
+      "source_sha256": "e42205ba0b58cafeafcaae76bc0a0650ffd4d62d9b026ab680eb556c2a5c3b6a",
+      "object_sha256": "d9d54a8aac1821132d45df5e66d080486e00dc06c94d333114bf8e2e1fcd2bc0"
+    },
+    {
+      "source": "src/menu/menu_n_c.c",
+      "source_sha256": "032c7216077bea0f0beb32d42602f3f3d9888f0ed41936a4fa6466b82611f4ee",
+      "object_sha256": "3733788afcfc3078f0dfda351afd7533001a38ab256dc0804186218b6b39e270"
+    },
+    {
+      "source": "src/menu/menu_n_d.c",
+      "source_sha256": "34650808aaf4541ae3f6efc2fac88d903938282440cf3e942a722d5b8b019819",
+      "object_sha256": "2413423f4eb9512ea919c8b2620b5a01101367b4829f6126518a1b612ab6f4d1"
+    },
+    {
+      "source": "src/menu/menu_o_b.c",
+      "source_sha256": "da329e8b567e0393f3a3dd0bee530fc13ffaf7ca000975482e855e8deb1ddf03",
+      "object_sha256": "65c01381200e4d23c0a4d99c3a0cec9d9e04a6a87935e012364d30e4a1ba9655"
+    },
+    {
+      "source": "src/menu/menu_o_c.c",
+      "source_sha256": "0fd1ef710775341ad7fab2b03d38b38984975a206ff44cac2546d55b2ebe560e",
+      "object_sha256": "f5c36485eeff3831e255574a731fc32832d205704a33fc57549bd763fa9fec79"
+    },
+    {
+      "source": "src/menu/menu_o_d.c",
+      "source_sha256": "24e0685dbcea25271b66e3341f1c6934631a59daf54b139646c48c5d86800359",
+      "object_sha256": "865e77a14dc49dcc1232620aa7c47cf7fe1324fdf9d7a1e2a6d849ff7b579a11"
+    },
+    {
+      "source": "src/menu/menu_p_b.c",
+      "source_sha256": "76c261fb70aea3654650977dbe4acfa7af6591e9a7fadc5dcd0a4ab357ba9931",
+      "object_sha256": "5beed45f30a1e1bd0d782c496afce10bebf84f084adf9a2c074d40f78b722bb7"
+    },
+    {
+      "source": "src/menu/menu_p_c.c",
+      "source_sha256": "e43d40994642cbbf3dc0a051425bf46cf79394965fcfcf9242322e06ffffa123",
+      "object_sha256": "ddccabdec1f2db0d0f775db0da5d4f5032a914e2e9b00c91ae0c5c51db33b27c"
+    },
+    {
+      "source": "src/menu/menu_p_d.c",
+      "source_sha256": "faf8fdad9f0ef444706731ab1b3f6276f3b6e29fdde924d270e2386cbf7a2306",
+      "object_sha256": "f1a05037d134da7e29e1cf309c0fff9bd1874e48b663c96e5e85f025cf373e2a"
+    },
+    {
+      "source": "src/menu/menu_q_b.c",
+      "source_sha256": "fdeff90e3658fb28362a84da78781925d594ebea1714e0b9f24902f1aa573dc3",
+      "object_sha256": "60c723628a2d6cbf7d735526c79735822369b2e06e7ec795c477998428215feb"
+    },
+    {
+      "source": "src/menu/menu_r_b.c",
+      "source_sha256": "5f7cfec47147f169b5aea24a9846b1a8225467a26e80cc67d362c3787a5d04d0",
+      "object_sha256": "d40af7a80cd7d742a35d3025541b3ac53f71c46db02109ae428b3cf8b0a4aba7"
+    },
+    {
+      "source": "src/menu/menu_r_c.c",
+      "source_sha256": "1f370466e93dcda3ea693e48b66593de7152fe22b8bd39282cb7c1f93c8844c6",
+      "object_sha256": "b1205ec77c9f5b9ba23c3d6742a60cb961290aa85a849c6040c69e25a8e4b7e3"
+    },
+    {
+      "source": "src/menu/menu_r_d.c",
+      "source_sha256": "0be49a09ccec56d4a501a70fdaa3c26e1bb9198bca422d5ce269c3e46c71d7bc",
+      "object_sha256": "f08906ed739de636e5b88ce8a5d345186d7085cea1069d91d4a343e434864fd4"
+    },
+    {
+      "source": "src/menu/menu_s_b.c",
+      "source_sha256": "90f20965ffd7804a9e7f62c5f92075bbdf05f4697fcfd9e81795641ab0980713",
+      "object_sha256": "baa71eb9c065c273ba794d4966928ff5c9d2244f99aa84e5429bf56712865c78"
+    },
+    {
+      "source": "src/menu/menu_s_c.c",
+      "source_sha256": "e6be93f9215f72a0536b8b27eeeda1e20cdecfaabdd84ab941f4a62b03323843",
+      "object_sha256": "4cb5968e223d6090e4836d8c93b3b1a6813ec6d605f7c0852c3209a464bf5885"
+    },
+    {
+      "source": "src/menu/menu_s_d.c",
+      "source_sha256": "11dbc7a84a0e91a84b69973be97c1fcb73e593cb59f24d73e89d854c55c7b796",
+      "object_sha256": "7eecac583034ce17c749c1be390deb70a3545395672bf4e22f04a98e9bd8ca60"
+    },
+    {
+      "source": "src/menu/menu_t_b.c",
+      "source_sha256": "6e41d9184934086e6b1e4fdc53085958c896c656035651af25457a8267ec5cce",
+      "object_sha256": "f367a255fec495fda4ea5ae7c7702aeb824da9d497f3692fe0309da7b9e18191"
+    },
+    {
+      "source": "src/menu/menu_u.c",
+      "source_sha256": "6cf5c3cad0719c9feefc35346b87ce65956a2c53d13385ace95e7ef58404c55f",
+      "object_sha256": "c0b250177e8a3c2bf0af80ad6ce93639eccacdfb5b8ffc310807959318016fe0"
+    },
+    {
+      "source": "src/menu/menu_u_b.c",
+      "source_sha256": "63d79fee4d1e1c5c090ac242808da085b64d0299bdd8638d2853307f1fa28626",
+      "object_sha256": "75cf8322a4353b5e1524a10dc21c41727de55a874d762ec97ff6afc883261a3f"
+    },
+    {
+      "source": "src/menu/menu_u_c.c",
+      "source_sha256": "b3f27d7502deeba23d9552d29bf762e19f5feba2e67d81bddf46407fbbc20b6b",
+      "object_sha256": "0b2cc16b10d3a93bb6300406701984a09b928e9a379003669294cbbd9af9a740"
+    },
+    {
+      "source": "src/menu/menu_u_d.c",
+      "source_sha256": "66c21aa7a9bbce3b4762ef57543aedbee90b126336750287fd18ffffb17b50dc",
+      "object_sha256": "3f4b5830548a8b618be2ae8a95da2787483ce3ac9b4e8d5ccdb0f50c6cc52f41"
+    },
+    {
+      "source": "src/menu/menu_u_e.c",
+      "source_sha256": "e9aea297b4cb0e0b3e50068f3fcdc331114573881b5cb6b2d03d2e0332b601db",
+      "object_sha256": "1d4a8d74e16b6bf4372b264a52a32e691bfcd468c68c14b30a29a47040297030"
+    },
+    {
+      "source": "src/menu/menu_u_f.c",
+      "source_sha256": "e50ea540b0c7adad74820ced4d2e0ccc69b4173e5c30121ab47e9e7ef233554e",
+      "object_sha256": "5ed5d4d08bb2f36ae65710c56c81beafe6cd33534b77ae38e377d05fa986b292"
+    },
+    {
+      "source": "src/menu/menu_u_g.c",
+      "source_sha256": "ac9b4ae738310899f13a3950e187c0d26b84c23a4398f7539e75f3b205769d96",
+      "object_sha256": "5af5c4fae85def7c61604811ee698cf1d4a604a0448ba4cb3c0900973b687d5c"
+    },
+    {
+      "source": "src/menu/menu_u_h.c",
+      "source_sha256": "69d7bd27454ef30c7283fb7540932604943cfb7a22b20672bafe4ef48c93336b",
+      "object_sha256": "2a58fb1da08428f743bff71cb782991eb883c93f08a3ef818a67decd169133d6"
+    },
+    {
+      "source": "src/menu/menu_v_b.c",
+      "source_sha256": "3e9b2374ceb95748ade505a3810a5aeba4fea02c21a2d8fcff4c91f659f45cd0",
+      "object_sha256": "98e52a5ed4b1962a613aa1e98e2a8669f0edb11b3262f0173f4bfd9fc9026b49"
+    },
+    {
+      "source": "src/menu/menu_v_c.c",
+      "source_sha256": "bf2f1508d08477e8026e05a7bb0db0b230c9c49a2cf7ed17691d803687efa76d",
+      "object_sha256": "5d9849f0f70c37f35d3644676fb4f63bf5597e77575a8632111cec029952fe59"
+    },
+    {
+      "source": "src/menu/menu_v_d.c",
+      "source_sha256": "658a08ae290d2ad0da844846def3a08a8016aa7bbe19231e4df0b82842f5348a",
+      "object_sha256": "cfcc15e1729e33c8f0f205058f7ad44b3e3fe26199ce789ecec65dcd08ec72ff"
+    },
+    {
+      "source": "src/menu/menu_w_b.c",
+      "source_sha256": "8a24b7059eb2e8ad5f902f957690d2fb8359bed95b4a6534861fd78fbf7a2635",
+      "object_sha256": "1c4e552152d8c169046cb14659cbcc1b3749f04f68169bbdd43da01ce9ea3074"
+    },
+    {
+      "source": "src/menu/menu_w_c.c",
+      "source_sha256": "9aebf02b55b2684281ec7867b90d7a791d91fe7ee032bcb1309e764f64171640",
+      "object_sha256": "5ce0682b06f6af4cbfa9331d6fadbbd9fc91e1c2baae018e302f9169cff1cfc1"
+    },
+    {
+      "source": "src/menu/menu_x_b.c",
+      "source_sha256": "7d06c27accf10b60ce879d2c22030e655e5d6533aceb3aae83505a16385bc9b8",
+      "object_sha256": "492b4d89ab31b15d2ef2324d07293dd467393b1ff4309094eb761bc217477d90"
+    },
+    {
+      "source": "src/menu/menu_x_c.c",
+      "source_sha256": "40dec9339694374320894ade75ac3e3eef2951f433399c7548dc60d042671276",
+      "object_sha256": "ab4e21cee414ad84e8379ff7c4dbc5805ef24e271beaa6bbdc773cb08ec3743f"
+    },
+    {
+      "source": "src/menu/menu_y_b.c",
+      "source_sha256": "203d791a0550cd16e82f7e70ef49dcadcb78eb63650a116b10a5801be4a4ea49",
+      "object_sha256": "7f6cd6d5bb5dc20a0aba4a96cebddf7ce27244c00f826f6039d08d76ec8f5bc2"
+    },
+    {
+      "source": "src/menu/menu_z_b.c",
+      "source_sha256": "585463a4aa16c605725151a6a55d65ca286c720ffc31161d60bbc0665e35c3ef",
+      "object_sha256": "c92d48c53f17a9d1edc4ab3ca766389652bf0d74cd9707f0df05fd7867c945da"
+    },
+    {
+      "source": "src/menu/menu_z_c.c",
+      "source_sha256": "0260715d86e67dd42c58c3166d0a45c8f1119b1d2a5960ebb633efabfe36cfa5",
+      "object_sha256": "2500b6549fc41a455eb8eadaa42af7d5f18c34a0776d64d9994f5ddf4c02f87c"
+    },
+    {
+      "source": "src/menu/menu_z_d.c",
+      "source_sha256": "c2fd852a1fc4db9e29d12f11f9df355ff0ad56667f42a3c1b38b0e0f010c3ad2",
+      "object_sha256": "cad36c9ba72846361043f231a96cc72bea0c1b99ae9b582660e23511d64b91ed"
+    },
+    {
+      "source": "src/menu/menu_za_b.c",
+      "source_sha256": "5bbc6e6d7ca0756cc75c5fecb19ae6e4be081279be6bf581c0b62b168f8ad4f2",
+      "object_sha256": "fb690b40e48fa8915460e9649f43571327a4d46af7f2a3fd3a2218e02d0aabd9"
+    },
+    {
+      "source": "src/menu/menu_za_c.c",
+      "source_sha256": "22b40aa54473c79c497158585d031f5daf3d273a109ccd10be80a074beecbe33",
+      "object_sha256": "b9809ddc18fe40ec101629f5d7dce37a6559d5f48e9e108168517d8cb539e6cb"
+    },
+    {
+      "source": "src/menu/menu_za_d.c",
+      "source_sha256": "cdbb7b65baa8d4431c43f8ac850a6c3a73474e421e4d646448546a0449a264f0",
+      "object_sha256": "02e93c3d3c43cf88dd2b783fda2ce6e30a2f7fce3fa776d93d0ec158967069f1"
+    },
+    {
+      "source": "src/menu/menu_za_e.c",
+      "source_sha256": "337020a901069fac896928842bd03e0727c975dbc14b76f5c1914192008931d9",
+      "object_sha256": "e78157a95c79c77f6bd51259e61ac6eeca3dc2a7c7c0181f5fe794838a6266bc"
+    },
+    {
+      "source": "src/menu/port_language.c",
+      "source_sha256": "09cd53a2663cad5cd92e06b0e1fa02b7da126d622b2519d72674297a8a1beec5",
+      "object_sha256": "4ce26bb48b87e05787b1c567cf4d621fcafc65a2ce172f55e5ff371410924cad"
+    },
+    {
+      "source": "src/menu/port_screen.c",
+      "source_sha256": "38746dcbd3f8a91bb7df0e40f3be6d55fe4ea84bbc659b19b66bb968a827780d",
+      "object_sha256": "cc0b664e938c20af5f44aecf50868a9207bc73a224867cd7c4162508108850c4"
+    },
+    {
+      "source": "src/menu/port_tbo.c",
+      "source_sha256": "d464e7f06c86566238d3174a668ba44733f4726b4096634f43b6470fec3319ea",
+      "object_sha256": "e3328f3c42f460e7f08f86a96e42f1b9b2f078d3296bc1a4f71308a02edb10da"
+    }
+  ],
+  "source_identity": "USA DBZP.BIN, size+FNV-1a, not a cryptographic authenticity check",
+  "MIPS_bytes_copied_to_native_memory": false,
+  "scope": "all compiled native menu writable sections/common symbols and their native pointer relocations; immutable constants and machine code stay resident under native linker control"
+}

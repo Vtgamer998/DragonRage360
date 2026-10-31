@@ -1,0 +1,1 @@
+PASS: final PPC catalog: 33 regions, 2738 ops, 1779 checked native bindings; 1473 addresses changed and relocated; boot remains blocked

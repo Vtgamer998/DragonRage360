@@ -1,0 +1,30 @@
+{
+  "review": "D6-C1",
+  "baseline": "0.39-D5",
+  "executable_runtime_identity": "0.39-D5",
+  "new_gameplay_features": false,
+  "battle_called": false,
+  "hardware_execution": false,
+  "platform_source_inventory": 29,
+  "D6_added_modules_accepted": false,
+  "correction_main_exactly_matches_D5": true,
+  "guards": {
+    "gPortDataStripped": 2,
+    "stage_NOT_READY": true
+  },
+  "toolchain": {
+    "gcc": "15.3.0",
+    "binutils": "2.47",
+    "newlib": "4.6.0.20260123",
+    "xsdk_commit": "57b02f1e60667e37d22c3aa613d23d2486514ff8",
+    "upstream_commit": "3ca419c7966b11438e2dc3c9a7e1914f102ed545"
+  },
+  "XEX_sha256": "38c3301f6b8268c8d826fc78f0f70bf63a518abb899ac747cb57853176f2c3f3",
+  "PPC_units_compiled": 401,
+  "undefined_symbols": 0,
+  "ABI_conflicts": 0,
+  "real_typed_catalog_regenerated_identical": true,
+  "catalog_regions": 33,
+  "catalog_operations": 2738,
+  "native_pointer_bindings_verified": 1779
+}

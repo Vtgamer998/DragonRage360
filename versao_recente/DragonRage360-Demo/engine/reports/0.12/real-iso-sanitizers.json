@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "sanitizers": [
+    "AddressSanitizer",
+    "UndefinedBehaviorSanitizer"
+  ],
+  "leak_detection": "disabled because proc/task inspection is restricted in this environment",
+  "animations": 57259,
+  "empty_motion_slots": 9395,
+  "model_skeletons": 698,
+  "absent_skins": 590,
+  "truncated_real_animation_checks": 317,
+  "CPU": "host little-endian; not Xbox or PowerPC execution",
+  "command": "ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 real-iso-sanitize game.iso"
+}

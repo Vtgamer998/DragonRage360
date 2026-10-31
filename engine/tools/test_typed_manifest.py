@@ -4,7 +4,7 @@
 Only expected hashes, layouts and pointer addresses are compiled into fixtures.
 """
 from pathlib import Path
-import argparse,json,struct,subprocess,os,hashlib
+import argparse,json,struct,subprocess,os,hashlib,sys
 p=argparse.ArgumentParser();p.add_argument('manifest',type=Path);p.add_argument('disc',type=Path);p.add_argument('output',type=Path);p.add_argument('--sanitize',action='store_true');a=p.parse_args();e=Path(__file__).resolve().parents[1];out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
 r=json.loads(a.manifest.read_text());elf=(a.disc/'SLUS_216.78').read_bytes();flat=bytearray(0x1ff180);shoff=struct.unpack_from('<I',elf,32)[0];step,n=struct.unpack_from('<HH',elf,46)
 for i in range(n):
@@ -17,8 +17,8 @@ def fnv(data):
  return v
 for op in r['operations']:
  rg=r['regions'][op['region']];start=rg['source_offset']+op['offset'];src=sources[rg['source_file']][start:start+op['length']]
- if op['kind']=='pointer':data=struct.pack('>I',op['native_value_in_reference_link'])
- else:data=b''.join(src[i:i+op['width']][::-1] for i in range(0,len(src),op['width']))
+ if op['kind']=='pointer':data=op['native_value_in_reference_link'].to_bytes(4,sys.byteorder)
+ else:data=src if sys.byteorder=='little' else b''.join(src[i:i+op['width']][::-1] for i in range(0,len(src),op['width']))
  expected[op['region']][op['offset']:op['offset']+op['length']]=data
 s='''#include "xb_typed_data.h"
 #include <assert.h>

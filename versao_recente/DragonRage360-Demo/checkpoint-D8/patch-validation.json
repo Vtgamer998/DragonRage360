@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "baseline": "0.41-D7",
+  "text_files": 24,
+  "applied_and_byte_compared": true,
+  "changed_files": [
+    "BUILD-RESULT.txt",
+    "LEIA-ME.txt",
+    "PENDENCIAS.md",
+    "README.md",
+    "RELATORIO-0.42-D8.md",
+    "RELATORIO-LUTA-MINIMA-ATUAL.md",
+    "TESTAR-PRIMEIRO.md",
+    "engine/platform/platform-sources.txt",
+    "engine/platform/platform/xb_battle_common.c",
+    "engine/platform/platform/xb_battle_common.h",
+    "engine/platform/platform/xb_battle_fighter.c",
+    "engine/platform/platform/xb_battle_fighter.h",
+    "engine/platform/platform/xb_fighter_tables.c",
+    "engine/platform/platform/xb_fighter_tables.h",
+    "engine/tests/test_battle_common.c",
+    "engine/tests/test_native_fighter.c",
+    "engine/tools/build_engine_diagnostic.py",
+    "engine/tools/test_battle_common.py",
+    "engine/tools/test_fighter_tables.py",
+    "engine/tools/test_native_fighter.py",
+    "engine/tools/test_platform_sources.py",
+    "src/demo_ui.c",
+    "src/main.c",
+    "tests/check_xex.py"
+  ]
+}

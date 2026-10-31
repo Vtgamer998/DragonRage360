@@ -1,0 +1,1 @@
+PASS -mcheck-fpr-alignment: dr_texfile.c and dr_body_demo.c; compilation only, no PPC execution.

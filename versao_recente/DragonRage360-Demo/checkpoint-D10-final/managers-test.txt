@@ -1,0 +1,19 @@
+typed data: 0
+runtime: 0
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+PASS original input sample/remap/press/release with physical-pad fixture
+PASS original roster reset / AI init / reset / terminate: pass=0 heap restored
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+PASS original input sample/remap/press/release with physical-pad fixture
+PASS original roster reset / AI init / reset / terminate: pass=1 heap restored
+PASS no Battle_Update/Battle_Main, GPU or SDK transport executed; marker stays 2
+typed-data: 2738 ops validated; complete=1; commit=1; combat NOT started
+mem: game arena at 0x4193e000 (29630464 bytes); fixed register windows separate
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started

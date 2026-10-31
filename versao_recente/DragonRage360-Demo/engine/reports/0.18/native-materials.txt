@@ -1,0 +1,2 @@
+PASS: PSMT8 palette diagnostic chain and native renderer calls, vertex arena lifetime, fences/timeouts, failure cleanup, state/capacity/input checks
+PASS: explicit mip-chain preflight/upload, 108 GS blend keys, channel masks and material constant traces (CPU mocks)

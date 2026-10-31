@@ -1,0 +1,1 @@
+PASS: 1841 byte comparisons with original upstream DMA producers; canonical serialization, actual stream submission, FINISH/END, double buffers, bounds/capacity/sticky errors; no battle or GPU execution

@@ -1,0 +1,4976 @@
+{
+  "unresolved_count": 207,
+  "object_count": 425,
+  "counts": {
+    "with_code_reference": 104,
+    "data_only": 103,
+    "not_found_in_objects": 0
+  },
+  "references": {
+    "D_3BE71C": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 157832,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "DrNet_BattleFinished": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleResult_Finish",
+          "offset": 112,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "MenuText_BootLanguageChosen": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3060,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "MenuText_RegisterGlyphs": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_UploadTexture",
+          "offset": 44,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "MenuTranslation_ArtPath": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 368,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 396,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 424,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3252,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3276,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3296,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "MenuTranslation_Available": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 36,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "MenuTranslation_SaveChoice": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3056,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "MenuTranslation_ShouldPrompt": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 60,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortA11y_FontText": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_NewCmd",
+          "offset": 276,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortA11y_Say": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 668,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 700,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3228,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 248,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 876,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 1512,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortQuit_Draw": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_gfx_c.o",
+          "section": ".text.Gfx_EndFrame",
+          "offset": 28,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortSongs_Refresh": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 3728,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3652,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_Copy": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 500,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_Paste": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_JoinUpdate",
+          "offset": 708,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_TextId": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_TextExOuterXY",
+          "offset": 180,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Heading",
+          "offset": 148,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Msg",
+          "offset": 60,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_TextInfo": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Line",
+          "offset": 160,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Line",
+          "offset": 212,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Line",
+          "offset": 264,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Line",
+          "offset": 308,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_TextExOuterXY",
+          "offset": 228,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Heading",
+          "offset": 168,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Heading",
+          "offset": 316,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Heading",
+          "offset": 396,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Heading",
+          "offset": 444,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_Heading",
+          "offset": 492,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_TextMeasure": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_TextWidth",
+          "offset": 20,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_screen_c.o",
+          "section": ".text.Ps_MsgWidth",
+          "offset": 20,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_TextMode": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Vanilla",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 164,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_JoinUpdate",
+          "offset": 424,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_JoinUpdate",
+          "offset": 568,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_CreateUpdate",
+          "offset": 468,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_NameUpdate",
+          "offset": 512,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 164,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 372,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 440,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SparUpdate",
+          "offset": 600,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_HubUpdate",
+          "offset": 192,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_HubUpdate",
+          "offset": 328,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_HubUpdate",
+          "offset": 416,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_HubUpdate",
+          "offset": 572,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 256,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 404,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4724,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4904,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 5056,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 6832,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 12288,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 13036,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 13224,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "PortTbo_TextRead": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_JoinUpdate",
+          "offset": 156,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_NameUpdate",
+          "offset": 96,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_ClashLog": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_act_e_c.o",
+          "section": ".text.BtlAct_ClashBlowsHandler",
+          "offset": 1112,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_act_f_c.o",
+          "section": ".text.BtlAct_ClashStruggleHandler",
+          "offset": 124,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_act_f_c.o",
+          "section": ".text.BtlAct_ClashStruggleHandler",
+          "offset": 976,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_ClashSquare": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_a_c.o",
+          "section": ".text.Hud_PreUpdate",
+          "offset": 1184,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_DataFingerprint": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Vanilla",
+          "offset": 16,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 11624,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_DataFingerprintOriginal": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Vanilla",
+          "offset": 152,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_DataFingerprintText": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 10884,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_DmaChcr": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.MovieTag_Send",
+          "offset": 44,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Run",
+          "offset": 468,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_CbNoData",
+          "offset": 348,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_CbNoData",
+          "offset": 456,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_HudSwap": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_a_b_c.o",
+          "section": ".text.HudTeam_SelectSide",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_a_b_c.o",
+          "section": ".text.HudTeam_SelectSide",
+          "offset": 56,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawHp",
+          "offset": 44,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawHp",
+          "offset": 312,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawWideFrame",
+          "offset": 232,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawWideFrame",
+          "offset": 472,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawFace",
+          "offset": 80,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawFace",
+          "offset": 124,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawFace",
+          "offset": 216,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_DrawFace",
+          "offset": 316,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_ClearFaceTexMark",
+          "offset": 48,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_SelectSide",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_b_c.o",
+          "section": ".text.HudGauge_SelectSide",
+          "offset": 56,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateRoot",
+          "offset": 64,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateMessage",
+          "offset": 348,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateText",
+          "offset": 312,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateHits",
+          "offset": 240,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateHits",
+          "offset": 552,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateDamage",
+          "offset": 328,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_UpdateDamage",
+          "offset": 568,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_SelectSide",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_DrawText",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_c_b_c.o",
+          "section": ".text.HudCombo_DrawText",
+          "offset": 192,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_UpdateButton",
+          "offset": 988,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_UpdateButton",
+          "offset": 1024,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_UpdateButton",
+          "offset": 3052,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_UpdateButton",
+          "offset": 3152,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_UpdateCommand",
+          "offset": 1880,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_UpdateCommand",
+          "offset": 2060,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_SelectSide",
+          "offset": 36,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_SelectSide",
+          "offset": 68,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_DrawNames",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_b_c.o",
+          "section": ".text.HudPrompt_DrawNames",
+          "offset": 172,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyBackground": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SparUpdate",
+          "offset": 296,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 13156,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyCancel": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 96,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 188,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 13284,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyCode": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 924,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 960,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 320,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 452,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_WaitUpdate",
+          "offset": 496,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 6060,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_SparSign",
+          "offset": 404,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyError": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 552,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyInBackground": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 500,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_SparSign",
+          "offset": 28,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyLaunch": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 408,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyOther": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 6340,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 12732,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyPoll": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyQueueWaiting": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 9128,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 12328,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyQueuesAsk": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 12208,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyStartCode": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 108,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 260,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_LobbyStartQuick": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4668,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_MainItemLabel": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.PortMainMenu_WriteDisc.constprop.0",
+          "offset": 36,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_MenuScene3D": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_h_b_c.o",
+          "section": ".text.CharRef_Run",
+          "offset": 104,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_h_b_c.o",
+          "section": ".text.CharRef_Run",
+          "offset": 232,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_h_b_c.o",
+          "section": ".text.CharRef_Run",
+          "offset": 356,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NameFontSheets": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 972,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3700,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 5680,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetActive": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_input_c.o",
+          "section": ".text.BtlInput_Sample",
+          "offset": 176,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_seq_c.o",
+          "section": ".text.BtlSeqFight_Update",
+          "offset": 128,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_seq_c.o",
+          "section": ".text.BtlSeqFight_Update",
+          "offset": 216,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_seq_c.o",
+          "section": ".text.BtlSeqFight_Update",
+          "offset": 312,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_0_c.o",
+          "section": ".text.PauseMenu_Init",
+          "offset": 12,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_0_c.o",
+          "section": ".text.PauseMenu_Draw",
+          "offset": 12,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_a_c.o",
+          "section": ".text.Hud_PreUpdate",
+          "offset": 1196,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_e_d_c.o",
+          "section": ".text.BtlPause_CheckOpen",
+          "offset": 112,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetFixedStart": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c_c.o",
+          "section": ".text.Title_Run",
+          "offset": 80,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_i_c_c.o",
+          "section": ".text.FirstRun_Main",
+          "offset": 108,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_i_c_c.o",
+          "section": ".text.FirstRun_Main",
+          "offset": 196,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetLeave": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.MainMenu_Run",
+          "offset": 528,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetMe": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_seq_c.o",
+          "section": ".text.BtlSeqFight_Update",
+          "offset": 236,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_0_c.o",
+          "section": ".text.PauseMenu_Draw",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_hud_a_c.o",
+          "section": ".text.Hud_PreUpdate",
+          "offset": 1248,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetMenuListed": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.MainMenu_Init",
+          "offset": 1744,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.MainMenu_Init",
+          "offset": 1808,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.MainMenu_Init",
+          "offset": 1852,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetMenuOpen": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.MainMenu_Input",
+          "offset": 1832,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetNameGet": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 240,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 1268,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 488,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4628,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 6472,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 9948,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 12980,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetNameSave": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_NameUpdate",
+          "offset": 308,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetNameSet": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4632,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetOptions": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 60,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 236,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4624,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetRulesSet": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_BeginSearch.part.0",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4600,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetSession": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.interp_show",
+          "offset": 776,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_FrameEnd",
+          "offset": 672,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BtlMember_ApplyItems",
+          "offset": 20,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c.o",
+          "section": ".text.MainMenu_Run",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2596,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2616,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 3732,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 2920,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 2936,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3000,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3656,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_g_b_c.o",
+          "section": ".text.Duel_Main",
+          "offset": 120,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetSessionsEnded": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 232,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SearchNews",
+          "offset": 316,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetSideOptions": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_DefaultOptions",
+          "offset": 112,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetSpeedSet": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4580,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetSpeedStandard": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4576,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 9360,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_NetView": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_cam_c.o",
+          "section": ".text.BtlCam_UpdateOverride",
+          "offset": 448,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_scene_c.o",
+          "section": ".text.BtlScene_IsCharInView",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_scene_c.o",
+          "section": ".text.BtlScene_IsCharInView",
+          "offset": 168,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_RollCan": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_Speak",
+          "offset": 1632,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_CreateUpdate",
+          "offset": 520,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 248,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4604,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 8412,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 12096,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_RumbleTest": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_btl_char_get_c.o",
+          "section": ".text.BtlChar_UpdateVibration",
+          "offset": 240,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_SettingSave": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 328,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 372,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 448,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 472,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 492,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 524,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 540,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 580,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 604,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 624,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 644,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 664,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 684,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 704,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 724,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 744,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 764,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 784,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 804,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 824,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsDraw_FrameSkipSet",
+          "offset": 36,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SaveChoices",
+          "offset": 36,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SaveChoices",
+          "offset": 56,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SaveChoices",
+          "offset": 76,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SaveChoices",
+          "offset": 96,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SparUpdate",
+          "offset": 264,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SparUpdate",
+          "offset": 284,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4652,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_SettingText": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 208,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_SettingsWrite": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.GsGpu_SetSettings",
+          "offset": 828,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SaveChoices",
+          "offset": 100,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.Tb_SparUpdate",
+          "offset": 288,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_tbo_c.o",
+          "section": ".text.PortTbo_Run",
+          "offset": 4656,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_SongDebug": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4504,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_TestBgm": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_SetRule",
+          "offset": 108,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_SetRule",
+          "offset": 120,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_TestScreen": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_SetRule",
+          "offset": 80,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_SetRule",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Port_TestStage": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_SetRule",
+          "offset": 152,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_battle_load_c.o",
+          "section": ".text.BattleSetup_SetRule",
+          "offset": 164,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "UiText_TranslateLine": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_dialog_c.o",
+          "section": ".text.Dialog_DrawText",
+          "offset": 192,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_dialog_c.o",
+          "section": ".text.Dialog_DrawTitle",
+          "offset": 168,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_dialog_c.o",
+          "section": ".text.Dialog_DrawBody",
+          "offset": 168,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_view_b_c.o",
+          "section": ".text.TextBox_AttachLine",
+          "offset": 120,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "UiText_TranslateString": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_CountLinesEx",
+          "offset": 240,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_GetHeight",
+          "offset": 24,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_CountLines",
+          "offset": 12,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_MeasureWidthEx",
+          "offset": 368,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_PrintAt",
+          "offset": 28,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_col_c_c.o",
+          "section": ".text.Font_Print",
+          "offset": 12,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Ui_LanguageChosen": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 3076,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "Ui_QuitAsk": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c_c.o",
+          "section": ".text.Title_Input.part.0",
+          "offset": 992,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "dvCiGetFileSize": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68608,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "dvCiOpen": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68616,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "dvCiReqRd": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68632,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00100000": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 163236,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027BCD0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68600,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027BD48": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68604,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027BDD8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68664,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C0F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68620,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C148": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68624,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C1E0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68628,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C3C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68640,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C4A8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68644,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C4E0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68648,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C4E8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68656,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C680": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68696,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F7A0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91136,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F7F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91140,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F810": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91144,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F9B8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91156,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FA00": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91160,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FAC0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91164,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FC80": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91176,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FCD0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91180,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FD08": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91184,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FD40": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91188,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FDC0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91192,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FE80": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91232,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002826A0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111004,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282758": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111008,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002827E8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111036,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282898": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111012,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282930": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111028,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282978": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111016,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282AB8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111024,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282BA8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111020,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282CF8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111032,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283278": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112260,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283330": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112264,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283338": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112292,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283348": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112268,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002833F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112284,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283448": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112272,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283648": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112280,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283818": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112276,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283A48": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112288,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283E98": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128700,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283F50": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128704,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283FE0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128732,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284090": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128708,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284198": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128724,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284298": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128712,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284448": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128720,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002845C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128716,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284730": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128728,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B7C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146280,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B838": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146284,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B850": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146344,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B8F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146288,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028BD28": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146300,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028BDC8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146304,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028BE60": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146308,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C028": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146320,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C120": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146324,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C158": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146328,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C160": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146336,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C288": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146376,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002967C0": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SpuTransfer",
+          "offset": 44,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SpuTransferWait",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SpuTransferCheck",
+          "offset": 32,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SendBank",
+          "offset": 164,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SendBank",
+          "offset": 188,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Reset",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Update",
+          "offset": 136,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Update",
+          "offset": 248,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_LoadBank",
+          "offset": 468,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_ReloadBank",
+          "offset": 628,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_0029F2F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148360,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F370": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148392,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F408": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148364,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F4C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148396,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F590": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148368,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F640": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148400,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F6F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148372,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F7F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148404,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F8F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148376,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F990": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148408,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FA40": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148380,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FB20": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148412,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FC08": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148384,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FCE0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148416,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FDB0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148388,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FED0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148420,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A09D8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25932,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0B18": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25940,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0C00": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25948,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0C10": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25928,
+          "relocation": 1,
+          "code": false
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25952,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0C20": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25960,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0E08": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25964,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0E18": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25968,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A11E8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25936,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A1278": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25944,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A1310": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25956,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A1A48": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Init",
+          "offset": 40,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A1E58": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 804,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 112,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 468,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 852,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 108,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 580,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 128,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 892,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A1F80": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 280,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A1FB8": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 496,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 352,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 256,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 256,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 352,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 560,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A2078": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 1080,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 424,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 496,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A2208": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 420,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 808,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A2320": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 1104,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 424,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A2498": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Init",
+          "offset": 104,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_GetInfo",
+          "offset": 244,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_GetInfo",
+          "offset": 300,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_GetInfoSync",
+          "offset": 112,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Probe",
+          "offset": 100,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckChange",
+          "offset": 240,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckChange",
+          "offset": 316,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Format",
+          "offset": 232,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Format",
+          "offset": 380,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 440,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 552,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 640,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 736,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CreateSave",
+          "offset": 1196,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 272,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 556,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 672,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 768,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 908,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 960,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 1144,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 1256,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_WriteSave",
+          "offset": 1356,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 320,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 488,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 632,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadFile",
+          "offset": 756,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 320,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 488,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 568,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 688,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 864,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_LoadFile",
+          "offset": 972,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 264,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 416,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 504,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckFiles",
+          "offset": 636,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadDir",
+          "offset": 236,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadDir",
+          "offset": 332,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_FindSystemSave",
+          "offset": 236,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_FindSystemSave",
+          "offset": 284,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_FindSave",
+          "offset": 236,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_FindSave",
+          "offset": 284,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 304,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 400,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 644,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 780,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 948,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 1008,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CalcNeed",
+          "offset": 1120,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A25B8": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Init",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_GetInfo",
+          "offset": 124,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_GetInfoSync",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Probe",
+          "offset": 76,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_CheckChange",
+          "offset": 112,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A27A8": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_ReadDir",
+          "offset": 120,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_FindSystemSave",
+          "offset": 120,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_FindSave",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002A2AC8": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_battle_stgm_a_b_c.o",
+          "section": ".text.McCard_Format",
+          "offset": 100,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "func_002BA2D0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 158044,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA308": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 158036,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA518": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 160020,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA688": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 160044,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA938": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 161948,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BC748": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 162948,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "gPortExtraStageCount": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2610,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2614,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 682,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 690,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 2994,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 2998,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 678,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 686,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortExtraStages": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2758,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2778,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3174,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3182,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortOverlayOpen": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.skip_decide",
+          "offset": 506,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/gs_draw.o",
+          "section": ".text.skip_decide",
+          "offset": 510,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c_c.o",
+          "section": ".text.Title_Input",
+          "offset": 2,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c_c.o",
+          "section": ".text.Title_Input",
+          "offset": 6,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c_c.o",
+          "section": ".text.Title_Run",
+          "offset": 326,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_a_c_c.o",
+          "section": ".text.Title_Run",
+          "offset": 574,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 830,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 834,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 2530,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_port_language_c.o",
+          "section": ".text.PortLanguage_Run",
+          "offset": 2534,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortReplaceNew": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2946,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2958,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3378,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3390,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortReplaceOld": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2938,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 2950,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3370,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3382,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortSongCount": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 5806,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 5818,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4098,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4102,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 5666,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 5678,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 5826,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 5830,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortSongNames": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4198,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4210,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 5926,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 5938,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortSongOffsets": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 5954,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 5970,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 5850,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 5866,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortStageNames": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4590,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Draw",
+          "offset": 4602,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 6094,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Draw",
+          "offset": 6106,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "gPortStageReplaceCount": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 5626,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_c_e_c.o",
+          "section": ".text.CharSel_Init",
+          "offset": 5634,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 2958,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 2978,
+          "relocation": 4,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3022,
+          "relocation": 6,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_menu_menu_e_b_c.o",
+          "section": ".text.TeamSel_Init",
+          "offset": 3042,
+          "relocation": 4,
+          "code": true
+        }
+      ]
+    },
+    "htCiOpen": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146296,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "htCiReqRd": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146312,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "mfCiOpen": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91152,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "mfCiReqRd": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91168,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "sceGsResetGraph": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_gfx_c.o",
+          "section": ".text.Gfx_InitDrawEnv",
+          "offset": 40,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_gfx_c.o",
+          "section": ".text.Gfx_Init",
+          "offset": 80,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_gfx_c.o",
+          "section": ".text.Gfx_Init",
+          "offset": 116,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceGsResetPath": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_gfx_c.o",
+          "section": ".text.Gfx_Init",
+          "offset": 60,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegAddCallback": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Open",
+          "offset": 424,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Open",
+          "offset": 448,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Open",
+          "offset": 472,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegAddStrCallback": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Open",
+          "offset": 400,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegCreate": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Open",
+          "offset": 372,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegDelete": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Close",
+          "offset": 72,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegDemuxPss": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Demux",
+          "offset": 96,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegGetPicture": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Run",
+          "offset": 420,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegInit": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Init",
+          "offset": 12,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegIsEnd": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Run",
+          "offset": 328,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Run",
+          "offset": 612,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceMpegReset": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_movie_c.o",
+          "section": ".text.Movie_Close",
+          "offset": 60,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    },
+    "sceSifCallRpc": {
+      "classification": "with_code_reference",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcCall",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcInit",
+          "offset": 164,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcTerm",
+          "offset": 68,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcReset",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcSetBank",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcFreeBank",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcCmdB",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcCmdC",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcFlush",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcFlush",
+          "offset": 224,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcSetMono",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcSetPause",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcStopBank",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcSetVolume",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcCmd8",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcCmdE",
+          "offset": 68,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_RpcSetFighters",
+          "offset": 148,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Init",
+          "offset": 172,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Reset",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_UnloadBank",
+          "offset": 316,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Term",
+          "offset": 96,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SetStereo",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SetStereo",
+          "offset": 188,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SetMasterVolume",
+          "offset": 92,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_CmdB",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_CmdC",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SetPause",
+          "offset": 84,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_StopBank",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_StopBankAndResume",
+          "offset": 100,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_StopBankAndResume",
+          "offset": 156,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_Cmd8",
+          "offset": 88,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_CmdE",
+          "offset": 68,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_SendFighters",
+          "offset": 312,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_LoadBank",
+          "offset": 352,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_ReloadBank",
+          "offset": 384,
+          "relocation": 10,
+          "code": true
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/boot-033/objects/src_sys_snd_c.o",
+          "section": ".text.Snd_ReloadBank",
+          "offset": 516,
+          "relocation": 10,
+          "code": true
+        }
+      ]
+    }
+  },
+  "scope": "allocated ELF32-BE sections, including sections later GC-discarded; no runtime reachability claim",
+  "tables_removed": false,
+  "battle_executed": false
+}

@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "cases": 5768,
+  "reference": "original Dma_PutTexStrips compiled with actual PS2 arithmetic pass and helpers",
+  "source_sha256": "b7d254aa36fd34762d217b65cf2aa4437ef62ac40d4eba13ca80451f4b8094f3",
+  "sanitizers": true,
+  "PPC_executed": false,
+  "GPU_executed": false,
+  "battle_executed": false
+}

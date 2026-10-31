@@ -1,0 +1,17 @@
+{
+  "raw_GS_samples": 27000,
+  "decoded_pixels_against_original_core": 38912,
+  "formats": [
+    0,
+    1,
+    2,
+    10,
+    19,
+    20,
+    27,
+    36,
+    44
+  ],
+  "coverage": "32/24/16/16S/8/4/8H/4HL/4HH, CSM1 RGBA32/16/16S, TEXA/AEM, 4MiB wrap, bijective page addressing",
+  "limitations": "CSM2, CLUT latch state, mipmaps and real game textures not validated; no GPU execution"
+}

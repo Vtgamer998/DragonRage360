@@ -1,0 +1,29 @@
+{
+  "previous_unresolved": 156,
+  "current_unresolved": 139,
+  "references_removed_from_native_profile": [
+    "GsVu1_Call",
+    "GsVu1_FrameEnd",
+    "GsVu1_Program",
+    "GsVu1_SetBase",
+    "GsVu1_SetCol",
+    "GsVu1_SetCycle",
+    "GsVu1_SetItop",
+    "GsVu1_SetMask",
+    "GsVu1_SetMode",
+    "GsVu1_SetOffset",
+    "GsVu1_SetRow",
+    "GsVu1_Unpack",
+    "GsVu1_UnpackWords",
+    "MenuText_Poll",
+    "TexPack_Count",
+    "gPortNetWindowClose",
+    "gPortOverlayOpen"
+  ],
+  "new_unresolved": [],
+  "explanation": "13 legacy VU references replaced by the real bounded native VIF/VU/GIF path; four desktop frame-end dependencies no longer reachable; not 17 newly implemented SDK functions",
+  "Battle_Main_in_XEX": false,
+  "battle_executed": false,
+  "Xbox_executed": false,
+  "emulator_executed": false
+}

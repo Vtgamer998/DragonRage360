@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "sanitizers": "ASan/UBSan",
+  "scope": "eight DMA IDs, exact nonoverlapping address spans, TTE and fragmented payloads, VIF controls, original reference VU, bounds/budgets/error propagation",
+  "battle_executed": false,
+  "GPU_execution": false,
+  "original_native_packet_producers_adapted": false
+}

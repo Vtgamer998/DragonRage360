@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "reference_layout_variants": 10,
+  "reference_pixels": 419072,
+  "reference": "pinned upstream port/tools/menu_font.py; CT32 linear source pixels",
+  "gpu_execution": false,
+  "body_material_mapping": false,
+  "leak_detection": "disabled"
+}

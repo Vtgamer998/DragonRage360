@@ -1,0 +1,70 @@
+disc: mounted game:/test.iso (3020816384 bytes)
+typed-data: 2738 ops validated; complete=1; commit=1; combat NOT started
+typed data: 0
+mem: game arena at 0x4193e000 (29630464 bytes); fixed register windows separate
+runtime: 0
+common3 preparation refused: id=12 type=2 error=-890
+common3 preparation refused: id=14 type=3 error=-890
+common3 preparation refused: id=29 type=4 error=-890
+common3 preparation refused: id=3 type=1 error=-300
+common3 preparation refused: id=569 type=5 error=-890
+common3 preparation refused: id=12 type=2 error=-890
+PASS seven corrupt common3 set/parameter/sprite/palette/mesh fixtures rejected without commit
+common3 preparation: 0 entries=637 textures=116 images=204 unprepared=2
+PASS original common3 consumers: 24 sets, 50 sprite packs, 197 layers, 309 particle keys, 2000 sprite steps, 2 meshes; heap restored
+PASS eight malformed real-stage animation fixtures rejected without publication
+real stage 00 conversion: 0; timers=0 meshes=2243
+real stage 01 conversion: 0; timers=0 meshes=1968
+real stage 02 conversion: 0; timers=0 meshes=785
+real stage 03 conversion: 0; timers=0 meshes=712
+real stage 04 conversion: 0; timers=9 meshes=675
+real stage 05 conversion: 0; timers=0 meshes=1444
+real stage 06 conversion: 0; timers=0 meshes=2076
+real stage 07 conversion: 0; timers=0 meshes=825
+real stage 08 conversion: 0; timers=1 meshes=887
+real stage 09 conversion: 0; timers=0 meshes=2227
+real stage 10 conversion: 0; timers=0 meshes=1200
+real stage 11 conversion: 0; timers=0 meshes=658
+real stage 12 conversion: 0; timers=0 meshes=1259
+real stage 13 conversion: 0; timers=0 meshes=1492
+real stage 14 conversion: 0; timers=0 meshes=1442
+real stage 15 conversion: 0; timers=0 meshes=814
+real stage 16 conversion: 0; timers=0 meshes=1563
+real stage 17 conversion: 0; timers=0 meshes=2390
+real stage 18 conversion: 0; timers=0 meshes=1173
+real stage 19 conversion: 0; timers=0 meshes=1222
+real stage 20 conversion: 0; timers=0 meshes=1342
+real stage 21 conversion: 0; timers=0 meshes=1159
+real stage 22 conversion: 0; timers=0 meshes=1639
+real stage 23 conversion: 0; timers=0 meshes=2249
+real stage 24 conversion: 0; timers=0 meshes=2203
+real stage 25 conversion: 0; timers=0 meshes=1967
+real stage 26 conversion: 0; timers=0 meshes=1968
+real stage 27 conversion: 0; timers=9 meshes=652
+real stage 28 conversion: 0; timers=0 meshes=2072
+real stage 29 conversion: 0; timers=0 meshes=2223
+real stage 30 conversion: 0; timers=0 meshes=2223
+real stage 31 conversion: 0; timers=0 meshes=1228
+real stage 32 conversion: 0; timers=0 meshes=1241
+real stage 33 conversion: 0; timers=0 meshes=1200
+real stage 34 conversion: 0; timers=0 meshes=1490
+real stage 35 conversion: 0; timers=0 meshes=149
+real stage 36 conversion: 0; timers=0 meshes=203
+real stage 37 conversion: 0; timers=0 meshes=283
+real stage 38 conversion: 0; timers=0 meshes=113
+PASS 39 real stage converters: 6 animated packs, 19 timers; no stage draw
+stage parameters: 0
+stage geometry prepare: 0 groups=7 materials=34 meshes=2243 parts=1959 nodes=172 cells=30 textures=25
+PASS seven corrupt stage parameter/path/nav fixtures rejected
+PASS five corrupt geometry/root/mesh/key/cycle fixtures rejected
+PASS 20 MAPD sections against original binder
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+original audio load: 0
+original stage init: 0 ready=1
+entering original full effect scene init
+original camera init returned
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped

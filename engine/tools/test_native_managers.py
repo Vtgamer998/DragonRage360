@@ -6,7 +6,7 @@ cannot prove Xbox CPU arithmetic, GPU, audio or a complete battle scene.
 """
 from pathlib import Path
 import argparse,concurrent.futures,subprocess,json,re,sys,os,hashlib
-p=argparse.ArgumentParser();p.add_argument('upstream',type=Path);p.add_argument('xsdk',type=Path);p.add_argument('i386_root',type=Path);p.add_argument('qemu',type=Path);p.add_argument('native_build',type=Path);p.add_argument('catalog',type=Path);p.add_argument('resources',type=Path);p.add_argument('programs',type=Path);p.add_argument('output',type=Path);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('upstream',type=Path);p.add_argument('xsdk',type=Path);p.add_argument('i386_root',type=Path);p.add_argument('qemu',type=Path);p.add_argument('native_build',type=Path);p.add_argument('catalog',type=Path);p.add_argument('resources',type=Path);p.add_argument('programs',type=Path);p.add_argument('output',type=Path);p.add_argument('--iso',type=Path,help='ISO USA local; defaults to stage-fixture.iso beside resources');a=p.parse_args()
 e=Path(__file__).resolve().parents[1];project=e.parent;up=a.upstream.resolve();sdk=a.xsdk.resolve();root=a.i386_root.resolve();build=a.native_build.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
 gen=out/'prepared';gen.mkdir(exist_ok=True);objs=out/'objects';objs.mkdir(exist_ok=True);logs=out/'logs';logs.mkdir(exist_ok=True)
 sys.path.insert(0,str(up/'port/tools'));import portsrc,eeconst
@@ -17,7 +17,7 @@ flags=['-m32','-malign-double','-std=gnu99','-O1','-g','-fcommon','-fno-builtin'
 # Header changes invalidate cached objects as well as changes to C text.
 headers=hashlib.sha256()
 for directory in [up/'include',up/'port/include',up/'port/src',project/'src',e/'graphics',e/'platform/platform',sdk/'include']:
- for header in sorted(directory.rglob('*.h')):
+ for header in sorted((p for p in directory.rglob('*') if p.suffix in ('.h','.inc'))):
   headers.update(str(header).encode());headers.update(header.read_bytes())
 header_digest=headers.hexdigest()
 sources=[]
@@ -77,7 +77,7 @@ if allowed:
  link.insert(link.index('-Wl,--gc-sections'),str(obj));r=subprocess.run(link,capture_output=True,text=True);(out/'link.txt').write_text(r.stdout+r.stderr)
 if r.returncode:
  print(r.stderr[-8000:]);raise SystemExit('strict host link failed')
-run=subprocess.run([str(a.qemu.resolve()),'-E','LD_LIBRARY_PATH='+str(root/'usr/lib32'),str(out/'managers'),str(a.resources.resolve()),str(a.programs.resolve())],capture_output=True,text=True,env=dict(os.environ,UBSAN_OPTIONS='halt_on_error=1'))
+run=subprocess.run([str(a.qemu.resolve()),'-E','LD_LIBRARY_PATH='+str(root/'usr/lib32'),str(out/'managers'),str(a.resources.resolve()),str(a.programs.resolve()),str((a.iso or a.resources.parent/'stage-fixture.iso').resolve())],capture_output=True,text=True,env=dict(os.environ,UBSAN_OPTIONS='halt_on_error=1'))
 (out/'test.txt').write_text(run.stdout+run.stderr);print(run.stdout+run.stderr);run.check_returncode()
-result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_calls_during_test':0,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
+result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_device':'simulated synchronous PCM sink','original_audio_cycle':True,'typed_catalog_native_host_byte_order':True,'original_File_Init_and_three_partitions':True,'original_stage_Init_Reset_Update_Term':True,'original_stage_culling':True,'original_stage_rigid_body':True,'original_navigation_short_route':True,'original_timer_synthetic_fixture':True,'stage_geometry':{'groups':7,'materials':34,'meshes':2243,'parts':1959,'nodes':172,'cells':30,'textures':25,'timers_in_actual_stage':0},'audio_frames':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][0]),'nonzero_PCM_values':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][1]),'common3_texture_subset':True,'common3_entries':637,'common3_textures':111,'common3_images':154,'common3_unprepared_entries':526,'original_EftTexSet_Load32_consumer':True,'MAPD_sections_vs_original_binder':20,'stage_corruption_rejections':7,'stage_geometry_corruption_rejections':5,'stage_restart_with_audio_device_open':True,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
 (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))

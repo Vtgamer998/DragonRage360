@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "baseline": "0.35-D1",
+  "changed_text_files": [
+    "LEIA-ME.txt",
+    "Makefile",
+    "PENDENCIAS.md",
+    "README.md",
+    "RELATORIO-0.36-D2.md",
+    "engine/resource/dr_stage_collision.c",
+    "engine/resource/dr_stage_collision.h",
+    "engine/schema/typed_catalog.generated.c",
+    "engine/tests/test_fixed_resources.c",
+    "engine/tests/test_stage_collision.c",
+    "engine/tools/build_engine_diagnostic.py",
+    "engine/tools/build_typed_manifest.py",
+    "engine/tools/refine_typed_manifest.py",
+    "engine/tools/reviewed_types.py",
+    "engine/tools/test_fixed_resources.py",
+    "engine/tools/test_reviewed_types.py",
+    "engine/tools/test_stage_collision.py",
+    "src/demo_ui.c",
+    "src/dr_stage_collision.c",
+    "src/dr_stage_collision.h",
+    "src/main.c",
+    "tests/check_xex.py"
+  ],
+  "applied_and_compared_to_sources": true,
+  "patch_includes_binary": false,
+  "note": "XEX and generated manifest are supplied separately in full in the package"
+}

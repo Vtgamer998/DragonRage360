@@ -1,0 +1,1 @@
+PASS: actual console overlay binding and actual ISO mount/parser, only NT transport mocked; real DBZP identity checked; native pointers restored; remount/unmount refused; no MIPS execution

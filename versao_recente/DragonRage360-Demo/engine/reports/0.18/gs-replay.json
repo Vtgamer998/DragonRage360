@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "ABI": "original pinned port/src/gs/gs_draw.h",
+  "scope": "single diagnostic surface or multiple saved color/depth targets, actual GsDraw descriptors, ordinary CPU vertices, TFX/TCC/ATST, blend-key translation, color masks, complete-list validation",
+  "unsupported": "GPU VU, native outline/depth-table effects, GS mip sampler selection, fragment depth quantization, target UVs requiring per-fragment clamp",
+  "GPU_execution": false,
+  "XEX_rebuilt": false,
+  "game_engine_linked": false,
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled",
+  "GS_surfaces_integration": "covered separately by gs-backend.json"
+}

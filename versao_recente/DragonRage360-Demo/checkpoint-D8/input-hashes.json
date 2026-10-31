@@ -1,0 +1,22 @@
+{
+  "common-2.bin": {
+    "bytes": 88832,
+    "sha256": "53abf6482d813f974679738e57523e7479d06e4e72ccea80255e3c2597b4f237"
+  },
+  "right-model.bin": {
+    "bytes": 787840,
+    "sha256": "9ff63390b4803d1521df955d3ca4da41dcc74e8e6970c94f8ee0dab79b1d1612"
+  },
+  "left-model.bin": {
+    "bytes": 742592,
+    "sha256": "744d05b524412a165f081d6df8a42b04bb80e491118428427f1b10f8126f1a33"
+  },
+  "right-animation.bin": {
+    "bytes": 996736,
+    "sha256": "a6b2224bb0a778cdae6d7ee84382569ae886c1f3aade78897c395aa3ba0e8a6b"
+  },
+  "left-animation.bin": {
+    "bytes": 1043392,
+    "sha256": "0c1c0e04b0ef40bbc0633bbc764f6f332d3f7536afcb4920a65642f78e625110"
+  }
+}

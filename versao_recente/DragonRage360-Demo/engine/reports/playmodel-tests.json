@@ -1,0 +1,7 @@
+{
+  "PlayModel": "PASS actual patched game function: source preserved, repeated play, fresh resource data, fighter work/no-work objects, missing/corrupt/reused ID, unregistered object",
+  "ABI": "32-bit i386 pointer layout with slot/model assertions",
+  "execution": "qemu-i386 Linux user mode",
+  "PowerPC_Xbox": "not executed",
+  "engine_integration": "still not a linked battle executable"
+}

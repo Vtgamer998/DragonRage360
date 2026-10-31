@@ -1,0 +1,14 @@
+/workspace/scratch/0e938d660765/work-d8/common64/btl_ai_cond.c:724:14: warning: conflicting types for built-in function ‘memset’; expected ‘void *(void *, int,  long unsigned int)’ [-Wbuiltin-declaration-mismatch]
+  724 | extern void *memset(void *dst, s32 c, u32 n);
+      |              ^~~~~~
+/workspace/scratch/0e938d660765/work-d8/common64/btl_ai_cond.c:6:1: note: ‘memset’ is declared in header ‘<string.h>’
+    5 | #include "sys/heap.h"
+  +++ |+#include <string.h>
+    6 | #include "sys/rand.h"
+/workspace/scratch/0e938d660765/work-d8/common64/btl_ai_cond.c: In function ‘AiThink_TestMove’:
+/workspace/scratch/0e938d660765/work-d8/common64/btl_ai_cond.c:771:52: warning: function called through a non-compatible type
+  771 | #define BtlCharApi_IsMoveSlotActive(objId, slot) (((s32 (*)(s32, s32))BtlCharApi_IsMoveSlotActive)(objId, slot))
+      |                                                   ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspace/scratch/0e938d660765/work-d8/common64/btl_ai_cond.c:1127:21: note: in expansion of macro ‘BtlCharApi_IsMoveSlotActive’
+ 1127 |                 if (BtlCharApi_IsMoveSlotActive(ai->objId, i) != 0) {
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~

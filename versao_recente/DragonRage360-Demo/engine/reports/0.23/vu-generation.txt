@@ -1,0 +1,1 @@
+PASS: generated interpreter + checked API body matches implementation byte-for-byte after provenance comments.

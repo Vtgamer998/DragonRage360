@@ -1,0 +1,14 @@
+{
+  "kind": "native diagnostic with linked combat code; NOT a playable game",
+  "version": "0.34-L1",
+  "Battle_Main_address": "0x820d4fd0",
+  "Battle_Main_linked": true,
+  "Game_Main_linked": false,
+  "battle_called": false,
+  "strong_or_weak_undefined": 0,
+  "native_game_data_loaded": false,
+  "boot_combat_available": false,
+  "hardware_executed": false,
+  "sha256": "cc719f53be8777be79faecf47d4ff13a3f2a6963eb4114a09f4274aefa8d817c",
+  "bytes": 13508608
+}

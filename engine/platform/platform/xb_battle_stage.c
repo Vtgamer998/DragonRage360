@@ -29,6 +29,10 @@ struct XbBattleStageCollision {
  NativeStage stage;StgBounds bounds;ColMesh empty;
  uint8_t *arena;void *saved_base;int installed,querying;
  float starts[4][8];int has_starts;
+ uint8_t *parameters,*path_bytes,*mef_bytes,*nav_bytes;
+ void *saved_paths,*saved_mef;int parameters_bound;
+ uint8_t *render_pack;size_t render_bytes,render_offset;void *render_texture,*saved_pack;int render_live,render_bound;
+ XbStageGeometryInfo geometry;
 };
 extern s32 *gColMeshBase;
 extern void *gStgColMesh;
@@ -37,6 +41,8 @@ extern s32 StgCol_QueryZone(StgColResult *,StgColZone *,StgColBox *,void *,StgCo
 extern void ColMesh_GetPolyVerts(ColMesh *,ColPoly *,ColVec *,ColVec *,ColVec *);
 extern ColPoly *ColMesh_GetPoly(ColMesh *,s32);
 static XbBattleStageCollision *active;
+static void publish_parameters(XbBattleStageCollision *);
+static void unpublish_parameters(XbBattleStageCollision *);
 static uint32_t rd(const uint8_t *p){return (uint32_t)p[0]|(uint32_t)p[1]<<8|(uint32_t)p[2]<<16|(uint32_t)p[3]<<24;}
 static int range(const DrStageCollision *v,uint32_t word,size_t n,size_t *at){
  uint64_t off=(uint64_t)word*4;if(off>v->size || n>v->size-(size_t)off)return DR_STAGE_BOUNDS;*at=(size_t)off;return 0;
@@ -70,8 +76,10 @@ static int native_mesh(XbBattleStageCollision *c,uint32_t word,void **out){
 }
 int XbBattleStage_FreeCollision(XbBattleStageCollision *c){
  if(!c)return 0;
- if(c->installed || c->querying)return XB_STAGE_STATE;
+ if(c->installed || c->querying || c->render_live)return XB_STAGE_STATE;
+ XbBattleStage_FreeGeometry(c);
  if(c->stage.zones)for(uint32_t i=0;i<c->source.zones;i++){free(c->stage.zones[i].near);free(c->stage.zones[i].recs);}
+ free(c->parameters);free(c->path_bytes);free(c->mef_bytes);free(c->nav_bytes);
  free(c->stage.zones);free(c->stage.objects);free(c->arena);free(c);return 0;
 }
 int XbBattleStage_PrepareCollision(const void *pack,size_t n,XbBattleStageCollision **out){
@@ -108,11 +116,14 @@ fail:XbBattleStage_FreeCollision(c);return e;
 }
 int XbBattleStage_InstallCollision(XbBattleStageCollision *c){
  if(!c || active || gBtlStage || c->installed)return XB_STAGE_STATE;
- c->saved_base=gColMeshBase;gColMeshBase=(s32 *)c->arena;gBtlStage=(BtlStage *)(void *)&c->stage;c->installed=1;active=c;return 0;
+ c->saved_base=gColMeshBase;gColMeshBase=(s32 *)c->arena;gBtlStage=(BtlStage *)(void *)&c->stage;c->installed=1;active=c;publish_parameters(c);return 0;
 }
 int XbBattleStage_UninstallCollision(XbBattleStageCollision *c){
- if(!c || active!=c || !c->installed || c->querying || (void *)gBtlStage!=&c->stage)return XB_STAGE_STATE;
- gBtlStage=NULL;gColMeshBase=c->saved_base;c->installed=0;active=NULL;return 0;
+ if(!c || active!=c || !c->installed || c->querying || c->render_live || (void *)gBtlStage!=&c->stage)return XB_STAGE_STATE;
+#if UINTPTR_MAX==UINT32_MAX
+ if(c->nav_bytes && gStgNav && (void *)gStgNav->data==c->nav_bytes)return XB_STAGE_STATE;
+#endif
+ unpublish_parameters(c);gBtlStage=NULL;gColMeshBase=c->saved_base;c->installed=0;active=NULL;return 0;
 }
 typedef struct Query {DrStageTriangleFn fn;void *ctx;} Query;
 static s32 triangle_callback(StgColNode *node,void *opaque){
@@ -193,3 +204,7 @@ int XbStage_TryStartPlace(int side,void *pos,void *rot,int alt,int *zone){
  if(zone)*zone=e?-1:z;
  return 1;
 }
+
+#include "xb_stage_parameters.inc"
+
+#include "xb_stage_geometry.inc"

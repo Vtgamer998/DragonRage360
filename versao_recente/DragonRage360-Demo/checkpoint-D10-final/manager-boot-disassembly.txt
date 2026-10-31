@@ -1,0 +1,171 @@
+
+work/DragonRage360-Demo/build/d10-diagnostic/default.elf:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+82266200 <XbBattleRuntime_BeginManagers>:
+82266200:	2c 03 00 00 	cmpwi   r3,0
+82266204:	94 21 ff 60 	stwu    r1,-160(r1)
+82266208:	fb a1 00 88 	std     r29,136(r1)
+8226620c:	41 82 02 7c 	beq     82266488 <XbBattleRuntime_BeginManagers+0x288>
+82266210:	3d 20 82 7e 	lis     r9,-32130
+82266214:	fb e1 00 98 	std     r31,152(r1)
+82266218:	7c 7f 1b 78 	mr      r31,r3
+8226621c:	81 29 e7 f0 	lwz     r9,-6160(r9)
+82266220:	7c 09 18 00 	cmpw    r9,r3
+82266224:	40 82 02 3c 	bne     82266460 <XbBattleRuntime_BeginManagers+0x260>
+82266228:	3d 40 82 2c 	lis     r10,-32212
+8226622c:	39 23 00 04 	addi    r9,r3,4
+82266230:	3b a0 fc 85 	li      r29,-891
+82266234:	81 4a 58 bc 	lwz     r10,22716(r10)
+82266238:	7c 0a 48 00 	cmpw    r10,r9
+8226623c:	41 82 00 1c 	beq     82266258 <XbBattleRuntime_BeginManagers+0x58>
+82266240:	eb e1 00 98 	ld      r31,152(r1)
+82266244:	7f a3 eb 78 	mr      r3,r29
+82266248:	eb a1 00 88 	ld      r29,136(r1)
+8226624c:	38 21 00 a0 	addi    r1,r1,160
+82266250:	4e 80 00 20 	blr
+82266254:	60 00 00 00 	nop
+82266258:	fb c1 00 90 	std     r30,144(r1)
+8226625c:	83 c3 00 7c 	lwz     r30,124(r3)
+82266260:	2c 1e 00 00 	cmpwi   r30,0
+82266264:	40 82 01 f4 	bne     82266458 <XbBattleRuntime_BeginManagers+0x258>
+82266268:	3d 20 82 2c 	lis     r9,-32212
+8226626c:	81 29 57 54 	lwz     r9,22356(r9)
+82266270:	2c 09 00 00 	cmpwi   r9,0
+82266274:	40 82 01 e4 	bne     82266458 <XbBattleRuntime_BeginManagers+0x258>
+82266278:	3d 20 82 2c 	lis     r9,-32212
+8226627c:	81 29 57 50 	lwz     r9,22352(r9)
+82266280:	2c 09 00 00 	cmpwi   r9,0
+82266284:	40 82 01 d4 	bne     82266458 <XbBattleRuntime_BeginManagers+0x258>
+82266288:	3d 20 82 cc 	lis     r9,-32052
+8226628c:	81 29 66 1c 	lwz     r9,26140(r9)
+82266290:	2c 09 00 00 	cmpwi   r9,0
+82266294:	40 82 01 c4 	bne     82266458 <XbBattleRuntime_BeginManagers+0x258>
+82266298:	3d 20 82 7d 	lis     r9,-32131
+8226629c:	81 29 72 bc 	lwz     r9,29372(r9)
+822662a0:	2c 09 00 00 	cmpwi   r9,0
+822662a4:	40 82 01 b4 	bne     82266458 <XbBattleRuntime_BeginManagers+0x258>
+822662a8:	3d 20 82 2c 	lis     r9,-32212
+822662ac:	81 29 58 34 	lwz     r9,22580(r9)
+822662b0:	2c 09 00 00 	cmpwi   r9,0
+822662b4:	41 82 01 a4 	beq     82266458 <XbBattleRuntime_BeginManagers+0x258>
+822662b8:	7c 08 02 a6 	mflr    r0
+822662bc:	90 01 00 a4 	stw     r0,164(r1)
+822662c0:	7f c3 f3 78 	mr      r3,r30
+822662c4:	4b f0 63 8d 	bl      8216c650 <BtlObj_Get>
+822662c8:	7c 69 1b 78 	mr      r9,r3
+822662cc:	39 40 ff ff 	li      r10,-1
+822662d0:	38 e1 00 70 	addi    r7,r1,112
+822662d4:	38 c0 00 00 	li      r6,0
+822662d8:	91 41 00 70 	stw     r10,112(r1)
+822662dc:	38 a1 00 50 	addi    r5,r1,80
+822662e0:	38 81 00 60 	addi    r4,r1,96
+822662e4:	7f c3 f3 78 	mr      r3,r30
+822662e8:	2c 09 00 00 	cmpwi   r9,0
+822662ec:	41 82 01 54 	beq     82266440 <XbBattleRuntime_BeginManagers+0x240>
+822662f0:	81 49 00 08 	lwz     r10,8(r9)
+822662f4:	2c 0a 00 00 	cmpwi   r10,0
+822662f8:	41 82 01 48 	beq     82266440 <XbBattleRuntime_BeginManagers+0x240>
+822662fc:	83 a9 00 00 	lwz     r29,0(r9)
+82266300:	2c 1d 00 00 	cmpwi   r29,0
+82266304:	40 82 01 3c 	bne     82266440 <XbBattleRuntime_BeginManagers+0x240>
+82266308:	81 29 16 60 	lwz     r9,5728(r9)
+8226630c:	2c 09 00 00 	cmpwi   r9,0
+82266310:	41 82 01 30 	beq     82266440 <XbBattleRuntime_BeginManagers+0x240>
+82266314:	48 00 18 c5 	bl      82267bd8 <XbStage_TryStartPlace>
+82266318:	2c 03 00 00 	cmpwi   r3,0
+8226631c:	39 3e 00 01 	addi    r9,r30,1
+82266320:	3b c0 00 01 	li      r30,1
+82266324:	2c 89 00 02 	cmpwi   cr1,r9,2
+82266328:	41 82 01 48 	beq     82266470 <XbBattleRuntime_BeginManagers+0x270>
+8226632c:	81 21 00 70 	lwz     r9,112(r1)
+82266330:	2c 09 00 00 	cmpwi   r9,0
+82266334:	41 80 01 3c 	blt     82266470 <XbBattleRuntime_BeginManagers+0x270>
+82266338:	40 86 ff 88 	bne     cr1,822662c0 <XbBattleRuntime_BeginManagers+0xc0>
+8226633c:	3b c0 00 00 	li      r30,0
+82266340:	4b fd 45 b1 	bl      8223a8f0 <Progress_Init>
+82266344:	4b e8 e6 fd 	bl      820f4a40 <Save_Init>
+82266348:	4b e8 b6 a9 	bl      820f19f0 <Pad_Init>
+8226634c:	4b e9 54 45 	bl      820fb790 <Battle_ClearWork>
+82266350:	39 20 00 00 	li      r9,0
+82266354:	39 00 00 00 	li      r8,0
+82266358:	38 e0 00 00 	li      r7,0
+8226635c:	38 c0 00 00 	li      r6,0
+82266360:	38 a0 00 00 	li      r5,0
+82266364:	38 80 00 00 	li      r4,0
+82266368:	38 60 00 00 	li      r3,0
+8226636c:	4b e9 3c 7d 	bl      820f9fe8 <BattleSetup_SetRule>
+82266370:	39 40 00 00 	li      r10,0
+82266374:	39 20 00 00 	li      r9,0
+82266378:	f9 41 00 50 	std     r10,80(r1)
+8226637c:	f9 21 00 58 	std     r9,88(r1)
+82266380:	7f c5 f3 78 	mr      r5,r30
+82266384:	57 c4 08 3c 	slwi    r4,r30,1
+82266388:	7f c3 f3 78 	mr      r3,r30
+8226638c:	39 40 00 00 	li      r10,0
+82266390:	39 20 00 00 	li      r9,0
+82266394:	39 00 00 00 	li      r8,0
+82266398:	38 e0 00 00 	li      r7,0
+8226639c:	38 c0 00 01 	li      r6,1
+822663a0:	4b e9 3d 59 	bl      820fa0f8 <BattleSetup_SetSide>
+822663a4:	3d 20 82 01 	lis     r9,-32255
+822663a8:	7f c5 f3 78 	mr      r5,r30
+822663ac:	7f c3 f3 78 	mr      r3,r30
+822663b0:	c0 29 a3 50 	lfs     f1,-23728(r9)
+822663b4:	39 41 00 50 	addi    r10,r1,80
+822663b8:	39 00 00 0d 	li      r8,13
+822663bc:	38 e0 00 00 	li      r7,0
+822663c0:	38 c0 00 00 	li      r6,0
+822663c4:	38 80 00 00 	li      r4,0
+822663c8:	4b e9 3f c1 	bl      820fa388 <BattleSetup_SetMember>
+822663cc:	39 3e 00 01 	addi    r9,r30,1
+822663d0:	3b c0 00 01 	li      r30,1
+822663d4:	2c 09 00 02 	cmpwi   r9,2
+822663d8:	40 82 ff a8 	bne     82266380 <XbBattleRuntime_BeginManagers+0x180>
+822663dc:	4b e9 43 6d 	bl      820fa748 <BattleSetup_Finish>
+822663e0:	38 80 00 00 	li      r4,0
+822663e4:	38 60 00 00 	li      r3,0
+822663e8:	4b e9 4e 99 	bl      820fb280 <BattleSide_SetObjId>
+822663ec:	38 80 00 00 	li      r4,0
+822663f0:	38 60 00 00 	li      r3,0
+822663f4:	4b e9 4e d5 	bl      820fb2c8 <BattleSide_SetModelSlot>
+822663f8:	38 80 00 01 	li      r4,1
+822663fc:	38 60 00 01 	li      r3,1
+82266400:	4b e9 4e 81 	bl      820fb280 <BattleSide_SetObjId>
+82266404:	38 80 00 01 	li      r4,1
+82266408:	38 60 00 01 	li      r3,1
+8226640c:	4b e9 4e bd 	bl      820fb2c8 <BattleSide_SetModelSlot>
+82266410:	38 60 00 02 	li      r3,2
+82266414:	4b ef 9b 4d 	bl      8215ff60 <BtlChar_AllocAll>
+82266418:	4b ec da b9 	bl      82133ed0 <BtlAiMgr_Init>
+8226641c:	93 df 00 7c 	stw     r30,124(r31)
+82266420:	7f a3 eb 78 	mr      r3,r29
+82266424:	80 01 00 a4 	lwz     r0,164(r1)
+82266428:	eb c1 00 90 	ld      r30,144(r1)
+8226642c:	eb e1 00 98 	ld      r31,152(r1)
+82266430:	7c 08 03 a6 	mtlr    r0
+82266434:	eb a1 00 88 	ld      r29,136(r1)
+82266438:	38 21 00 a0 	addi    r1,r1,160
+8226643c:	4e 80 00 20 	blr
+82266440:	80 01 00 a4 	lwz     r0,164(r1)
+82266444:	3b a0 fc 85 	li      r29,-891
+82266448:	eb c1 00 90 	ld      r30,144(r1)
+8226644c:	eb e1 00 98 	ld      r31,152(r1)
+82266450:	7c 08 03 a6 	mtlr    r0
+82266454:	4b ff fd f0 	b       82266244 <XbBattleRuntime_BeginManagers+0x44>
+82266458:	eb c1 00 90 	ld      r30,144(r1)
+8226645c:	4b ff fd e4 	b       82266240 <XbBattleRuntime_BeginManagers+0x40>
+82266460:	3b a0 fc 85 	li      r29,-891
+82266464:	eb e1 00 98 	ld      r31,152(r1)
+82266468:	4b ff fd dc 	b       82266244 <XbBattleRuntime_BeginManagers+0x44>
+8226646c:	60 00 00 00 	nop
+82266470:	80 01 00 a4 	lwz     r0,164(r1)
+82266474:	3b a0 fc 84 	li      r29,-892
+82266478:	eb c1 00 90 	ld      r30,144(r1)
+8226647c:	eb e1 00 98 	ld      r31,152(r1)
+82266480:	7c 08 03 a6 	mtlr    r0
+82266484:	4b ff fd c0 	b       82266244 <XbBattleRuntime_BeginManagers+0x44>
+82266488:	3b a0 fc 85 	li      r29,-891
+8226648c:	4b ff fd b8 	b       82266244 <XbBattleRuntime_BeginManagers+0x44>

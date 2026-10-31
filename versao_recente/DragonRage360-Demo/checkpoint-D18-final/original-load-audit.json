@@ -1,0 +1,113 @@
+{
+  "scope": "Battle_Load initial files, stage 0 and characters 0/1",
+  "all_found": true,
+  "known_buffer_limits_ok": true,
+  "original_loader_executed": false,
+  "resources_converted_for_original_loader": false,
+  "requests": [
+    {
+      "label": "common sound",
+      "file_id": 330,
+      "path": "pzs3us1/00329.bin",
+      "found": true,
+      "bytes": 540224,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "stage sound",
+      "file_id": 334,
+      "path": "pzs3us1/00333.bin",
+      "found": true,
+      "bytes": 80576,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "left voice",
+      "file_id": 3034,
+      "path": "pzs3us1/03033.bin",
+      "found": true,
+      "bytes": 317312,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "right voice",
+      "file_id": 3035,
+      "path": "pzs3us1/03034.bin",
+      "found": true,
+      "bytes": 285952,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "stage model",
+      "file_id": 369,
+      "path": "pzs3us1/00368.bin",
+      "found": true,
+      "bytes": 6231936,
+      "within_loader_buffer": true
+    },
+    {
+      "label": "left member",
+      "file_id": 8,
+      "path": "pzs3us1/00007.bin",
+      "found": true,
+      "bytes": 3424,
+      "within_loader_buffer": true
+    },
+    {
+      "label": "right member",
+      "file_id": 11,
+      "path": "pzs3us1/00010.bin",
+      "found": true,
+      "bytes": 3424,
+      "within_loader_buffer": true
+    },
+    {
+      "label": "left model",
+      "file_id": 1424,
+      "path": "pzs3us1/01423.bin",
+      "found": true,
+      "bytes": 742592,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "left animations",
+      "file_id": 1432,
+      "path": "pzs3us1/01431.bin",
+      "found": true,
+      "bytes": 1043392,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "left effects",
+      "file_id": 1433,
+      "path": "pzs3us1/01432.bin",
+      "found": true,
+      "bytes": 718848,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "right model",
+      "file_id": 1434,
+      "path": "pzs3us1/01433.bin",
+      "found": true,
+      "bytes": 787840,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "right animations",
+      "file_id": 1442,
+      "path": "pzs3us1/01441.bin",
+      "found": true,
+      "bytes": 996736,
+      "within_loader_buffer": null
+    },
+    {
+      "label": "right effects",
+      "file_id": 1443,
+      "path": "pzs3us1/01442.bin",
+      "found": true,
+      "bytes": 741568,
+      "within_loader_buffer": null
+    }
+  ]
+}

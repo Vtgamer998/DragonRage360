@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "test": "engine/tools/test_body_demo.py --sanitize",
+  "scope": "viewer batch/texture ownership, fences, reopen, failure cleanup with GPU mocks",
+  "GPU_execution": false,
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

@@ -1,0 +1,10 @@
+{
+  "unpack_comparisons": 4000,
+  "arithmetic_programs": 400,
+  "two_bone": "synthetic LQ/MULA/MADDA/MADD/SQ program -> (6,25,19.5,1)",
+  "GIF": "wrapped XGKICK exact canonical bytes passed",
+  "guards": "truncation, invalid formats/addresses, byte capacity, instruction budget",
+  "reference": "actual unmodified upstream gs_vu1.c on little-endian host",
+  "PowerPC_execution": "not run",
+  "real_game_microprograms": "not tested; not full skinning/game integration"
+}

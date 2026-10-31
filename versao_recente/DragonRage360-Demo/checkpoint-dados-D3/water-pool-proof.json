@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "source": "USA executable, exact SHA256 checked",
+  "address": "D_002FE8D0",
+  "reader": [
+    "0x108B54 LUI v0,0x30",
+    "0x108B78 ADDIU v0,v0,-0x1730",
+    "0x108B80 LWC1 f30,0(v0)",
+    "0x108B84 CVT.S.W f30,f30"
+  ],
+  "type": "32-bit signed integer loaded as bits then converted numerically to float",
+  "bytes_read": 4,
+  "next_four_bytes": "checked zero padding"
+}

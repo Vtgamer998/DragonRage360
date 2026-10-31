@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "host_execution": "QEMU-i386",
+  "original_full_roster_reset_and_AI_init": true,
+  "original_object_Init_Term": true,
+  "original_input_sample_remap_press_release": true,
+  "typed_catalog_real_data_and_callbacks": true,
+  "SDK_import_traps": [
+    "xsdk_audio_close",
+    "xsdk_audio_next_frame",
+    "xsdk_audio_open",
+    "xsdk_audio_queue_frame",
+    "xsdk_audio_stats"
+  ],
+  "SDK_calls_during_test": 0,
+  "PowerPC_execution": false,
+  "GPU_execution": false,
+  "Battle_Update_or_Main": false,
+  "sanitizers": "undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks"
+}

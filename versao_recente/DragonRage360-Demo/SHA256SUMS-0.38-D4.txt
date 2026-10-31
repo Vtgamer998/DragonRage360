@@ -1,0 +1,5 @@
+51e0b9f9a14ab35ad2f5e4894ce56f654fd8bdc4b58ae0404b944a0cb0fdb801  default.xex
+eb6408876459ed1f5b2e3ca41ca4616f6953768f75efd07934085bc7a811c42e  manifesto-tipado/typed-manifest.json
+6566b5fa2b1a1509826b39eb022aa44f5faeb194d9fb1f9eea67772507fb3723  manifesto-tipado/typed_catalog.c
+f66f972b8b07deef7c6cf7aa439f68be1e9cb5c6b80bfff8098d6e35a691785d  manifesto-tipado/unused-native-proof.json
+d2a045c67cc6b72817da1692711c087784e827c8404f0b9a66af0713084cfc87  extras/player-0.37-D3-para-0.38-D4.patch

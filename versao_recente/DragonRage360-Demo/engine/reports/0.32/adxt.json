@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "reference_source_sha256": "1d90a97eb5b98c2e15415297130c0423102a67ad3ba9cb4b0811b82647ad14d9",
+  "real_inputs": [
+    {
+      "file": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/adxt-032/real-24000-1.adx",
+      "index": 0,
+      "size": 45742,
+      "sha256": "96298a2ee64d48e3467055e532fe1f054cfecd7201287244b0883b3c945685fd"
+    },
+    {
+      "file": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/adxt-032/real-16000-1.adx",
+      "index": 32763,
+      "size": 59494,
+      "sha256": "4749b3f898834cef44651cf45ad52143f916683c239a6e39e377d679bbe97ce3"
+    },
+    {
+      "file": "/workspace/scratch/0e938d660765/work-030/DragonRage360-Demo/build/adxt-032/real-24000-2.adx",
+      "index": 64974,
+      "size": 3641344,
+      "sha256": "f6a78da188c77530a34810000d51057167e55c064792b809b02a223d8daecdb5"
+    }
+  ],
+  "xsdk_audio": "mocked, real API frame layout",
+  "ISO_transport": "XbFile_* mocked with real resource bytes; separate real xb_disc test covers transport",
+  "hardware_audio": false,
+  "PPC_execution": false,
+  "whole_game_rollback_validated": false
+}

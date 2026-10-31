@@ -1,0 +1,1 @@
+PASS: 13583 triangle occurrences, independent fingerprint 04645362575aed17; 100 zones, static/destructible meshes, native floats, ordered closed AABB traversal; malformed pointers/counts/tree/vertex/NaN/truncation rejected; immutable input; host only

@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "sanitizers": true,
+  "scope": "actual adapted engine heap + native arena + converter registry; allocator/log transport replaced only on host",
+  "randomized_operations": 3000,
+  "PowerPC_executed": false,
+  "battle_executed": false
+}

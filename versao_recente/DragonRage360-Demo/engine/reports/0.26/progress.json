@@ -1,0 +1,15 @@
+{
+  "resolved": [
+    "Dma_PutTexStrips"
+  ],
+  "previous_unresolved": 157,
+  "current_unresolved": 156,
+  "new_unresolved": [],
+  "source_compiled": true,
+  "producer_in_battle_link": true,
+  "battle_link_success": false,
+  "Battle_Main_in_XEX": false,
+  "XEX_changed": false,
+  "Xbox_tested": false,
+  "emulator_tested": false
+}

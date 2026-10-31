@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "scope": "old 0.22 direct VM calls vs new VIF stream, bind-pose body CPU vertices only",
+  "byte_identical": true,
+  "bytes": 377328,
+  "sha256": "9508ded03ccd84f00df015254cf7e2ce818a679e254d5ec6a52ae7a99325e806",
+  "vertices": 13476,
+  "battle_executed": false,
+  "hardware_pixels_verified": false
+}

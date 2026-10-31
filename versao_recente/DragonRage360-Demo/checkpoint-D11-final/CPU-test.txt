@@ -1,0 +1,27 @@
+typed data: 0
+runtime: 0
+common3 preparation: 0 entries=637 textures=111 images=154 unprepared=526
+stage parameters: 0
+PASS seven corrupt stage parameter/path/nav fixtures rejected
+PASS 20 MAPD sections against original binder
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+original audio load: 0
+PASS original audio: 96 frames, 30384 nonzero samples; SDK device simulated
+PASS original input sample/remap/press/release with physical-pad fixture
+PASS original roster reset / AI init / reset / terminate: pass=0 heap restored
+objects ready; entering original roster/AI reset
+original managers: 0
+side=0 hp=40000 ki=40000 AI=0 level=13
+side=1 hp=40000 ki=40000 AI=0 level=13
+original audio load: 0
+PASS original audio: 192 frames, 60768 nonzero samples; SDK device simulated
+PASS original input sample/remap/press/release with physical-pad fixture
+PASS original roster reset / AI init / reset / terminate: pass=1 heap restored
+PASS no Battle_Update/Battle_Main or hardware execution; audio SDK simulated; marker stays 2
+typed-data: 2738 ops validated; complete=1; commit=1; combat NOT started
+mem: game arena at 0x4193e000 (29630464 bytes); fixed register windows separate
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started
+typed-data: 2738 ops validated; complete=1; commit=0; combat NOT started

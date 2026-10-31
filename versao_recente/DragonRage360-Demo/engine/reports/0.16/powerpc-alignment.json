@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "units": [
+    "vu/dr_body_pipeline.c",
+    "graphics/dr_texfile.c",
+    "graphics/dr_body_demo.c"
+  ],
+  "extra_flag": "-mcheck-fpr-alignment",
+  "PowerPC_execution": false
+}

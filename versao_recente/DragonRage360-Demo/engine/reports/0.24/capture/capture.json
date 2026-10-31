@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "capture": "bounded DMA/VIF DIRECT + whole gs_draw.c and gs_core.c, reachable GS sections linked",
+  "GPU_execution": false,
+  "battle_loop": false,
+  "sanitizers": "ASan/UBSan",
+  "all_original_combat_packet_producers_adapted": false,
+  "adapted_producer_subset": "register/rect helpers; diagnostic uses Frame/Zbuf/Scissor/XYOffset/AD and Dma_Flush/ResetBuffers",
+  "scope": "bounded canonical-LE DMA/VIF DIRECT -> GIF/register/VRAM -> real capture -> backend -> mock XSDK calls; lifecycle, endian boundaries, eight original filter/clamp selectors, DATE/FBA/snapshot descriptors, native VU shader selection/uniform uploads, shadow stencil reset, original captured outline/CLUT passes, unmerged self-target consumer resolves and raw-alpha binding, frozen effect IDs, rejected missing/wrong-owner snapshots and invalid CLUT/source before draw"
+}

@@ -1,0 +1,3 @@
+0.7 PASS: BPE, motion, skeleton and BIN memory readers tested with 10000 hostile buffers under ASan/UBSan
+Leak scan disabled: runtime /proc task inspection unavailable.
+Host synthetic test; no real ISO, fight or PowerPC execution.

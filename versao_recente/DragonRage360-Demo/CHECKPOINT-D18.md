@@ -1,0 +1,1 @@
+D18 — a captura externa confirmou a interface visível no Xenia, enquanto a leitura interna permanece FF000000. SDL em modo arquivo confirmou PCM não nulo. Os 13 arquivos iniciais do Battle_Load para cenário 0 e lutadores 0/1 existem e os buffers conhecidos comportam seus tamanhos; o boot original não foi executado. NOT_READY=2. Consulte RELATORIO-0.52-D18.md.

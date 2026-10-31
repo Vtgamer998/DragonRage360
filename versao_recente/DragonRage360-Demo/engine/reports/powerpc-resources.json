@@ -1,0 +1,17 @@
+{
+  "target": "powerpc-xsdk-elf, game software-float ABI",
+  "compiled": [
+    "src/sys/mem_read.c",
+    "src/sys/bpe.c",
+    "src/battle/bobj_a.c",
+    "resource/dr_anim.c",
+    "resource/dr_bpe.c",
+    "resource/dr_container.c",
+    "resource/dr_disc.c",
+    "resource/dr_resource_selftest.c",
+    "resource/dr_skeleton.c",
+    "tests/resource_layout.c (15 format assertions)"
+  ],
+  "runtime": "not executed",
+  "engine_link": "not attempted; platform/render/resource blockers remain"
+}

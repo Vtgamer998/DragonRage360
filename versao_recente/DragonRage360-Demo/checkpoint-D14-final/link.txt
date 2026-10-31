@@ -1,0 +1,2 @@
+/usr/bin/ld: warning: /workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d14-host/objects/port_data_vu1_micro_data_s.o: missing .note.GNU-stack section implies executable stack
+/usr/bin/ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker

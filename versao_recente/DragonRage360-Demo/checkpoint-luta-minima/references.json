@@ -1,0 +1,1257 @@
+{
+  "unresolved_count": 103,
+  "object_count": 433,
+  "counts": {
+    "with_code_reference": 0,
+    "data_only": 103,
+    "not_found_in_objects": 0
+  },
+  "references": {
+    "D_3BE71C": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 157832,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "dvCiGetFileSize": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68608,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "dvCiOpen": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68616,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "dvCiReqRd": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68632,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00100000": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 163236,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027BCD0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68600,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027BD48": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68604,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027BDD8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68664,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C0F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68620,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C148": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68624,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C1E0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68628,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C3C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68640,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C4A8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68644,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C4E0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68648,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C4E8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68656,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027C680": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 68696,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F7A0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91136,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F7F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91140,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F810": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91144,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027F9B8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91156,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FA00": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91160,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FAC0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91164,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FC80": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91176,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FCD0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91180,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FD08": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91184,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FD40": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91188,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FDC0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91192,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0027FE80": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91232,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002826A0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111004,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282758": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111008,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002827E8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111036,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282898": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111012,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282930": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111028,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282978": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111016,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282AB8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111024,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282BA8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111020,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00282CF8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 111032,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283278": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112260,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283330": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112264,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283338": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112292,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283348": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112268,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002833F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112284,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283448": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112272,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283648": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112280,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283818": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112276,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283A48": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 112288,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283E98": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128700,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283F50": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128704,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00283FE0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128732,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284090": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128708,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284198": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128724,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284298": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128712,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284448": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128720,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002845C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128716,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_00284730": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 128728,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B7C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146280,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B838": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146284,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B850": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146344,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028B8F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146288,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028BD28": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146300,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028BDC8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146304,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028BE60": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146308,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C028": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146320,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C120": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146324,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C158": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146328,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C160": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146336,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0028C288": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146376,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F2F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148360,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F370": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148392,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F408": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148364,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F4C0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148396,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F590": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148368,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F640": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148400,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F6F8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148372,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F7F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148404,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F8F0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148376,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029F990": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148408,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FA40": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148380,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FB20": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148412,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FC08": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148384,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FCE0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148416,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FDB0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148388,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_0029FED0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 148420,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A09D8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25932,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0B18": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25940,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0C00": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25948,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0C10": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25928,
+          "relocation": 1,
+          "code": false
+        },
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25952,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0C20": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25960,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0E08": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25964,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A0E18": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25968,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A11E8": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25936,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A1278": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25944,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002A1310": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1F44C0_rodata_s.o",
+          "section": ".data",
+          "offset": 25956,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA2D0": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 158044,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA308": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 158036,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA518": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 160020,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA688": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 160044,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BA938": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 161948,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "func_002BC748": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 162948,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "htCiOpen": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146296,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "htCiReqRd": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 146312,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "mfCiOpen": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91152,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    },
+    "mfCiReqRd": {
+      "classification": "data_only",
+      "sites": [
+        {
+          "object": "/workspace/scratch/0e938d660765/work-034/DragonRage360-Demo/build/fixed-sfx/objects/port_data_cod_1C3400_data_s.o",
+          "section": ".data",
+          "offset": 91168,
+          "relocation": 1,
+          "code": false
+        }
+      ]
+    }
+  },
+  "scope": "allocated ELF32-BE sections, including sections later GC-discarded; no runtime reachability claim",
+  "tables_removed": false,
+  "battle_executed": false
+}

@@ -1,1 +1,7 @@
-0.44-D10: novo XEX compilado; 405/405 unidades PPC; zero indefinidos. Boot original de objetos e BtlChar/BtlAi executado em i386, não em PowerPC. Sem luta/GPU de combate. Consulte RELATORIO-0.44-D10.md e checkpoint-D10-final/.
+0.45-D11: novo XEX diagnóstico, não jogável.
+SHA256 157f37311c29d9e90d2a3ccc84ba1ed4b6cf333657f2f8b4dfdfeaab2f6444cf
+PPC: 405/405, zero referências indefinidas, ABI fechada, catálogo verificado.
+CPU i386/QEMU: MAPD/navegação, comum3 111 texturas/154 imagens, áudio original
+192 blocos/60.768 valores PCM não nulos; dispositivo de áudio simulado.
+Sem Battle_Update/Main, ciclo Battle_Load/Init integral, HUD/cena ou GPU.
+Marcador 2 e NOT_READY preservados. Sem Xbox/Xenia.

@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "DATE_FBA_native_microcode_cases": 216,
+  "sampled_target_native_microcode_cases": 16,
+  "stencil_native_microcode_cases": 2304,
+  "target_UV_clamp_cases": 27,
+  "scope": "raw-alpha MRT output, DATE bit7 decision, FBA OR 128, eight stencil-bit selectors and clear selector",
+  "GPU_execution": false,
+  "rasterization": false,
+  "not_verified": [
+    "real D24S8/RGBA8 alias bytes",
+    "eDRAM clears/restores",
+    "tiled execution",
+    "hardware pixels"
+  ]
+}

@@ -1,0 +1,14 @@
+eft_c.h: static assertion failed: "EftTask.unk4 0x04"
+eft_z.h: unknown type name 'EftZView'; did you mean 'EftZVec'?
+eft_z.h: expression in static assertion is not an integer
+eft_z.h: unknown type name 'EftZView'; did you mean 'EftZVec'?
+eft_z.h: expression in static assertion is not an integer
+eft_z.h: unknown type name 'EftZView'; did you mean 'EftZVec'?
+eft_z.h: expression in static assertion is not an integer
+menu_a.h: static assertion failed: "MainMenu.itemCount 0x144"
+menu_a.h: static assertion failed: "MainMenu.top 0x148"
+menu_a.h: static assertion failed: "MainMenu.unk14C 0x14C"
+menu_a.h: static assertion failed: "MainMenu.extra 0x150"
+menu_a.h: static assertion failed: "MainMenu.iconTimer 0x154"
+menu_a.h: static assertion failed: "MainMenu.iconFrame 0x158"
+14862 member offsets checked in 186 headers: 11 differ, 8 other compile errors

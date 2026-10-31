@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "PPC_catalog_shape": "32-bit pointers; 16-byte regions; 28-byte operations; header 32 bytes",
+  "regions_verified": 33,
+  "operations_verified": 2736,
+  "pointer_operations_verified": 1779,
+  "pointer_bindings_changed_since_reference_link": 1473,
+  "all_final_addresses_symbolically_relocated": true,
+  "catalog_complete": false,
+  "boot_marker": 2,
+  "hardware_executed": false
+}

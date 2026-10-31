@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "backend": "real sXenosBackend object and callbacks",
+  "registration": "verbatim patched GsGpu_Init body, DR_XBOX360; rest of gs_draw.c not compiled",
+  "scope": [
+    "texture/mip upload ownership and handle generations",
+    "DATE marker/FBA replay",
+    "MRT target handles",
+    "present/read/color-copy calls",
+    "unknown VU fails before draw"
+  ],
+  "GPU_execution": false,
+  "complete_engine_linked": false,
+  "sanitizers": "ASan/UBSan",
+  "leak_detection": "disabled"
+}

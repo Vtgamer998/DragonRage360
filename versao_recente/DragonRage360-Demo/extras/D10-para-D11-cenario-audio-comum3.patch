@@ -1,0 +1,883 @@
+--- a/BUILD-RESULT.txt
++++ b/BUILD-RESULT.txt
+@@ -1 +1,7 @@
+-0.44-D10: novo XEX compilado; 405/405 unidades PPC; zero indefinidos. Boot original de objetos e BtlChar/BtlAi executado em i386, não em PowerPC. Sem luta/GPU de combate. Consulte RELATORIO-0.44-D10.md e checkpoint-D10-final/.
++0.45-D11: novo XEX diagnóstico, não jogável.
++SHA256 157f37311c29d9e90d2a3ccc84ba1ed4b6cf333657f2f8b4dfdfeaab2f6444cf
++PPC: 405/405, zero referências indefinidas, ABI fechada, catálogo verificado.
++CPU i386/QEMU: MAPD/navegação, comum3 111 texturas/154 imagens, áudio original
++192 blocos/60.768 valores PCM não nulos; dispositivo de áudio simulado.
++Sem Battle_Update/Main, ciclo Battle_Load/Init integral, HUD/cena ou GPU.
++Marcador 2 e NOT_READY preservados. Sem Xbox/Xenia.
+--- a/LEIA-ME.txt
++++ b/LEIA-ME.txt
+@@ -1,3 +1,5 @@
++0.45-D11: MAPD, caminhos e navegação nativos; 111 recursos de textura do comum 3 (154 imagens), com 526 recursos ainda indisponíveis; ciclo original de áudio/mixer testado em CPU. A batalha completa, HUD/cena e GPU continuam pendentes. Marcador 2/NOT_READY mantidos. Veja RELATORIO-0.45-D11.md.
++
+ # 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
+ 
+ Novo default.xex compilado. O boot original de objetos e o reset/inicialização
+--- a/PENDENCIAS.md
++++ b/PENDENCIAS.md
+@@ -1,3 +1,5 @@
++0.45-D11: MAPD, caminhos e navegação nativos; 111 recursos de textura do comum 3 (154 imagens), com 526 recursos ainda indisponíveis; ciclo original de áudio/mixer testado em CPU. A batalha completa, HUD/cena e GPU continuam pendentes. Marcador 2/NOT_READY mantidos. Veja RELATORIO-0.45-D11.md.
++
+ # 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
+ 
+ Novo default.xex compilado. O boot original de objetos e o reset/inicialização
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,5 @@
++0.45-D11: MAPD, caminhos e navegação nativos; 111 recursos de textura do comum 3 (154 imagens), com 526 recursos ainda indisponíveis; ciclo original de áudio/mixer testado em CPU. A batalha completa, HUD/cena e GPU continuam pendentes. Marcador 2/NOT_READY mantidos. Veja RELATORIO-0.45-D11.md.
++
+ # 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
+ 
+ Novo default.xex compilado. O boot original de objetos e o reset/inicialização
+--- /dev/null
++++ b/RECUPERACAO-D11.md
+@@ -0,0 +1 @@
++A recuperação desta revisão foi concluída e os testes de CPU repetidos. O XEX atual é D11; veja RELATORIO-0.45-D11.md e VALIDACAO-0.45-D11.json para o estado e os limites desta entrega.
+--- /dev/null
++++ b/RELATORIO-0.45-D11.md
+@@ -0,0 +1,107 @@
++# D11 — cenário, texturas do comum 3 e áudio
++
++**O pedido completo ainda não está concluído. Battle_Update e Battle_Main
++não foram executados. O ciclo Battle_Load/Battle_Init completo, a cena/HUD
++e a apresentação GPU continuam pendentes. Marcador 2 e NOT_READY mantidos.**
++
++## Alterações implementadas e executadas em CPU
++
++Preparação nativa das vinte seções MAPD, com ponteiros próprios, números de
++32/16 bits e transformação de coordenadas conforme os leitores originais.
++Cores, curvas e dados opacos são preservados. Não se troca a ordem dos bytes
++de todas as palavras de um arquivo indiscriminadamente.
++
++Caminhos EVPp: cabeçalhos, ponteiros e posições preparados; outros bytes de
++cada ponto continuam opacos. Pontos MEF0 opcionais preparados. O grafo de
++navegação tem posições, objetos e oito links de 16 bits por nó validados.
++O gerenciador original recebe esses dados e aloca suas listas. O cenário
++usado tem 165 nós e cinco caminhos. Sua liberação é recusada enquanto o
++navegador o referencia. A busca pública de rotas continua dependente da
++inicialização integral do cenário.
++
++O cenário NÃO está pronto para renderização: ainda faltam seus modelos,
++animações, física, temporizadores e recursos internos completos. A preparação
++de metadados não remove NOT_READY.
++
++O comum 3 ganhou uma representação própria de **111 recursos TexFile,
++totalizando 154 imagens**. Cada recurso aceito passa pelo decodificador e
++conversor existente, com descritores numéricos nativos e payloads canônicos.
++O getter original BtlScene_GetCommonEntry fornece essas representações; o
++consumidor original EftTexSet_Load32 lê os descritores e TEX0 preparados.
++Os **outros 526 recursos permanecem indisponíveis** nesse caminho: incluem
++formatos não preparados e candidatos não aceitos pelo conversor. Não se
++publica um bloco little-endian cru como se todos os seus recursos fossem
++nativos. Esse subconjunto não inicializa a cena ou seus efeitos.
++
++BGM/streams ADX da partida não foram iniciados nesta sessão.
++
++Áudio: bancos com cabeçalho externo nativo e HD/seq/ADPCM canônicos, com
++limites de arquivo, capacidade, amostras e metadados validados. Os leitores
++originais recebem metadados preparados. A sessão executa Snd_Init,
++Snd_LoadBank, transferências adiadas de Snd_Update, fila de reprodução e
++Snd_Term. Usa bancos comum/cenário e vozes dos personagens 0/1.
++
++Corrigido Snd_Term: descarrega bancos ocupados antes de terminar o RPC e
++libera o bloco RPC, que o código anterior deixava alocado. O launcher solicita
++uma voz do lado 0 e atende o mixer durante os quadros da interface. Saída
++audível no Xbox ainda não foi verificada.
++
++## Testes recuperados e repetidos
++
++Linux i386 sob QEMU, catálogo original e callbacks reais, UBSan/bounds:
++
++- Vinte seções MAPD comparadas com BtlStage_BindData original em uma cópia
++  independente. Sete corrupções de dados/pais/caminhos/grafo recusadas.
++- Binder, consultas de nó próximo e encerramento de navegação originais;
++  cinco caminhos publicados sem declarar o cenário completo.
++- 111 recursos/154 imagens do comum 3 entregues ao getter original e a
++  EftTexSet_Load32; ponteiros e TEX0 conferidos após liberar a origem.
++  Índices inválidos retornam NULL no caminho nativo.
++- Dois ciclos de objetos, BtlChar/BtlAi, navegação, áudio e entrada;
++  heap do motor restaurado exatamente depois de cada ciclo.
++- Quatro bancos reais carregados com transferências adiadas, metadados e
++  bits de loop comparados aos leitores originais. Cabeçalho truncado,
++  máscara, tamanho e capacidade inválidos recusados.
++- **192 blocos de 256 amostras e 60.768 valores PCM não nulos** nos canais
++  estéreo; valores finitos em [-1,1], demais canais zerados.
++
++O dispositivo SDK do teste é um coletor PCM síncrono simulado. O sampler,
++o mixer, os comandos originais e as transferências IOP/SPU são executados em
++CPU. Isso não prova saída física, PowerPC, GPU, uma partida completa ou
++sincronização com mandíbula/lábios. Os blocos de áudio não são quadros de
++Battle_Update. Mantêm-se as exceções documentadas de sanitização da matemática
++newlib de terceiros.
++
++Evidências CPU em checkpoint-D11-CPU. Novo default.xex D11: 13.705.216 bytes, SHA-256 157f37311c29d9e90d2a3ccc84ba1ed4b6cf333657f2f8b4dfdfeaab2f6444cf.
++Vínculo PowerPC: 405/405 unidades, zero símbolos pendentes e zero conflitos
++ABI. Catálogo final: 33 regiões e 2.738 operações verificados. Integridade
++XEX2/PE e hashes da imagem: PASS. Verificações C do toolchain xsdk: PASS.
++Tabelas PS2 antigas continuam isoladas: forçá-las expõe os 103 símbolos
++não implementados; o probe Game_Main continua com 69 nomes ausentes.
++O D10 anterior está em diagnostico-anterior-D10/default.xex.
++Evidências finais em checkpoint-D11-final.
++
++## O que ainda falta do pedido
++
++| Parte | Situação |
++|---|---|
++| Battle_Load/Battle_Init | Ciclo integral não integrado. |
++| Battle_Update/Battle_Main | Não executados; bloqueio preservado. |
++| Cenário | Dados de MAPD/caminhos/grafo preparados; cenário gráfico completo ainda ausente. |
++| Comum 3 | Subconjunto de texturas integrado; 526 recursos indisponíveis. |
++| HUD, cena e apresentação | Não concluídos. |
++| Skinning/pixels da batalha, mandíbula/lábios, auras/efeitos | Sem comprovação de apresentação GPU. |
++| Áudio | Ciclo e mixer testados em CPU; saída no Xbox e sincronização facial não comprovadas. |
++
++Sem execução em Xbox ou Xenia. Recursos reais utilizados nos testes não
++acompanham o pacote. O XEX usa o SDK real; o coletor simulado é exclusivo do
++teste host. Não force Battle_Main retirando os bloqueios.
++
++## Reprodução
++
++Upstream 3ca419c7966b11438e2dc3c9a7e1914f102ed545; SDK
++57b02f1e60667e37d22c3aa613d23d2486514ff8. Veja BUILD.md.
++test_native_managers.py conserva a ordem de argumentos D10. Além dos
++recursos anteriores, requer common-3.bin, sound-common.bin, sound-stage.bin,
++voice-left.bin e voice-right.bin. Bancos USA: IDs 0x14A, 0x14E, 0xBDA, 0xBDB.
++Esses arquivos devem vir da ISO local e não estão incluídos.
+--- a/TESTAR-PRIMEIRO.md
++++ b/TESTAR-PRIMEIRO.md
+@@ -1,22 +1,22 @@
+-# Teste do novo XEX 0.44-D10
++# Testar D11 no Xbox 360 RGH
+ 
+-Este é um diagnóstico de boot CPU, ainda sem luta jogável.
++Copie default.xex e startup_test.txt do pacote D11 para a pasta do aplicativo.
++Mantenha a ISO USA na pasta isos e inicie pelo Aurora. startup_test.txt
++seleciona typed-data. O teste continua sendo diagnóstico, sem partida jogável.
+ 
+-1. Copie o novo `default.xex` e `startup_test.txt` para a pasta existente do
+-   projeto no Xbox 360. Preserve a sua ISO USA original em `isos/`.
+-2. Inicie pela Aurora. A interface deve identificar `0.44-D10`.
+-   O startup `typed-data` executa o diagnóstico na ISO selecionada.
+-3. Consulte `default.log`. No fim do teste devem aparecer:
+-   - `original CPU manager boot: error=0`
+-   - duas linhas `original initialized fighter`, lados 0/1,
+-     `HP=40000 Ki=40000 AI_type=0 AI_level=13`.
+-4. Se aparecer um erro, guarde o log completo. O resultado zero confirma
+-   apenas o boot CPU indicado; não significa que uma partida foi renderizada.
++Procure em default.log:
+ 
+-O pacote menor de atualização contém o executável e estas instruções.
+-O pacote completo contém também os fontes e o relatório de validação.
+-O XEX D8 anterior foi preservado no pacote completo em
+-`diagnostico-anterior-D8/default.xex`.
++- common3 native texture subset: error=0 entries=637 textures=111 images=154
++  unprepared=526
++- original CPU manager boot: error=0
++- original initialized fighter: dois lados com HP=40000, Ki=40000,
++  AI_type=0, AI_level=13
++- original audio diagnostic: error=0
+ 
+-Ainda não são executados Battle_Update/Battle_Main. A apresentação GPU do
+-combate, efeitos e vozes continuam pendentes. Leia RELATORIO-0.44-D10.md.
++O programa solicita uma voz do lado 0. Confira se há som no console.
++error=0 não comprova saída audível: o teste em CPU usou um coletor PCM
++simulado. audio service failed indica falha de serviço registrada no log.
++
++Não retire o marcador 2 nem NOT_READY. Battle_Load/Battle_Init completos,
++Battle_Update/Battle_Main, cenário gráfico, demais recursos do comum 3,
++HUD/cena e apresentação GPU continuam pendentes. Veja RELATORIO-0.45-D11.md.
+--- /dev/null
++++ b/engine/platform/platform/xb_battle_audio.inc
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later */
++int XbBattleRuntime_BeginAudio(XbBattleRuntime *r,const void *const packs[4],const size_t bytes[4]){
++ if(!r || active!=r || !r->managers || r->audio || gSndMgr || gSndRpc || !packs || !bytes)return -891;
++ static const unsigned masks[4]={4,8,16,32};int e=0;
++ for(unsigned i=0;i<4;i++){e=XbSfx_PrepareBank(packs[i],bytes[i],masks[i],&r->banks[i]);if(e)goto fail;}
++ Snd_Init();r->audio=1;e=XbAdx_LastError();if(!e)e=XbSfx_LastError();if(e)goto fail;
++ for(unsigned i=0;i<4;i++){Snd_LoadBank(masks[i],XbSfx_BankData(r->banks[i]),0);e=XbSfx_LastError();if(e)goto fail;}
++ for(unsigned frame=0;frame<16 && !Snd_IsUploadDone();frame++){Snd_Update();e=XbSfx_LastError();if(e)goto fail;}
++ if(!Snd_IsUploadDone()){e=-893;goto fail;}return 0;
++fail:
++ if(r->audio)XbBattleRuntime_EndAudio(r);
++ else for(unsigned i=0;i<4;i++){XbSfx_FreeBank(r->banks[i]);r->banks[i]=NULL;}
++ return e;
++}
++int XbBattleRuntime_ServiceAudio(XbBattleRuntime *r){
++ if(!r || active!=r || !r->audio)return -891;
++ Snd_Update();int e=XbSfx_LastError();if(e)return e;XbAdx_Tick();return XbAdx_LastError();
++}
++int XbBattleRuntime_EndAudio(XbBattleRuntime *r){
++ if(!r || active!=r || !r->audio)return -891;
++ Snd_Term();r->audio=0;
++ for(unsigned i=0;i<4;i++){XbSfx_FreeBank(r->banks[i]);r->banks[i]=NULL;}
++ return XbAdx_Close();
++}
+--- /dev/null
++++ b/engine/platform/platform/xb_battle_common3.inc
+@@ -0,0 +1,41 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later
++ * Texture subset of common 3. Unknown entries are never exposed as native.
++ * Original scene indexes TABLE WORDS, so word 1 is pack entry 0. */
++static uint32_t common3_word(const uint8_t *p){return p[0]|(uint32_t)p[1]<<8|(uint32_t)p[2]<<16|(uint32_t)p[3]<<24;}
++int XbBattleRuntime_AttachCommon3(XbBattleRuntime *r,const void *pack,size_t n,XbCommon3Info *info){
++ if(info)memset(info,0,sizeof(*info));
++ if(!r || active!=r || r->managers || r->common3 || !pack || n<12 || n>16*1024*1024)return -891;
++ const uint8_t *p=pack;unsigned count=common3_word(p);
++ if(count!=637)return -890;
++ void **entries=calloc((size_t)count+1,sizeof(*entries));if(!entries)return -851;
++ unsigned textures=0,images=0;int error=0;
++ for(unsigned i=0;i<count;i++){
++  size_t off,size;unsigned flags;
++  error=dr_pack_memory_entry(pack,n,i,&off,&size,&flags);
++  if(error==DR_NOT_FOUND){error=0;continue;}if(error)goto fail;
++  if(flags){error=-890;goto fail;}
++  const uint8_t *entry=p+off;
++  /* TexFile has its 0x40-byte entry table at word offset 8. No
++   * guessing schemas for emitters, animations, VIF or effect configs. */
++  if(size<32 || common3_word(entry+4)!=8)continue;
++  unsigned entries_count=common3_word(entry);
++  if(!entries_count || entries_count>256)continue;
++  error=XbNativeTexture_Prepare(entry,size,&entries[i+1]);
++  if(error){if(error==-851 || error==-303)goto fail;
++   /* Rejected data stays unavailable. Partial preparation is never scene readiness. */
++   error=0;continue;
++  }
++  textures++;images+=entries_count;
++ }
++ if(!textures){error=-890;goto fail;}
++ r->common3=entries;r->common3_count=count;r->common3_textures=textures;r->common3_images=images;
++ if(info){*info=(XbCommon3Info){count,textures,images,count-textures};}
++ return 0;
++fail:
++ for(unsigned i=1;i<=count;i++){XbNativeTexture_Free(entries[i]);}
++ free(entries);return error;
++}
++int XbBattleRuntime_TryCommon3Entry(int index,void **out){
++ if(!out || !XbBattleRuntime_HasResources() || !active->common3)return 0;
++ *out=NULL;if(index>0 && (unsigned)index<=active->common3_count)*out=active->common3[index];return 1;
++}
+--- a/engine/platform/platform/xb_battle_runtime.c
++++ b/engine/platform/platform/xb_battle_runtime.c
+@@ -7,6 +7,10 @@
+ #include "xb_model_native.h"
+ #include "xb_mem.h"
+ #include "xb_heap.h"
++#include "xb_sfx.h"
++#include "xb_adxt.h"
++#include "sys/snd.h"
++#include "battle/eft_det_b.h"
+ #include "dr_container.h"
+ #include "battle/btl_obj.h"
+ #include "battle/btl_char_mgr.h"
+@@ -21,10 +25,12 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers;};
++struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images;};
+ static XbBattleRuntime *active;
+ extern AiThMgr *gBtlAi;
+ extern ViewProgress *gProgress;
++extern SndMgr *gSndMgr;
++extern SndRpc *gSndRpc;
+ extern void BtlChar_AllocAll(s32);
+ extern void BtlChar_FreeAll(void);
+ extern void BtlAiMgr_Init(void);
+@@ -66,10 +72,12 @@
+ }
+ int XbBattleRuntime_Close(XbBattleRuntime *r){
+  if(!r || active!=r || gCommonRes!=&r->view || r->managers || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress)return -891;
+- gCommonRes=NULL;active=NULL;XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return 0;
++ gCommonRes=NULL;active=NULL;
++ if(r->common3){for(unsigned i=1;i<=r->common3_count;i++)XbNativeTexture_Free(r->common3[i]);free(r->common3);}
++ XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return 0;
+ }
+ int XbBattleRuntime_BeginManagers(XbBattleRuntime *r){
+- if(!r || active!=r || !XbBattleRuntime_HasResources() || r->managers || gBtlChars || gBtlAi || gSaveData || gProgress || !gBtlObjWork)return -891;
++ if(!r || active!=r || !XbBattleRuntime_HasResources() || r->managers || gBtlChars || gBtlAi || gSaveData || gProgress || gStgNav || !gBtlObjWork)return -891;
+  /* Validate every stage start before AllocAll performs its immediate reset. */
+  for(int side=0;side<2;side++){
+   BtlObj *obj=BtlObj_Get(side);float pos[4],rot[4];int zone=-1;
+@@ -85,10 +93,12 @@
+  }
+  BattleSetup_Finish();
+  for(int side=0;side<2;side++){BattleSide_SetObjId(side,side);BattleSide_SetModelSlot(side,side);}
+- BtlChar_AllocAll(2);BtlAiMgr_Init();r->managers=1;return 0;
++ BtlChar_AllocAll(2);BtlAiMgr_Init();if(XbBattleStage_HasParameters())StgNav_Init();r->managers=1;return 0;
+ }
+ int XbBattleRuntime_EndManagers(XbBattleRuntime *r){
+  if(!r || active!=r || !r->managers || !gBtlChars || !gBtlAi || !gSaveData || !gProgress)return -891;
++ if(r->audio){int e=XbBattleRuntime_EndAudio(r);if(e)return e;}
++ if(XbBattleStage_HasParameters())StgNav_Term();
+  BtlAiMgr_Term();BtlChar_FreeAll();
+  Heap_Free(gSaveData);gSaveData=NULL;
+  Heap_Free(gProgress->loadSprites);Heap_Free(gProgress->loadRes);Heap_Free(gProgress->loadPack);Heap_Free(gProgress);gProgress=NULL;
+@@ -106,3 +116,7 @@
+  }
+  return 0;
+ }
++
++#include "xb_battle_audio.inc"
++
++#include "xb_battle_common3.inc"
+--- a/engine/platform/platform/xb_battle_runtime.h
++++ b/engine/platform/platform/xb_battle_runtime.h
+@@ -4,7 +4,8 @@
+ #include <stddef.h>
+ typedef struct XbBattleRuntime XbBattleRuntime;
+ /* Dedicated native common resources for object/roster boot. Common 3 and the
+- * effect scene are NOT supplied by this interface. No readiness marker is set. */
++ * effect scene are not complete. A separate API attaches a texture subset
++ * of common 3; other entries remain unavailable. No readiness marker is set. */
+ int XbBattleRuntime_Open(const void *,size_t,const void *,size_t,XbBattleRuntime **);
+ int XbBattleRuntime_Close(XbBattleRuntime *);
+ int XbBattleRuntime_HasResources(void);
+@@ -17,4 +18,11 @@
+ int XbBattleRuntime_EndManagers(XbBattleRuntime *);
+ typedef struct XbBattleRuntimeInfo {int health[2],ki[2],ai_type[2],ai_level[2];} XbBattleRuntimeInfo;
+ int XbBattleRuntime_GetInfo(XbBattleRuntime *,XbBattleRuntimeInfo *);
++int XbBattleRuntime_BeginAudio(XbBattleRuntime *,const void *const[4],const size_t[4]);
++int XbBattleRuntime_ServiceAudio(XbBattleRuntime *);
++int XbBattleRuntime_EndAudio(XbBattleRuntime *);
++typedef struct XbCommon3Info {unsigned entries,textures,images,unprepared;} XbCommon3Info;
++/* Texture subset only: success does not mean all entries were prepared. */
++int XbBattleRuntime_AttachCommon3(XbBattleRuntime *,const void *,size_t,XbCommon3Info *);
++int XbBattleRuntime_TryCommon3Entry(int,void **);
+ #endif
+--- a/engine/platform/platform/xb_battle_stage.c
++++ b/engine/platform/platform/xb_battle_stage.c
+@@ -29,6 +29,8 @@
+  NativeStage stage;StgBounds bounds;ColMesh empty;
+  uint8_t *arena;void *saved_base;int installed,querying;
+  float starts[4][8];int has_starts;
++ uint8_t *parameters,*path_bytes,*mef_bytes,*nav_bytes;
++ void *saved_paths,*saved_mef;int parameters_bound;
+ };
+ extern s32 *gColMeshBase;
+ extern void *gStgColMesh;
+@@ -37,6 +39,8 @@
+ extern void ColMesh_GetPolyVerts(ColMesh *,ColPoly *,ColVec *,ColVec *,ColVec *);
+ extern ColPoly *ColMesh_GetPoly(ColMesh *,s32);
+ static XbBattleStageCollision *active;
++static void publish_parameters(XbBattleStageCollision *);
++static void unpublish_parameters(XbBattleStageCollision *);
+ static uint32_t rd(const uint8_t *p){return (uint32_t)p[0]|(uint32_t)p[1]<<8|(uint32_t)p[2]<<16|(uint32_t)p[3]<<24;}
+ static int range(const DrStageCollision *v,uint32_t word,size_t n,size_t *at){
+  uint64_t off=(uint64_t)word*4;if(off>v->size || n>v->size-(size_t)off)return DR_STAGE_BOUNDS;*at=(size_t)off;return 0;
+@@ -72,6 +76,7 @@
+  if(!c)return 0;
+  if(c->installed || c->querying)return XB_STAGE_STATE;
+  if(c->stage.zones)for(uint32_t i=0;i<c->source.zones;i++){free(c->stage.zones[i].near);free(c->stage.zones[i].recs);}
++ free(c->parameters);free(c->path_bytes);free(c->mef_bytes);free(c->nav_bytes);
+  free(c->stage.zones);free(c->stage.objects);free(c->arena);free(c);return 0;
+ }
+ int XbBattleStage_PrepareCollision(const void *pack,size_t n,XbBattleStageCollision **out){
+@@ -108,11 +113,14 @@
+ }
+ int XbBattleStage_InstallCollision(XbBattleStageCollision *c){
+  if(!c || active || gBtlStage || c->installed)return XB_STAGE_STATE;
+- c->saved_base=gColMeshBase;gColMeshBase=(s32 *)c->arena;gBtlStage=(BtlStage *)(void *)&c->stage;c->installed=1;active=c;return 0;
++ c->saved_base=gColMeshBase;gColMeshBase=(s32 *)c->arena;gBtlStage=(BtlStage *)(void *)&c->stage;c->installed=1;active=c;publish_parameters(c);return 0;
+ }
+ int XbBattleStage_UninstallCollision(XbBattleStageCollision *c){
+  if(!c || active!=c || !c->installed || c->querying || (void *)gBtlStage!=&c->stage)return XB_STAGE_STATE;
+- gBtlStage=NULL;gColMeshBase=c->saved_base;c->installed=0;active=NULL;return 0;
++#if UINTPTR_MAX==UINT32_MAX
++ if(c->nav_bytes && gStgNav && (void *)gStgNav->data==c->nav_bytes)return XB_STAGE_STATE;
++#endif
++ unpublish_parameters(c);gBtlStage=NULL;gColMeshBase=c->saved_base;c->installed=0;active=NULL;return 0;
+ }
+ typedef struct Query {DrStageTriangleFn fn;void *ctx;} Query;
+ static s32 triangle_callback(StgColNode *node,void *opaque){
+@@ -193,3 +201,5 @@
+  if(zone)*zone=e?-1:z;
+  return 1;
+ }
++
++#include "xb_stage_parameters.inc"
+--- a/engine/platform/platform/xb_battle_stage.h
++++ b/engine/platform/platform/xb_battle_stage.h
+@@ -6,8 +6,8 @@
+ enum {XB_STAGE_STATE=-850,XB_STAGE_MEMORY=-851};
+ /* Prepare a private native collision arena, including zones/neighbours,
+  * static/destructible meshes and initial unbroken object state. This is NOT
+- * full stage initialization: render objects, MAPD, animation and physics
+- * bodies are still absent. Installation keeps the stage NOT-READY flag. */
++ * full stage initialization: render objects, animation and physics
++ * bodies are still absent. MAPD/navigation use a separate preparation step. Installation keeps the stage NOT-READY flag. */
+ int XbBattleStage_PrepareCollision(const void *,size_t,XbBattleStageCollision **);
+ int XbBattleStage_InstallCollision(XbBattleStageCollision *);
+ int XbBattleStage_UninstallCollision(XbBattleStageCollision *);
+@@ -24,4 +24,7 @@
+ int XbBattleStage_GetPlacement(XbBattleStageCollision *,unsigned,unsigned,float[4],float[4],int *);
+ /* Native dispatch for the adapted original GetStartPlace/GetPlace. */
+ int XbStage_TryStartPlace(int,void *,void *,int,int *);
++int XbBattleStage_PrepareParameters(XbBattleStageCollision *,const void *,size_t);
++int XbStage_TryBindNav(void **);
++int XbBattleStage_HasParameters(void);
+ #endif
+--- a/engine/platform/platform/xb_sfx.c
++++ b/engine/platform/platform/xb_sfx.c
+@@ -30,6 +30,7 @@
+  for(size_t i=0;i+minimum<=n;i+=4)if(!memcmp(p+i,tag,8)){*size=n-i;return p+i;}
+  return NULL;
+ }
++#include "xb_sfx_banks.inc"
+ static int slot(int mask){if(mask<=0 || mask>255 || (mask&(mask-1)))return -1;int s=0;while((mask>>s)!=1)s++;return s;}
+ static int span(uint32_t at,size_t n){if(at>SPU || n>SPU-at)return 0;for(size_t i=0;i<n;i++)if(!written[at+i])return 0;return 1;}
+ static int lookup(const Bank *b,unsigned id,uint32_t *start,uint32_t *end,uint32_t *rate,int require_pcm){
+--- a/engine/platform/platform/xb_sfx.h
++++ b/engine/platform/platform/xb_sfx.h
+@@ -2,6 +2,7 @@
+ #ifndef XB_SFX_H
+ #define XB_SFX_H
+ #include <stdint.h>
++#include <stddef.h>
+ int XbSfx_Bind(void *,int,int);
+ int XbSfx_Mix(float *planar_6_channels);
+ int XbSfx_LastError(void);
+@@ -9,4 +10,11 @@
+ void XbSfx_Close(void);
+ int func_002967C0(int,int,...);
+ int sceSifCallRpc(void *,int,int,void *,int,void *,int,void *,void *);
++/* Keep owned banks alive until Snd_UnloadBank and deferred uploads end. */
++typedef struct XbSoundBank XbSoundBank;
++int XbSfx_PrepareBank(const void *,size_t,int,XbSoundBank **);
++void *XbSfx_BankData(XbSoundBank *);
++void XbSfx_FreeBank(XbSoundBank *);
++int XbSfx_TryVagMax(const void *,int *);
++int XbSfx_TryLoopFlags(const void *,void *);
+ #endif
+--- /dev/null
++++ b/engine/platform/platform/xb_sfx_banks.inc
+@@ -0,0 +1,37 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later
++ * Native external bank header; HD/sequence/ADPCM payload stays canonical LE.
++ * Keep prepared banks alive through Snd_UnloadBank and deferred uploads. */
++static int lookup(const Bank *,unsigned,uint32_t *,uint32_t *,uint32_t *,int);
++struct XbSoundBank {uint8_t *data,loop[128];int max;};
++static XbSoundBank *prepared_banks[8];
++int XbSfx_PrepareBank(const void *source,size_t n,int mask,XbSoundBank **out){
++ if(!out)return BAD;
++ *out=NULL;if(!source || n<20 || mask<=0 || mask>255 || (mask&(mask-1)))return BAD;
++ unsigned place=8;for(unsigned i=0;i<8;i++)if(!prepared_banks[i]){place=i;break;}if(place==8)return MEMORY;
++ const uint8_t *p=source;uint32_t o[4];for(unsigned i=0;i<4;i++)o[i]=le32(p+4+i*4);
++ if(le32(p)!=3 || o[0]<20 || o[3]>n)return FORMAT;
++ for(unsigned i=0;i<4;i++)if((o[i]&3) || (i && o[i]<=o[i-1]))return FORMAT;
++ size_t body=o[1]-o[0],hd=o[2]-o[1],seq=o[3]-o[2];
++ size_t bm=(mask==16 || mask==32)?0x8f000:mask==8?0x13800:0xa4800;
++ size_t hm=(mask==16 || mask==32)?0x1000:mask==8?0x800:0x20000;
++ size_t sm=(mask==8 || mask==16 || mask==32)?0x800:0x20000;
++ if(!body || body%16 || body>bm || hd>hm || seq>sm)return BOUNDS;
++ size_t vn;const uint8_t *v=chunk(p+o[1],hd,"IECSigaV",16,&vn);
++ if(!v || le32(v+12)>=128 || 16+(uint64_t)(le32(v+12)+1)*4>vn)return FORMAT;
++ XbSoundBank *b=calloc(1,sizeof(*b));if(!b)return MEMORY;b->max=(int)le32(v+12);
++ for(int i=0;i<=b->max;i++){
++  uint32_t at=le32(v+16+i*4);if(at>vn || vn-at<8){free(b);return BOUNDS;}
++  uint32_t offset=le32(v+at),rate=le16(v+at+4);
++  if(offset>=body || body-offset<16 || offset%16 || !rate || rate>48000 || v[at+6]>1){free(b);return FORMAT;}
++  b->loop[i]=v[at+6];
++ }
++ Bank view={.hd=(uint8_t *)p+o[1],.hn=hd,.sq=(uint8_t *)p+o[2],.sn=seq,.spu=0,.spu_end=(uint32_t)body};
++ uint32_t a,z,r;int e=lookup(&view,0,&a,&z,&r,0);if(e){free(b);return e;}
++ b->data=malloc(o[3]);if(!b->data){free(b);return MEMORY;}memcpy(b->data,p,o[3]);
++ for(unsigned i=0;i<5;i++){uint32_t value=le32(p+4*i);memcpy(b->data+4*i,&value,4);}
++ prepared_banks[place]=b;*out=b;return 0;
++}
++void *XbSfx_BankData(XbSoundBank *b){return b?b->data:NULL;}
++void XbSfx_FreeBank(XbSoundBank *b){if(!b)return;for(unsigned i=0;i<8;i++)if(prepared_banks[i]==b){prepared_banks[i]=NULL;free(b->data);free(b);return;}}
++int XbSfx_TryVagMax(const void *p,int *out){for(unsigned i=0;i<8;i++)if(prepared_banks[i] && prepared_banks[i]->data==p){*out=prepared_banks[i]->max;return 1;}return 0;}
++int XbSfx_TryLoopFlags(const void *p,void *out){for(unsigned i=0;i<8;i++)if(prepared_banks[i] && prepared_banks[i]->data==p){memcpy(out,prepared_banks[i]->loop,(size_t)prepared_banks[i]->max+1);return 1;}return 0;}
+--- /dev/null
++++ b/engine/platform/platform/xb_stage_parameters.inc
+@@ -0,0 +1,107 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later
++ * Included by xb_battle_stage.c. Native metadata, never render-stage readiness.
++ * Schemas: stg_a.h, stg_b.h, eft_c.h, eft_z.h and gfxm_a.h. */
++typedef struct ParamSchema {uint8_t stride;uint16_t words,negate;uint32_t halves;} ParamSchema;
++static const ParamSchema param_schema[20]={
++ {64,0xf8f,0x600,0},{16,15,4,0},{32,255,0x66,0},{16,15,6,0},
++ {32,255,0x66,0},{32,255,0x66,0},{32,255,0x66,0},{16,1,0,0},
++ {16,3,0,0},{16,1,0,0},{32,31,6,1u<<10},
++ {24,31,6,(1u<<10)|(1u<<11)},{24,0x19,0,1u<<10},
++ {4,1,0,0},{12,0,0,0},{8,0,0,0},{4,0,0,0},{8,1,0,0},
++ {4,1,0,0},{24,0x21,0,0}
++};
++static int param_span(size_t size,uint32_t at,size_t count,size_t stride,size_t min){
++ return at<min || (at&3) || at>size || count>(size-at)/stride;
++}
++static int param_finite(const uint8_t *p,unsigned n){for(unsigned k=0;k<n;k++)if(!isfinite(rf(p+k*4)))return DR_STAGE_NUMBER;return 0;}
++static void param_halves(void *to,const uint8_t *from,size_t n){for(size_t k=0;k<n;k+=2){uint16_t v=(uint16_t)(from[k]|(unsigned)from[k+1]<<8);memcpy((uint8_t *)to+k,&v,2);}}
++int XbBattleStage_PrepareParameters(XbBattleStageCollision *c,const void *pack,size_t n){
++ if(!c || !pack || c->installed || c->parameters || sizeof(void *)!=4)return XB_STAGE_STATE;
++ size_t at,bytes,start[20],end[20];unsigned flags;int e=DR_STAGE_FORMAT;
++ if(dr_pack_memory_entry(pack,n,1,&at,&bytes,&flags) || flags || bytes<168 || bytes>0x100000)return e;
++ const uint8_t *p=(const uint8_t *)pack+at;
++ if(rd(p)!=0x4450414d || rd(p+4))return e;
++ uint8_t *params=malloc(bytes),*nav=NULL,*paths=NULL,*mef=NULL;if(!params)return XB_STAGE_MEMORY;
++ memcpy(params,p,bytes);words(params,p,168);
++ for(unsigned i=0;i<20;i++){
++  uint32_t count=rd(p+8+i*8),off=rd(p+12+i*8);const ParamSchema *s=&param_schema[i];
++  if(param_span(bytes,off,count,s->stride,168)){e=DR_STAGE_BOUNDS;goto fail;}
++  start[i]=off;end[i]=off+(size_t)count*s->stride;
++  for(unsigned j=0;j<i;j++)if(count && end[j]>start[j] && start[i]<end[j] && start[j]<end[i])goto fail;
++  for(uint32_t j=0;j<count;j++){
++   const uint8_t *src=p+off+(size_t)j*s->stride;uint8_t *dst=params+off+(size_t)j*s->stride;
++   for(unsigned k=0;k<s->stride/4;k++)if(s->words&(1u<<k))words(dst+k*4,src+k*4,4);
++   for(unsigned k=0;k<s->stride/2;k++)if(s->halves&(1u<<k))param_halves(dst+k*2,src+k*2,2);
++   unsigned floats=i==2?8:i>=3&&i<=6?(i==3?4:8):i==10?5:i==11?4:0;
++   if((floats && param_finite(src,floats)) || (i==0 && param_finite(src+32,4)) || (i==1 && param_finite(src+8,1)) || (i==12 && param_finite(src+12,2)) || (i==19 && param_finite(src+20,1))){e=DR_STAGE_NUMBER;goto fail;}
++   for(unsigned k=0;k<s->stride/4;k++)if(s->negate&(1u<<k)){float f=-rf(src+k*4);memcpy(dst+k*4,&f,4);}
++  }
++  uintptr_t ptr=(uintptr_t)(params+off);memcpy(params+12+i*8,&ptr,4);
++ }
++ if(rd(p+8)!=c->source.objects || rd(p+16)!=1 || rd(p+24)!=1 || rd(p+32)!=1 || rd(p+40)!=2 || rd(p+48)!=1 || rd(p+56)!=1)goto fail;
++ for(uint32_t i=0;i<rd(p+8);i++){
++  int32_t parent=(int32_t)i;uint32_t budget=rd(p+8)+1;
++  while(parent>=0){if((uint32_t)parent>=rd(p+8) || !budget--){e=DR_STAGE_TREE;goto fail;}parent=(int32_t)rd(p+start[0]+(size_t)parent*64+12);}
++ }
++ if(dr_pack_memory_entry(pack,n,23,&at,&bytes,&flags) || flags || bytes<32)goto fail;
++ p=(const uint8_t *)pack+at;uint32_t count=rd(p+8),off=rd(p+12);
++ if(rd(p)!=0x70505645 || rd(p+4)!=1 || rd(p+16) || count>256 || param_span(bytes,off,count,16,32)){e=DR_STAGE_BOUNDS;goto fail;}
++ paths=malloc(bytes);if(!paths){e=XB_STAGE_MEMORY;goto fail;}memcpy(paths,p,bytes);words(paths,p,32);
++ uintptr_t ptr=(uintptr_t)(paths+off);memcpy(paths+12,&ptr,4);uint32_t one=1;memcpy(paths+16,&one,4);
++ for(uint32_t i=0;i<count;i++){
++  const uint8_t *q=p+off+i*16;uint32_t last=rd(q),point=rd(q+4),first=rd(q+8);
++  if(first>=last || param_span(bytes,point,last,48,off+(size_t)count*16)){e=DR_STAGE_BOUNDS;goto fail;}
++  words(paths+off+i*16,q,16);ptr=(uintptr_t)(paths+point);memcpy(paths+off+i*16+4,&ptr,4);
++  for(uint32_t j=0;j<last;j++){if(param_finite(p+point+(size_t)j*48,3)){e=DR_STAGE_NUMBER;goto fail;}words(paths+point+(size_t)j*48,p+point+(size_t)j*48,12);}
++ }
++ if(dr_pack_memory_entry(pack,n,15,&at,&bytes,&flags) || flags || bytes<16)goto fail;
++ p=(const uint8_t *)pack+at;count=rd(p+4);
++ if(rd(p)!=1 || !count || count>256 || count>(bytes-16)/48){e=DR_STAGE_BOUNDS;goto fail;}
++ nav=malloc(16+(size_t)count*48);if(!nav){e=XB_STAGE_MEMORY;goto fail;}words(nav,p,12);memset(nav+12,0,4);
++ for(uint32_t i=0;i<count;i++){
++  const uint8_t *q=p+16+(size_t)i*48;int32_t obj=(int32_t)rd(q+20);
++  if(param_finite(q,4)){e=DR_STAGE_NUMBER;goto fail;}
++  if(obj< -1 || (obj>=0 && (uint32_t)obj>=c->source.objects)){e=DR_STAGE_BOUNDS;goto fail;}
++  words(nav+16+(size_t)i*48,q,32);param_halves(nav+48+(size_t)i*48,q+32,16);
++  for(unsigned k=0;k<8;k++){int16_t link=(int16_t)(q[32+k*2]|(unsigned)q[33+k*2]<<8);if(link< -1 || link>=(int)count){e=DR_STAGE_BOUNDS;goto fail;}}
++ }
++ e=dr_pack_memory_entry(pack,n,18,&at,&bytes,&flags);
++ if(e!=DR_NOT_FOUND){
++  if(e || flags || bytes<32){e=DR_STAGE_FORMAT;goto fail;}
++  p=(const uint8_t *)pack+at;if(rd(p)!=0x3046454d){e=DR_STAGE_FORMAT;goto fail;}
++  mef=malloc(bytes);if(!mef){e=XB_STAGE_MEMORY;goto fail;}memcpy(mef,p,bytes);words(mef,p,32);
++  for(unsigned i=0;i<3;i++){
++   count=rd(p+8+i*8);off=rd(p+12+i*8);if(param_span(bytes,off,count,48,32)){e=DR_STAGE_BOUNDS;goto fail;}
++   ptr=(uintptr_t)(mef+off);memcpy(mef+12+i*8,&ptr,4);
++   for(uint32_t j=0;j<count;j++){
++    const uint8_t *q=p+off+(size_t)j*48;if(param_finite(q,3)){e=DR_STAGE_NUMBER;goto fail;}words(mef+off+(size_t)j*48,q,12);
++    for(unsigned k=1;k<=2;k++){float f=-rf(q+4*k);memcpy(mef+off+(size_t)j*48+4*k,&f,4);}
++   }
++  }
++ }
++ c->parameters=params;c->nav_bytes=nav;c->path_bytes=paths;c->mef_bytes=mef;return 0;
++fail:free(params);free(nav);free(paths);free(mef);return e?e:DR_STAGE_FORMAT;
++}
++static void publish_parameters(XbBattleStageCollision *c){
++#if UINTPTR_MAX==UINT32_MAX
++ if(c->parameters){
++  extern StgPathTable *gStgPaths;extern StgMef *gBtlStageFxRes;
++  memcpy(c->stage.header+4,&c->parameters,4);c->saved_paths=gStgPaths;c->saved_mef=gBtlStageFxRes;
++  gStgPaths=(StgPathTable *)c->path_bytes;gBtlStageFxRes=(StgMef *)c->mef_bytes;c->parameters_bound=1;
++ }
++#else
++ (void)c;
++#endif
++}
++static void unpublish_parameters(XbBattleStageCollision *c){
++#if UINTPTR_MAX==UINT32_MAX
++ if(c->parameters_bound){
++  extern StgPathTable *gStgPaths;extern StgMef *gBtlStageFxRes;
++  gStgPaths=c->saved_paths;gBtlStageFxRes=c->saved_mef;memset(c->stage.header+4,0,4);c->parameters_bound=0;
++ }
++#else
++ (void)c;
++#endif
++}
++int XbStage_TryBindNav(void **out){if(!out || !active || !active->parameters_bound)return 0;*out=active->nav_bytes;return 1;}
++int XbBattleStage_HasParameters(void){return active && active->parameters_bound;}
+--- a/engine/tests/test_native_managers.c
++++ b/engine/tests/test_native_managers.c
+@@ -9,6 +9,14 @@
+ #include "battle/btl_ai_think.h"
+ #include "battle/btl_obj.h"
+ #include "battle/btl_input.h"
++#include "battle/eft_det_b.h"
++#include "battle/stg_a.h"
++#include "sys/snd.h"
++#include "xb_adxt.h"
++#include "xb_sfx.h"
++#include "xsdk/audio.h"
++#include "sys/gfxm_b_b.h"
++#include "battle/eft_ae.h"
+ #include "sys/pad.h"
+ #include "battle/battle_setup.h"
+ #include "sys/heap.h"
+@@ -20,6 +28,15 @@
+ #include <string.h>
+ #include <assert.h>
+ #include <math.h>
++/* Host test SDK device: validates PCM frames; no physical sound output. */
++static float pcm[XSDK_AUDIO_FRAME_FLOATS];static unsigned device_open,pending,frames,played,nonzero;
++NTSTATUS xsdk_audio_open(uint32_t n){assert(n==8 && !device_open);device_open=1;played=0;return STATUS_SUCCESS;}
++NTSTATUS xsdk_audio_close(void){assert(device_open && !pending);device_open=0;return STATUS_SUCCESS;}
++NTSTATUS xsdk_audio_next_frame(uint32_t ms,float **out){assert(!ms && device_open && !pending);pending=1;*out=pcm;return STATUS_SUCCESS;}
++void xsdk_audio_queue_frame(void){assert(device_open && pending);pending=0;frames++;played++;for(unsigned i=0;i<XSDK_AUDIO_FRAME_FLOATS;i++){assert(isfinite(pcm[i]));if(i<512){assert(pcm[i]>=-1 && pcm[i]<=1);nonzero+=pcm[i]!=0;}else assert(pcm[i]==0);}}
++void xsdk_audio_stats(XsdkAudioStats *out){memset(out,0,sizeof(*out));out->played=played;}
++extern s32 *BtlScene_GetCommonEntry(s32);
++extern void EftTexSet_Load32(EftAeTexSet32 *,void *);
+ extern AiThMgr *gBtlAi;
+ extern void BtlChar_ResetAll(void),BtlAiMgr_Reset(void);
+ extern void BtlChar_SetFlag(void *,int);
+@@ -28,12 +45,38 @@
+ void xsdk_log_write(const char *fmt,...){va_list ap;va_start(ap,fmt);vfprintf(stderr,fmt,ap);fputc('\n',stderr);va_end(ap);}
+ static void *load(const char *root,const char *name,size_t *n){char path[2048];assert(snprintf(path,sizeof(path),"%s/%s",root,name)<(int)sizeof(path));FILE *f=fopen(path,"rb");assert(f && !fseek(f,0,SEEK_END));long s=ftell(f);assert(s>0);rewind(f);*n=(size_t)s;void *p=malloc(*n);assert(p && fread(p,1,*n,f)==*n);fclose(f);return p;}
+ static int read_program(void *root,const char *name,uint8_t **bytes,size_t *n){*bytes=load(root,!strcmp(name,"DBZP.BIN")?"BIN/DBZP.BIN":name,n);return 0;}
++static uint32_t le32(const void *address){const uint8_t *p=address;return p[0]|(uint32_t)p[1]<<8|(uint32_t)p[2]<<16|(uint32_t)p[3]<<24;}
++static void stage_oracle(const uint8_t *pack){
++ size_t offset=le32(pack+8),length=le32(pack+12)-offset;void *copy=malloc(length);assert(copy);memcpy(copy,pack+offset,length);
++ BtlStage *native=gBtlStage,oracle={0};gBtlStage=&oracle;BtlStage_BindData(&oracle,copy);gBtlStage=native;
++ static const unsigned stride[20]={64,16,32,16,32,32,32,16,16,16,32,24,24,4,12,8,4,8,4,24};
++ for(unsigned i=0;i<20;i++){
++  const uint8_t *a=(const uint8_t *)native->data+8+i*8,*b=(const uint8_t *)oracle.data+8+i*8;uint32_t na,nb;void *pa,*pb;
++  memcpy(&na,a,4);memcpy(&nb,b,4);memcpy(&pa,a+4,4);memcpy(&pb,b+4,4);assert(na==nb && !memcmp(pa,pb,(size_t)na*stride[i]));
++ }
++ free(copy);puts("PASS 20 MAPD sections against original binder");
++}
++static void stage_rejections(const uint8_t *pack,size_t size){
++ size_t param=le32(pack+8),nav=le32(pack+64),path=le32(pack+96);
++ size_t locations[]={param+8,param+20,param+44,param+176+12,nav+4,nav+16+32,path+32+4};
++ uint32_t values[]={UINT32_MAX,0,UINT32_MAX,0,257,0x7fff7fff,UINT32_MAX};
++ for(unsigned i=0;i<7;i++){
++  uint8_t *copy=malloc(size);assert(copy);memcpy(copy,pack,size);for(unsigned j=0;j<4;j++)copy[locations[i]+j]=(uint8_t)(values[i]>>(8*j));
++  XbBattleStageCollision *c=NULL;assert(!XbBattleStage_PrepareCollision(copy,size,&c));assert(XbBattleStage_PrepareParameters(c,copy,size)<0);assert(!XbBattleStage_FreeCollision(c));free(copy);
++ }
++ puts("PASS seven corrupt stage parameter/path/nav fixtures rejected");
++}
+ int main(int argc,char **argv){
+  setvbuf(stdout,NULL,_IOLBF,0);assert(argc==3);
+  XbDataFiles files={read_program,argv[2]};int rc=XbTypedData_Load(&files,&gXbTypedMainCatalog,0);printf("typed data: %d\n",rc);assert(!rc && gPortDataStripped==2);
+  size_t n2,n4,ns;void *c2=load(argv[1],"common-2.bin",&n2),*c4=load(argv[1],"common-4.bin",&n4),*stage=load(argv[1],"stage.bin",&ns);
+- XbBattleRuntime *runtime=NULL;rc=XbBattleRuntime_Open(c2,n2,c4,n4,&runtime);printf("runtime: %d\n",rc);assert(!rc);free(c2);free(c4);s32 heap=Heap_GetFreeSize();
+- XbBattleStageCollision *collision=NULL;assert(!XbBattleStage_PrepareCollision(stage,ns,&collision));assert(!XbBattleStage_PrepareStarts(collision,stage,ns));free(stage);assert(!XbBattleStage_InstallCollision(collision));
++ XbBattleRuntime *runtime=NULL;rc=XbBattleRuntime_Open(c2,n2,c4,n4,&runtime);printf("runtime: %d\n",rc);assert(!rc);free(c2);free(c4);
++ size_t n3;void *c3=load(argv[1],"common-3.bin",&n3);XbCommon3Info common3;rc=XbBattleRuntime_AttachCommon3(runtime,c3,n3,&common3);printf("common3 preparation: %d entries=%u textures=%u images=%u unprepared=%u\n",rc,common3.entries,common3.textures,common3.images,common3.unprepared);assert(!rc);free(c3);
++ for(unsigned i=1;i<=637;i++){TexFile *texture=(TexFile *)BtlScene_GetCommonEntry((s32)i);if(!texture)continue;TexFile *relocated=NULL;Res_RelocateOffsets(&relocated,(u8 *)texture,texture);assert(relocated==texture && texture->ent && texture->count<=32);EftAeTexSet32 set;EftTexSet_Load32(&set,texture);assert(set.count==(int)texture->count);for(unsigned j=0;j<texture->count;j++){assert(texture->ent[j].pix && (void *)set.tex[j].image==&texture->ent[j] && set.tex[j].tex0==texture->ent[j].tex0);}}
++ assert(!BtlScene_GetCommonEntry(-1) && !BtlScene_GetCommonEntry(638));
++ assert(common3.entries==637 && common3.textures==111 && common3.images==154 && common3.unprepared==526);
++ s32 heap=Heap_GetFreeSize();
++ XbBattleStageCollision *collision=NULL;assert(!XbBattleStage_PrepareCollision(stage,ns,&collision));assert(!XbBattleStage_PrepareStarts(collision,stage,ns));rc=XbBattleStage_PrepareParameters(collision,stage,ns);printf("stage parameters: %d\n",rc);assert(!rc);stage_rejections(stage,ns);assert(!XbBattleStage_InstallCollision(collision));stage_oracle(stage);free(stage);assert(gBtlStage->data && gBtlStage->data->objCount==11 && !BtlStage_IsReady() && BtlStage_GetPathCount()==5);
+  for(unsigned pass=0;pass<2;pass++){
+   assert(!XbTypedData_Load(&files,&gXbTypedMainCatalog,XBTD_VALIDATE_ONLY));assert(Heap_GetFreeSize()==heap);
+   assert(!XbBattleFighter_BeginOriginalObjects());XbBattleFighter *fighters[2];
+@@ -46,6 +89,9 @@
+   puts("objects ready; entering original roster/AI reset");
+   rc=XbBattleRuntime_BeginManagers(runtime);printf("original managers: %d\n",rc);assert(!rc);
+   assert(gBtlChars && gBtlChars->count==2 && gBtlAi && gBtlAi->data);
++  assert(gStgNav && gStgNav->ready && gStgNav->data->count==165 && !StgNav_IsReady());
++  assert(XbBattleStage_UninstallCollision(collision)==XB_STAGE_STATE);
++  for(int i=0;i<165;i++){StgColVec pos;memcpy(&pos,&gStgNav->data->nodes[i].pos,16);int nearest=StgNav_FindNearest(&pos);if(!(gStgNav->data->nodes[i].flags&1))assert(nearest>=0 && nearest<165);}
+   XbBattleRuntimeInfo runtime_info;assert(!XbBattleRuntime_GetInfo(runtime,&runtime_info));
+   assert(runtime_info.health[0]==40000 && runtime_info.health[1]==40000 && runtime_info.ai_level[1]==13);
+   assert(XbBattleRuntime_BeginManagers(runtime)<0);
+@@ -57,6 +103,24 @@
+    printf("side=%u hp=%d ki=%d AI=%d level=%d\n",side,chr->members[0].gauge.health,chr->members[0].gauge.ki,gBtlAi->work[side].type,gBtlAi->work[side].level);
+   }
+   assert(isfinite(gBtlAi->radiusSum) && gBtlAi->radiusSum>0);
++  const char *names[4]={"sound-common.bin","sound-stage.bin","voice-left.bin","voice-right.bin"};void *sound[4];size_t sizes[4];
++  for(unsigned i=0;i<4;i++)sound[i]=load(argv[1],names[i],&sizes[i]);
++  XbSoundBank *invalid=(void *)1;
++  assert(XbSfx_PrepareBank(sound[0],19,4,&invalid)<0 && !invalid);
++  assert(XbSfx_PrepareBank(sound[0],sizes[0],3,&invalid)<0 && !invalid);
++  assert(XbSfx_PrepareBank(sound[0],sizes[0],8,&invalid)<0 && !invalid);
++  uint8_t *bad=malloc(sizes[0]);assert(bad);memcpy(bad,sound[0],sizes[0]);memset(bad+16,0xff,4);
++  assert(XbSfx_PrepareBank(bad,sizes[0],4,&invalid)<0 && !invalid);free(bad);
++  int maximum[4];uint8_t loops[4][19]={{0}};
++  for(unsigned i=0;i<4;i++){maximum[i]=SndHd_GetVagMax(sound[i]);SndHd_GetLoopBits(sound[i],loops[i]);}
++  rc=XbBattleRuntime_BeginAudio(runtime,(const void *const *)sound,sizes);printf("original audio load: %d\n",rc);assert(!rc);
++  extern SndMgr *gSndMgr;
++  for(unsigned i=0;i<4;i++)assert(gSndMgr->bank[i+2].vagMax==maximum[i] && !memcmp(gSndMgr->bank[i+2].loopBits,loops[i],19));
++  for(unsigned i=0;i<4;i++)free(sound[i]);assert(Snd_IsUploadDone());unsigned before=nonzero;
++  assert(Snd_QueuePlay(4,0,100,64,0,0)>=0 && Snd_QueuePlay(16,0,100,64,0,0)>=0 && Snd_QueuePlay(32,0,100,64,0,0)>=0);
++  for(unsigned i=0;i<12;i++)assert(!XbBattleRuntime_ServiceAudio(runtime));assert(nonzero>before && frames>0 && !XbSfx_LastError());
++  assert(!XbBattleRuntime_EndAudio(runtime) && !device_open);printf("PASS original audio: %u frames, %u nonzero samples; SDK device simulated\n",frames,nonzero);
++
+   /* Isolated original input phase: a physical-pad fixture, then release.
+    * Flag 2 normally comes from the battle sequence; no sequence is claimed. */
+   BtlInputChr *input=(BtlInputChr *)&gBtlChars->chars[0];
+@@ -72,5 +136,5 @@
+   printf("PASS original roster reset / AI init / reset / terminate: pass=%u heap restored\n",pass);
+  }
+  assert(!XbBattleStage_UninstallCollision(collision));assert(!XbBattleStage_FreeCollision(collision));assert(!XbBattleRuntime_Close(runtime));
+- puts("PASS no Battle_Update/Battle_Main, GPU or SDK transport executed; marker stays 2");return 0;
++ puts("PASS no Battle_Update/Battle_Main or hardware execution; audio SDK simulated; marker stays 2");return 0;
+ }
+--- a/engine/tools/build_engine_diagnostic.py
++++ b/engine/tools/build_engine_diagnostic.py
+@@ -45,9 +45,9 @@
+ for name in ['func_002967C0','sceSifCallRpc','XbSfx_Mix','ADXT_Create','_ctype_','gPortDataStripped']:
+     assert name in defined,name
+ subprocess.run(['python3',str(sdk/'tools/elf2xex.py'),'--title-id','0x44523630',
+-                '--title-name','DragonRage360 0.44 D10 Original Object Boot Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
++                '--title-name','DragonRage360 0.45 D11 Stage Audio Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
+ report={'kind':'native diagnostic with linked combat code; NOT a playable game',
+-        'version':'0.44-D10' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
++        'version':'0.45-D11' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
+         'Battle_Main_linked':True,'Game_Main_linked':False,'battle_called':False,
+         'strong_or_weak_undefined':0,'native_game_data_loaded':False,'typed_catalog_linked':bool(r.get('typed_catalog_linked')),'partial_preview_available':bool(r.get('typed_catalog_linked')), 
+         'boot_combat_available':False,'hardware_executed':False,
+--- a/engine/tools/fixed_profile_source.py
++++ b/engine/tools/fixed_profile_source.py
+@@ -8,6 +8,27 @@
+ import re
+ 
+ def transform(source, text):
++    if source=='src/battle/btl_scene.c':
++        anchor='s32 *BtlScene_GetCommonEntry(s32 idx) {\n'
++        if text.count(anchor)!=1:raise ValueError('common3 entry binding changed')
++        return text.replace(anchor,anchor+'    extern int XbBattleRuntime_TryCommon3Entry(int,void **);\n    void *native_entry=NULL;\n    if(XbBattleRuntime_TryCommon3Entry(idx,&native_entry)) return native_entry;\n'), []
++    if source=='src/sys/snd.c':
++        for signature,body in [
++            ('s32 SndHd_GetVagMax(SndBankFile *file) {\n', '    extern int XbSfx_TryVagMax(const void *,int *);\n    int maximum; if(XbSfx_TryVagMax(file,&maximum)) return maximum;\n'),
++            ('void SndHd_GetLoopFlags(SndBankFile *file, u8 *flags) {\n', '    extern int XbSfx_TryLoopFlags(const void *,void *);\n    if(XbSfx_TryLoopFlags(file,flags)) return;\n')]:
++            if text.count(signature)!=1:raise ValueError('sound metadata reader changed')
++            text=text.replace(signature,signature+body)
++        start=text.index('void Snd_Term(void) {');end=text.index('/* Stops everything:',start)
++        block=text[start:end]
++        if block.count('    Snd_RpcTerm();')!=1 or block.count('bank->spuAddr == 0')!=1:raise ValueError('sound termination changed')
++        block=block.replace('    Snd_RpcTerm();\n','').replace('bank->spuAddr == 0','bank->spuAddr != 0')
++        block=block.replace('    IopHeap_Free(gSndMgr->iopBuf);','    Snd_RpcTerm();\n    Heap_Free(gSndRpc);\n    gSndRpc = NULL;\n    IopHeap_Free(gSndMgr->iopBuf);')
++        return text[:start]+block+text[end:], []
++    if source=='src/battle/eft_det_b_b.c':
++        anchor='    file = STGNAV_RES->stageFile;'
++        if text.count(anchor)!=1:raise ValueError('navigation binding changed')
++        code='    extern int XbStage_TryBindNav(void **);\n    void *native_nav=NULL;\n    if (XbStage_TryBindNav(&native_nav)) {\n        gStgNav->data=native_nav;\n        gStgNav->data->nodes=(StgNavNode *)((u8 *)native_nav+16);\n        gStgNav->ready=1;\n        return 0;\n    }\n'
++        return text.replace(anchor,code+anchor), []
+     if source=='src/battle/btl_input.c':
+         anchor='        u32 bit = 1 << i;'
+         if text.count(anchor)!=2:raise ValueError('input bit-counter source changed')
+--- a/engine/tools/test_native_managers.py
++++ b/engine/tools/test_native_managers.py
+@@ -17,7 +17,7 @@
+ # Header changes invalidate cached objects as well as changes to C text.
+ headers=hashlib.sha256()
+ for directory in [up/'include',up/'port/include',up/'port/src',project/'src',e/'graphics',e/'platform/platform',sdk/'include']:
+- for header in sorted(directory.rglob('*.h')):
++ for header in sorted((p for p in directory.rglob('*') if p.suffix in ('.h','.inc'))):
+   headers.update(str(header).encode());headers.update(header.read_bytes())
+ header_digest=headers.hexdigest()
+ sources=[]
+@@ -79,5 +79,5 @@
+  print(r.stderr[-8000:]);raise SystemExit('strict host link failed')
+ run=subprocess.run([str(a.qemu.resolve()),'-E','LD_LIBRARY_PATH='+str(root/'usr/lib32'),str(out/'managers'),str(a.resources.resolve()),str(a.programs.resolve())],capture_output=True,text=True,env=dict(os.environ,UBSAN_OPTIONS='halt_on_error=1'))
+ (out/'test.txt').write_text(run.stdout+run.stderr);print(run.stdout+run.stderr);run.check_returncode()
+-result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_calls_during_test':0,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
++result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_device':'simulated synchronous PCM sink','original_audio_cycle':True,'audio_frames':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][0]),'nonzero_PCM_values':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][1]),'common3_texture_subset':True,'common3_entries':637,'common3_textures':111,'common3_images':154,'common3_unprepared_entries':526,'original_EftTexSet_Load32_consumer':True,'MAPD_sections_vs_original_binder':20,'stage_corruption_rejections':7,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
+ (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+--- a/src/demo_ui.c
++++ b/src/demo_ui.c
+@@ -99,7 +99,7 @@
+     p->rect(52,52,68,68,ORANGE);
+     text(p,66,66,2,0xFF211000,"DR");
+     text(p,144,48,2,WHITE,"DRAGON RAGE");
+-    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.44-D10");
++    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.45-D11");
+     text(p,930,56,1,u->connected?0xFF3DDC84:GOLD,u->connected?"CONTROLE CONECTADO":"CONECTE O CONTROLE");
+     text(p,930,88,1,MUTED,"Interface + leitor de ISO");
+     p->rect(52,154,300,480,PANEL);
+--- a/src/main.c
++++ b/src/main.c
+@@ -25,11 +25,13 @@
+ static XbBattleCommon *native_common;
+ static XbBattleRuntime *native_runtime;
+ static int native_managers;
++static int native_audio;
+ static int native_typed_values_loaded;
+ static XbBattleFighter *native_fighters[2];
+ static int native_object_diagnostic;
+ static XbBattleStageCollision *native_stage;
+ static void release_native_stage(void){
++ native_audio=0;
+  if(native_managers){int e=XbBattleRuntime_EndManagers(native_runtime);if(e){xsdk_log_write("native manager cleanup refused: %d",e);return;}native_managers=0;}
+  for(unsigned i=0;i<2;i++){XbBattleFighter_FreeModelAnimation(native_fighters[i]);native_fighters[i]=NULL;}
+  if(native_object_diagnostic){int e=XbBattleFighter_EndObjectDiagnostic();if(e){xsdk_log_write("native object cleanup refused: %d",e);return;}native_object_diagnostic=0;}
+@@ -275,6 +277,12 @@
+     xsdk_log_write("original table consumers: error=%d animations=%u voices=%u characters=%u items=%u; temporary reader view, NOT fighter manager boot",common_error,consumer.animations,consumer.voices,consumer.characters,consumer.items);
+     if(!common_error)common_error=XbBattleRuntime_Open(common_pack,common_bytes,item_pack,item_bytes,&native_runtime);
+     free(item_pack);free(common_pack);
++    if(common_error)return common_error;
++    void *scene_pack=NULL;size_t scene_bytes=0;XbCommon3Info scene_info={0};
++    common_error=read_battle_resource(3,&scene_pack,&scene_bytes);
++    if(!common_error)common_error=XbBattleRuntime_AttachCommon3(native_runtime,scene_pack,scene_bytes,&scene_info);
++    free(scene_pack);
++    xsdk_log_write("common3 native texture subset: error=%d entries=%u textures=%u images=%u unprepared=%u; complete scene remains unavailable",common_error,scene_info.entries,scene_info.textures,scene_info.images,scene_info.unprepared);
+     if(common_error)return common_error;
+     void *ai_data=NULL;size_t ai_bytes=0;
+     common_error=XbBattleCommon_GetAiData(native_common,&ai_data,&ai_bytes);
+@@ -333,6 +341,14 @@
+     if(!boot)boot=XbBattleRuntime_GetInfo(native_runtime,&runtime_info);
+     xsdk_log_write("original CPU manager boot: error=%d; BtlObj_Init(1), Save_Init, match setup, BtlChar_AllocAll(2) and BtlAiMgr_Init; Battle_Update NOT called",boot);
+     if(!boot)for(unsigned side=0;side<2;side++)xsdk_log_write("original initialized fighter: side=%u HP=%d Ki=%d AI_type=%d AI_level=%d; GPU battle remains unavailable",side,runtime_info.health[side],runtime_info.ki[side],runtime_info.ai_type[side],runtime_info.ai_level[side]);
++    if(!boot){
++        void *banks[4]={0};size_t bytes[4]={0};unsigned ids[4]={0x14a,0x14e,0xbda,0xbdb};int audio=0;
++        for(unsigned i=0;i<4 && !audio;i++)audio=read_battle_resource(ids[i],&banks[i],&bytes[i]);
++        if(!audio)audio=XbBattleRuntime_BeginAudio(native_runtime,(const void *const *)banks,bytes);
++        for(unsigned i=0;i<4;i++)free(banks[i]);
++        if(!audio){extern int Snd_QueuePlay(int,unsigned,unsigned,unsigned,int,int);native_audio=1;audio=Snd_QueuePlay(16,0,96,64,0,0)<0?-894:0;}
++        xsdk_log_write("original audio diagnostic: error=%d; four banks and side-0 voice request; confirm audible output on console",audio);
++    }
+     return boot;
+ }
+ #endif
+@@ -354,6 +370,7 @@
+     if(!error){
+         error=XbBattleStage_PrepareCollision(pack,(size_t)span.size,&native_stage);
+         if(!error)error=XbBattleStage_PrepareStarts(native_stage,pack,(size_t)span.size);
++        if(!error)error=XbBattleStage_PrepareParameters(native_stage,pack,(size_t)span.size);
+         if(!error)error=XbBattleStage_InstallCollision(native_stage);
+         for(unsigned side=0;!error && side<2;side++){
+             float pos[4],rot[4];int zone=-1;
+@@ -466,10 +483,10 @@
+ #ifdef DR_ENGINE_LINKED
+     extern int Battle_Main(void);
+     extern volatile uint32_t gPortDataStripped;
+-    xsdk_log_write("DragonRage360 0.44-D10: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
++    xsdk_log_write("DragonRage360 0.45-D11: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
+     xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: character/AI managers, common resources and battle boot are incomplete",(unsigned)gPortDataStripped);
+ #else
+-    xsdk_log_write("DragonRage360 0.44-D10: component diagnostic; Battle_Main not linked in this build.");
++    xsdk_log_write("DragonRage360 0.45-D11: component diagnostic; Battle_Main not linked in this build.");
+ #endif
+     xsdk_log_write("%s: BPE decode + animation endian synthetic self-test",dr_resource_selftest()?"PASS":"FAIL");
+     xsdk_log_write("%s: bounded BIN + motion + skeleton synthetic self-test",dr_container_selftest()?"PASS":"FAIL");
+@@ -588,6 +605,9 @@
+             xsdk_log_write("%s: separate unlocked save export",ok?"PASS":"FAIL");
+         }
+         if(!running) break;
++#if defined(DR_TYPED_CATALOG) && defined(DR_ENGINE_LINKED)
++        if(native_audio){int e=XbBattleRuntime_ServiceAudio(native_runtime);if(e){xsdk_log_write("audio service failed: %d",e);native_audio=0;}}
++#endif
+         uint32_t address;
+         status=xsdk_present_begin(&address,5000);
+         if(!NT_SUCCESS(status)) {xsdk_log_write("FAIL: present_begin 0x%08X",(unsigned)status);break;}
+--- a/tests/check_xex.py
++++ b/tests/check_xex.py
+@@ -99,9 +99,10 @@
+     assert cat[0]==1 and cat[1] in (0,1) and cat[3]==33 and cat[5]>2000
+     assert {'XbTypedData_Load','XbTypedData_LoadFromDisc','XbTypedData_RequireBattleData','dr_stage_collision_open','dr_stage_collision_query','XbBattleStage_PrepareCollision','XbBattleStage_InstallCollision','XbBattleStage_QueryCollision','XbBattleFighter_PrepareModelAnimation','XbBattleFighter_PlayModel','XbBattleFighter_StepModel','XbBattleFighter_PlayMotion','XbBattleFighter_PlayRetargeted','XbBattleFighter_SamplePose','XbBattleFighter_CalcMatrices','XbBattleFighter_UpdateVolumes','XbBattleFighter_PrepareTextures','XbBattleFighter_GetMesh','XbBattleFighter_GetFaceGeometry','XbFighterTable_Convert','XbBattleFighter_BindCommonReference','XbBattleFighter_PlayCommonRetargeted','XbBattleFighter_CreateModelObject','XbBattleFighter_FreeModelAnimation','XbFighterRegistry_BeginOriginal','BtlObj_Init','BtlObj_Term','XbBattleRuntime_Open','XbBattleRuntime_Close','XbBattleRuntime_BeginManagers','XbBattleRuntime_EndManagers','BtlChar_AllocAll','BtlAiMgr_Init','XbFighterRegistry_ModelCapacity','XbFighterRegistry_ModelSlot','XbFighterRegistry_CreateModel','XbNativeModel_Prepare','XbFighter_BindOwnedTables','XbFighter_BindOwnedFiles','XbFighterRegistry_Remove','XbFighterRegistry_End'}<=defined
+     assert {'XbBattleCommon_Prepare','XbBattleCommon_Convert','XbBattleCommon_GetAiData','XbBattleCommon_Free','XbBattleFighter_SetEye','XbBattleFighter_SetFace','XbBattleFighter_StepFace','BtlObj_UpdateFace','BtlObjFace_StepBlink','BObjFace_StepLipData'}<=defined
++    assert {'XbBattleStage_PrepareParameters','XbStage_TryBindNav','XbBattleRuntime_AttachCommon3','XbBattleRuntime_TryCommon3Entry','XbSfx_PrepareBank','XbBattleRuntime_BeginAudio','XbBattleRuntime_ServiceAudio','XbBattleRuntime_EndAudio','Snd_Init','Snd_Term','Snd_LoadBank','Snd_Update'}<=defined
+     assert data_at_symbol('gPortDataStripped',4)==b'\x00\x00\x00\x02'
+     report.update(typed_main_catalog_linked=True,typed_catalog_complete=bool(cat[1]),
+         typed_regions=cat[3],typed_operations=cat[5],partial_data_preview_available=True,
+-        native_game_data_loaded=False,stage_collision_diagnostic_linked=True,stage_collision_original_readers_linked=True,stage_collision_install_path_linked=True,fighter_model_animation_preparation_linked=True,native_pose_body_attack_and_texture_paths_linked=True,full_fighter_spawn=False,original_object_registry_linked=True,active_model_object_lifecycle_linked=True,typed_character_table_windows=8,common_reference_retarget_linked=True,character_and_AI_initialization_path_linked=True,complete_combat_boot_integrated=False,native_common_CPU_resources_linked=True,original_CPU_facial_state_path_linked=True,audio_clock_facial_sync=False,original_BtlObj_Init_Term_boot_linked=True,common4_native_consumer_probe_linked=True,native_grounded_starts_linked=True,scope='0.44-D10: original object Init/Term boot with private common resources; six common roster windows and bounded common AI data; eight character reader windows; CPU blink/mouth/lip path; original CreateChara/Setup model lifecycle with native CPU resources/pools/materials; original BtlChar/BtlAi initialization path linked; execution verified separately on i386 only; linked Battle_Main and reviewed native data catalog; original-only pools excluded with native reference proof; explicit typed-data startup preview commits only validated known fields, with readiness marker 2 retained. Native data catalog excludes 46 proven original-only pool bytes; full battle resource initialization, original Game_Main and combat execution remain absent. No hardware validation.')
++        native_game_data_loaded=False,stage_collision_diagnostic_linked=True,stage_collision_original_readers_linked=True,stage_collision_install_path_linked=True,fighter_model_animation_preparation_linked=True,native_pose_body_attack_and_texture_paths_linked=True,full_fighter_spawn=False,original_object_registry_linked=True,active_model_object_lifecycle_linked=True,typed_character_table_windows=8,common_reference_retarget_linked=True,character_and_AI_initialization_path_linked=True,complete_combat_boot_integrated=False,native_common_CPU_resources_linked=True,original_CPU_facial_state_path_linked=True,audio_clock_facial_sync=False,original_BtlObj_Init_Term_boot_linked=True,common4_native_consumer_probe_linked=True,native_grounded_starts_linked=True,native_MAPD_sections=20,native_navigation_binding=True,common3_texture_subset_linked=True,complete_common3=False,original_audio_cycle_integrated=True,hardware_audio_verified=False,scope='0.45-D11: native MAPD, path and navigation data; stage remains NOT_READY. Owned common3 TexFile subset and original four-bank audio cycle with service in the launcher; full scene still unavailable. Original object Init/Term boot with private common resources; six common roster windows and bounded common AI data; eight character reader windows; CPU blink/mouth/lip path; original CreateChara/Setup model lifecycle with native CPU resources/pools/materials; original BtlChar/BtlAi initialization path linked; execution verified separately on i386 only; linked Battle_Main and reviewed native data catalog; original-only pools excluded with native reference proof; explicit typed-data startup preview commits only validated known fields, with readiness marker 2 retained. Native data catalog excludes 46 proven original-only pool bytes; full battle resource initialization, original Game_Main and combat execution remain absent. No hardware validation.')
+ report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+ print(json.dumps(report,ensure_ascii=False,indent=2))

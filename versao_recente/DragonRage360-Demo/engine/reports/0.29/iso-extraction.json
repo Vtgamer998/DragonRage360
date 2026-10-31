@@ -1,0 +1,49 @@
+{
+  "ISO_bytes": 3020816384,
+  "reader": "actual src/dr_disc.c",
+  "game_executed": false,
+  "files": [
+    {
+      "name": "SYSTEM.CNF",
+      "offset": 628736,
+      "size": 57,
+      "sha256": "7d48dc9bc71005bfcc4c2f136ae80a5362b006c2a554ca6aad6165639a0f79af"
+    },
+    {
+      "name": "SLUS_216.78",
+      "offset": 630784,
+      "size": 2115684,
+      "sha256": "811188ba9b416500d921cd4d9514df0cbf42f3a41a99cf5aac5a3da37171bf99"
+    },
+    {
+      "name": "BIN/DBZP.BIN",
+      "offset": 2748416,
+      "size": 563996,
+      "sha256": "30f61f9c78c3859e5dd4fcfd8df6753b0f2d2c64beb924b92da5b2eaaa5e09cc"
+    },
+    {
+      "name": "DATA/PZS3US0.AFS",
+      "offset": 4059136,
+      "size": 14336,
+      "AFS_entries": 1,
+      "all_entry_ranges_valid": true,
+      "sha256": "b18931ced6baa727caf28752abb115eb907352835a5e39554221fdb3062b8cc5"
+    },
+    {
+      "name": "DATA/PZS3US1.AFS",
+      "offset": 4075520,
+      "size": 1462016000,
+      "AFS_entries": 3399,
+      "all_entry_ranges_valid": true,
+      "sha256": "0123b569657dfbec661be3a0156d299a3786e14aecb1e13a3b93412ede71d433"
+    },
+    {
+      "name": "DATA/PZS3US2.AFS",
+      "offset": 1466093568,
+      "size": 1220337664,
+      "AFS_entries": 65201,
+      "all_entry_ranges_valid": true,
+      "sha256": "53613521e9170d4a16fcd94aee9cf8a9cd769a3563922a47d1d4e55067053ead"
+    }
+  ]
+}

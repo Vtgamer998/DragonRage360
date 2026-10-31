@@ -1,0 +1,1641 @@
+{
+  "upstream": "3ca419c7966b11438e2dc3c9a7e1914f102ed545",
+  "target": "powerpc-xsdk-elf",
+  "total": 272,
+  "compiled": 272,
+  "files": [
+    {
+      "source": "src/main.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/adx.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/align.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/bpe.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/color_fade.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/common.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/debug.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/dialog.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/dma.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/fade.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/file.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/game_pad.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfx.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfx_ot.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_b_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_b_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_d_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_d_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_e_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_e_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gfxm_e_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/gsc.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/heap.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/heap_info.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/iop_heap.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/job.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/late_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/late_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/late_a_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/list.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/loading.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/math3d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/mathf.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/mcflow_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/mem_read.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/misc_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/misc_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/movie.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/pad.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/pad_watch.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/queue.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/ramp.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/rand.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/randf.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/rigid.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/save.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/snd.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/sprite.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/spu_heap.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/timer.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/sys/vu1_packet.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/battle.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/battle_load.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/battle_work.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/bobj_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/bobj_b_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_f.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_h.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_h_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_act_j.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_ai_act.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_ai_cond.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_ai_mgr.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_ai_seq.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_cam.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_capi_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_capi_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_action.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_api.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_cam.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_cam_cut.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_cam_modes.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_coll_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_ctl_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_ctl_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_ctl_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_flag.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_flag_clash.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_flag_opp.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_flag_snd.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_fx.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_fx_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_get.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_hit.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_member.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_mgr.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_move.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_status.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_char_status_anim.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_demo_cam.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_facade.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_input.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_obj.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_pool.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_replay.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_scene.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_script.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_script_cmd.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_seq.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_tech_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/btl_tech_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/col_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/col_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/col_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/col_c_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_aa.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ab.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ab_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ab_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ad.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ad_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ad_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_ae.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_d_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_det_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_det_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_det_b_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_det_b_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_g.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_h.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_i.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_j.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_k.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_l_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_l_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_l_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_m.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_n.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_o.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_o_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_o_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_p.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_p_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_q.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_r.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_s.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_t_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_t_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_u_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_v_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_v_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_w.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_x.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_x_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_x_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_y.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_z.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_z_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/eft_z_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_0.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_0_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_0_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_a_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_a_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_c_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_c_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_d_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_e_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_e_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_e_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/hud_e_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/orbit_cam.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stg_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stg_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stg_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stg_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stg_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stg_d_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stgm_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/stgm_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_a_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_a_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_a_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_b_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_b_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_b_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/battle/view_b_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_a.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_a_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_a_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_a_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_b_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_b_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_b_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_c_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_c_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_c_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_c_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_e_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_g.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_g_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_g_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_h_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_h_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_h_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_i_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_i_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_i_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_j_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_k_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_k_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_k_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_k_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_k_f.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_l_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_m_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_n_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_n_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_n_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_o_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_o_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_o_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_p_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_p_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_p_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_q_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_r_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_r_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_r_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_s_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_s_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_s_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_t_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_f.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_g.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_u_h.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_v_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_v_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_v_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_w_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_w_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_x_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_x_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_y_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_z_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_z_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_z_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_za_b.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_za_c.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_za_d.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/menu_za_e.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/port_language.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/port_screen.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    },
+    {
+      "source": "src/menu/port_tbo.c",
+      "compiled": true,
+      "missing_c": [],
+      "error": ""
+    }
+  ],
+  "warning": "Compile-only audit; no engine link, no data conversion, no renderer or networking integration."
+}

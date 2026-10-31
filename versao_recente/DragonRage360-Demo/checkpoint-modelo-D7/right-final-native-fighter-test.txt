@@ -1,0 +1,14 @@
+animated_matrix_delta=0.099297
+real common-table retarget sampled and matrices calculated
+body_parts=22 attack_spheres=0 attack_boxes=0
+attack_motion=55 active_volume_frames=108
+pose motion=0 root0=0.000000 root30=0.000000 quaternion_w=1.000000
+PASS: bones=69 decoded=357 empty=57 model=1/7; original PlayModel/Step 200 frames length=11; source freed; no combat spawn
+cross-owner retarget survived source fighter free
+original BtlObj_Setup rc=0
+native rebased canonical VIF material blocks=564
+real Setup/init/parts/materials/face/shadow/animation/destroy lifecycle PASS; BtlChar/BtlAi absent
+texture preparation rc=0 count=24
+renderer inputs textures=24 facial_geometries=6 node0=0; no GPU submission
+real BtlObj_CreateChara -> Setup path PASS; native slot and charaWork installed
+original object lists/map/pools/resources cleanup PASS; no BtlChar/BtlAi boot

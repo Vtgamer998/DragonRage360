@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "first_call": "XbTypedData_RequireBattleData",
+  "conditional_exit_before_work_access": true,
+  "readiness_marker": 2,
+  "Xbox_or_Xenia_executed": false
+}

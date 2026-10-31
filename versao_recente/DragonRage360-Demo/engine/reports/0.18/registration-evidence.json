@@ -1,0 +1,8 @@
+{
+  "upstream_base": "3ca419c7966b11438e2dc3c9a7e1914f102ed545",
+  "patch_sha256": "056bd68d28d2dd4d606e18a78d70c6cca76ffab227a82c5ae43e06f1c9ecbe89",
+  "applied_to_test_checkout": true,
+  "tested": "verbatim GsGpu_Init body and real callbacks, with platform/GPU mocks",
+  "whole_gs_draw_compiled": false,
+  "backend_in_XEX": false
+}

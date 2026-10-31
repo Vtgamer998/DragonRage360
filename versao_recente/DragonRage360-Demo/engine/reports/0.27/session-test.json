@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "sanitizers": true,
+  "PPC_execution": false,
+  "GPU_execution": false,
+  "battle_execution": false,
+  "scope": "shared native VU session, bound canonical mappings, direct GIF and all DMA chain types, sticky errors, lifecycle and re-entry"
+}
