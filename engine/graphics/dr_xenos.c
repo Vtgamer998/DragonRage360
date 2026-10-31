@@ -71,8 +71,10 @@ static void uniform_constants(uint32_t first,const float *data,uint32_t count){
     if(first+count>19){xsdk_gpu_set_vertex_constants(first,data,count);return;}
     unsigned at=0;
     while(at<count){
+            if(first+at+run<=19 && state_cache.valid&(1u<<(first+at))) continue; /* skip unchanged uniforms */
         unsigned run=0,start=at;
         while(at<count){
+            if(first+at+run<=19 && state_cache.valid&(1u<<(first+at))) continue; /* skip unchanged uniforms */
             unsigned n=4-((first+at)&3);if(n>count-at)n=count-at;
             uint32_t mask=((1u<<n)-1)<<(first+at);
             int changed=(state_cache.valid&mask)!=mask || memcmp(state_cache.constants+(first+at)*4,data+at*4,n*16);

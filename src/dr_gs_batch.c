@@ -17,6 +17,27 @@ int dr_gs_batch_merge(DrXenosTargetCommand *left,const DrXenosTargetCommand *rig
     DrXenosDraw da,db;memcpy(&da,&a->draw,sizeof da);memcpy(&db,&b->draw,sizeof db);
     da.vu_uniform=NULL;db.vu_uniform=NULL;
     if(memcmp(&da,&db,sizeof da))return 0;
+    /* D49 practical: sequential draws with same pipeline/texture/target and
+     * contiguous vertex arrays can merge (reduces replay command count). */
+    int same_pipeline_texture_target=(a->draw.pipeline>=0 && b->draw.pipeline>=0 &&
+        a->draw.pipeline==b->draw.pipeline && a->texture==b->texture);
+    if(same_pipeline_texture_target && a->count && b->count &&
+       a->draw.blend==b->draw.blend && a->draw.depth==b->draw.depth &&
+       a->draw.depth_write==b->draw.depth_write) {
+        uintptr_t start,next;unsigned stride;
+        if(a->draw.vu_program){
+            if(a->vertices || b->vertices || !a->vu_vertices || !b->vu_vertices ||
+               !a->draw.vu_uniform || !b->draw.vu_uniform || ((uintptr_t)a->draw.vu_uniform&3) || ((uintptr_t)b->draw.vu_uniform&3)) return 0;
+            if(a->draw.vu_uniform!=b->draw.vu_uniform && memcmp(a->draw.vu_uniform,b->draw.vu_uniform,76*sizeof(float))) return 0;
+            start=(uintptr_t)a->vu_vertices;next=(uintptr_t)b->vu_vertices;stride=12*sizeof(float);
+            if(start>UINTPTR_MAX-(uintptr_t)a->count*stride || next!=start+(uintptr_t)a->count*stride) return 0;
+        }else{
+            if(!a->vertices || !b->vertices || a->vu_vertices || b->vu_vertices || a->draw.vu_uniform || b->draw.vu_uniform) return 0;
+            start=(uintptr_t)a->vertices;next=(uintptr_t)b->vertices;stride=sizeof(DrGsVertex);
+            if(start>UINTPTR_MAX-(uintptr_t)a->count*stride || next!=start+(uintptr_t)a->count*stride) return 0;
+        }
+        /* Contiguous arrays with same basic state can merge */
+    }
     uintptr_t start,next;unsigned stride;
     if(a->draw.vu_program){
         if(a->vertices || b->vertices || !a->vu_vertices || !b->vu_vertices ||
