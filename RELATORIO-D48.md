@@ -76,3 +76,26 @@ apresentação (GPU nativa), não à lógica do produtor DMA em si.
 Para o hardware, o próximo passo de verificação é repetir o mesmo roteiro
 (`original-battle`) no Xbox 360 com `console/default.xex` acima e enviar o
 `default.log` gerado. O hash do binário de hardware deve acompanhar o log.
+
+## Teste em hardware real (RGH) — log enviado pelo usuário, 2026-10-31
+
+O teste foi executado no console com `console/default.xex`
+(`68fa346a17d3c790b8f02c70bc70009687ab568c2d2e012d462d6e27564b46c8`) e a ISO em
+`usb1:/isos/`. Log em `validation-d47/console/simple-run/default.log`,
+resumo em `validation-d47/console/simple-run/hardware.json`.
+
+- Boot completo no hardware: packs, File_Init/ADXXT (seis players), Battle_Load,
+  StgFx/StgModel/BtlChar/BtlAiMgr/BtlCam/StgNav/BtlGame/Ot/BtlScene e
+  `Battle_Restart` — `Battle_Init returned=0 read_error=0`; saúde 40000/40000 dos dois lados.
+- ISO de 3.020.816.384 bytes montada a partir de um caminho **com espaços** — o carregador tolerou; registrar aqui para não considerar o formato obrigatório.
+- `startup_test.txt` não estava ao lado do `.xex` (0xC0000034); o modo automático
+  (PIXEL check → ação 14) cai no mesmo roteiro `original-battle`, então o teste
+  percorreu o curso esperado mesmo assim. Recomendação: copiar/criar
+  `startup_test.txt` com o token desejado na pasta do `.xex` para testes dirigidos.
+- Luta no hardware: checkpoints 0, 32, 64, **96, 128, 160, 192** com
+  `Battle_StepFrame returned=0 read_error=0` — **zero `DR_DMA_INVALID`/`-420`** até o quadro 192.
+- Desempenho medido (hardware): perfil até quadro 193 em 97,66 s de sessão; por
+  quadro do último checkpoint: `simulation 15,1 ms + producers 21,6 ms + replay 231,7 ms`
+  — o **replay domina ~93% do quadro (~2 FPS)**. Confirma o gargalo do bloco 2:
+  reescrever a leitura do caminho de desenho (replay por comando, ~2493 comandos
+  por quadro) é o próximo alvo; a simulação e os produtores estão fora do gargalo.

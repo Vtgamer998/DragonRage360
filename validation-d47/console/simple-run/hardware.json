@@ -1,0 +1,33 @@
+{
+  "source": "console RGH (D47-console-default.log enviado pelo usuario)",
+  "bin_sha256": "68fa346a17d3c790b8f02c70bc70009687ab568c2d2e012d462d6e27564b46c8",
+  "frames_tested": 192,
+  "checkpoint_frames": [
+    0,
+    32,
+    64,
+    96,
+    128,
+    160,
+    192
+  ],
+  "stepframe_returns": "todos 0",
+  "DR_DMA_INVALID_hits": 0,
+  "returned_minus_420": 0,
+  "battle_init": "returned=0 read_error=0",
+  "health_sides": "40000/40000 nos dois lados",
+  "iso": "usb1:/isos/Dragon Ball Z - Budokai Tenkaichi 3 (USA) (En,Ja).iso (caminho com espacos montou)",
+  "startup_test": "nao encontrado (0xC0000034); modo automatico 14 (original-battle) igual ao roteiro",
+  "per_frame_us": {
+    "simulation": 15123,
+    "producers": 21617,
+    "replay": 231725,
+    "replay_share": "~93% do quadro"
+  },
+  "profile_last": {
+    "frames": 193,
+    "elapsed_ms": 97658.872,
+    "VU_instructions": 4688787,
+    "elapsed_scope": "sessao completa ate o retorno do ultimo checkpoint"
+  }
+}

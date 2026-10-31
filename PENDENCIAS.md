@@ -5,10 +5,17 @@ e luta varrida no Xenia Canary/llvmpipe com ISO real: **321 quadros,
 `Battle_StepFrame returned=0` em todos os checkpoints, zero
 `DR_DMA_INVALID`/`-420`** (inclui o quadro 88 do console). Evidência em
 `validation-d47/xenia/original-battle-321/`; leia [RELATORIO-D48.md](RELATORIO-D48.md).
-O travamento do quadro 88 no RGH agora aponta para o caminho de GPU nativa
-do XEX console; o próximo teste é repetir `original-battle` no Xbox com o
-`console/default.xex` de `sha256 68fa346a17d3c790b8f02c70bc70009687ab568c2d2e012d462d6e27564b46c8`
-e colher o `default.log`.
+
+**Hardware real (RGH) confirmado com o log do usuário
+(`validation-d47/console/simple-run/`): boot completo no Xbox, Battle_Init OK,
+luta até o quadro 192 com `returned=0` em todos os checkpoints e ZERO
+`DR_DMA_INVALID`/`-420` — o quadro 88 que travava passou no hardware com o XEX
+console compilado do logo após os fontes D47.**
+Bloco 1 "luta estável" segue nos testes longos (minutos contínuos, KO,
+resultado). Medição de desempenho em hardware: ~2 FPS, com o **replay de
+comandos a ~93% do quadro** (231 ms dos ~268 ms/quadro; simulação 15 ms,
+produtores 22 ms). Gargala já medido: reescrever o caminho de desenho é o
+alvo do bloco 2.
 
 # 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi (histórico)
 
