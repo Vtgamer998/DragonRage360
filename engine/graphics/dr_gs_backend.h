@@ -8,6 +8,8 @@ extern GsBackend sXenosBackend;
 int dr_gs_backend_error(uint32_t *failed_draw);
 int dr_gs_backend_close(void);
 int dr_gs_backend_sync(void);
+/* Lifetime frame_end CPU stage costs in microseconds; single-threaded telemetry. */
+void dr_gs_backend_frame_times(uint64_t *movie_us,uint64_t *present_us);
 /* Explicit displayed GS framebuffer; never infer it from the last draw.
  * Native fixed-match profile supports original 0/0x70 buffers at zero offset. */
 int dr_gs_backend_display(uint32_t fbp,int x,int y);

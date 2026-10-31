@@ -10,6 +10,7 @@
 #include "xsdk/log.h"
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 enum { TEXTURES=256,PIPES=1024 };
 static int attached;
 static uint32_t attached_width,attached_height;
@@ -179,7 +180,13 @@ static void target_copy(int src,int dst)
 }
 /* Snapshot after the final IMAGE payload reached VRAM, before replay. The
  * two private textures are reused, so one movie frame does not leak slots. */
-static uint32_t movie_texture(unsigned second) {
+static uint64_t movie_us,present_us; /* lifetime frame_end stage costs; single thread */
+void dr_gs_backend_frame_times(uint64_t *movie,uint64_t *present){if(movie)*movie=movie_us;if(present)*present=present_us;}
+static uint64_t backend_now_us(void)
+{
+    struct timespec t;return clock_gettime(CLOCK_MONOTONIC,&t)?0:(uint64_t)t.tv_sec*1000000u+t.tv_nsec/1000u;
+}
+static uint32_t movie_texture_impl(unsigned second) {
     extern uint32_t Gs_VramRead(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
     uint8_t *rgba=malloc(512*448*4);if(!rgba){fail(DR_GS_MEMORY,UINT32_MAX);return 0;}
     for(unsigned y=0;y<448;y++)for(unsigned x=0;x<512;x++) {
@@ -190,6 +197,13 @@ static uint32_t movie_texture(unsigned second) {
     if(!state.movie[second]){free(rgba);return 0;}
     if(!tex_upload(state.movie[second],0,512,448,GS_TEXFMT_RGBA8,rgba,512*448*4))return 0;
     return native_texture(state.movie[second],NULL);
+}
+static uint32_t movie_texture(unsigned second)
+{
+    uint64_t started=backend_now_us();
+    uint32_t result=movie_texture_impl(second);
+    movie_us+=backend_now_us()-started;
+    return result;
 }
 static void frame_end(void)
 {
@@ -226,11 +240,13 @@ static void frame_end(void)
     if(state.display_set && best<0){fail(DR_XENOS_STATE,UINT32_MAX);return;}
     if(best>=0) {
         uint32_t address;
+        uint64_t present_started=backend_now_us();
         if(!attached && !NT_SUCCESS(xsdk_present_begin(&address,1000))) {fail(DR_XENOS_GPU,UINT32_MAX);return;}
         e=dr_xenos_begin(state.width,state.height);
         if(!e) {e=blit(best,state.width,state.height,0);int end=dr_xenos_end();if(!e)e=end;}
         if(e) {fail(e,UINT32_MAX);return;}
         if(!attached) {xsdk_gpu_resolve(address,state.width,state.height,0);xsdk_present_end();}
+        present_us+=backend_now_us()-present_started;
     }
     for(int i=0;i<gsTargetCount;i++) gsTargets[i].draws=0;
     gsDrawCount=gsVertCount=gsVuVertCount=gsVuIdxCount=gsVuUniCount=0;gsAnchor=0;gsSkipped=gsNative=0;

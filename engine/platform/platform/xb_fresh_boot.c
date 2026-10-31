@@ -264,6 +264,9 @@ static int probe(int full_load) {
       xsdk_log_write("D46 GPU lifetime draws=%u arena_restarts=%u vertex_waits=%u target_stores=%u target_loads=%u target_waits=%u stencil_passes=%u known_zero_restores=%u",xp.draws,xp.arena_restarts,xp.fence_waits,tp.stores,tp.loads,tp.fence_waits,tp.stencil_restore_passes,tp.zero_stencil_restores);
       xsdk_log_write("D46 constants literal_sets=%u skips=%u uniform_regs=%u skipped_regs=%u",xp.literal_sets,xp.literal_skips,xp.constant_registers,xp.constant_skips);
       xsdk_log_write("D46 validation scanned_vertices=%u reused_vertices=%u state_sets=%u state_skips=%u",xp.validated_vertices,xp.reused_validation_vertices,xp.state_sets,xp.state_skips);
+      xsdk_log_write("D46 replay stages selects=%u preflight_us=%llu emit_us=%llu snapshot_us=%llu",xp.target_selects,(unsigned long long)xp.preflight_us,(unsigned long long)xp.emit_us,(unsigned long long)xp.select_us);
+      xsdk_log_write("D46 target times store_us=%llu bind_us=%llu splits=%u",(unsigned long long)tp.store_us,(unsigned long long)tp.bind_us,tp.command_splits);
+      {uint64_t movie_us=0,present_us=0;void dr_gs_backend_frame_times(uint64_t *,uint64_t *);dr_gs_backend_frame_times(&movie_us,&present_us);xsdk_log_write("D46 backend stage movie_us=%llu present_us=%llu",movie_us,present_us);}
       uint32_t md,mf;dr_vu1_model_profile(&md,&mf);xsdk_log_write("D46 model GPU draws=%u fallbacks=%u command_splits=%u",md,mf,tp.command_splits);
       uint32_t instructions,draws,fallbacks;dr_vu1_profile(&instructions,&draws,&fallbacks);
       xsdk_log_write("D46 profile frames=%u elapsed_us=%llu VU_instructions=%u stage_GPU_draws=%u stage_fallbacks=%u",frame+1,(unsigned long long)(probe_us()-started),instructions,draws,fallbacks);

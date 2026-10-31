@@ -47,7 +47,9 @@ typedef struct {unsigned target;DrXenosCommand command;unsigned snapshot; /* 1 D
  * Saved native color/depth surfaces are available through the target API below.
  * A bounded 12 MiB frame arena keeps earlier draws immutable across batches;
  * begin waits for the previous fence before reusing this arena. */
-typedef struct {uint32_t draws,arena_restarts,fence_waits,literal_sets,literal_skips,constant_registers,constant_skips,validated_vertices,reused_validation_vertices,state_sets,state_skips;} DrXenosProfile;
+typedef struct {uint32_t draws,arena_restarts,fence_waits,literal_sets,literal_skips,constant_registers,constant_skips,validated_vertices,reused_validation_vertices,state_sets,state_skips;
+    /* Lifetime replay-path stage timings (replay_targets only) and counts. */
+    uint64_t preflight_us,emit_us,select_us;uint32_t target_selects,target_snapshots;} DrXenosProfile;
 void dr_xenos_profile(DrXenosProfile *);
 /* Closed renderer only, 1..60000 ms. Default 1000; Xenia's software GPU
  * diagnostic selects 30000 explicitly. A timeout never releases live memory. */
