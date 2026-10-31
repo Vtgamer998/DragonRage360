@@ -288,6 +288,8 @@ static int validate_draw(const void *data,uint32_t count,uint32_t texture,const 
     if(draw->vu_program>3 || !isfinite(draw->depth_quantize) ||
        (draw->depth_quantize!=0 && draw->depth_quantize!=65535.0f &&
         draw->depth_quantize!=16777215.0f && draw->depth_quantize!=4294967295.0f)) return DR_XENOS_INVALID;
+    /* Defensive: prevent effect-storm crash (shadow/outline effects accumulating). */
+    if((draw->effect==1 || draw->effect==2) && backend.used>ARENA_VERTICES-256) return DR_XENOS_FULL;
     if(draw->vu_program) {
         if(!draw->vu_uniform || ((uintptr_t)draw->vu_uniform&3) || ((uintptr_t)data&3) || draw->logical_width!=1024 || draw->logical_height!=1024 || draw->topology) return DR_XENOS_INVALID;
         for(unsigned i=0;i<76;i++) if(!isfinite(draw->vu_uniform[i])) return DR_XENOS_INVALID;
