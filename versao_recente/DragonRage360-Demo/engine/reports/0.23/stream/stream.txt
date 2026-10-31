@@ -1,0 +1,1 @@
+PASS: bounded canonical-LE DMA/VIF, all eight chain IDs, TTE, split DIRECT/MPG, exact mappings, VU control/MSCAL/double buffering, masked/filling UNPACK, loop/word/stack/range/truncation/callback failures; no combat or GPU execution

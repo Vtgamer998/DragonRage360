@@ -1,0 +1,1 @@
+PASS TexFile: CT32 pixels, every fixture truncation, capacity/offset/unsupported-transfer rejection, no partial RGBA output

@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "gpu_execution": false,
+  "model_loader": "synthetic stub",
+  "native_draw_core": "real implementation",
+  "max_chunk_vertices": 1023,
+  "sanitizers": "ASan/UBSan",
+  "coverage": [
+    "fence before arena reuse",
+    "timeout retains GPU resources",
+    "capacity batching",
+    "close and reopen",
+    "load failure cleanup"
+  ]
+}

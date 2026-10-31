@@ -1,0 +1,7 @@
+{
+  "BPE": "56 random/edge reference vectors + pair expansion; truncated/cyclic/capacity failures",
+  "motion": "full and rotation-only tracks, shared track, events, hit volume, exact big-endian bytes, float/quat bits, unchanged failure buffer, 2000 corruptions",
+  "game_logic": "actual upstream BtlObjAnim_UpdateEvents tested: hit opens, shape scaled, hit closes",
+  "PowerPC_runtime": "not executed; compile check separate",
+  "real_ISO": "not tested"
+}

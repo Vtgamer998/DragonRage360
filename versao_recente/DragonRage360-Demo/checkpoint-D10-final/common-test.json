@@ -1,0 +1,49 @@
+{
+  "result": "PASS",
+  "tables": [
+    {
+      "kind": 0,
+      "bytes": 1792,
+      "numeric_fields": 448
+    },
+    {
+      "kind": 1,
+      "bytes": 1472,
+      "numeric_fields": 360
+    },
+    {
+      "kind": 2,
+      "bytes": 512,
+      "numeric_fields": 192
+    },
+    {
+      "kind": 3,
+      "bytes": 1536,
+      "numeric_fields": 192
+    },
+    {
+      "kind": 4,
+      "bytes": 2624,
+      "numeric_fields": 656
+    },
+    {
+      "kind": 5,
+      "bytes": 384,
+      "numeric_fields": 0
+    },
+    {
+      "kind": 6,
+      "bytes": 61376,
+      "numeric_fields": 1984
+    }
+  ],
+  "negative_AI_cases": 11,
+  "endian_field_oracle": true,
+  "source_lifetime_checked": true,
+  "original_AiThink_BindData_equivalence": true,
+  "host_pointer_bits": 32,
+  "sanitizers": "undefined,bounds",
+  "BtlChar_AllocAll_executed": false,
+  "BtlAiMgr_Init_executed": false,
+  "PowerPC_execution": false
+}

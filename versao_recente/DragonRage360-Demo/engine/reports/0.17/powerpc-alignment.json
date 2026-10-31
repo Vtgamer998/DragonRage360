@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "compiled": [
+    "dr_xenos.c",
+    "dr_gs_replay.c"
+  ],
+  "compiler": "powerpc-xsdk-elf-gcc 15.3.0",
+  "extra_flags": [
+    "-mcheck-fpr-alignment"
+  ],
+  "execution": false
+}

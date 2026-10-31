@@ -1,0 +1,2 @@
+PASS: real mounted ISO/PSS CPU decode; invalid PES, IO, bounds, sticky errors, ownership and stale mounts; NT transport mocked; no GPU/console execution
+Decoded 4200 frames; retained first 32 RGBA frames for comparison

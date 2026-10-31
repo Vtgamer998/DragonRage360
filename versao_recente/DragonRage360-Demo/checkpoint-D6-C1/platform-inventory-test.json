@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "injected_regressions_refused_before_compile": [
+    "extra C",
+    "duplicate original C",
+    "shadow header",
+    "opaque table",
+    "D6 actual added modules/header/blobs refused with new inventory"
+  ],
+  "inventory_duplicates_traversal_missing_checked": true,
+  "parallel_Make_platform_main_and_all_checked": true,
+  "strict_link_entry_refuses_before_plugin": true,
+  "PowerPC_execution": false
+}

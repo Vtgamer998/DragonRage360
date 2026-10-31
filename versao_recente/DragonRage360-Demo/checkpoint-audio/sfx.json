@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "upstream": "3ca419c7966b11438e2dc3c9a7e1914f102ed545",
+  "reference_sha256": "dbe0d31d0cc239bee8bdc1151bc84408a23033a9862d8132fdd42de544b9e987",
+  "real_bank": "AFS1 index 3194, pzs3us1/03194.bin",
+  "compared_stereo_frames": 6144,
+  "pitches_cents": [
+    -1200,
+    0,
+    1200
+  ],
+  "real_ISO_transport": "xb_disc, dr_disc, xb_iso_file, xb_plat_file; NT file system mocked",
+  "sample_transfer": "actual xb_iop + xb_sfx; low-address host heap fixture",
+  "ADXT_mix": "actual decoder + sampler, single mocked SDK client",
+  "hardware_audio": false,
+  "PPC_execution": false,
+  "complete_SPU_emulation": false
+}

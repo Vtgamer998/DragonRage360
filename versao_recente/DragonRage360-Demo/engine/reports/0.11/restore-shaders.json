@@ -1,0 +1,14 @@
+{
+  "result": "compiled",
+  "pipeline": "GLSL -> glslang 15.1.0 SPIR-V -> xsdk open xost/xsc native containers",
+  "SDK_revision": "57b02f1e60667e37d22c3aa613d23d2486514ff8",
+  "xsc_source_hash": "94721b3950171d3c",
+  "sha256": {
+    "graphics/shaders/dr_restore.vert": "a6c6ead1eb5ef5111db48345b5a59cee8840311e13645c615e0f14b2708c8d7e",
+    "graphics/shaders/dr_restore.frag": "aef715c671c168ef1a92d06246d058214fcf36ec24290f477f7ca9d309f768a6",
+    "graphics/dr_restore_shaders.h": "33945792cd24331d25ede492ec82e8b77ff3ff75893c20657ebb5e80493633aa"
+  },
+  "shader_execution": false,
+  "PowerPC_C_compilation": false,
+  "new_XEX": false
+}

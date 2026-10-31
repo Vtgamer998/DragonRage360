@@ -1,0 +1,22 @@
+TEX0=2000000621410000 index=0 256x256 PSM=20 rc=0
+TEX0=2000002599400080 index=1 64x64 PSM=20 rc=0
+TEX0=20000045dd408088 index=2 128x128 PSM=20 rc=0
+TEX0=20000065e14100a8 index=3 256x128 PSM=20 rc=0
+TEX0=200000861d4080e8 index=4 128x256 PSM=20 rc=0
+TEX0=200000a5dd408128 index=5 128x128 PSM=20 rc=0
+TEX0=200000c5dd408148 index=6 128x128 PSM=20 rc=0
+TEX0=200000e599400168 index=7 64x64 PSM=20 rc=0
+TEX0=20000105dd408170 index=8 128x128 PSM=20 rc=0
+TEX0=2000012599400190 index=9 64x64 PSM=20 rc=0
+TEX0=20000145dd408198 index=10 128x128 PSM=20 rc=0
+TEX0=20000165554001b8 index=11 32x32 PSM=20 rc=0
+TEX0=20000185554001ba index=12 32x32 PSM=20 rc=0
+PASS body materials: triangles=4492 unique=13; all TEX0 matched and decoded; finite STQ; CPU only
+PASS facial substitution=0 triangles=4562 MSCNT=566 all materials resolved; reference pose only
+PASS facial substitution=1 triangles=4591 MSCNT=569 all materials resolved; reference pose only
+PASS facial substitution=2 triangles=4576 MSCNT=570 all materials resolved; reference pose only
+PASS facial substitution=3 triangles=4576 MSCNT=570 all materials resolved; reference pose only
+PASS facial substitution=4 triangles=4497 MSCNT=561 all materials resolved; reference pose only
+PASS facial slot=5 absent, rejected without published output
+PASS facial slot=6 absent, rejected without published output
+PASS facial slot=7 absent, rejected without published output

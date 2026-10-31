@@ -1,0 +1,1 @@
+PASS TexFile real corpus: files=2148 textures=16156 CT32=4441 PSMT8=1396 PSMT4=10319; CPU only

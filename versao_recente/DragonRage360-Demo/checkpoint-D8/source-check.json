@@ -1,0 +1,17 @@
+[
+  {
+    "source": "engine/platform/platform/xb_battle_common.c",
+    "sha256": "9e7ee1326da87e879daa0f861c6c6a99e728954eb9226e0cc65d2cdf4fe7d019",
+    "matches_final_compilation": true
+  },
+  {
+    "source": "engine/platform/platform/xb_battle_fighter.c",
+    "sha256": "28030f9f1179b37ab561d6435d1abccd4bd0709e8bcaeba1f5b3c14917f6f8f1",
+    "matches_final_compilation": true
+  },
+  {
+    "source": "engine/platform/platform/xb_fighter_tables.c",
+    "sha256": "19cb8093604041c45ab43e174d750a96cfb2e285c2a75f41c479122803c06773",
+    "matches_final_compilation": true
+  }
+]

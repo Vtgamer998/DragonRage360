@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "classification": "face geometry DMA/VIF lists; previously misclassified as texture payloads",
+  "corpus": {
+    "DMA_VIF_blocks": 2722,
+    "UNPACKs": 173798,
+    "vectors": 5132078,
+    "MSCNTs_parsed_not_executed": 86899,
+    "NOPs": 3659,
+    "texture_headers": 2148
+  },
+  "unit": "bounds, preflight, guard/padding, truncation, NUM=0, unknown opcodes, callbacks, 10000 hostile buffers",
+  "VU_test": "every UNPACK is isolated after reset with equal CL/WL and zero base/TOPS; transferred bytes compared exactly",
+  "MSCNT_execution": false,
+  "game_engine_linked": false,
+  "GPU_execution": false,
+  "Xbox_execution": false,
+  "new_XEX": false,
+  "sanitizers": [
+    "ASan",
+    "UBSan"
+  ],
+  "leak_detection": "disabled",
+  "input_bytes": 3020816384,
+  "source_sha256": {
+    "resource/dr_face_vif.c": "c114deedc3e490bc22f4588b44e2b9936daaa1f6cb7bbbb023b0e9ffcaea9c56",
+    "tests/test_face_vif.c": "6330863bbda18473d6da68ea9906badaded9d5333c9f248822526214b1dc32de",
+    "tests/face_vif_real.c": "985fef2b0a3633a2329cfa3100c381493b71d500e8f174b24628a8ba7e1186a8",
+    "vu/dr_vu1.c": "fba81d96eb6b73304dbfc7f0dc1fe68f8bd1b4478d13c3c2db04018326127d10",
+    "resource/dr_disc.c": "38f745a2a6d42dd81ed6acf591b39438782fc7ded2ab88d844afcc8f0f872556",
+    "resource/dr_container.c": "62e723b223c72f6e30ed730a1336645bf1eac68f16a96221e82932b9621b314a",
+    "resource/dr_bpe.c": "8a4588bc848abed4c93d586f0bc813fb2e038a7b9aa1886ed4382ce944fda3e4",
+    "resource/dr_anim.c": "5aa697a8c7c40242b5c764f59eda8d251573bcf2a78f5892d86a7c44a92bfb48",
+    "resource/dr_skeleton.c": "590efdeb82f4eb2e427313493feb43012f279ea5bb9ea84f3c65b0025428bd39",
+    "tests/real_iso_sanitize.c": "886817a114030ded18f48c74de35aebc25bb7cf1d3ce267f04d45fc2c67eab8c"
+  }
+}

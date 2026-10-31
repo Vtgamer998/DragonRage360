@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "CLUT_microcode_cases": 7950,
+  "outline_microcode_cases": 1280,
+  "snapshot_boundary_cases": 4,
+  "scope": "original depth/ID lookup, alpha scaling/raw-byte output, source premultiplication, outline table/4-neighbours and copied-region clamp",
+  "GPU_execution": false,
+  "rasterization": false,
+  "hardware_pixels": false
+}

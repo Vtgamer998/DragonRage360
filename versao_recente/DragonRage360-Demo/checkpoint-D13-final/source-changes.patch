@@ -1,0 +1,912 @@
+--- a/engine/platform/platform/xb_battle_common3.inc
++++ b/engine/platform/platform/xb_battle_common3.inc
+@@ -1,40 +1,78 @@
+ /* SPDX-License-Identifier: AGPL-3.0-or-later
+- * Texture subset of common 3. Unknown entries are never exposed as native.
++ * Native USA common 3. Unknown entries are never exposed as native.
+  * Original scene indexes TABLE WORDS, so word 1 is pack entry 0. */
+ static uint32_t common3_word(const uint8_t *p){return p[0]|(uint32_t)p[1]<<8|(uint32_t)p[2]<<16|(uint32_t)p[3]<<24;}
++#include "xb_common3_formats.inc"
++static const unsigned c3sets[]={0xc,0x20,0x25,0x4c,0x66,0x73,0x88,0x91,0xa4,0xb9,0xf2,0x11a,0x137,0x158,0x192,0x1aa,0x1c0,0x1c1,0x1cb,0x1e6,0x1fc,0x217,0x23f,0x268};
++static int c3entry(const void *pack,size_t n,unsigned index,const uint8_t **bytes,size_t *length){
++ size_t off;unsigned flags;int e=dr_pack_memory_entry(pack,n,index-1,&off,length,&flags);
++ if(e)return e;
++ if(flags)return -890;
++ *bytes=(const uint8_t *)pack+off;return 0;
++}
+ int XbBattleRuntime_AttachCommon3(XbBattleRuntime *r,const void *pack,size_t n,XbCommon3Info *info){
+  if(info)memset(info,0,sizeof(*info));
+  if(!r || active!=r || r->managers || r->common3 || !pack || n<12 || n>16*1024*1024)return -891;
+  const uint8_t *p=pack;unsigned count=common3_word(p);
+  if(count!=637)return -890;
+  void **entries=calloc((size_t)count+1,sizeof(*entries));if(!entries)return -851;
+- unsigned textures=0,images=0;int error=0;
+- for(unsigned i=0;i<count;i++){
+-  size_t off,size;unsigned flags;
+-  error=dr_pack_memory_entry(pack,n,i,&off,&size,&flags);
+-  if(error==DR_NOT_FOUND){error=0;continue;}if(error)goto fail;
+-  if(flags){error=-890;goto fail;}
+-  const uint8_t *entry=p+off;
+-  /* TexFile has its 0x40-byte entry table at word offset 8. No
+-   * guessing schemas for emitters, animations, VIF or effect configs. */
+-  if(size<32 || common3_word(entry+4)!=8)continue;
+-  unsigned entries_count=common3_word(entry);
+-  if(!entries_count || entries_count>256)continue;
+-  error=XbNativeTexture_Prepare(entry,size,&entries[i+1]);
+-  if(error){if(error==-851 || error==-303)goto fail;
+-   /* Rejected data stays unavailable. Partial preparation is never scene readiness. */
+-   error=0;continue;
++ uint8_t type[638]={0},kind[638]={0},second[638]={0};
++ unsigned textures=0,images=0,prepared=0,diagnostic_id=0;int error=0;
++ for(unsigned set=0;set<sizeof(c3sets)/sizeof(*c3sets);set++){
++  unsigned id=c3sets[set];diagnostic_id=id;const uint8_t *s;size_t bytes;
++  error=c3entry(pack,n,id,&s,&bytes);if(error)goto fail;
++  if(bytes<64){error=-890;goto fail;}
++  unsigned groups=s[4],parts=s[5],sum=0,res=0,pairs=0,next=id+1;uint32_t mask=0;
++  if(groups>19 || parts>40 || ((64+32*groups+64*parts+63)&~63u)!=bytes){error=-890;goto fail;}
++  type[id]=2;
++  for(unsigned g=0;g<groups;g++){
++   const uint8_t *q=s+64+g*32;unsigned k=q[0],np=q[1],nr=q[2];
++   if(k>=19 || mask&(1u<<k) || sum+np>parts || (k && (!nr || res+nr>32 || pairs+np>40))){error=-890;goto fail;}
++   mask|=1u<<k;sum+=np;if(!k)continue;
++   res+=nr;pairs+=np;
++   for(unsigned j=0;j<nr;j++){if(next>count || type[next]){error=-890;goto fail;}type[next++]=1;}
++   for(unsigned j=0;j<np;j++)for(unsigned which=0;which<(k==2 || k==14?1u:2u);which++){
++    if(next>count || type[next]){error=-890;goto fail;}
++    type[next]=k==14?4:3;kind[next]=(uint8_t)k;second[next]=(uint8_t)which;next++;
++   }
++   unsigned first=sum-np;
++   for(unsigned j=0;j<np;j++)if(s[64+groups*32+(first+j)*64+1]>=nr){error=-890;goto fail;}
+   }
+-  textures++;images+=entries_count;
++  if(mask!=c3u(s)){error=-890;goto fail;}
+  }
+- if(!textures){error=-890;goto fail;}
+- r->common3=entries;r->common3_count=count;r->common3_textures=textures;r->common3_images=images;
+- if(info){*info=(XbCommon3Info){count,textures,images,count-textures};}
++ for(unsigned id=1;id<=count;id++){
++  diagnostic_id=id;const uint8_t *s;size_t bytes;error=c3entry(pack,n,id,&s,&bytes);if(error)goto fail;
++  if(!type[id]){
++   if(id==0x239 || id==0x23b)type[id]=5;
++   else if(id==1 || id==4 || id==7 || (id>=0x24e && id<=0x25b) || id==0x25d || id==0x25f || id==0x260 || (id>=0x261 && id<=0x267)){
++    if(id!=0x259)type[id]=6;
++   }
++  }
++  if(!type[id] && bytes>=32 && c3u(s+4)==8 && c3u(s)>0 && c3u(s)<=256)type[id]=1;
++  if(type[id]==1){
++   error=XbNativeTexture_Prepare(s,bytes,&entries[id]);if(error)goto fail;
++   textures++;images+=c3u(s);prepared++;continue;
++  }
++  uint8_t *d=malloc(bytes);if(!d){error=-851;goto fail;}memcpy(d,s,bytes);
++  if(type[id]==2){
++   error=c3fields(d,s,bytes,0,4,4,0);
++   if(!error)error=c3fields(d,s,bytes,8,32,4,1);
++   if(!error)error=c3fields(d,s,bytes,40,64,4,1);
++   for(unsigned j=0;!error && j<s[5];j++)error=c3fields(d,s,bytes,64+s[4]*32+j*64+16,64+s[4]*32+j*64+52,4,1);
++  }else if(type[id]==3 || type[id]==4)error=c3param(d,s,bytes,kind[id],second[id]);
++  else {error=c3standalone(d,s,bytes,id);if(!error)type[id]=(id==0x239 || id==0x23b)?5:6;}
++  if(error){free(d);if(type[id])goto fail;error=0;continue;}
++  entries[id]=d;prepared++;
++ }
++ r->common3=entries;r->common3_count=count;r->common3_textures=textures;r->common3_images=images;r->common3_prepared=prepared;memcpy(r->common3_type,type,sizeof(type));
++ if(info)*info=(XbCommon3Info){.entries=count,.textures=textures,.images=images,.unprepared=count-prepared,.prepared=prepared};
+  return 0;
+ fail:
+- for(unsigned i=1;i<=count;i++){XbNativeTexture_Free(entries[i]);}
++ extern void xsdk_log_write(const char *,...);xsdk_log_write("common3 preparation refused: id=%u type=%u error=%d",diagnostic_id,type[diagnostic_id],error);
++ for(unsigned i=1;i<=count;i++)XbNativeTexture_Free(entries[i]);
+  free(entries);return error;
+ }
++int XbBattleRuntime_Common3Type(int index){return active && index>0 && index<=637?active->common3_type[index]:0;}
+ int XbBattleRuntime_TryCommon3Entry(int index,void **out){
+  if(!out || !XbBattleRuntime_HasResources() || !active->common3)return 0;
+  *out=NULL;if(index>0 && (unsigned)index<=active->common3_count)*out=active->common3[index];return 1;
+--- a/engine/platform/platform/xb_battle_files.inc
++++ b/engine/platform/platform/xb_battle_files.inc
+@@ -1,5 +1,6 @@
+ /* SPDX-License-Identifier: AGPL-3.0-or-later */
+ #include "xb_disc.h"
++#include <stdio.h>
+ #include "sys/file.h"
+ extern AdxPlayer gAdxPlayerTbl[];
+ extern AfsPartition gAfsPartitionTbl[];
+@@ -29,7 +30,10 @@
+  if(need>(size_t)Heap_GetFreeSize())return -851;
+  /* Require the ambience stream before the original stage initializer starts
+   * it. File_Init brings up the original queue, players and partitions. */
+- dr_span stream;if(XbDisc_FindFile("pzs3us2/65116.bin",&stream))return -894;
++ extern s32 BtlStage_GetId(void);s32 stage_id=BtlStage_GetId();
++ if(stage_id<0 || stage_id>38)return -894;
++ char ambience[40];snprintf(ambience,sizeof(ambience),"pzs3us2/%05u.bin",65116u+(unsigned)stage_id);
++ dr_span stream;if(XbDisc_FindFile(ambience,&stream))return -894;
+  File_Init();File_LoadPartitionNw(2);File_WaitPartition(2);r->files=1;
+  int e=XbAdx_LastError();if(!e)e=XbBattleStage_BeginGeometry(stage);
+  if(e){runtime_end_files(r);return e;}
+--- a/engine/platform/platform/xb_battle_runtime.c
++++ b/engine/platform/platform/xb_battle_runtime.c
+@@ -25,7 +25,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio,files;XbBattleStageCollision *stage_geometry;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images;};
++struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio,files;XbBattleStageCollision *stage_geometry;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images,common3_prepared;uint8_t common3_type[638];};
+ static XbBattleRuntime *active;
+ extern AiThMgr *gBtlAi;
+ extern ViewProgress *gProgress;
+--- a/engine/platform/platform/xb_battle_runtime.h
++++ b/engine/platform/platform/xb_battle_runtime.h
+@@ -21,10 +21,12 @@
+ int XbBattleRuntime_BeginAudio(XbBattleRuntime *,const void *const[4],const size_t[4]);
+ int XbBattleRuntime_ServiceAudio(XbBattleRuntime *);
+ int XbBattleRuntime_EndAudio(XbBattleRuntime *);
+-typedef struct XbCommon3Info {unsigned entries,textures,images,unprepared;} XbCommon3Info;
++typedef struct XbCommon3Info {unsigned entries,textures,images,unprepared,prepared;} XbCommon3Info;
+ /* Texture subset only: success does not mean all entries were prepared. */
+ int XbBattleRuntime_AttachCommon3(XbBattleRuntime *,const void *,size_t,XbCommon3Info *);
+ int XbBattleRuntime_TryCommon3Entry(int,void **);
++/* 0 absent, 1 TexFile, 2 emitter set, 3 parameters, 4 V000, 5 mesh, 6 configuration. */
++int XbBattleRuntime_Common3Type(int);
+ int XbBattleRuntime_BeginStage(XbBattleRuntime *,void *stage);
+ int XbBattleRuntime_ServiceStage(XbBattleRuntime *);
+ int XbBattleRuntime_EndStage(XbBattleRuntime *);
+--- a/engine/platform/platform/xb_battle_stage.c
++++ b/engine/platform/platform/xb_battle_stage.c
+@@ -31,7 +31,7 @@
+  float starts[4][8];int has_starts;
+  uint8_t *parameters,*path_bytes,*mef_bytes,*nav_bytes;
+  void *saved_paths,*saved_mef;int parameters_bound;
+- uint8_t *render_pack;size_t render_bytes,render_offset;void *render_texture,*saved_pack;int render_live,render_bound;
++ uint8_t *render_pack;size_t render_bytes,render_offset;void *render_texture,*saved_pack;int render_live,render_bound,render_error;void **animation_textures;unsigned animation_texture_count,animation_models,animation_nodes;
+  XbStageGeometryInfo geometry;
+ };
+ extern s32 *gColMeshBase;
+--- a/engine/platform/platform/xb_common3_formats.inc
++++ b/engine/platform/platform/xb_common3_formats.inc
+@@ -0,0 +1,99 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later
++ * USA common effect formats, derived from the original typed consumers.
++ * Byte fields/padding stay opaque. Scalar arrays are converted individually.
++ * IDs are TABLE WORD indices, not zero-based pack entry indices. */
++#include <math.h>
++static uint32_t c3u(const uint8_t *p){return common3_word(p);}
++static unsigned c3h(const uint8_t *p){return p[0]|(unsigned)p[1]<<8;}
++static int c3fields(uint8_t *d,const uint8_t *s,size_t n,size_t at,size_t end,unsigned width,int floating){
++ if(end>n || at>end || (end-at)%width)return -890;
++ for(size_t j=at;j<end;j+=width){
++  if(width==2){uint16_t v=(uint16_t)c3h(s+j);memcpy(d+j,&v,2);}
++  else {uint32_t v=c3u(s+j);if(floating){float f;memcpy(&f,&v,4);if(!isfinite(f))return -890;}memcpy(d+j,&v,4);}
++ }
++ return 0;
++}
++#define C3W(a,b) do{int error=c3fields(d,s,n,(a),(b),4,0);if(error)return error;}while(0)
++#define C3F(a,b) do{int error=c3fields(d,s,n,(a),(b),4,1);if(error)return error;}while(0)
++#define C3H(a,b) do{int error=c3fields(d,s,n,(a),(b),2,0);if(error)return error;}while(0)
++/* EftSprPack/EftSprLayerDef/EftSprKey, eft_ae.h. */
++static int c3sprite(uint8_t *d,const uint8_t *s,size_t n){
++ if(n<32 || c3u(s)!=0x30303056 || !s[4] || s[4]>16)return -890;
++ size_t keys=c3u(s+8),next=keys;
++ if(keys<32+(size_t)s[4]*32 || keys>n || (keys&15))return -890;
++ C3W(0,4);C3W(8,12);
++ for(unsigned i=0;i<s[4];i++){
++  size_t at=32+i*32;unsigned count=s[at+4];
++  if(!count || s[at+5]>=count || s[at+6]>=count || count>(n-next)/64)return -890;
++  C3H(at+8,at+12);C3W(at+16,at+28);C3H(at+28,at+32);
++  uint32_t previous=0;
++  for(unsigned k=0;k<count;k++){
++   size_t key=next+k*64;uint32_t frame=c3u(s+key+52);
++   if(k && frame<previous)return -890;
++   previous=frame;C3F(key,key+48);C3W(key+52,key+64);
++  }
++  next+=(size_t)count*64;
++ }
++ return 0;
++}
++/* EftMeshData, EftMeshGroup/Tri/Vtx, eft_ad.h. Offsets are bytes. */
++static int c3mesh(uint8_t *d,const uint8_t *s,size_t n){
++ if(n<16 || c3u(s)!=0x53454244)return -890;
++ size_t groups=c3u(s+4),tri=c3u(s+8),vtx=c3u(s+12);
++ if(!groups || groups>(n-16)/16 || tri<16+groups*16 || vtx<tri || vtx>n || (tri&15) || (vtx&15))return -890;
++ size_t triangles=(vtx-tri)/16,vertices=(n-vtx)/48;
++ C3W(0,16+groups*16);
++ for(size_t i=0;i<groups;i++){
++  size_t at=16+i*16,count=c3u(s+at),first=c3u(s+at+8);
++  if(first>triangles || count>triangles-first)return -890;
++  for(size_t j=first;j<first+count;j++){
++   for(unsigned k=0;k<3;k++)if(c3u(s+tri+j*16+k*4)>=vertices)return -890;
++   C3W(tri+j*16,tri+j*16+16);
++  }
++ }
++ C3F(vtx,vtx+vertices*48);return 0;
++}
++/* Emitters dispatched by eft_h.c/eft_i.c. Kind comes from the owning set. */
++static int c3param(uint8_t *d,const uint8_t *s,size_t n,unsigned kind,unsigned second){
++ switch(kind){
++ case 5: /* EftUPtclDef/Def2, eft_u.h (also eft_v.h's runtime view). */
++  if(second){C3F(0,0x114);}else{C3W(0,4);C3F(0x10,0x1c);C3H(0x1c,0x28);C3F(0x28,0x2b0);}break;
++ case 9: /* EftQuadDef/Def2, eft_y.h. */
++  if(second){C3F(0,0x12c);}else{C3F(0,0x224);C3W(0x234,0x238);}break;
++ case 10: /* EftPart10Def/Def2, eft_x.h. */
++  if(second){C3F(0,0x12c);}else{C3F(0,0x1f4);C3W(0x1f4,0x1f8);C3F(0x1fc,0x20c);}break;
++ case 16: /* EftBillDef + EftLineDef/Def2, eft_z.h/eft_y.h. */
++  if(second){C3F(0,0x84);}else{C3W(0,4);C3F(8,0x90);}break;
++ case 18: /* EftArcParam/Keys, eft_s.h. */
++  if(second){C3F(0,0x114);}else{C3W(0,4);C3F(0xc,0x1e8);}break;
++ case 2: /* EftRaysDef: ten 0x78-byte rays with byte RGBA keys. */
++  if(second || n<0x4b8 || c3u(s+0x4b0)>10)return -890;
++  for(unsigned i=0;i<10;i++){
++   size_t at=i*0x78;
++   for(unsigned k=0;k<3;k++)C3F(at+k*16+4,at+k*16+16);
++   C3F(at+0x30,at+0x70);C3H(at+0x70,at+0x72);
++  }
++  C3W(0x4b0,0x4b8);break;
++ case 14:if(second)return -890;return c3sprite(d,s,n);
++ default:return -890;
++ }
++ return 0;
++}
++/* Standalone consumers in eft_m/n/p/q/t/aa/ab. Unreferenced 0x23D/E
++ * are deliberately not guessed. No mapped set depends on those entries. */
++static int c3standalone(uint8_t *d,const uint8_t *s,size_t n,unsigned id){
++ if(id==1){C3F(0,0x410);C3W(0x410,0x500);C3F(0x510,0x1070);return 0;}
++ if(id==4){C3W(0,8*0x14);return 0;} /* EftBoltPair[8]. */
++ if(id==7){C3F(0,0x490);C3W(0x490,0x580);C3F(0x580,0x620);C3F(0x620,0xa30);return 0;}
++ if(id==0x239 || id==0x23b)return c3mesh(d,s,n);
++ if(id==0x24e){C3F(0,7*16);return 0;}
++ if(id>=0x24f && id<=0x258){C3F(0,0x1c);C3F(0x20,0x40);C3W(0x40,0x48);return 0;}
++ if(id==0x25a){C3F(0,0x7c);return 0;}
++ if(id==0x25b){C3F(0,0x74);return 0;}
++ if(id==0x25d || id==0x25f || id==0x260)return c3param(d,s,n,5,0);
++ if(id>=0x261 && id<=0x267)return c3param(d,s,n,5,1);
++ return -890;
++}
++#undef C3W
++#undef C3F
++#undef C3H
+--- a/engine/platform/platform/xb_model_native.c
++++ b/engine/platform/platform/xb_model_native.c
+@@ -46,9 +46,9 @@
+  if(size<32 || size>16*1024*1024)return -870;
+  unsigned count=rd(src),off=rd((const unsigned char *)src+4)*4u;
+  if(!count || count>256 || off<32 || off>size || count>(size-off)/64)return -870;
+- void *scratch=malloc(4*1024*1024);if(!scratch)return -851;
+- for(unsigned i=0;i<count;i++){DrTexFileImage im;int e=dr_texfile_decode(src,size,i,scratch,4*1024*1024,&im);if(e){free(scratch);return e;}}
+- free(scratch);unsigned char *copy=malloc(size);if(!copy)return -851;memcpy(copy,src,size);
++ /* Native consumers use bounded upload packets; decoding is a separate check. */
++ for(unsigned i=0;i<count;i++){int e=dr_texfile_validate_transfers(src,size,i);if(e)return e;}
++ unsigned char *copy=malloc(size);if(!copy)return -851;memcpy(copy,src,size);
+  fields(copy,src,0,8,4);TexFile *f=(TexFile *)copy;f->ent=(TexEntry *)(copy+off);
+  for(unsigned i=0;i<count;i++){
+   const unsigned char *s=(const unsigned char *)src+off+i*64;TexEntry *e=&f->ent[i];
+--- a/engine/platform/platform/xb_stage_animations.inc
++++ b/engine/platform/platform/xb_stage_animations.inc
+@@ -0,0 +1,80 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later
++ * EPC K animation triples: TexFile, variable-size Vu1Node list, Vu1Track list.
++ * Native headers/tracks, bounded canonical VIF payloads. No GPU readiness claim. */
++static int stage_animation_vif(uint8_t *p,size_t bytes,uint32_t bits0,uint32_t bits1,int write){
++ for(size_t at=0;at+4<=bytes;at+=4){
++  uint32_t word=rd(p+at);if(word==0x70000000)return 0;
++  if(word==0x6c038000){
++   if(bytes-at<28)return DR_STAGE_BOUNDS;
++   if(write){uint32_t values[2]={rd(p+at+20)|bits0,rd(p+at+24)|(bits1<<5)};
++    for(unsigned j=0;j<2;j++)for(unsigned k=0;k<4;k++)p[at+20+j*4+k]=(uint8_t)(values[j]>>(8*k));
++   }
++  }
++ }
++ return DR_STAGE_FORMAT;
++}
++static int geom_animations(XbBattleStageCollision *c,const void *pack,size_t n){
++ size_t off,bytes;unsigned flags;int e=dr_pack_memory_entry(pack,n,8,&off,&bytes,&flags);
++ if(e==DR_NOT_FOUND)return 0;
++ if(e || flags || bytes<16)return DR_STAGE_FORMAT;
++ const uint8_t *s=(const uint8_t *)pack+off;uint8_t *d=c->render_pack+off;
++ uint32_t count=rd(s+8);if(rd(s)!=0x4b435045 || rd(s+12) || count%3 || count>192 || count>(bytes-16)/4)return DR_STAGE_FORMAT;
++ uint32_t previous=16+count*4;
++ for(unsigned i=0;i<count;i++){
++  uint32_t at=rd(s+16+i*4);if(at<previous || at>=bytes || (at&15))return DR_STAGE_BOUNDS;previous=at;
++ }
++ c->animation_textures=calloc(count/3?count/3:1,sizeof(void *));if(!c->animation_textures)return XB_STAGE_MEMORY;
++ words(d,s,16+count*4);uint32_t relocated=1;memcpy(d+12,&relocated,4);
++ for(unsigned triple=0;triple<count;triple+=3){
++  size_t tex=rd(s+16+triple*4),node=rd(s+20+triple*4),track=rd(s+24+triple*4),end=triple+3<count?rd(s+28+triple*4):bytes;
++  if(tex>=node || node>=track || track>=end || end>bytes)return DR_STAGE_BOUNDS;
++  e=XbNativeTexture_Prepare(s+tex,node-tex,&c->animation_textures[c->animation_texture_count]);if(e)return e;
++  void *texture=c->animation_textures[c->animation_texture_count++];memcpy(d+16+triple*4,&texture,4);
++  if(track-node<16 || rd(s+node)<16 || rd(s+node)>track-node || (rd(s+node)&15))return DR_STAGE_BOUNDS;
++  words(d+node,s+node,16);
++  size_t at=node+rd(s+node),cursor=track;unsigned nodes=0,depth=0;
++  for(;;){
++   if(at>track || track-at<240 || cursor>end || end-cursor<16)return DR_STAGE_BOUNDS;
++   const uint8_t *q=s+at;uint32_t size=rd(q),pop=rd(q+4),last=rd(q+8),has_mesh=rd(q+12);
++   if(size<240 || (size&15) || size>track-at || pop>++depth || depth>64 || param_finite(q+16,56))return DR_STAGE_FORMAT;
++   depth-=pop;if(++nodes>1024)return DR_STAGE_BOUNDS;
++   words(d+at,q,240);
++   if(has_mesh){e=stage_animation_vif(d+at+240,size-240,0,0,0);if(e)return e;}
++   unsigned keys=geom_half(s+cursor+10);if((nodes==1 && keys && !geom_half(s+cursor+12)) || keys>(end-cursor-16)/32)return DR_STAGE_BOUNDS;
++   /* +0xC is read as the low u16 length by StgModel_ResetAnims;
++    * treating this mixed header as four u32s would zero that length on PPC. */
++   param_halves(d+cursor+10,s+cursor+10,6);
++   uint32_t previous_frame=0;
++   for(unsigned k=0;k<keys;k++){
++    size_t key=cursor+16+k*32;uint32_t frame=rd(s+key+12);
++    if((k && frame<previous_frame) || param_finite(s+key,3) || param_finite(s+key+16,4))return DR_STAGE_NUMBER;
++    previous_frame=frame;words(d+key,s+key,32);
++   }
++   cursor+=16+keys*32;
++   if(last)break;
++   at+=size;
++  }
++  void *native_node=d+node,*native_track=d+track;
++  memcpy(d+20+triple*4,&native_node,4);memcpy(d+24+triple*4,&native_track,4);
++  c->animation_nodes+=nodes;
++ }
++ StgDataA *params=(StgDataA *)c->parameters;
++ for(int i=0;i<params->objCount;i++)if(params->objDefs[i].unk8>0 && (unsigned)params->objDefs[i].unk8>count/3)return DR_STAGE_BOUNDS;
++ c->animation_models=count/3;return 0;
++}
++int XbStage_TryAnimationNodeFlags(void *address,uint32_t bits0,uint32_t bits1){
++ if(!active || !active->render_live || !active->animation_models)return 0;
++ uintptr_t base=(uintptr_t)active->render_pack,at=(uintptr_t)address;
++ if(at<base || at-base>=active->render_bytes)return 0;
++ uint8_t *node=address;size_t available=active->render_bytes-(size_t)(at-base);
++ /* Every node and terminator was checked before original initialization. */
++ while(available>=240){
++  uint32_t size,last,has_mesh;memcpy(&size,node,4);memcpy(&last,node+8,4);memcpy(&has_mesh,node+12,4);
++  if(size<240 || size>available)break;
++  if(has_mesh && stage_animation_vif(node+240,size-240,bits0,bits1,1))break;
++  if(last)return 1;
++  node+=size;available-=size;
++ }
++ active->render_error=DR_STAGE_FORMAT;
++ return 1; /* Never fall through to an unbounded native-u32 scan of LE VIF. */
++}
+--- a/engine/platform/platform/xb_stage_geometry.inc
++++ b/engine/platform/platform/xb_stage_geometry.inc
+@@ -143,18 +143,19 @@
+  for(unsigned i=0;i<timers;i++){geom_halves(b,at+i*16,4);geom_words(b,at+i*16+4,12);if(param_finite(h+at+i*16+8,2))return DR_STAGE_NUMBER;}
+  b->info.timers=timers;return 0;
+ }
++#include "xb_stage_animations.inc"
+ int XbBattleStage_FreeGeometry(XbBattleStageCollision *c){
+  if(!c || c->render_live)return XB_STAGE_STATE;
+- free(c->render_pack);XbNativeTexture_Free(c->render_texture);c->render_pack=NULL;c->render_texture=NULL;c->render_bytes=0;c->render_bound=0;memset(&c->geometry,0,sizeof(c->geometry));return 0;
++ for(unsigned i=0;i<c->animation_texture_count;i++)XbNativeTexture_Free(c->animation_textures[i]);
++ free(c->animation_textures);c->animation_textures=NULL;c->animation_texture_count=c->animation_models=c->animation_nodes=0;
++ free(c->render_pack);XbNativeTexture_Free(c->render_texture);c->render_pack=NULL;c->render_texture=NULL;c->render_bytes=0;c->render_bound=0;c->render_error=0;memset(&c->geometry,0,sizeof(c->geometry));return 0;
+ }
+ int XbBattleStage_PrepareGeometry(XbBattleStageCollision *c,const void *pack,size_t n,XbStageGeometryInfo *info){
+  if(info)memset(info,0,sizeof(*info));
+  if(!c || !pack || sizeof(void *)!=4 || !c->parameters || c->render_pack || c->render_live)return XB_STAGE_STATE;
+  DrStageCollision v;int e=dr_stage_collision_open(pack,n,&v);if(e)return e;
+  size_t at,bytes;unsigned flags;if(dr_pack_memory_entry(pack,n,0,&at,&bytes,&flags) || flags || (n&15))return DR_STAGE_FORMAT;
+- /* Animated-object members need a separate VU1-node/track adapter. Refuse
+-  * those stages rather than claiming their raw tracks are native. */
+- const uint8_t *p=pack;if(rd(p+36)!=rd(p+40))return DR_STAGE_FORMAT;
++
+  c->render_pack=malloc(n+32);if(!c->render_pack)return XB_STAGE_MEMORY;
+  c->render_bytes=n+32;c->render_offset=at;memcpy(c->render_pack,pack,n);memset(c->render_pack+n,0,32);
+  words(c->render_pack,pack,(rd(pack)+2)*4);
+@@ -165,7 +166,7 @@
+  memcpy(texture,v.base,v.size);memcpy(texture,v.base+tex,32);
+  e=XbNativeTexture_Prepare(texture,v.size,&c->render_texture);free(texture);if(e)goto cleanup;
+  b.texture_count=rd(v.base+tex);b.info.textures=b.texture_count;
+- e=geom_tables(&b);if(!e){c->geometry=b.info;if(info)*info=b.info;}
++ e=geom_tables(&b);if(!e)e=geom_animations(c,pack,n);if(!e){c->geometry=b.info;if(info)*info=b.info;}
+ cleanup:free(b.seen);
+ fail:if(e)XbBattleStage_FreeGeometry(c);return e;
+ }
+@@ -194,7 +195,7 @@
+  if(Heap_GetFreeSize()<(s32)sizeof(StgRigidPool)+4096)return XB_STAGE_MEMORY;
+  void **slot=(void **)((uint8_t *)gCommonRes+0x24);c->saved_pack=*slot;*slot=c->render_pack;c->render_live=1;
+  extern void StgModel_InitStage(void);StgModel_InitStage();
+- if((void *)gBtlStage!=c->render_pack+c->render_offset || !BtlStage_IsReady() || !gStgRigid || XbAdx_LastError()){
++ if((void *)gBtlStage!=c->render_pack+c->render_offset || !BtlStage_IsReady() || !gStgRigid || c->render_error || XbAdx_LastError()){
+   XbBattleStage_EndGeometry(c);return XB_STAGE_STATE;
+  }
+  return 0;
+--- a/engine/platform/platform/xb_stage_parameters.inc
++++ b/engine/platform/platform/xb_stage_parameters.inc
+@@ -38,7 +38,14 @@
+   }
+   uintptr_t ptr=(uintptr_t)(params+off);memcpy(params+12+i*8,&ptr,4);
+  }
+- if(rd(p+8)!=c->source.objects || rd(p+16)!=1 || rd(p+24)!=1 || rd(p+32)!=1 || rd(p+40)!=2 || rd(p+48)!=1 || rd(p+56)!=1)goto fail;
++ /* MAPD also includes animation-only objects without collision objects. */
++ if(rd(p+8)<c->source.objects || rd(p+16)!=1 || rd(p+24)!=1 || rd(p+32)!=1 || rd(p+40)!=2 || rd(p+48)!=1 || rd(p+56)!=1)goto fail;
++ for(uint32_t i=c->source.objects;i<rd(p+8);i++){
++  /* Original animation consumers may query collision state unless this bit
++   * is set. Extra MAPD objects must be animation-only, as in the real packs. */
++  const uint8_t *def=p+start[0]+(size_t)i*64;
++  if(!(rd(def+4)&0x40000000u) || (int32_t)rd(def+8)<=0){e=DR_STAGE_FORMAT;goto fail;}
++ }
+  for(uint32_t i=0;i<rd(p+8);i++){
+   int32_t parent=(int32_t)i;uint32_t budget=rd(p+8)+1;
+   while(parent>=0){if((uint32_t)parent>=rd(p+8) || !budget--){e=DR_STAGE_TREE;goto fail;}parent=(int32_t)rd(p+start[0]+(size_t)parent*64+12);}
+@@ -54,7 +61,12 @@
+   words(paths+off+i*16,q,16);ptr=(uintptr_t)(paths+point);memcpy(paths+off+i*16+4,&ptr,4);
+   for(uint32_t j=0;j<last;j++){if(param_finite(p+point+(size_t)j*48,3)){e=DR_STAGE_NUMBER;goto fail;}words(paths+point+(size_t)j*48,p+point+(size_t)j*48,12);}
+  }
+- if(dr_pack_memory_entry(pack,n,15,&at,&bytes,&flags) || flags || bytes<16)goto fail;
++ e=dr_pack_memory_entry(pack,n,15,&at,&bytes,&flags);
++ if(e==DR_NOT_FOUND && !c->source.objects){
++  /* Preserve the original no-graph state; StgNav_Bind returns -2. */
++  goto navigation_done;
++ }
++ if(e || flags || bytes<16)goto fail;
+  p=(const uint8_t *)pack+at;count=rd(p+4);
+  if(rd(p)!=1 || !count || count>256 || count>(bytes-16)/48){e=DR_STAGE_BOUNDS;goto fail;}
+  nav=malloc(16+(size_t)count*48);if(!nav){e=XB_STAGE_MEMORY;goto fail;}words(nav,p,12);memset(nav+12,0,4);
+@@ -65,6 +77,7 @@
+   words(nav+16+(size_t)i*48,q,32);param_halves(nav+48+(size_t)i*48,q+32,16);
+   for(unsigned k=0;k<8;k++){int16_t link=(int16_t)(q[32+k*2]|(unsigned)q[33+k*2]<<8);if(link< -1 || link>=(int)count){e=DR_STAGE_BOUNDS;goto fail;}}
+  }
++navigation_done:
+  e=dr_pack_memory_entry(pack,n,18,&at,&bytes,&flags);
+  if(e!=DR_NOT_FOUND){
+   if(e || flags || bytes<32){e=DR_STAGE_FORMAT;goto fail;}
+--- a/engine/tests/test_common3_consumers.c
++++ b/engine/tests/test_common3_consumers.c
+@@ -0,0 +1,75 @@
++/* SPDX-License-Identifier: AGPL-3.0-or-later */
++#include "port_compat.h"
++#include "xb_battle_runtime.h"
++#include "battle/eft_h.h"
++#include "battle/eft_ae.h"
++#include "battle/eft_u.h"
++#include "battle/eft_ad.h"
++#include "battle/btl_pool.h"
++#include "sys/heap.h"
++#include <assert.h>
++#include <math.h>
++#include <stdio.h>
++#include <string.h>
++extern void EftEmit_LoadSet(void *,EftSet *,EftSetHead *,s32 *,s32,s32);
++extern void EftEmit_FreeSet(EftSet *),EftEmit_BeginFrame(EftSet *);
++extern void EftSprPack_Bind(EftSprPack *);
++extern s32 EftSprPack_FindKey(EftSprLayerDef *,s32);
++extern s32 *BtlScene_GetCommonEntry(s32);
++extern s32 Heap_GetFreeSize(void);
++extern void EftSprAnim_InitPool(void),EftSprAnim_TermPool(void);
++extern void EftSprAnim_Create(EftSprAnim *,EftSprPack *,EftAeTexSet32 *),EftSprAnim_Destroy(EftSprAnim *);
++extern s32 EftSprAnim_Step(EftSprAnim *);
++void verify_common3_consumers(void){
++ static const unsigned sets[]={0xc,0x20,0x25,0x4c,0x66,0x73,0x88,0x91,0xa4,0xb9,0xf2,0x11a,0x137,0x158,0x192,0x1aa,0x1c0,0x1c1,0x1cb,0x1e6,0x1fc,0x217,0x23f,0x268};
++ s32 heap=Heap_GetFreeSize();BtlPool_Init(0);BtlPool_SetCurrent(0);
++ EftSprAnim_InitPool();unsigned sprites=0,layers=0,param_keys=0,animation_steps=0;
++ for(unsigned i=0;i<24;i++){
++  EftSet set={0};EftEmit_LoadSet(NULL,&set,NULL,NULL,1,(s32)sets[i]);assert(set.head && set.head->nGroups<=19);
++  for(unsigned j=0;j<set.head->nGroups;j++){
++   EftSetGroupDef *def=&set.entries[j];EftSetGroup *group=&set.group[def->kind];
++   assert(group->parts==set.parts+group->firstPart && group->entry==def);
++   if(!def->kind)continue;
++   for(unsigned k=0;k<def->nRes;k++)assert(set.res[group->firstRes+k]);
++   for(unsigned k=0;k<def->nParts;k++){
++    EftSetPair *pair=&set.pair[group->firstPair+k];assert(pair->a);
++    if(def->kind!=2 && def->kind!=14)assert(pair->b);
++    if(def->kind==14){
++     EftSprAnim anim;EftAeTexSet32 *texture=(EftAeTexSet32 *)(set.array[0]+(group->catFirst+group->parts[k].res)*0x208);
++     EftSprAnim_Create(&anim,(EftSprPack *)pair->a,texture);
++     for(unsigned tick=0;tick<40;tick++){
++      assert(EftSprAnim_Step(&anim)>0);
++      for(unsigned l=0;l<anim.pack->layerCount;l++)assert(isfinite(anim.slot->layer[l].frame) && isfinite(anim.slot->layer[l].alpha));
++      animation_steps++;
++     }
++     EftSprAnim_Destroy(&anim);
++    }
++    if(def->kind==5){
++     EftUPtclWork work={0};EftUPtclCur cur;
++     work.arg.def=(EftUPtclDef *)pair->a;work.arg.def2=(EftUPtclDef2 *)pair->b;
++     for(int key=0;key<3;key++){
++      memset(&cur,0,sizeof(cur));EftPtcl_SetKey(&cur,&work,key);
++      volatile float expected_life=work.arg.def->life[key]*30.0f;
++      assert(cur.count==work.arg.def->count[key] && cur.life==expected_life);
++      assert(isfinite(cur.life) && isfinite(cur.speed[0]));param_keys++;
++     }
++    }
++   }
++  }
++  EftEmit_BeginFrame(&set);EftEmit_FreeSet(&set);assert(!set.head);
++ }
++ for(int id=1;id<=637;id++)if(XbBattleRuntime_Common3Type(id)==4){
++  EftSprPack *sprite=(EftSprPack *)BtlScene_GetCommonEntry(id);assert(sprite && sprite->layerCount<=16);
++  EftSprPack_Bind(sprite);sprites++;
++  for(unsigned l=0;l<sprite->layerCount;l++){
++   EftSprLayerDef *def=&sprite->layer[l];assert(def->keys && def->keyCount);layers++;
++   for(unsigned k=0;k+1<def->keyCount;k++)assert(EftSprPack_FindKey(def,def->keys[k].frame)>=0);
++  }
++ }
++ for(unsigned i=0;i<2;i++){
++  EftMesh mesh;EftMeshData *data=(EftMeshData *)BtlScene_GetCommonEntry(i?0x23b:0x239);EftMesh_Init(&mesh,data);
++  assert(mesh.data==data && mesh.groups==data->groups && mesh.tris && mesh.verts && mesh.mtx.m[3][3]==1);
++ }
++ EftSprAnim_TermPool();BtlPool_Term();assert(Heap_GetFreeSize()==heap);
++ printf("PASS original common3 consumers: 24 sets, %u sprite packs, %u layers, %u particle keys, %u sprite steps, 2 meshes; heap restored\n",sprites,layers,param_keys,animation_steps);
++}
+--- a/engine/tests/test_native_managers.c
++++ b/engine/tests/test_native_managers.c
+@@ -22,6 +22,7 @@
+ #include "xb_sfx.h"
+ #include "xsdk/audio.h"
+ #include "sys/gfxm_b_b.h"
++#include "sys/vu1_packet.h"
+ #include "battle/eft_ae.h"
+ #include "sys/pad.h"
+ #include "battle/battle_setup.h"
+@@ -99,16 +100,111 @@
+  }
+  puts("PASS five corrupt geometry/root/mesh/key/cycle fixtures rejected");
+ }
++static void put32(uint8_t *p,uint32_t v){for(unsigned i=0;i<4;i++)p[i]=(uint8_t)(v>>(i*8));}
++static void stage_animation_rejections(const char *resources){
++ size_t bytes;uint8_t *pack=load(resources,"../stages/stage-04.bin",&bytes),*copy=malloc(bytes);assert(copy);
++ uint32_t anim=le32(pack+36),node=anim+le32(pack+anim+20),track=anim+le32(pack+anim+24);
++ uint32_t first=node+le32(pack+node),mapd=le32(pack+8),defs=mapd+le32(pack+mapd+12);
++ for(unsigned test=0;test<8;test++){
++  memcpy(copy,pack,bytes);
++  if(test==0)put32(copy+anim+20,(uint32_t)bytes);
++  if(test==1)put32(copy+first,0);
++  if(test==2)put32(copy+first+4,65);
++  if(test==3)put32(copy+first+16,0x7fc00000);
++  if(test==4){copy[track+10]=255;copy[track+11]=255;}
++  if(test==5){copy[track+12]=0;copy[track+13]=0;}
++  if(test==6)put32(copy+track+16,0x7fc00000);
++  if(test==7)put32(copy+defs+11*64+8,65535);
++  XbBattleStageCollision *c=NULL;assert(!XbBattleStage_PrepareCollision(copy,bytes,&c));assert(!XbBattleStage_PrepareStarts(c,copy,bytes));
++  int e=XbBattleStage_PrepareParameters(c,copy,bytes);if(!e)e=XbBattleStage_PrepareGeometry(c,copy,bytes,NULL);assert(e<0);assert(!XbBattleStage_FreeCollision(c));
++ }
++ free(copy);free(pack);puts("PASS eight malformed real-stage animation fixtures rejected without publication");
++}
++static void verify_stage_converters(const char *resources){
++ unsigned animated=0,timers=0,failed=0;
++ for(unsigned i=0;i<39;i++){
++  char name[80];snprintf(name,sizeof(name),"../stages/stage-%02u.bin",i);size_t bytes;void *pack=load(resources,name,&bytes);
++  XbBattleStageCollision *c=NULL;int e=XbBattleStage_PrepareCollision(pack,bytes,&c);
++  if(e)printf("collision fail %d\n",e);
++  if(!e){e=XbBattleStage_PrepareStarts(c,pack,bytes);if(e)printf("starts fail %d\n",e);}
++  if(!e){e=XbBattleStage_PrepareParameters(c,pack,bytes);if(e)printf("params fail %d\n",e);}
++  XbStageGeometryInfo info={0};if(!e)e=XbBattleStage_PrepareGeometry(c,pack,bytes,&info);
++  printf("real stage %02u conversion: %d; timers=%u meshes=%u\n",i,e,info.timers,info.meshes);if(e)failed++;
++  unsigned off=le32((const uint8_t *)pack+36),end=le32((const uint8_t *)pack+40);animated+=end>off;timers+=info.timers;
++  assert(!XbBattleStage_FreeCollision(c));free(pack);
++ }
++ assert(!failed);printf("PASS 39 real stage converters: %u animated packs, %u timers; no stage draw\n",animated,timers);
++}
++static void verify_stage_cycles(XbBattleRuntime *runtime,XbBattleStageCollision *original,const char *resources){
++ extern void *gStgAnimTable;
++ assert(!XbBattleRuntime_EndStage(runtime));StgNav_Term();
++ assert(!XbBattleStage_UninstallCollision(original));
++ unsigned animated_objects=0,timer_wraps=0;
++ for(unsigned stage=0;stage<39;stage++){
++  char name[80];snprintf(name,sizeof(name),"../stages/stage-%02u.bin",stage);size_t bytes;void *pack=load(resources,name,&bytes);
++  XbBattleStageCollision *c=NULL;XbStageGeometryInfo info={0};
++  assert(!XbBattleStage_PrepareCollision(pack,bytes,&c));assert(!XbBattleStage_PrepareStarts(c,pack,bytes));
++  assert(!XbBattleStage_PrepareParameters(c,pack,bytes));assert(!XbBattleStage_PrepareGeometry(c,pack,bytes,&info));
++  free(pack);assert(!XbBattleStage_InstallCollision(c));StgNav_Init();
++  printf("entering real stage %u original initialization\n",stage);
++  int result=XbBattleRuntime_BeginStage(runtime,c);printf("real stage %u original init result %d\n",stage,result);assert(!result && BtlStage_IsReady());
++  if(gStgAnimTable){
++   StgOfsTable *table=gStgAnimTable;Mtx44 identity __attribute__((aligned(16)))={0};for(unsigned k=0;k<4;k++)identity.m[k][k]=1;
++   for(int k=0;k<table->count;k+=3){
++    uint8_t *block=(void *)StgOfsTable_Get(table,k+1);uint32_t offset;memcpy(&offset,block,4);
++    Vu1Node *node=(Vu1Node *)(block+offset);Vu1Track *track=(void *)StgOfsTable_Get(table,k+2);
++    for(unsigned frame=0;frame<3;frame++){
++     Vu1Node_Animate(node,track,&identity,(float)(frame*5));
++     for(Vu1Node *p=node;;p=(Vu1Node *)((uint8_t *)p+p->size)){for(unsigned j=0;j<16;j++)assert(isfinite(p->world[j]));if(p->last)break;}
++    }
++   }
++  }
++  unsigned before_animated=animated_objects;
++  float initial[256]={0};assert(gBtlStage->data->objCount<=256);
++  for(int i=0;i<gBtlStage->data->objCount;i++){
++   StgObjDef *d=&gBtlStage->data->objDefs[i];memcpy(&initial[i],(uint8_t *)d+28,4);
++   if(d->unk8>0){animated_objects++;assert(gStgAnimTable);}
++  }
++  for(unsigned frame=0;frame<12;frame++){
++   assert(!XbBattleRuntime_ServiceStage(runtime));
++   for(unsigned i=0;i<info.timers;i++){unsigned short flags;memcpy(&flags,(uint8_t *)gBtlStage->timers+i*16,2);timer_wraps+=(flags&4)!=0;}
++  }
++  if(animated_objects>before_animated){unsigned changed=0;
++   for(int i=0;i<gBtlStage->data->objCount;i++){float value;memcpy(&value,(uint8_t *)&gBtlStage->data->objDefs[i]+28,4);if(gBtlStage->data->objDefs[i].unk8>0){assert(isfinite(value));changed+=value!=initial[i];}}
++   assert(changed);
++  }
++  StgView view={0};for(unsigned i=0;i<4;i++)view.mtx.m[i][i]=1;view.x1=640;view.screenDist=256;view.nearZ=1;view.farZ=100000;
++  StgModel_Cull(&view);
++  assert(!XbBattleRuntime_EndStage(runtime));StgNav_Term();
++  assert(!XbBattleStage_UninstallCollision(c));assert(!XbBattleStage_FreeCollision(c));
++  printf("PASS real stage %u original Init/12 Updates/Cull/Term; no GPU draw\n",stage);
++ }
++ assert(animated_objects && timer_wraps);
++ printf("PASS real stage cycles: 39 stages, %u animated object definitions, %u timer wraps\n",animated_objects,timer_wraps);
++ assert(!XbBattleStage_InstallCollision(original));StgNav_Init();
++}
++static void common3_rejections(XbBattleRuntime *runtime,const uint8_t *pack,size_t size){
++ size_t set=le32(pack+0xc*4),param=le32(pack+14*4),sprite=le32(pack+29*4),tex=le32(pack+3*4),mesh=le32(pack+0x239*4);
++ size_t where[]={0,set+64,param+0x28,sprite+8,tex+32+64+4,mesh+le32(pack+mesh+8),set+64+pack[set+4]*32+1};
++ uint32_t what[]={638,19,0x7fc00000,UINT32_MAX,UINT32_MAX,UINT32_MAX,255};unsigned width[]={4,1,4,4,4,4,1};
++ for(unsigned i=0;i<7;i++){
++  uint8_t *copy=malloc(size);assert(copy);memcpy(copy,pack,size);for(unsigned k=0;k<width[i];k++)copy[where[i]+k]=(uint8_t)(what[i]>>(k*8));
++  XbCommon3Info info={0};assert(XbBattleRuntime_AttachCommon3(runtime,copy,size,&info)<0 && info.prepared==0);
++  void *out=(void *)1;assert(!XbBattleRuntime_TryCommon3Entry(1,&out));free(copy);
++ }
++ puts("PASS seven corrupt common3 set/parameter/sprite/palette/mesh fixtures rejected without commit");
++}
+ int main(int argc,char **argv){
+  setvbuf(stdout,NULL,_IOLBF,0);assert(argc==4);
+  image_path=argv[3];assert(!XbDisc_Mount("game:/test.iso"));
+  XbDataFiles files={read_program,argv[2]};int rc=XbTypedData_Load(&files,&gXbTypedMainCatalog,0);printf("typed data: %d\n",rc);assert(!rc && gPortDataStripped==2);
+  size_t n2,n4,ns;void *c2=load(argv[1],"common-2.bin",&n2),*c4=load(argv[1],"common-4.bin",&n4),*stage=load(argv[1],"stage.bin",&ns);
+  XbBattleRuntime *runtime=NULL;rc=XbBattleRuntime_Open(c2,n2,c4,n4,&runtime);printf("runtime: %d\n",rc);assert(!rc);free(c2);free(c4);
+- size_t n3;void *c3=load(argv[1],"common-3.bin",&n3);XbCommon3Info common3;rc=XbBattleRuntime_AttachCommon3(runtime,c3,n3,&common3);printf("common3 preparation: %d entries=%u textures=%u images=%u unprepared=%u\n",rc,common3.entries,common3.textures,common3.images,common3.unprepared);assert(!rc);free(c3);
+- for(unsigned i=1;i<=637;i++){TexFile *texture=(TexFile *)BtlScene_GetCommonEntry((s32)i);if(!texture)continue;TexFile *relocated=NULL;Res_RelocateOffsets(&relocated,(u8 *)texture,texture);assert(relocated==texture && texture->ent && texture->count<=32);EftAeTexSet32 set;EftTexSet_Load32(&set,texture);assert(set.count==(int)texture->count);for(unsigned j=0;j<texture->count;j++){assert(texture->ent[j].pix && (void *)set.tex[j].image==&texture->ent[j] && set.tex[j].tex0==texture->ent[j].tex0);}}
++ size_t n3;void *c3=load(argv[1],"common-3.bin",&n3);XbCommon3Info common3;common3_rejections(runtime,c3,n3);rc=XbBattleRuntime_AttachCommon3(runtime,c3,n3,&common3);printf("common3 preparation: %d entries=%u textures=%u images=%u unprepared=%u\n",rc,common3.entries,common3.textures,common3.images,common3.unprepared);assert(!rc);free(c3);
++ for(unsigned i=1;i<=637;i++){if(XbBattleRuntime_Common3Type(i)!=1)continue;TexFile *texture=(TexFile *)BtlScene_GetCommonEntry((s32)i);if(!texture)continue;TexFile *relocated=NULL;Res_RelocateOffsets(&relocated,(u8 *)texture,texture);assert(relocated==texture && texture->ent && texture->count<=32);EftAeTexSet32 set;EftTexSet_Load32(&set,texture);assert(set.count==(int)texture->count);for(unsigned j=0;j<texture->count;j++){assert((texture->ent[j].pix || texture->ent[j].clut) && (void *)set.tex[j].image==&texture->ent[j] && set.tex[j].tex0==texture->ent[j].tex0);}}
+  assert(!BtlScene_GetCommonEntry(-1) && !BtlScene_GetCommonEntry(638));
+- assert(common3.entries==637 && common3.textures==111 && common3.images==154 && common3.unprepared==526);
++ assert(common3.entries==637 && common3.prepared==635 && common3.unprepared==2);
++ extern void verify_common3_consumers(void);verify_common3_consumers();stage_animation_rejections(argv[1]);verify_stage_converters(argv[1]);
+  s32 heap=Heap_GetFreeSize();
+  XbBattleStageCollision *collision=NULL;assert(!XbBattleStage_PrepareCollision(stage,ns,&collision));assert(!XbBattleStage_PrepareStarts(collision,stage,ns));rc=XbBattleStage_PrepareParameters(collision,stage,ns);printf("stage parameters: %d\n",rc);assert(!rc);XbStageGeometryInfo geometry;rc=XbBattleStage_PrepareGeometry(collision,stage,ns,&geometry);printf("stage geometry prepare: %d groups=%u materials=%u meshes=%u parts=%u nodes=%u cells=%u textures=%u\n",rc,geometry.groups,geometry.materials,geometry.meshes,geometry.parts,geometry.nodes,geometry.cells,geometry.textures);assert(!rc);stage_rejections(stage,ns);geometry_rejections(stage,ns);assert(!XbBattleStage_InstallCollision(collision));stage_oracle(stage);free(stage);assert(gBtlStage->data && gBtlStage->data->objCount==11 && !BtlStage_IsReady() && BtlStage_GetPathCount()==5);
+  for(unsigned pass=0;pass<2;pass++){
+@@ -153,6 +249,12 @@
+   for(unsigned i=0;i<4;i++)assert(gSndMgr->bank[i+2].vagMax==maximum[i] && !memcmp(gSndMgr->bank[i+2].loopBits,loops[i],19));
+   for(unsigned i=0;i<4;i++)free(sound[i]);assert(Snd_IsUploadDone());unsigned before=nonzero;
+   rc=XbBattleRuntime_BeginStage(runtime,collision);printf("original stage init: %d ready=%d\n",rc,BtlStage_IsReady());assert(!rc && BtlStage_IsReady() && gStgRigid);
++  if(getenv("XB_TEST_FULL_SCENE")){
++   puts("entering original full effect scene init");
++   extern void BtlCam_Init(void),BtlCam_Term(void),BtlScene_Init(int),BtlScene_Term(void);
++   BtlCam_Init();puts("original camera init returned");BtlScene_Init(0);
++   puts("original full effect scene init returned");BtlScene_Term();BtlCam_Term();
++  }
+   assert(StgNav_IsReady());
+   /* An adjacent graph edge has a short, independently known route. */
+   int start=-1,goal=-1;
+@@ -181,13 +283,14 @@
+   StgModel_Cull(&view);BtlStageM *graphics=(BtlStageM *)gBtlStage;unsigned visible=0;
+   for(unsigned i=0;i<graphics->visSize;i++)visible+=graphics->vis[i]!=0;assert(visible>0 && visible<=2243);
+   printf("PASS original stage timers and CPU culling: %u visible meshes; no GPU draw\n",visible);
+-  Vec4 pos,rot;int zone=BtlStage_GetStartPlace(0,&pos,&rot,0);assert(zone>=0 && isfinite(pos.y));
++  Vec4 pos __attribute__((aligned(16))),rot __attribute__((aligned(16)));int zone=BtlStage_GetStartPlace(0,&pos,&rot,0);assert(zone>=0 && isfinite(pos.y));
+   printf("PASS original stage relocation/init/reset/update: zone=%d y=%f\n",zone,(double)pos.y);
+ 
+   /* Restart stage/file players without closing the active audio device. */
+   assert(!XbBattleRuntime_EndStage(runtime));size_t restart_bytes;void *restart=load(argv[1],"stage.bin",&restart_bytes);
+   assert(!XbBattleStage_PrepareGeometry(collision,restart,restart_bytes,NULL));free(restart);
+   assert(!XbBattleRuntime_BeginStage(runtime,collision));assert(!XbBattleRuntime_ServiceStage(runtime));
++  if(!pass)verify_stage_cycles(runtime,collision,argv[1]);
+   assert(Snd_QueuePlay(4,0,100,64,0,0)>=0 && Snd_QueuePlay(16,0,100,64,0,0)>=0 && Snd_QueuePlay(32,0,100,64,0,0)>=0);
+   for(unsigned i=0;i<12;i++)assert(!XbBattleRuntime_ServiceAudio(runtime));assert(nonzero>before && frames>0 && !XbSfx_LastError());
+   assert(!XbBattleRuntime_EndAudio(runtime) && !device_open);printf("PASS original audio: %u frames, %u nonzero samples; SDK device simulated\n",frames,nonzero);
+--- a/engine/tests/test_texfile.c
++++ b/engine/tests/test_texfile.c
+@@ -15,6 +15,11 @@
+     put(p+80,UINT64_C(0x0800000000008040),8);
+     for(unsigned i=0;i<1024;i++)p[96+i]=(unsigned char)i;
+     put(p+1120,UINT64_C(0x1000000000008001),8);put(p+1128,14,8);put(p+1144,0x3f,8);
++    assert(!dr_texfile_validate_transfers(file,sizeof(file),0));
++    /* Even CT32 entries may carry a CLUT pointer: never publish an unchecked one. */
++    put(file+36,0xffffffff,4);put(file+44,192,4);
++    assert(dr_texfile_validate_transfers(file,sizeof(file),0));
++    put(file+36,0,4);put(file+44,0,4);
+     DrTexFileImage info;assert(!dr_texfile_decode(file,sizeof(file),0,rgba,sizeof(rgba),&info));
+     assert(info.width==16 && info.height==16 && !info.psm && info.rgba_bytes==1024);
+     for(unsigned i=0;i<1024;i++)assert(rgba[i]==(unsigned char)i);
+--- a/engine/tools/build_engine_diagnostic.py
++++ b/engine/tools/build_engine_diagnostic.py
+@@ -45,9 +45,9 @@
+ for name in ['func_002967C0','sceSifCallRpc','XbSfx_Mix','ADXT_Create','_ctype_','gPortDataStripped']:
+     assert name in defined,name
+ subprocess.run(['python3',str(sdk/'tools/elf2xex.py'),'--title-id','0x44523630',
+-                '--title-name','DragonRage360 0.46 D12 Native Stage Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
++                '--title-name','DragonRage360 0.47 D13 Stage Animation Diagnostic' if r.get('typed_catalog_linked') else 'DragonRage360 0.34 L1 Diagnostic',str(elf),str(xex)],check=True)
+ report={'kind':'native diagnostic with linked combat code; NOT a playable game',
+-        'version':'0.46-D12' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
++        'version':'0.47-D13' if r.get('typed_catalog_linked') else '0.34-L1','Battle_Main_address':hex(defined['Battle_Main'][1]),
+         'Battle_Main_linked':True,'Game_Main_linked':False,'battle_called':False,
+         'strong_or_weak_undefined':0,'native_game_data_loaded':False,'typed_catalog_linked':bool(r.get('typed_catalog_linked')),'partial_preview_available':bool(r.get('typed_catalog_linked')), 
+         'boot_combat_available':False,'hardware_executed':False,
+--- a/engine/tools/fixed_profile_source.py
++++ b/engine/tools/fixed_profile_source.py
+@@ -8,6 +8,25 @@
+ import re
+ 
+ def transform(source, text):
++    if source=='src/sys/vu1_packet.c':
++        anchor='void Vu1Node_OrFlags(Vu1Node *node, u32 bits0, u32 bits1) {\n'
++        if text.count(anchor)!=1:raise ValueError('stage node flag reader changed')
++        text=text.replace(anchor,anchor+'    extern int XbStage_TryAnimationNodeFlags(void *,u32,u32);\n    if(XbStage_TryAnimationNodeFlags(node,bits0,bits1))return;\n')
++        # The original copies pos.w from the adjacent frame word. Its partial
++        # pos[3] declaration makes that read undefined in C; preserve its bits.
++        helper='static f32 XbAnimationKeyW(const Vu1Key *key){ f32 value; memcpy(&value,&key->frame,4); return value; }\n'
++        signature='void Vu1Node_Animate(Vu1Node *node, Vu1Track *track, void *mtx, f32 frame) {'
++        if text.count(signature)!=1 or text.count('(next - 1)->pos[3]')!=1 or text.count('next->pos[3]')!=1:raise ValueError('animation frame-word alias changed')
++        text=text.replace(signature,helper+signature).replace('(next - 1)->pos[3]','XbAnimationKeyW(next - 1)').replace('next->pos[3]','XbAnimationKeyW(next)')
++        return text, []
++    if source=='src/battle/stgm_a.c':
++        anchor='StgModel_SetTexture(*(u8 *)&mats[i].cur);'
++        if text.count(anchor)!=1:raise ValueError('stage texture byte alias changed')
++        return text.replace(anchor,'StgModel_SetTexture(mats[i].cur & 255u);'), []
++    if source=='src/battle/eft_m.c':
++        anchor='    f->unk8 = gEftAuraCfg->flame[part].unk0;'
++        if text.count(anchor)!=1:raise ValueError('aura node byte alias changed')
++        return text.replace(anchor,'    { u32 native_node; memcpy(&native_node,&gEftAuraCfg->flame[part],4); f->unk8=native_node&255u; }'), []
+     if source=='src/sys/rigid.c':
+         anchor='    Vec4 zero = { 0.0f, 0.0f, 0.0f, 1.0f };'
+         if text.count(anchor)!=1:raise ValueError('rigid sphere origin changed')
+@@ -35,7 +54,7 @@
+     if source=='src/battle/eft_det_b_b.c':
+         anchor='    file = STGNAV_RES->stageFile;'
+         if text.count(anchor)!=1:raise ValueError('navigation binding changed')
+-        code='    extern int XbStage_TryBindNav(void **);\n    void *native_nav=NULL;\n    if (XbStage_TryBindNav(&native_nav)) {\n        gStgNav->data=native_nav;\n        gStgNav->data->nodes=(StgNavNode *)((u8 *)native_nav+16);\n        gStgNav->ready=1;\n        return 0;\n    }\n'
++        code='    extern int XbStage_TryBindNav(void **);\n    void *native_nav=NULL;\n    if (XbStage_TryBindNav(&native_nav)) {\n        if (native_nav == NULL) return -2;\n        gStgNav->data=native_nav;\n        gStgNav->data->nodes=(StgNavNode *)((u8 *)native_nav+16);\n        gStgNav->ready=1;\n        return 0;\n    }\n'
+         return text.replace(anchor,code+anchor), []
+     if source=='src/battle/btl_input.c':
+         anchor='        u32 bit = 1 << i;'
+--- a/engine/tools/test_native_managers.py
++++ b/engine/tools/test_native_managers.py
+@@ -58,6 +58,7 @@
+  if not r.returncode:stamp.write_text(digest)
+  log.write_text(r.stdout+r.stderr)
+  return {'source':rel,'compiled':r.returncode==0,'object':str(obj),'log':str(log)}
++sources.append(('test_common3_consumers.c',e/'tests/test_common3_consumers.c'))
+ with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:rows=list(pool.map(compile_one,sources))
+ (out/'compile.json').write_text(json.dumps(rows,indent=2)+'\n')
+ failed=[row for row in rows if not row['compiled']]
+@@ -77,7 +78,10 @@
+  link.insert(link.index('-Wl,--gc-sections'),str(obj));r=subprocess.run(link,capture_output=True,text=True);(out/'link.txt').write_text(r.stdout+r.stderr)
+ if r.returncode:
+  print(r.stderr[-8000:]);raise SystemExit('strict host link failed')
++(out/'result.json').unlink(missing_ok=True)
+ run=subprocess.run([str(a.qemu.resolve()),'-E','LD_LIBRARY_PATH='+str(root/'usr/lib32'),str(out/'managers'),str(a.resources.resolve()),str(a.programs.resolve()),str((a.iso or a.resources.parent/'stage-fixture.iso').resolve())],capture_output=True,text=True,env=dict(os.environ,UBSAN_OPTIONS='halt_on_error=1'))
+-(out/'test.txt').write_text(run.stdout+run.stderr);print(run.stdout+run.stderr);run.check_returncode()
+-result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_device':'simulated synchronous PCM sink','original_audio_cycle':True,'typed_catalog_native_host_byte_order':True,'original_File_Init_and_three_partitions':True,'original_stage_Init_Reset_Update_Term':True,'original_stage_culling':True,'original_stage_rigid_body':True,'original_navigation_short_route':True,'original_timer_synthetic_fixture':True,'stage_geometry':{'groups':7,'materials':34,'meshes':2243,'parts':1959,'nodes':172,'cells':30,'textures':25,'timers_in_actual_stage':0},'audio_frames':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][0]),'nonzero_PCM_values':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][1]),'common3_texture_subset':True,'common3_entries':637,'common3_textures':111,'common3_images':154,'common3_unprepared_entries':526,'original_EftTexSet_Load32_consumer':True,'MAPD_sections_vs_original_binder':20,'stage_corruption_rejections':7,'stage_geometry_corruption_rejections':5,'stage_restart_with_audio_device_open':True,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
++(out/'test.txt').write_text(run.stdout+run.stderr);print(run.stdout+run.stderr)
++if run.returncode:(out/'result.json').write_text(json.dumps({'result':'FAIL','returncode':run.returncode,'full_effect_scene_probe':bool(os.environ.get('XB_TEST_FULL_SCENE'))},indent=2)+'\n')
++run.check_returncode()
++result={'result':'PASS','host_execution':'QEMU-i386','original_full_roster_reset_and_AI_init':True,'original_object_Init_Term':True,'original_input_sample_remap_press_release':True,'typed_catalog_real_data_and_callbacks':True,'SDK_import_traps':allowed,'SDK_device':'simulated synchronous PCM sink','original_audio_cycle':True,'typed_catalog_native_host_byte_order':True,'original_File_Init_and_three_partitions':True,'original_stage_Init_Reset_Update_Term':True,'original_stage_culling':True,'original_stage_rigid_body':True,'original_navigation_short_route':True,'original_timer_synthetic_fixture':True,'stage_geometry':{'groups':7,'materials':34,'meshes':2243,'parts':1959,'nodes':172,'cells':30,'textures':25,'timers_in_actual_stage':0},'audio_frames':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][0]),'nonzero_PCM_values':int(re.findall(r'(\d+) frames, (\d+) nonzero samples',run.stdout)[-1][1]),'real_stage_converters':39,'real_stage_original_Init_Update_Cull_Term':39,'real_stage_updates_each':12,'real_stage_animated_packs':6,'real_stage_animated_object_definitions':31,'real_stage_timers':19,'real_stage_timer_wraps':57,'real_stage_animation_matrix_samples_per_model':3,'real_stage_animation_corruption_rejections':8,'partial_GS_uploads_are_not_complete_RGBA':True,'common3_texture_subset':True,'common3_entries':637,'common3_textures':116,'common3_images_and_palette_entries':204,'common3_unprepared_entries':2,'common3_prepared_entries':635,'common3_original_set_consumers':24,'common3_original_sprite_consumers':50,'common3_original_particle_key_consumers':True,'common3_sprite_steps':2000,'common3_mesh_consumers':2,'common3_corruption_rejections':7,'common3_drawable_images':162,'common3_palette_only_entries':42,'full_effect_scene_initialized':False,'original_EftTexSet_Load32_consumer':True,'MAPD_sections_vs_original_binder':20,'stage_corruption_rejections':7,'stage_geometry_corruption_rejections':5,'stage_restart_with_audio_device_open':True,'PowerPC_execution':False,'GPU_execution':False,'Battle_Update_or_Main':False,'sanitizers':'undefined,bounds; vendor newlib bit arithmetic excludes shift and signed-overflow checks'}
+ (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+--- a/engine/tools/test_texfile.py
++++ b/engine/tools/test_texfile.py
+@@ -19,10 +19,12 @@
+     a = p.parse_args()
+     root = Path(__file__).resolve().parents[1]
+     out = a.output.resolve(); out.mkdir(parents=True, exist_ok=True)
++    # Test the same current sources linked into the title, not older snapshots.
++    source_root = root.parent/'src'
+     flags = ['gcc', '-std=c17', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
+-             '-I'+str(root/'resource'), '-I'+str(root/'graphics')]
+-    sources = [root/'graphics/dr_texfile.c', root/'graphics/dr_gs_texture.c'] + [
+-        root/'resource'/(n+'.c') for n in ['dr_disc', 'dr_container', 'dr_anim', 'dr_bpe', 'dr_skeleton']]
++             '-I'+str(source_root)]
++    sources = [source_root/(n+'.c') for n in [
++        'dr_texfile', 'dr_gs_texture', 'dr_disc', 'dr_container', 'dr_anim', 'dr_bpe', 'dr_skeleton']]
+     if not a.reference_only:
+         san = ['-fsanitize=address,undefined', '-fno-omit-frame-pointer'] if a.sanitize else []
+         for test in ['test_texfile', 'texfile_real']:
+--- a/src/demo_ui.c
++++ b/src/demo_ui.c
+@@ -99,7 +99,7 @@
+     p->rect(52,52,68,68,ORANGE);
+     text(p,66,66,2,0xFF211000,"DR");
+     text(p,144,48,2,WHITE,"DRAGON RAGE");
+-    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.46-D12");
++    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.47-D13");
+     text(p,930,56,1,u->connected?0xFF3DDC84:GOLD,u->connected?"CONTROLE CONECTADO":"CONECTE O CONTROLE");
+     text(p,930,88,1,MUTED,"Interface + leitor de ISO");
+     p->rect(52,154,300,480,PANEL);
+--- a/src/dr_texfile.c
++++ b/src/dr_texfile.c
+@@ -45,6 +45,36 @@
+ {
+     size_t off;unsigned shift,bits;int rc=dr_gs_address(bp,bw,psm,x,y,&off,&shift,&bits);
+     return !rc && (covered[off>>5]&(1u<<((off>>2)&7)));
++}
++/* Palette-only entries intentionally pair alternate palettes with another image. */
++int dr_texfile_validate_palette(const void *data,size_t size,uint32_t index){
++ if(!data || size<32)return INVALID;
++ const unsigned char *p=data;uint32_t count=word(p);uint64_t table=(uint64_t)word(p+4)*4,end=table+(uint64_t)count*64;
++ if(!count || count>1024 || index>=count || table<32 || end>size)return INVALID;
++ const unsigned char *e=p+(size_t)table+index*64;
++ if(word(e) || word(e+8) || word(e+16) || wide(e+48))return INVALID;
++ Upload pal;int rc=locate(p,size,(size_t)end,word(e+4),word(e+12),word(e+28),&pal);
++ if(rc)return rc;
++ return ((pal.width==16 && pal.height==16) || (pal.width==8 && pal.height==2))?0:UNSUPPORTED;
++}
++/* Validate the transfer representation without claiming that the upload
++ * initializes every texel in TEX0. Some original stage textures upload only
++ * part of a GS block. The RGBA decoder still requires complete coverage. */
++int dr_texfile_validate_transfers(const void *data,size_t size,uint32_t index){
++ if(!data || size<32)return INVALID;
++ const unsigned char *p=data;uint32_t count=word(p);uint64_t table=(uint64_t)word(p+4)*4,end=table+(uint64_t)count*64;
++ if(!count || count>1024 || index>=count || table<32 || end>size)return INVALID;
++ const unsigned char *e=p+(size_t)table+index*64;uint64_t tex=wide(e+48);
++ if(!word(e))return dr_texfile_validate_palette(data,size,index);
++ unsigned width=1u<<((tex>>26)&15),height=1u<<((tex>>30)&15),psm=(tex>>20)&63;
++ if(width>1024 || height>1024 || (psm!=0 && psm!=19 && psm!=20) || ((tex>>51)&1023))return UNSUPPORTED;
++ Upload pix,pal;int rc=locate(p,size,(size_t)end,word(e),word(e+8),word(e+24),&pix);if(rc)return rc;
++ size_t expected=(size_t)width*height;if(psm==0)expected*=4;else if(psm==20)expected=(expected+1)/2;
++ if((size_t)pix.width*pix.height*4!=expected)return UNSUPPORTED;
++ if(psm!=0 || word(e+4) || word(e+12)){rc=locate(p,size,(size_t)end,word(e+4),word(e+12),word(e+28),&pal);if(rc)return rc;
++  if((psm==19 && (pal.width!=16 || pal.height!=16)) || (psm==20 && (pal.width!=8 || pal.height!=2)))return UNSUPPORTED;
++ }
++ return 0;
+ }
+ int dr_texfile_decode(const void *data,size_t size,uint32_t index,void *rgba,size_t capacity,DrTexFileImage *info)
+ {
+--- a/src/dr_texfile.h
++++ b/src/dr_texfile.h
+@@ -8,6 +8,9 @@
+ /* Bounded TexFile subset: CT32 upload packets, CT32/PSMT8/PSMT4 base level,
+  * CSM1 with CT32 palettes and CSA=0. Validates coverage before writing RGBA.
+  * No relocation, mipmaps, GS state emulation or mapping to body materials. */
++/* Transfer bounds/schema only; full RGBA coverage is checked by decode. */
++int dr_texfile_validate_transfers(const void *,size_t,uint32_t);
++int dr_texfile_validate_palette(const void *,size_t,uint32_t);
+ int dr_texfile_decode(const void *,size_t,uint32_t index,void *rgba,size_t capacity,DrTexFileImage *);
+ int dr_texfile_model_image(const dr_disc *,const char *pack_path,uint32_t index,
+                           void *rgba,size_t capacity,DrTexFileImage *);
+--- a/src/main.c
++++ b/src/main.c
+@@ -282,7 +282,7 @@
+     common_error=read_battle_resource(3,&scene_pack,&scene_bytes);
+     if(!common_error)common_error=XbBattleRuntime_AttachCommon3(native_runtime,scene_pack,scene_bytes,&scene_info);
+     free(scene_pack);
+-    xsdk_log_write("common3 native texture subset: error=%d entries=%u textures=%u images=%u unprepared=%u; complete scene remains unavailable",common_error,scene_info.entries,scene_info.textures,scene_info.images,scene_info.unprepared);
++    xsdk_log_write("common3 native resources: error=%d entries=%u prepared=%u TexFiles=%u image_or_palette_entries=%u unprepared=%u; complete scene remains unavailable",common_error,scene_info.entries,scene_info.prepared,scene_info.textures,scene_info.images,scene_info.unprepared);
+     if(common_error)return common_error;
+     void *ai_data=NULL;size_t ai_bytes=0;
+     common_error=XbBattleCommon_GetAiData(native_common,&ai_data,&ai_bytes);
+@@ -491,10 +491,10 @@
+ #ifdef DR_ENGINE_LINKED
+     extern int Battle_Main(void);
+     extern volatile uint32_t gPortDataStripped;
+-    xsdk_log_write("DragonRage360 0.46-D12: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
+-    xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: character/AI managers, common resources and battle boot are incomplete",(unsigned)gPortDataStripped);
++    xsdk_log_write("DragonRage360 0.47-D13: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
++    xsdk_log_write("engine: data_stripped=%u; combat boot BLOCKED: full Battle_Load/Battle_Init, character effect packs and scene presentation remain incomplete",(unsigned)gPortDataStripped);
+ #else
+-    xsdk_log_write("DragonRage360 0.46-D12: component diagnostic; Battle_Main not linked in this build.");
++    xsdk_log_write("DragonRage360 0.47-D13: component diagnostic; Battle_Main not linked in this build.");
+ #endif
+     xsdk_log_write("%s: BPE decode + animation endian synthetic self-test",dr_resource_selftest()?"PASS":"FAIL");
+     xsdk_log_write("%s: bounded BIN + motion + skeleton synthetic self-test",dr_container_selftest()?"PASS":"FAIL");
+--- a/tests/check_xex.py
++++ b/tests/check_xex.py
+@@ -100,10 +100,10 @@
+     assert {'XbTypedData_Load','XbTypedData_LoadFromDisc','XbTypedData_RequireBattleData','dr_stage_collision_open','dr_stage_collision_query','XbBattleStage_PrepareCollision','XbBattleStage_InstallCollision','XbBattleStage_QueryCollision','XbBattleFighter_PrepareModelAnimation','XbBattleFighter_PlayModel','XbBattleFighter_StepModel','XbBattleFighter_PlayMotion','XbBattleFighter_PlayRetargeted','XbBattleFighter_SamplePose','XbBattleFighter_CalcMatrices','XbBattleFighter_UpdateVolumes','XbBattleFighter_PrepareTextures','XbBattleFighter_GetMesh','XbBattleFighter_GetFaceGeometry','XbFighterTable_Convert','XbBattleFighter_BindCommonReference','XbBattleFighter_PlayCommonRetargeted','XbBattleFighter_CreateModelObject','XbBattleFighter_FreeModelAnimation','XbFighterRegistry_BeginOriginal','BtlObj_Init','BtlObj_Term','XbBattleRuntime_Open','XbBattleRuntime_Close','XbBattleRuntime_BeginManagers','XbBattleRuntime_EndManagers','BtlChar_AllocAll','BtlAiMgr_Init','XbFighterRegistry_ModelCapacity','XbFighterRegistry_ModelSlot','XbFighterRegistry_CreateModel','XbNativeModel_Prepare','XbFighter_BindOwnedTables','XbFighter_BindOwnedFiles','XbFighterRegistry_Remove','XbFighterRegistry_End'}<=defined
+     assert {'XbBattleCommon_Prepare','XbBattleCommon_Convert','XbBattleCommon_GetAiData','XbBattleCommon_Free','XbBattleFighter_SetEye','XbBattleFighter_SetFace','XbBattleFighter_StepFace','BtlObj_UpdateFace','BtlObjFace_StepBlink','BObjFace_StepLipData'}<=defined
+     assert {'XbBattleStage_PrepareParameters','XbStage_TryBindNav','XbBattleRuntime_AttachCommon3','XbBattleRuntime_TryCommon3Entry','XbSfx_PrepareBank','XbBattleRuntime_BeginAudio','XbBattleRuntime_ServiceAudio','XbBattleRuntime_EndAudio','Snd_Init','Snd_Term','Snd_LoadBank','Snd_Update'}<=defined
+-    assert {'XbBattleStage_PrepareGeometry','XbBattleStage_BeginGeometry','XbBattleStage_EndGeometry','XbBattleRuntime_BeginStage','XbBattleRuntime_ServiceStage','XbBattleRuntime_EndStage','File_Init','BtlStage_Init','BtlStage_Update','StgRigid_Init'}<=defined
++    assert {'XbStage_TryAnimationNodeFlags','dr_texfile_validate_transfers','XbBattleStage_PrepareGeometry','XbBattleStage_BeginGeometry','XbBattleStage_EndGeometry','XbBattleRuntime_BeginStage','XbBattleRuntime_ServiceStage','XbBattleRuntime_EndStage','File_Init','BtlStage_Init','BtlStage_Update','StgRigid_Init'}<=defined
+     assert data_at_symbol('gPortDataStripped',4)==b'\x00\x00\x00\x02'
+     report.update(typed_main_catalog_linked=True,typed_catalog_complete=bool(cat[1]),
+         typed_regions=cat[3],typed_operations=cat[5],partial_data_preview_available=True,
+-        native_game_data_loaded=False,stage_collision_diagnostic_linked=True,stage_collision_original_readers_linked=True,stage_collision_install_path_linked=True,fighter_model_animation_preparation_linked=True,native_pose_body_attack_and_texture_paths_linked=True,full_fighter_spawn=False,original_object_registry_linked=True,active_model_object_lifecycle_linked=True,typed_character_table_windows=8,common_reference_retarget_linked=True,character_and_AI_initialization_path_linked=True,complete_combat_boot_integrated=False,native_common_CPU_resources_linked=True,original_CPU_facial_state_path_linked=True,audio_clock_facial_sync=False,original_BtlObj_Init_Term_boot_linked=True,common4_native_consumer_probe_linked=True,native_grounded_starts_linked=True,native_MAPD_sections=20,native_navigation_binding=True,original_stage_cycle_integrated=True,native_stage_geometry_preparation_linked=True,complete_stage_resources=False,common3_texture_subset_linked=True,complete_common3=False,original_audio_cycle_integrated=True,hardware_audio_verified=False,scope='0.46-D12: native MAPD, path and navigation data; native stage geometry with original Init/Reset/Update/Term integrated; stage readiness comes only from its original initializer. Full battle remains blocked. Owned common3 TexFile subset and original four-bank audio cycle with service in the launcher; full scene still unavailable. Original object Init/Term boot with private common resources; six common roster windows and bounded common AI data; eight character reader windows; CPU blink/mouth/lip path; original CreateChara/Setup model lifecycle with native CPU resources/pools/materials; original BtlChar/BtlAi initialization path linked; execution verified separately on i386 only; linked Battle_Main and reviewed native data catalog; original-only pools excluded with native reference proof; explicit typed-data startup preview commits only validated known fields, with readiness marker 2 retained. Native data catalog excludes 46 proven original-only pool bytes; full battle resource initialization, original Game_Main and combat execution remain absent. No hardware validation.')
++        native_game_data_loaded=False,stage_collision_diagnostic_linked=True,stage_collision_original_readers_linked=True,stage_collision_install_path_linked=True,fighter_model_animation_preparation_linked=True,native_pose_body_attack_and_texture_paths_linked=True,full_fighter_spawn=False,original_object_registry_linked=True,active_model_object_lifecycle_linked=True,typed_character_table_windows=8,common_reference_retarget_linked=True,character_and_AI_initialization_path_linked=True,complete_combat_boot_integrated=False,native_common_CPU_resources_linked=True,original_CPU_facial_state_path_linked=True,audio_clock_facial_sync=False,original_BtlObj_Init_Term_boot_linked=True,common4_native_consumer_probe_linked=True,native_grounded_starts_linked=True,native_MAPD_sections=20,native_navigation_binding=True,original_stage_cycle_integrated=True,native_stage_geometry_preparation_linked=True,complete_stage_resources=False,common3_texture_subset_linked=True,complete_common3=False,original_audio_cycle_integrated=True,hardware_audio_verified=False,native_stage_animation_adapter_linked=True,common3_typed_resource_preparation_linked=True,scope='0.47-D13: 635/637 common3 resources prepared by native format; stage animation triple and key schemas, canonical LE VIF flags and bounded GS uploads. Native MAPD, path and navigation data; native stage geometry with original Init/Reset/Update/Term integrated; stage readiness comes only from its original initializer. Full battle remains blocked. Owned common3 TexFile subset and original four-bank audio cycle with service in the launcher; full scene still unavailable. Original object Init/Term boot with private common resources; six common roster windows and bounded common AI data; eight character reader windows; CPU blink/mouth/lip path; original CreateChara/Setup model lifecycle with native CPU resources/pools/materials; original BtlChar/BtlAi initialization path linked; execution verified separately on i386 only; linked Battle_Main and reviewed native data catalog; original-only pools excluded with native reference proof; explicit typed-data startup preview commits only validated known fields, with readiness marker 2 retained. Native data catalog excludes 46 proven original-only pool bytes; full battle resource initialization, original Game_Main and combat execution remain absent. No hardware validation.')
+ report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+ print(json.dumps(report,ensure_ascii=False,indent=2))
+--- a/tools/package_d13.py
++++ b/tools/package_d13.py
+@@ -0,0 +1,23 @@
++#!/usr/bin/env python3
++"""Package project-owned sources and diagnostics; never include game fixtures."""
++from pathlib import Path
++import hashlib,json,zipfile,argparse
++p=argparse.ArgumentParser();p.add_argument('output',type=Path);a=p.parse_args()
++root=Path(__file__).resolve().parents[1];out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
++expected=json.loads((root/'checkpoint-D13-final/engine-diagnostic.json').read_text())['sha256']
++assert hashlib.sha256((root/'default.xex').read_bytes()).hexdigest()==expected
++full=out/'DragonRage360-0.47-D13-cenarios-animados.zip'
++with zipfile.ZipFile(full,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
++ for f in sorted(root.rglob('*')):
++  rel=f.relative_to(root)
++  if not f.is_file() or any(k in rel.parts for k in ['build','__pycache__','.git']) or f.suffix.lower() in ['.iso','.pyc','.o']:continue
++  z.write(f,Path(root.name)/rel)
++small=out/'DragonRage360-0.47-D13-XEX.zip'
++with zipfile.ZipFile(small,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
++ for rel in ['default.xex','RELATORIO-0.47-D13.md','BUILD-RESULT.txt','checkpoint-D13-final/engine-diagnostic.json','checkpoint-D13-final/host-native-result.json','checkpoint-D13-final/xenia-291f0c9/guest-default.log']:
++  z.write(root/rel,rel)
++for f in [full,small]:
++ with zipfile.ZipFile(f) as z:
++  assert not z.testzip();name=next(n for n in z.namelist() if n.endswith('/default.xex') and 'diagnostico-' not in n or n=='default.xex')
++  assert hashlib.sha256(z.read(name)).hexdigest()==expected
++ print(json.dumps({'file':str(f),'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'xex_sha256':expected}))

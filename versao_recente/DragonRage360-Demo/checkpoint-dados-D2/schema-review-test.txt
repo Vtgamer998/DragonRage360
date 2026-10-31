@@ -1,0 +1,1 @@
+PASS: 80 bounded reviewed schemas; 4/54 unknown ranges retained; bad menu graph/count/NaN/icon lengths refused; real suppressions and live prefix pointers remain blockers; boot stays disabled

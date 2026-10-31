@@ -1,0 +1,2660 @@
+[
+  {
+    "source": "src/main.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_main_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_main_c.txt"
+  },
+  {
+    "source": "src/sys/adx.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_adx_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_adx_c.txt"
+  },
+  {
+    "source": "src/sys/align.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_align_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_align_c.txt"
+  },
+  {
+    "source": "src/sys/bpe.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_bpe_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_bpe_c.txt"
+  },
+  {
+    "source": "src/sys/color_fade.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_color_fade_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_color_fade_c.txt"
+  },
+  {
+    "source": "src/sys/common.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_common_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_common_c.txt"
+  },
+  {
+    "source": "src/sys/debug.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_debug_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_debug_c.txt"
+  },
+  {
+    "source": "src/sys/dialog.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_dialog_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_dialog_c.txt"
+  },
+  {
+    "source": "src/sys/fade.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_fade_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_fade_c.txt"
+  },
+  {
+    "source": "src/sys/file.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_file_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_file_c.txt"
+  },
+  {
+    "source": "src/sys/game_pad.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_game_pad_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_game_pad_c.txt"
+  },
+  {
+    "source": "src/sys/gfx.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfx_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfx_c.txt"
+  },
+  {
+    "source": "src/sys/gfx_ot.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfx_ot_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfx_ot_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_a_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_b_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_b_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_b_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_b_b_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_b_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_b_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_b_c_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_c_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_d_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_d_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_d_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_d_b_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_d_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_d_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_d_c_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_e_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_e_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_e_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_e_b_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_e_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_e_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_e_c_c.txt"
+  },
+  {
+    "source": "src/sys/gfxm_e_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gfxm_e_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gfxm_e_d_c.txt"
+  },
+  {
+    "source": "src/sys/gsc.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_gsc_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_gsc_c.txt"
+  },
+  {
+    "source": "src/sys/heap.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_heap_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_heap_c.txt"
+  },
+  {
+    "source": "src/sys/heap_info.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_heap_info_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_heap_info_c.txt"
+  },
+  {
+    "source": "src/sys/iop_heap.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_iop_heap_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_iop_heap_c.txt"
+  },
+  {
+    "source": "src/sys/job.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_job_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_job_c.txt"
+  },
+  {
+    "source": "src/sys/late_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_late_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_late_a_c.txt"
+  },
+  {
+    "source": "src/sys/late_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_late_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_late_a_b_c.txt"
+  },
+  {
+    "source": "src/sys/late_a_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_late_a_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_late_a_c_c.txt"
+  },
+  {
+    "source": "src/sys/list.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_list_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_list_c.txt"
+  },
+  {
+    "source": "src/sys/loading.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_loading_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_loading_c.txt"
+  },
+  {
+    "source": "src/sys/math3d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_math3d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_math3d_c.txt"
+  },
+  {
+    "source": "src/sys/mathf.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_mathf_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_mathf_c.txt"
+  },
+  {
+    "source": "src/sys/mcflow_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_mcflow_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_mcflow_a_c.txt"
+  },
+  {
+    "source": "src/sys/mem_read.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_mem_read_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_mem_read_c.txt"
+  },
+  {
+    "source": "src/sys/misc_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_misc_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_misc_a_c.txt"
+  },
+  {
+    "source": "src/sys/misc_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_misc_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_misc_a_b_c.txt"
+  },
+  {
+    "source": "src/sys/movie.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_movie_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_movie_c.txt"
+  },
+  {
+    "source": "src/sys/pad.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_pad_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_pad_c.txt"
+  },
+  {
+    "source": "src/sys/pad_watch.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_pad_watch_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_pad_watch_c.txt"
+  },
+  {
+    "source": "src/sys/queue.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_queue_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_queue_c.txt"
+  },
+  {
+    "source": "src/sys/ramp.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_ramp_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_ramp_c.txt"
+  },
+  {
+    "source": "src/sys/rand.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_rand_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_rand_c.txt"
+  },
+  {
+    "source": "src/sys/randf.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_randf_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_randf_c.txt"
+  },
+  {
+    "source": "src/sys/rigid.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_rigid_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_rigid_c.txt"
+  },
+  {
+    "source": "src/sys/save.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_save_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_save_c.txt"
+  },
+  {
+    "source": "src/sys/snd.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_snd_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_snd_c.txt"
+  },
+  {
+    "source": "src/sys/sprite.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_sprite_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_sprite_c.txt"
+  },
+  {
+    "source": "src/sys/spu_heap.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_spu_heap_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_spu_heap_c.txt"
+  },
+  {
+    "source": "src/sys/timer.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_timer_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_timer_c.txt"
+  },
+  {
+    "source": "src/sys/vu1_packet.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_sys_vu1_packet_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_sys_vu1_packet_c.txt"
+  },
+  {
+    "source": "src/battle/battle.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_battle_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_battle_c.txt"
+  },
+  {
+    "source": "src/battle/battle_load.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_battle_load_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_battle_load_c.txt"
+  },
+  {
+    "source": "src/battle/battle_work.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_battle_work_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_battle_work_c.txt"
+  },
+  {
+    "source": "src/battle/bobj_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_bobj_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_bobj_a_c.txt"
+  },
+  {
+    "source": "src/battle/bobj_b_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_bobj_b_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_bobj_b_b_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_a_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_c_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_d_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_e_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_f.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_f_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_f_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_h.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_h_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_h_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_h_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_h_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_h_b_c.txt"
+  },
+  {
+    "source": "src/battle/btl_act_j.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_act_j_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_act_j_c.txt"
+  },
+  {
+    "source": "src/battle/btl_ai_act.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_ai_act_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_ai_act_c.txt"
+  },
+  {
+    "source": "src/battle/btl_ai_cond.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_ai_cond_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_ai_cond_c.txt"
+  },
+  {
+    "source": "src/battle/btl_ai_mgr.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_ai_mgr_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_ai_mgr_c.txt"
+  },
+  {
+    "source": "src/battle/btl_ai_seq.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_ai_seq_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_ai_seq_c.txt"
+  },
+  {
+    "source": "src/battle/btl_cam.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_cam_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_cam_c.txt"
+  },
+  {
+    "source": "src/battle/btl_capi_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_capi_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_capi_a_c.txt"
+  },
+  {
+    "source": "src/battle/btl_capi_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_capi_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_capi_b_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_action.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_action_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_action_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_api.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_api_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_api_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_cam.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_cam_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_cam_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_cam_cut.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_cam_cut_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_cam_cut_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_cam_modes.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_cam_modes_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_cam_modes_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_coll_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_coll_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_coll_b_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_ctl_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_ctl_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_ctl_b_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_ctl_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_ctl_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_ctl_c_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_ctl_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_ctl_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_ctl_d_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_flag.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_flag_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_flag_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_flag_clash.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_flag_clash_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_flag_clash_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_flag_opp.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_flag_opp_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_flag_opp_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_flag_snd.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_flag_snd_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_flag_snd_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_fx.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_fx_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_fx_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_fx_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_fx_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_fx_c_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_get.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_get_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_get_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_hit.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_hit_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_hit_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_member.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_member_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_member_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_mgr.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_mgr_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_mgr_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_move.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_move_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_move_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_status.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_status_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_status_c.txt"
+  },
+  {
+    "source": "src/battle/btl_char_status_anim.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_char_status_anim_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_char_status_anim_c.txt"
+  },
+  {
+    "source": "src/battle/btl_demo_cam.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_demo_cam_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_demo_cam_c.txt"
+  },
+  {
+    "source": "src/battle/btl_facade.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_facade_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_facade_c.txt"
+  },
+  {
+    "source": "src/battle/btl_input.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_input_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_input_c.txt"
+  },
+  {
+    "source": "src/battle/btl_obj.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_obj_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_obj_c.txt"
+  },
+  {
+    "source": "src/battle/btl_pool.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_pool_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_pool_c.txt"
+  },
+  {
+    "source": "src/battle/btl_replay.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_replay_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_replay_c.txt"
+  },
+  {
+    "source": "src/battle/btl_scene.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_scene_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_scene_c.txt"
+  },
+  {
+    "source": "src/battle/btl_script.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_script_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_script_c.txt"
+  },
+  {
+    "source": "src/battle/btl_script_cmd.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_script_cmd_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_script_cmd_c.txt"
+  },
+  {
+    "source": "src/battle/btl_seq.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_seq_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_seq_c.txt"
+  },
+  {
+    "source": "src/battle/btl_tech_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_tech_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_tech_a_c.txt"
+  },
+  {
+    "source": "src/battle/btl_tech_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_btl_tech_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_btl_tech_b_c.txt"
+  },
+  {
+    "source": "src/battle/col_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_col_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_col_a_c.txt"
+  },
+  {
+    "source": "src/battle/col_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_col_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_col_b_c.txt"
+  },
+  {
+    "source": "src/battle/col_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_col_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_col_c_c.txt"
+  },
+  {
+    "source": "src/battle/col_c_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_col_c_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_col_c_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_a_c.txt"
+  },
+  {
+    "source": "src/battle/eft_aa.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_aa_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_aa_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ab.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ab_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ab_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ab_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ab_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ab_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ab_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ab_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ab_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ad.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ad_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ad_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ad_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ad_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ad_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ad_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ad_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ad_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_ae.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_ae_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_ae_c.txt"
+  },
+  {
+    "source": "src/battle/eft_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_d_c.txt"
+  },
+  {
+    "source": "src/battle/eft_d_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_d_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_d_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_det_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_det_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_det_a_c.txt"
+  },
+  {
+    "source": "src/battle/eft_det_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_det_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_det_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_det_b_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_det_b_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_det_b_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_det_b_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_det_b_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_det_b_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_e_c.txt"
+  },
+  {
+    "source": "src/battle/eft_g.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_g_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_g_c.txt"
+  },
+  {
+    "source": "src/battle/eft_h.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_h_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_h_c.txt"
+  },
+  {
+    "source": "src/battle/eft_i.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_i_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_i_c.txt"
+  },
+  {
+    "source": "src/battle/eft_j.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_j_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_j_c.txt"
+  },
+  {
+    "source": "src/battle/eft_k.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_k_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_k_c.txt"
+  },
+  {
+    "source": "src/battle/eft_l_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_l_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_l_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_l_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_l_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_l_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_l_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_l_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_l_d_c.txt"
+  },
+  {
+    "source": "src/battle/eft_m.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_m_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_m_c.txt"
+  },
+  {
+    "source": "src/battle/eft_n.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_n_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_n_c.txt"
+  },
+  {
+    "source": "src/battle/eft_o.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_o_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_o_c.txt"
+  },
+  {
+    "source": "src/battle/eft_o_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_o_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_o_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_o_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_o_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_o_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_p.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_p_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_p_c.txt"
+  },
+  {
+    "source": "src/battle/eft_p_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_p_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_p_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_q.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_q_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_q_c.txt"
+  },
+  {
+    "source": "src/battle/eft_r.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_r_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_r_c.txt"
+  },
+  {
+    "source": "src/battle/eft_s.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_s_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_s_c.txt"
+  },
+  {
+    "source": "src/battle/eft_t_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_t_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_t_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_t_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_t_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_t_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_u_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_u_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_u_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_v_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_v_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_v_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_v_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_v_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_v_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_w.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_w_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_w_c.txt"
+  },
+  {
+    "source": "src/battle/eft_x.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_x_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_x_c.txt"
+  },
+  {
+    "source": "src/battle/eft_x_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_x_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_x_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_x_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_x_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_x_c_c.txt"
+  },
+  {
+    "source": "src/battle/eft_y.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_y_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_y_c.txt"
+  },
+  {
+    "source": "src/battle/eft_z.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_z_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_z_c.txt"
+  },
+  {
+    "source": "src/battle/eft_z_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_z_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_z_b_c.txt"
+  },
+  {
+    "source": "src/battle/eft_z_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_eft_z_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_eft_z_c_c.txt"
+  },
+  {
+    "source": "src/battle/hud_0.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_0_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_0_c.txt"
+  },
+  {
+    "source": "src/battle/hud_0_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_0_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_0_b_c.txt"
+  },
+  {
+    "source": "src/battle/hud_0_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_0_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_0_c_c.txt"
+  },
+  {
+    "source": "src/battle/hud_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_a_c.txt"
+  },
+  {
+    "source": "src/battle/hud_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_a_b_c.txt"
+  },
+  {
+    "source": "src/battle/hud_a_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_a_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_a_c_c.txt"
+  },
+  {
+    "source": "src/battle/hud_a_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_a_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_a_d_c.txt"
+  },
+  {
+    "source": "src/battle/hud_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_b_c.txt"
+  },
+  {
+    "source": "src/battle/hud_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_c_c.txt"
+  },
+  {
+    "source": "src/battle/hud_c_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_c_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_c_b_c.txt"
+  },
+  {
+    "source": "src/battle/hud_c_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_c_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_c_c_c.txt"
+  },
+  {
+    "source": "src/battle/hud_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_d_c.txt"
+  },
+  {
+    "source": "src/battle/hud_d_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_d_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_d_b_c.txt"
+  },
+  {
+    "source": "src/battle/hud_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_e_c.txt"
+  },
+  {
+    "source": "src/battle/hud_e_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_e_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_e_b_c.txt"
+  },
+  {
+    "source": "src/battle/hud_e_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_e_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_e_c_c.txt"
+  },
+  {
+    "source": "src/battle/hud_e_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_e_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_e_d_c.txt"
+  },
+  {
+    "source": "src/battle/hud_e_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_hud_e_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_hud_e_e_c.txt"
+  },
+  {
+    "source": "src/battle/orbit_cam.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_orbit_cam_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_orbit_cam_c.txt"
+  },
+  {
+    "source": "src/battle/stg_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stg_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stg_a_c.txt"
+  },
+  {
+    "source": "src/battle/stg_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stg_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stg_a_b_c.txt"
+  },
+  {
+    "source": "src/battle/stg_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stg_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stg_b_c.txt"
+  },
+  {
+    "source": "src/battle/stg_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stg_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stg_c_c.txt"
+  },
+  {
+    "source": "src/battle/stg_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stg_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stg_d_c.txt"
+  },
+  {
+    "source": "src/battle/stg_d_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stg_d_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stg_d_b_c.txt"
+  },
+  {
+    "source": "src/battle/stgm_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stgm_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stgm_a_c.txt"
+  },
+  {
+    "source": "src/battle/stgm_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_stgm_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_stgm_a_b_c.txt"
+  },
+  {
+    "source": "src/battle/view_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_a_c.txt"
+  },
+  {
+    "source": "src/battle/view_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_a_b_c.txt"
+  },
+  {
+    "source": "src/battle/view_a_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_a_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_a_c_c.txt"
+  },
+  {
+    "source": "src/battle/view_a_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_a_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_a_d_c.txt"
+  },
+  {
+    "source": "src/battle/view_a_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_a_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_a_e_c.txt"
+  },
+  {
+    "source": "src/battle/view_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_b_c.txt"
+  },
+  {
+    "source": "src/battle/view_b_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_b_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_b_b_c.txt"
+  },
+  {
+    "source": "src/battle/view_b_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_b_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_b_c_c.txt"
+  },
+  {
+    "source": "src/battle/view_b_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_b_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_b_d_c.txt"
+  },
+  {
+    "source": "src/battle/view_b_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_battle_view_b_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_battle_view_b_e_c.txt"
+  },
+  {
+    "source": "src/menu/menu_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_a_c.txt"
+  },
+  {
+    "source": "src/menu/menu_a_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_a_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_a_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_a_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_a_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_a_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_a_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_a_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_a_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_b_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_b_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_b_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_b_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_b_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_b_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_b_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_b_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_b_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_c_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_c_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_c_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_c_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_c_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_c_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_c_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_c_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_c_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_c_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_c_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_c_e_c.txt"
+  },
+  {
+    "source": "src/menu/menu_e_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_e_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_e_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_g.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_g_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_g_c.txt"
+  },
+  {
+    "source": "src/menu/menu_g_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_g_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_g_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_g_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_g_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_g_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_h_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_h_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_h_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_h_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_h_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_h_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_h_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_h_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_h_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_i_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_i_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_i_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_i_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_i_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_i_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_i_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_i_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_i_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_j_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_j_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_j_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_k_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_k_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_k_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_k_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_k_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_k_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_k_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_k_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_k_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_k_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_k_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_k_e_c.txt"
+  },
+  {
+    "source": "src/menu/menu_k_f.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_k_f_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_k_f_c.txt"
+  },
+  {
+    "source": "src/menu/menu_l_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_l_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_l_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_m_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_m_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_m_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_n_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_n_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_n_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_n_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_n_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_n_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_n_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_n_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_n_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_o_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_o_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_o_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_o_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_o_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_o_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_o_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_o_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_o_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_p_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_p_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_p_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_p_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_p_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_p_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_p_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_p_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_p_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_q_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_q_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_q_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_r_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_r_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_r_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_r_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_r_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_r_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_r_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_r_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_r_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_s_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_s_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_s_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_s_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_s_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_s_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_s_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_s_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_s_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_t_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_t_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_t_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_e_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_f.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_f_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_f_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_g.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_g_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_g_c.txt"
+  },
+  {
+    "source": "src/menu/menu_u_h.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_u_h_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_u_h_c.txt"
+  },
+  {
+    "source": "src/menu/menu_v_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_v_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_v_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_v_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_v_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_v_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_v_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_v_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_v_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_w_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_w_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_w_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_w_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_w_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_w_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_x_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_x_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_x_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_x_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_x_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_x_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_y_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_y_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_y_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_z_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_z_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_z_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_z_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_z_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_z_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_z_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_z_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_z_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_za_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_za_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_za_b_c.txt"
+  },
+  {
+    "source": "src/menu/menu_za_c.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_za_c_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_za_c_c.txt"
+  },
+  {
+    "source": "src/menu/menu_za_d.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_za_d_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_za_d_c.txt"
+  },
+  {
+    "source": "src/menu/menu_za_e.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_menu_za_e_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_menu_za_e_c.txt"
+  },
+  {
+    "source": "src/menu/port_language.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_port_language_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_port_language_c.txt"
+  },
+  {
+    "source": "src/menu/port_screen.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_port_screen_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_port_screen_c.txt"
+  },
+  {
+    "source": "src/menu/port_tbo.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_menu_port_tbo_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_menu_port_tbo_c.txt"
+  },
+  {
+    "source": "engine/combat/dma_tex.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_combat_dma_tex_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_combat_dma_tex_c.txt"
+  },
+  {
+    "source": "engine/combat/offline_profile.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_combat_offline_profile_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_combat_offline_profile_c.txt"
+  },
+  {
+    "source": "src/port/vu0_a.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_port_vu0_a_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_port_vu0_a_c.txt"
+  },
+  {
+    "source": "src/port/vu0_b.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/src_port_vu0_b_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/src_port_vu0_b_c.txt"
+  },
+  {
+    "source": "port/src/softfloat_ps2.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_src_softfloat_ps2_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_src_softfloat_ps2_c.txt"
+  },
+  {
+    "source": "port/src/mathf_pc.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_src_mathf_pc_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_src_mathf_pc_c.txt"
+  },
+  {
+    "source": "port/src/plat_fastvec.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_src_plat_fastvec_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_src_plat_fastvec_c.txt"
+  },
+  {
+    "source": "engine/combat/math_bridge.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_combat_math_bridge_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_combat_math_bridge_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_a11y_text.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_a11y_text_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_a11y_text_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_adxt.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_adxt_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_adxt_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_battle_common.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_battle_common_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_battle_common_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_battle_consumers.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_battle_consumers_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_battle_consumers_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_battle_fighter.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_battle_fighter_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_battle_fighter_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_battle_runtime.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_battle_runtime_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_battle_runtime_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_battle_stage.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_battle_stage_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_battle_stage_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_bpe.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_bpe_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_bpe_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_demo_resources.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_demo_resources_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_demo_resources_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_disc.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_disc_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_disc_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_fighter_registry.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_fighter_registry_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_fighter_registry_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_fighter_tables.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_fighter_tables_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_fighter_tables_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_game_profile.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_game_profile_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_game_profile_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_gamedata.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_gamedata_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_gamedata_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_iop.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_iop_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_iop_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_iso_file.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_iso_file_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_iso_file_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_model_native.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_model_native_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_model_native_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_movie_clock.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_movie_clock_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_movie_clock_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_movie_source.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_movie_source_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_movie_source_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_mpeg.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_mpeg_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_mpeg_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_mpeg2.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_mpeg2_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_mpeg2_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_overlay.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_overlay_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_overlay_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_plat_file.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_plat_file_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_plat_file_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_plat_mem.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_plat_mem_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_plat_mem_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_plat_pad.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_plat_pad_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_plat_pad_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_plat_sys.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_plat_sys_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_plat_sys_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_plat_time.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_plat_time_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_plat_time_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_platform.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_platform_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_platform_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_resconv.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_resconv_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_resconv_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_resource_map.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_resource_map_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_resource_map_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_sfx.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_sfx_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_sfx_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_tbo_text.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_tbo_text_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_tbo_text_c.txt"
+  },
+  {
+    "source": "engine/platform/platform/xb_text.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/engine_platform_platform_xb_text_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/engine_platform_platform_xb_text_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/ef_acos.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_ef_acos_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_ef_acos_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/ef_asin.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_ef_asin_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_ef_asin_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/ef_atan2.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_ef_atan2_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_ef_atan2_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/ef_pow.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_ef_pow_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_ef_pow_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/ef_rem_pio2.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_ef_rem_pio2_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_ef_rem_pio2_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/ef_sqrt.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_ef_sqrt_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_ef_sqrt_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/kf_cos.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_kf_cos_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_kf_cos_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/kf_rem_pio2.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_kf_rem_pio2_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_kf_rem_pio2_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/kf_sin.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_kf_sin_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_kf_sin_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/kf_tan.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_kf_tan_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_kf_tan_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_atan.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_atan_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_atan_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_copysign.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_copysign_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_copysign_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_cos.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_cos_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_cos_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_fabs.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_fabs_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_fabs_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_floor.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_floor_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_floor_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_scalbn.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_scalbn_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_scalbn_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_sin.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_sin_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_sin_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/sf_tan.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_sf_tan_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_sf_tan_c.txt"
+  },
+  {
+    "source": "port/third_party/newlib_libm/wrappers.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_third_party_newlib_libm_wrappers_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_third_party_newlib_libm_wrappers_c.txt"
+  },
+  {
+    "source": "port/data/cod_002FF180.sbss.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_002FF180_sbss_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_002FF180_sbss_s.txt"
+  },
+  {
+    "source": "port/data/cod_002FF280.bss.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_002FF280_bss_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_002FF280_bss_s.txt"
+  },
+  {
+    "source": "port/data/cod_002FF300.bss.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_002FF300_bss_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_002FF300_bss_s.txt"
+  },
+  {
+    "source": "port/data/cod_1C3380.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1C3380_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1C3380_data_s.txt"
+  },
+  {
+    "source": "port/data/cod_1C3388.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1C3388_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1C3388_data_s.txt"
+  },
+  {
+    "source": "port/data/cod_1C3398.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1C3398_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1C3398_data_s.txt"
+  },
+  {
+    "source": "port/data/cod_1C3400.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1C3400_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1C3400_data_s.txt"
+  },
+  {
+    "source": "port/data/cod_1EB354.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1EB354_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1EB354_data_s.txt"
+  },
+  {
+    "source": "port/data/cod_1EB380.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1EB380_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1EB380_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1EC248.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1EC248_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1EC248_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1ECB60.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1ECB60_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1ECB60_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1EE7BC.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1EE7BC_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1EE7BC_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1F2168.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1F2168_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1F2168_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1F2198.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1F2198_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1F2198_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1F3488.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1F3488_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1F3488_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1F36F8.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1F36F8_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1F36F8_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1F44C0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1F44C0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1F44C0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FC2A0.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FC2A0_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FC2A0_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FC2CC.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FC2CC_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FC2CC_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FC328.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FC328_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FC328_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FC3FC.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FC3FC_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FC3FC_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FC728.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FC728_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FC728_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FC744.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FC744_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FC744_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE408.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE408_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE408_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE4BC.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE4BC_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE4BC_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE7AC.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE7AC_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE7AC_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE820.lit4.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE820_lit4_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE820_lit4_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE880.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE880_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE880_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE958.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE958_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE958_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE9DC.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE9DC_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE9DC_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FE9F0.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FE9F0_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FE9F0_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEA18.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEA18_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEA18_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEA58.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEA58_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEA58_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEAE0.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEAE0_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEAE0_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEB28.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEB28_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEB28_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEB78.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEB78_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEB78_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEBB0.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEBB0_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEBB0_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEC20.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEC20_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEC20_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FEC44.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FEC44_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FEC44_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FF05C.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FF05C_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FF05C_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FF11C.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FF11C_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FF11C_sdata_s.txt"
+  },
+  {
+    "source": "port/data/cod_1FF170.sdata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_cod_1FF170_sdata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_cod_1FF170_sdata_s.txt"
+  },
+  {
+    "source": "port/data/dbzp_07C204.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_dbzp_07C204_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_dbzp_07C204_data_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EC6E0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EC6E0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EC6E0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EC8C0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EC8C0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EC8C0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EC8D0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EC8D0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EC8D0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ECE90.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ECE90_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ECE90_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ECEA0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ECEA0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ECEA0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ED360.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ED360_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ED360_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ED3E0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ED3E0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ED3E0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ED510.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ED510_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ED510_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ED550.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ED550_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ED550_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ED590.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ED590_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ED590_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002ED5D0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002ED5D0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002ED5D0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDA70.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDA70_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDA70_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDC70.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDC70_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDC70_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDCE0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDCE0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDCE0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDD50.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDD50_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDD50_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDDC0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDDC0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDDC0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDDD8.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDDD8_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDDD8_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDE10.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDE10_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDE10_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDEB0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDEB0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDEB0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002EDEE8.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002EDEE8_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002EDEE8_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002F1B90.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002F1B90_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002F1B90_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002F2420.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002F2420_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002F2420_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002F33D0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002F33D0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002F33D0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002F33E0.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002F33E0_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002F33E0_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002F3410.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002F3410_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002F3410_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_D_002F3440.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_D_002F3440_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_D_002F3440_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_gEftShotFxRows.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_gEftShotFxRows_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_gEftShotFxRows_rodata_s.txt"
+  },
+  {
+    "source": "port/data/inc_gEftShotFxSegs.rodata.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_inc_gEftShotFxSegs_rodata_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_inc_gEftShotFxSegs_rodata_s.txt"
+  },
+  {
+    "source": "port/data/vu1_micro.data.s",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/port_data_vu1_micro_data_s.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/port_data_vu1_micro_data_s.txt"
+  },
+  {
+    "source": "title/engine/graphics/dr_gs_movie.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_graphics_dr_gs_movie_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_graphics_dr_gs_movie_c.txt"
+  },
+  {
+    "source": "title/engine/graphics/dr_dma_engine.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_graphics_dr_dma_engine_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_graphics_dr_dma_engine_c.txt"
+  },
+  {
+    "source": "title/src/dr_gs_native.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_gs_native_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_gs_native_c.txt"
+  },
+  {
+    "source": "title/src/dr_dma_producer.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_dma_producer_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_dma_producer_c.txt"
+  },
+  {
+    "source": "title/src/dr_gs_stream.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_gs_stream_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_gs_stream_c.txt"
+  },
+  {
+    "source": "title/engine/capture/port/src/gs/gs_draw.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_capture_port_src_gs_gs_draw_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_capture_port_src_gs_gs_draw_c.txt"
+  },
+  {
+    "source": "title/engine/capture/port/src/gs/gs_core.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_capture_port_src_gs_gs_core_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_capture_port_src_gs_gs_core_c.txt"
+  },
+  {
+    "source": "title/engine/capture/port/src/gs/gs_sony.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_capture_port_src_gs_gs_sony_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_capture_port_src_gs_gs_sony_c.txt"
+  },
+  {
+    "source": "title/engine/graphics/dr_gs_backend.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_graphics_dr_gs_backend_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_graphics_dr_gs_backend_c.txt"
+  },
+  {
+    "source": "title/engine/graphics/dr_gs_replay.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_engine_graphics_dr_gs_replay_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_engine_graphics_dr_gs_replay_c.txt"
+  },
+  {
+    "source": "title/src/dr_capture_demo.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_capture_demo_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_capture_demo_c.txt"
+  },
+  {
+    "source": "title/src/dr_capture_platform.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_capture_platform_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_capture_platform_c.txt"
+  },
+  {
+    "source": "title/src/demo_ui.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_demo_ui_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_demo_ui_c.txt"
+  },
+  {
+    "source": "title/src/dr_disc.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_disc_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_disc_c.txt"
+  },
+  {
+    "source": "title/src/bt3_wire.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_bt3_wire_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_bt3_wire_c.txt"
+  },
+  {
+    "source": "title/src/net_check.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_net_check_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_net_check_c.txt"
+  },
+  {
+    "source": "title/src/lobby.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_lobby_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_lobby_c.txt"
+  },
+  {
+    "source": "title/src/dr_anim.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_anim_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_anim_c.txt"
+  },
+  {
+    "source": "title/src/dr_bpe.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_bpe_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_bpe_c.txt"
+  },
+  {
+    "source": "title/src/dr_resource_selftest.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_resource_selftest_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_resource_selftest_c.txt"
+  },
+  {
+    "source": "title/src/dr_container.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_container_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_container_c.txt"
+  },
+  {
+    "source": "title/src/dr_stage_collision.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_stage_collision_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_stage_collision_c.txt"
+  },
+  {
+    "source": "title/src/dr_skeleton.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_skeleton_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_skeleton_c.txt"
+  },
+  {
+    "source": "title/src/dr_xenos.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_xenos_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_xenos_c.txt"
+  },
+  {
+    "source": "title/src/dr_gs_texture.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_gs_texture_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_gs_texture_c.txt"
+  },
+  {
+    "source": "title/src/dr_graphics_demo.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_graphics_demo_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_graphics_demo_c.txt"
+  },
+  {
+    "source": "title/src/dr_body_demo.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_body_demo_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_body_demo_c.txt"
+  },
+  {
+    "source": "title/src/dr_texfile.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_texfile_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_texfile_c.txt"
+  },
+  {
+    "source": "title/src/dr_body_pipeline.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_body_pipeline_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_body_pipeline_c.txt"
+  },
+  {
+    "source": "title/src/dr_body_model.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_body_model_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_body_model_c.txt"
+  },
+  {
+    "source": "title/src/dr_elf.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_elf_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_elf_c.txt"
+  },
+  {
+    "source": "title/src/dr_face_vif.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_face_vif_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_face_vif_c.txt"
+  },
+  {
+    "source": "title/src/dr_targets.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_targets_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_targets_c.txt"
+  },
+  {
+    "source": "title/src/dr_vu1.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_vu1_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_vu1_c.txt"
+  },
+  {
+    "source": "title/src/dr_vu1_selftest.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_dr_vu1_selftest_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_dr_vu1_selftest_c.txt"
+  },
+  {
+    "source": "title/src/save_unlock.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_save_unlock_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_save_unlock_c.txt"
+  },
+  {
+    "source": "title/src/save_export.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/title_src_save_export_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/title_src_save_export_c.txt"
+  },
+  {
+    "source": "test/harness.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/test_harness_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/test_harness_c.txt"
+  },
+  {
+    "source": "test/catalog.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/test_catalog_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/test_catalog_c.txt"
+  },
+  {
+    "source": "test_common3_consumers.c",
+    "compiled": true,
+    "object": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/objects/test_common3_consumers_c.o",
+    "log": "/workspace/scratch/d8c1dff39e41/work/DragonRage360-Demo/build/d13-host/logs/test_common3_consumers_c.txt"
+  }
+]

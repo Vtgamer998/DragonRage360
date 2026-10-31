@@ -1,0 +1,9 @@
+patching file Makefile
+patching file README.md
+patching file REVISAO-D6-C1.md
+patching file engine/platform/platform-sources.txt
+patching file engine/tools/audit_d6_bundle.py
+patching file engine/tools/audit_platform_sources.py
+patching file engine/tools/link_battle.py
+patching file engine/tools/platform_sources.py
+patching file engine/tools/test_platform_sources.py

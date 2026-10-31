@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "sanitizers": true,
+  "synthetic_sources_only": true,
+  "PowerPC_execution": false,
+  "real_ISO_data_loaded": false,
+  "battle_executed": false
+}

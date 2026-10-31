@@ -1,0 +1,1 @@
+PASS: real ISO bank, owned IOP->SPU transfer, native RPC/queue, 6144 reference samples at three pitches, pan/mono/pause/volume/stop, atomic queue refusal, bank lifetime, deferred/replacement uploads, malformed ADPCM error propagation and real ADXT+SFX sum; device/NT mocked

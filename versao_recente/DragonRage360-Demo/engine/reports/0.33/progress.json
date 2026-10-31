@@ -1,0 +1,16 @@
+{
+  "version": "0.33",
+  "compiled": 389,
+  "total": 389,
+  "ABI_conflicts": 0,
+  "unresolved": 207,
+  "code_refs": 104,
+  "data_only_refs": 103,
+  "decoded_PSS_frames_host": 7010,
+  "ffmpeg_compared_frames_per_movie": 32,
+  "sceMpeg_integrated": false,
+  "Game_Main_in_XEX": false,
+  "Battle_Main_in_XEX": false,
+  "Xbox_execution": false,
+  "XEX_sha256": "d6d7f380a81ebb08f394a3c5e21132a6b99cab0814403c26ec28f9b2ff9ea8fb"
+}

@@ -1,0 +1,8 @@
+{
+  "calls_and_lifetime": "PASS under native host mocks and ASan/UBSan",
+  "textures_sanitized": "PASS golden byte order and 10000 descriptors; ASan/UBSan",
+  "leak_scan": "disabled: runtime /proc task inspection unavailable",
+  "GPU_execution": "not run; not an emulation or proof of actual pixels",
+  "actual_fight": "not integrated",
+  "diagnostic_chain": "PASS: generated PSMT8/CSM1 -> decoded orange pixel -> native texture upload -> three mocked draw calls"
+}

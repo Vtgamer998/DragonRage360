@@ -1,0 +1,11 @@
+{
+  "source_version": "0.13",
+  "binary_version": "0.9 unchanged",
+  "default_xex_sha256": "f35f9a3c24cc453e989e668fd59eef21abcd7ff27788ce69f14f0aff5560bddf",
+  "new_xex": false,
+  "playable_battle": false,
+  "hardware_validated": false,
+  "real_face_DMA_VIF_lists_parsed": 2722,
+  "isolated_VU_UNPACK_tests": 173798,
+  "MSCNT_execution": false
+}

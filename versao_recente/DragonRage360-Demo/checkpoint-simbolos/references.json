@@ -1,0 +1,13 @@
+{
+  "unresolved_count": 0,
+  "object_count": 433,
+  "counts": {
+    "with_code_reference": 0,
+    "data_only": 0,
+    "not_found_in_objects": 0
+  },
+  "references": {},
+  "scope": "allocated ELF32-BE sections, including sections later GC-discarded; no runtime reachability claim",
+  "tables_removed": false,
+  "battle_executed": false
+}

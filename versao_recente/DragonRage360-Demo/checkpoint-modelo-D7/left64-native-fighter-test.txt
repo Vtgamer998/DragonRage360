@@ -1,0 +1,4 @@
+pose motion=0 root0=0.000000 root30=0.000000 quaternion_w=1.000000
+PASS: bones=69 decoded=361 empty=53 model=1/7; original PlayModel/Step 200 frames length=67; source freed; no combat spawn
+texture preparation rc=0 count=24
+renderer inputs textures=24 facial_geometries=5 node0=0; no GPU submission

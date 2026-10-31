@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "original_PlayModel_and_Step": true,
+  "frames": 200,
+  "owned_state_survives_source_free": true,
+  "sanitizers": true,
+  "host_only": true,
+  "fighter_spawned_in_combat": false,
+  "rendered": false
+}

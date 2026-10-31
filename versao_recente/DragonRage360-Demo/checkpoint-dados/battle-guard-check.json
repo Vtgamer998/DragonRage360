@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "scope": "final PPC static disassembly, not execution",
+  "first_call": "XbTypedData_RequireBattleData",
+  "Battle_GetWork_after_guard": true,
+  "PPC_execution": false
+}

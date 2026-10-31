@@ -1,0 +1,1 @@
+PASS: native ADXT, real 16/24k and synthetic 48k ADX PCM matches original decoder sample-hold resampling; controls, loop predictor restore, deterministic tick status, bounded ISO read path and 6-channel xsdk queue mocks; invalid formats/device errors rejected; no hardware audio

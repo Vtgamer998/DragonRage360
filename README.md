@@ -1,74 +1,152 @@
-# DragonRage360
+0.46-D12: geometria nativa do cenário 0 e ciclo original de inicialização, física, navegação, culling e ambiente sonoro testados em CPU. Novo XEX de diagnóstico; não desenha o cenário nem executa Battle_Update/Battle_Main. Comum 3 ainda tem 526 recursos indisponíveis. Veja RELATORIO-0.46-D12.md.
 
-Port **experimental e não oficial** de *Dragon Ball Z: Budokai Tenkaichi 3* (versão USA, PS2) para **Xbox 360**, escrito para rodar de forma **nativa** (não é um emulador).
+--- Histórico anterior ---
 
-> **Estado atual (0.44-D10): ainda não existe luta jogável.**
-> O executável é um **diagnóstico**: ele lê a sua ISO, converte dados e inicializa parte do motor de combate, mas `Battle_Update`/`Battle_Main` ainda não rodam e não há renderização de luta na GPU.
-> Nenhuma versão depois da 0.33 foi confirmada em um Xbox 360 real. Os testes mais recentes foram feitos em CPU i386 (QEMU).
+0.45-D11: MAPD, caminhos e navegação nativos; 111 recursos de textura do comum 3 (154 imagens), com 526 recursos ainda indisponíveis; ciclo original de áudio/mixer testado em CPU. A batalha completa, HUD/cena e GPU continuam pendentes. Marcador 2/NOT_READY mantidos. Veja RELATORIO-0.45-D11.md.
 
-## Aviso legal
+# 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
 
-- Este é um projeto de fãs, **sem afiliação** com os detentores dos direitos de *Dragon Ball Z* ou do jogo original.
-- **Este repositório não contém a ISO, o executável MIPS do jogo, modelos, texturas, áudio nem qualquer dado extraído do jogo.** Você precisa ter a sua própria cópia legal da versão USA.
-- Não peça nem compartilhe ISOs ou dados extraídos nas issues.
-- Não publique binários (`.xex`) compilados por você a partir de dados do jogo.
+Novo default.xex compilado. O boot original de objetos e o reset/inicialização
+de BtlChar/BtlAi estão integrados ao diagnóstico e passaram em CPU i386 com
+recursos reais. Ainda não existe luta jogável: Battle_Update/Battle_Main e
+apresentação GPU do combate continuam pendentes; sem teste em Xbox/Xenia.
 
-## Como funciona
+Leia TESTAR-PRIMEIRO.md e RELATORIO-0.44-D10.md. O XEX anterior D8 foi preservado.
 
-| Parte | Origem |
-|---|---|
-| Lógica do jogo (luta, IA, objetos) | Código C do projeto de decompilação Tenkaichi3DecompAndroid (de z3xox e colaboradores), compilado para PowerPC |
-| Plataforma (GS, VU, áudio, disco, memória) | Escrita neste projeto para o Xbox 360 |
-| Conversão de dados (MIPS little-endian → PowerPC big-endian) | Escrita neste projeto, campo a campo |
-| Dados do jogo (modelos, animações, cenário, tabelas) | Lidos da **sua** ISO em tempo de execução |
-| Launcher/interface | Próprio (MIT) |
+---
+Documentação histórica da versão anterior:
 
-Upstream fixado em `3ca419c7966b11438e2dc3c9a7e1914f102ed545`; SDK `xsdk` em `57b02f1e60667e37d22c3aa613d23d2486514ff8` (veja `BUILD.md`).
+# Revisão de fontes 0.43-D9 — entrega parcial
 
-## O que já foi comprovado
+**Não há XEX novo nem luta jogável nesta revisão.** O default.xex é o diagnóstico
+0.42-D8 original. As alterações em fontes tratam comum 4, leitores temporários
+e posicionamento inicial com chão. Leia RELATORIO-0.43-D9-FONTES.md para testes
+e pendências. Não execute BtlChar_AllocAll/Battle_Main como se o boot estivesse pronto.
 
-- Leitura da ISO USA, de AFS/BIN e do executável do PS2 (**no Xbox 360 real, versão 0.33**).
-- Decodificação de animações e modelos, colisão do cenário, tabelas comuns e IA convertidas (testes em PC).
-- `BtlObj_Init/Term`, `BtlChar_AllocAll` e `BtlAiMgr_Init` originais executando com dados reais (testes i386/QEMU).
-- 405/405 unidades compilam para PowerPC, sem símbolos indefinidos.
+---
+Documentação histórica da versão recebida:
 
-## O que falta
+# DragonRage360 0.42-D8 — tabelas e facial CPU
 
-- Executar `Battle_Update`/`Battle_Main` e o ciclo completo de `Battle_Load`/`Battle_Init`.
-- Cenário completo (continua `NOT_READY`), HUD, controle, simulação e apresentação.
-- Renderização na GPU do Xbox 360 (skinning, materiais, facial, efeitos) e vozes/áudio.
-- Menus originais e `Game_Main` (69 dependências sem solução).
-- Testes em Xbox 360 real das versões recentes.
+**Ainda não há luta jogável nem inicialização de BtlChar/BtlAi.**
 
-Veja `PENDENCIAS.md` e o relatório mais recente (`RELATORIO-0.44-D10.md`).
+O diagnóstico prepara seis janelas comuns, a seção de IA e oito janelas por modelo; executa blink/boca/trilha labial na CPU. Não comprova apresentação facial, áudio ou GPU. Vínculo: 403/403 unidades PowerPC, zero indefinidos; sem execução desta versão no Xbox.
 
-## Como compilar
+Leia [RELATORIO-0.42-D8.md](RELATORIO-0.42-D8.md). Evidências: checkpoint-D8/. XEX anterior: diagnostico-anterior-D7/. O teste typed-data continua disponível; gPortDataStripped=2 e cenário NOT_READY. Os fontes já incluem o patch.
 
-Veja [`BUILD.md`](BUILD.md). Resumo:
+---
+Histórico anterior:
 
-```sh
-make typed-data-diagnostic UPSTREAM=/caminho/upstream \
-  XSDK=/caminho/xsdk TOOLCHAIN=/caminho/toolchain/bin/powerpc-xsdk-elf- \
-  ISO=/caminho/jogo-USA.iso
-```
+# DragonRage360 0.41-D7 — ciclo real do objeto de modelo
 
-O resultado fica em `build/typed-diagnostic/default.xex`.
+**O registro completo em BtlChar/BtlAi ainda não foi concluído. A luta não inicia.**
 
-## Como testar no Xbox 360
+O diagnóstico agora chama BtlObj_CreateChara/Setup originais com recursos CPU próprios, materiais e pools de partes/face/sombra. Ambos os modelos passaram no teste Linux/i386 com UBSan/bounds, incluindo animação e liberação dos pools. Isso não é teste do XEX no Xbox ou validação da GPU.
 
-1. Copie o `default.xex` e o `startup_test.txt` para uma pasta do console.
-2. Coloque a sua ISO USA em `isos/` (USB ou HD).
-3. Inicie o `default.xex` (por exemplo, pelo Aurora) com `startup_test.txt` em `typed-data`.
-4. Saia pelo menu e guarde o `default.log`.
+Leia [RELATORIO-0.41-D7.md](RELATORIO-0.41-D7.md). Evidências em checkpoint-modelo-D7/. startup_test.txt=typed-data continua disponível. O marcador de combate 2 e NOT_READY foram preservados. Binário anterior em diagnostico-anterior-D6-C1/; fontes já atualizados.
 
-Instruções detalhadas em [`TESTAR-PRIMEIRO.md`](TESTAR-PRIMEIRO.md). Se der erro, abra uma issue com o `default.log` e uma foto da tela.
+---
+Histórico anterior:
 
-## Licença
+# DragonRage360 — revisão D6-C1
 
-**AGPL-3.0**, com partes sob MIT e outras licenças de terceiros (xsdk, newlib, libgcc, fonte bitmap). Detalhes em [`LICENSE`](LICENSE) e [`LICENSES.md`](LICENSES.md). Como o projeto deriva do upstream em AGPL, o código-fonte precisa acompanhar qualquer distribuição de binários.
+**Pacote corrigido e verificado. A luta ainda não inicia.**
 
-## Créditos
+A D6 enviada acrescentava chamadas incompletas e mantinha o XEX da D5. Esta revisão incorpora o main.c correto, deixa essas adições fora do port e usa um inventário explícito de fontes com testes contra sua reintrodução. O executável de diagnóstico foi recompilado sobre a base D5; não há funcionalidade de combate nova.
 
-- Tenkaichi3DecompAndroid, de z3xox, dfdx047 e colaboradores.
-- xsdk, de Mena e colaboradores.
-- Dragon Rage UI e demais autores listados em `licenses/`.
+Leia [REVISAO-D6-C1.md](REVISAO-D6-C1.md). Evidências em checkpoint-D6-C1/. A identidade de execução continua 0.39-D5; D6-C1 identifica a revisão dos fontes/build. startup_test.txt=typed-data permanece disponível. Não reaplique os patches históricos sobre estes fontes.
+
+---
+Histórico anterior:
+
+# DragonRage360 0.39-D5 — tabelas e registro original de objetos
+
+**Diagnóstico: a luta ainda não roda. Esta versão não foi executada no Xbox/Xenia.**
+
+- Entrada de parâmetros de 256 bytes convertida por campos; janelas nativas dos ataques, ki blast e movimento ligadas ao objeto.
+- Registro inativo em gBtlObjTbl e nas listas originais, com remoção/limpeza e reprodução testadas em i386.
+- Retarget com tabela comum real integrado ao diagnóstico.
+- Faltam gerenciadores de personagem/IA, tabelas e binders restantes, facial, apresentação GPU dos lutadores e boot do combate. NOT_READY e marcador 2 continuam ativos.
+
+Leia [RELATORIO-0.39-D5.md](RELATORIO-0.39-D5.md). Evidências em checkpoint-dados-D5/; default.xex atualizado, ainda diagnóstico. startup_test.txt=typed-data registra os testes em default.log. Fontes já atualizados; não reaplique o patch. XEX anterior em diagnostico-anterior-D4/.
+
+---
+Documentação histórica (escopo e binário da raiz substituídos acima):
+
+# DragonRage360 0.38-D4 — poses e volumes nativos
+
+**Ainda é diagnóstico, sem luta jogável e sem execução desta versão no Xbox/Xenia. A lista pedida não está completa.**
+
+- Player original ligado a BobjWork, nós próprios e motions; retarget entre os dois modelos testado.
+- Poses e matrizes animadas pelas rotinas originais; 22 partes de corpo por modelo e volumes de ataque ativos.
+- 24 texturas RGBA por modelo e referências de malha/geometria facial preparadas. Não há submissão GPU ou animação facial completa.
+- Faltam tabelas/binders completos, renderer/facial e estado/registro nos gerenciadores de personagens. O registro de proprietários dos nós não é o gerenciador do combate.
+
+Leia [RELATORIO-0.38-D4.md](RELATORIO-0.38-D4.md) e os testes em `checkpoint-dados-D4/`. O `default.xex` novo mantém a guarda da luta. `startup_test.txt=typed-data` executa o warm-up e registra resultados em `default.log`. Fontes atuais na raiz; não reaplique o patch incremental. Binário anterior em `diagnostico-anterior-D3/`.
+
+---
+Documentação histórica (escopo e binário da raiz substituídos acima):
+
+# DragonRage360 0.37-D3 — catálogo nativo e estados parciais
+
+**Novo XEX de diagnóstico; ainda não inicia uma luta e não foi executado no Xbox/Xenia.**
+
+- Catálogo nativo `complete=true`: campo inteiro da água comprovado; 46 bytes de três pools sem consumidor nativo excluídos com auditoria e testes. Isso não significa converter todos os dados da ISO.
+- Colisão preparada em arena própria e instalada em `gBtlStage`/`gColMeshBase`, mantendo NOT_READY. Leitores originais conferidos com objetos inteiros e quebrados.
+- Dois esqueletos nativos e buffers de animação preparados; `PlayModel/Step` original testado por 200 passos em cada modelo.
+- **Faltam os lutadores completos**, seus binders/tabelas/corpos, cenário completo, gerenciadores, entrada e apresentação da luta. A guarda permanece ativa mesmo com catálogo completo.
+
+Leia [RELATORIO-0.37-D3.md](RELATORIO-0.37-D3.md). `startup_test.txt=typed-data` exercita os caminhos novos e escreve no `default.log`; execução no console ainda pendente. Os fontes da raiz já estão atualizados. O patch incremental em `extras/` parte da 0.36-D2; o binário anterior fica em `diagnostico-anterior-D2/`.
+
+---
+Documentação histórica (contagens e binário da raiz substituídos acima):
+
+# DragonRage360 0.36-D2 — revisão dos dados e colisão do cenário
+
+Novo `default.xex` recompilado e verificado estaticamente. **Ainda é diagnóstico; não inicia uma luta e não foi executado no Xbox/Xenia.**
+
+- Faixas sem tipo: 168 → 4, com 54 bytes restantes.
+- Os 23 trechos suprimidos foram revisados como preenchimento de alinhamento antes dos símbolos.
+- Leitor nativo de colisão do cenário 0: 100 zonas e 13.583 ocorrências de triângulos conferidas com dados reais e leitura independente.
+- Catálogo: 2.736 operações; 1.779 slots de ponteiro conferidos no vínculo final. `Battle_Main` continua protegido antes de acessar o estado.
+
+O startup `typed-data` agora também registra a colisão no `default.log`. Faltam os recursos vivos e o boot da luta; o leitor não instala o cenário no motor. Leia [RELATORIO-0.36-D2.md](RELATORIO-0.36-D2.md). Fontes atuais na raiz; patch incremental em `extras/`, para quem parte exatamente da 0.35-D1. Binário anterior em `diagnostico-anterior-D1/`.
+
+---
+Documentação histórica (contagens e binário da raiz substituídos acima):
+
+# DragonRage360 0.35-D1 — manifesto tipado PARCIAL
+
+O novo default.xex testa a carga parcial das tabelas pela ISO do usuário.
+startup_test.txt=typed-data. O manifesto ainda não é completo e a luta não inicia.
+O próprio Battle_Main recusa a entrada antes de acessar o work, com marcador 2.
+Leia RELATORIO-0.35-D1.md para resultados e limites. Os fontes estão atualizados
+na raiz; não aplique o patch novamente. O XEX 0.34-L1 anterior está em
+ diagnostico-anterior-L1, com sua configuração de teste gráfico.
+
+O catálogo aplica 2.157 operações em 33 regiões; 1.694 slots de ponteiro foram
+conferidos no link final. Faltam 168 faixas e a revisão de 23 trechos suprimidos,
+além de conversões e inicialização dos recursos para combate. Não é jogo pronto.
+
+Para repetir o gráfico: copie startup_test-graphics.txt sobre startup_test.txt.
+Para regenerar tudo: make typed-data-diagnostic ISO=... XSDK=... TOOLCHAIN=... UPSTREAM=...
+O alvo comum make all não inclui o catálogo/combate; confira o relatório.
+
+---
+Documentação histórica anterior (escopo e contagens substituídos acima):
+
+# DragonRage360 0.34-L1 — diagnóstico com Battle_Main vinculado
+
+Novo default.xex: vínculo do alvo de combate fechado, sem indefinidos.
+Não inicia a luta: dados tipados e boot nativo continuam faltando.
+Leia RELATORIO-0.34-L1.md para resultados, limites e reprodução.
+Os fontes atuais estão na raiz. Não aplique o patch novamente sobre eles.
+O diagnóstico HW1 anterior está em diagnostico-anterior-HW1/default.xex.
+A interface nova mostra 0.34-L1; startup_test.txt continua graphics.
+
+Para reproduzir o XEX incluído, use make engine-linked-diagnostic,
+conforme o relatório. make all gera só o diagnóstico de componentes.
+
+---
+Documentação histórica anterior (escopo e contagens substituídos acima):
+

@@ -1,0 +1,5 @@
+ff48957be7fd58bd482addee8ea9106cae7dbfa765de4339dd103ef5c2c9b81a  default.xex
+422a37e086000221c419361ad230cff13e7d3e06c1f22eb8d45f04a6ed191261  manifesto-tipado/typed-manifest.json
+6566b5fa2b1a1509826b39eb022aa44f5faeb194d9fb1f9eea67772507fb3723  manifesto-tipado/typed_catalog.c
+04aaee4aa321f3983c47d2ffc9eed825d363bf80975b681e8951f955902f2602  manifesto-tipado/unused-native-proof.json
+d144fb854357dcbd498b6bfe0047e5a4f4ea68c121d84925bb371466ee2bd0da  extras/tabelas-registro-0.38-D4-para-0.39-D5.patch

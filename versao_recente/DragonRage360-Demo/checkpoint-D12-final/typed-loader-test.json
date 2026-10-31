@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "regions": 33,
+  "operations": 2738,
+  "typed_bytes": 35318,
+  "pointer_ops": 1779,
+  "complete": true,
+  "real_source_programs": true,
+  "actual_loader": true,
+  "sanitizers": true,
+  "destination": "registered host buffers, not native game globals",
+  "PPC_execution": false,
+  "battle_execution": false
+}

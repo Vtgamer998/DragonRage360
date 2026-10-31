@@ -1,0 +1,7 @@
+real viewer face=-1 open=0 materials=13
+real viewer face=0 open=0 materials=13
+real viewer face=1 open=0 materials=13
+real viewer face=2 open=0 materials=13
+real viewer face=3 open=0 materials=13
+real viewer face=4 open=0 materials=13
+PASS real viewer: reference + five faces, real materials, batching and cleanup; GPU mocked, no rasterization

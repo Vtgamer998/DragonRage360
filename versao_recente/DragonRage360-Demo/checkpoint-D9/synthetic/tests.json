@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "synthetic_fixtures_only": true,
+  "common4_endian_oracle": 2455,
+  "common4_corruptions_rejected": 10,
+  "original_ground_triangle_and_collision_executed": true,
+  "six_spawn_queries": true,
+  "missing_ground_refused": true,
+  "MAPD_corruptions_rejected": 3,
+  "native_dispatch_and_uninstall_tested": true,
+  "original_GetStartPlace_dispatch_source_checked": true,
+  "PowerPC_execution": false,
+  "gameplay": false
+}

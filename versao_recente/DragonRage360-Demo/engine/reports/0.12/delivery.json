@@ -1,0 +1,9 @@
+{
+  "source_test_version": "0.12",
+  "binary_version": "0.9 unchanged",
+  "default_xex_sha256": "f35f9a3c24cc453e989e668fd59eef21abcd7ff27788ce69f14f0aff5560bddf",
+  "new_xex": false,
+  "playable_battle": false,
+  "hardware_validated": false,
+  "real_ISO_parser_and_converter_tests": true
+}

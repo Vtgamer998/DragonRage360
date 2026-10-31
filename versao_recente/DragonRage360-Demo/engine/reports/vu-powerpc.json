@@ -1,0 +1,6 @@
+{
+  "compiled": "standalone original reference core, selftest and actual patched upstream gs_vu1.c",
+  "target": "Cell / xsdk ABI PowerPC big-endian",
+  "floating_point": "graphics hard-float, -ffp-contract=off; not PS2 combat soft-float ABI",
+  "execution": "not run on PowerPC/Xbox"
+}

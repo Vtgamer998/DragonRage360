@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "actual_console_binding": true,
+  "actual_ISO_reader": true,
+  "catalogue": "host test native DATA fixture; complete engine catalogue audited separately",
+  "NT_transport": "mocked",
+  "MIPS_execution": false,
+  "PowerPC_execution": false
+}

@@ -1,0 +1,72 @@
+{
+  "version": "0.43-D9-source-only",
+  "request_complete": false,
+  "new_XEX_built": false,
+  "included_XEX_version": "0.42-D8",
+  "included_XEX_sha256": "f6e056b983ff0459250763518c328dfc66efcdd8e423e5962bf9ea2bd991fb75",
+  "PowerPC_build_and_link_in_this_revision": false,
+  "Xbox_or_Xenia_execution": false,
+  "Battle_Update_or_Main_executed": false,
+  "boot_marker": 2,
+  "original_BtlChar_AllocAll_executed": false,
+  "original_BtlAiMgr_Init_executed": false,
+  "original_BtlObj_Init_Term_integrated": false,
+  "permanent_consumer_installation": false,
+  "common3_ready": false,
+  "match_setup_and_runtime_save_ready": false,
+  "GPU_or_audio_proven": false,
+  "synthetic_test_results": {
+    "synthetic": {
+      "result": "PASS",
+      "synthetic_fixtures_only": true,
+      "common4_endian_oracle": 2455,
+      "common4_corruptions_rejected": 10,
+      "original_ground_triangle_and_collision_executed": true,
+      "six_spawn_queries": true,
+      "missing_ground_refused": true,
+      "MAPD_corruptions_rejected": 3,
+      "native_dispatch_and_uninstall_tested": true,
+      "original_GetStartPlace_dispatch_source_checked": true,
+      "PowerPC_execution": false,
+      "gameplay": false
+    },
+    "consumers32": {
+      "result": "PASS",
+      "execution": "QEMU-i386 Linux user mode, freestanding test allocator",
+      "original_BtlAnim_GetFlags": 414,
+      "original_voice_entries": 57,
+      "original_character_and_item_readers": [
+        161,
+        4
+      ],
+      "temporary_installation_and_cleanup_twice": true,
+      "occupied_global_refused": true,
+      "source_overwritten_after_preparation": true,
+      "synthetic_fixtures_only": true,
+      "full_manager_init": false,
+      "PowerPC_execution": false
+    }
+  },
+  "changed_files": [
+    "Makefile",
+    "src/main.c",
+    "src/demo_ui.c",
+    "engine/platform/platform-sources.txt",
+    "engine/platform/platform/xb_battle_common.c",
+    "engine/platform/platform/xb_battle_common.h",
+    "engine/platform/platform/xb_battle_consumers.c",
+    "engine/platform/platform/xb_battle_stage.c",
+    "engine/platform/platform/xb_battle_stage.h",
+    "engine/tools/build_engine_diagnostic.py",
+    "engine/tools/fixed_profile_source.py",
+    "engine/tools/test_platform_sources.py",
+    "engine/tools/test_d9.py",
+    "engine/tools/test_d9_consumers32.py",
+    "engine/tests/d9/test_spawn.c",
+    "engine/tests/d9/test_consumers32.c",
+    "README.md",
+    "LEIA-ME.txt",
+    "TESTAR-PRIMEIRO.md",
+    "RELATORIO-0.43-D9-FONTES.md"
+  ]
+}

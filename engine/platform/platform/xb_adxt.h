@@ -7,6 +7,7 @@ void ADXT_Init(void);
 int XbAdx_EnsureOutput(void);
 void XbAdx_SetEffectsMixer(int (*)(float *),void (*)(void));
 void *ADXT_Create(int,void *,int);
+int XbAdx_Destroy(void *);
 void ADXT_SetReloadSct(void *,int);
 void ADXT_SetSvrFreq(void *,int);
 void ADXT_StartAfs(void *,int,int);

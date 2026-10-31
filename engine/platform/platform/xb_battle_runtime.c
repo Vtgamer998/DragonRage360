@@ -7,6 +7,10 @@
 #include "xb_model_native.h"
 #include "xb_mem.h"
 #include "xb_heap.h"
+#include "xb_sfx.h"
+#include "xb_adxt.h"
+#include "sys/snd.h"
+#include "battle/eft_det_b.h"
 #include "dr_container.h"
 #include "battle/btl_obj.h"
 #include "battle/btl_char_mgr.h"
@@ -21,10 +25,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers;};
+struct XbBattleRuntime {XbBattleCommon *common;CommonRes view;void *file,*light;int managers,audio,files;XbBattleStageCollision *stage_geometry;XbSoundBank *banks[4];void **common3;unsigned common3_count,common3_textures,common3_images;};
 static XbBattleRuntime *active;
 extern AiThMgr *gBtlAi;
 extern ViewProgress *gProgress;
+extern SndMgr *gSndMgr;
+extern SndRpc *gSndRpc;
 extern void BtlChar_AllocAll(s32);
 extern void BtlChar_FreeAll(void);
 extern void BtlAiMgr_Init(void);
@@ -66,10 +72,12 @@ fail:
 }
 int XbBattleRuntime_Close(XbBattleRuntime *r){
  if(!r || active!=r || gCommonRes!=&r->view || r->managers || gBtlObjWork || gBtlChars || gBtlAi || gSaveData || gProgress)return -891;
- gCommonRes=NULL;active=NULL;XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return 0;
+ gCommonRes=NULL;active=NULL;
+ if(r->common3){for(unsigned i=1;i<=r->common3_count;i++)XbNativeTexture_Free(r->common3[i]);free(r->common3);}
+ XbNativeTexture_Free(r->light);free(r->file);XbBattleCommon_Free(r->common);free(r);return 0;
 }
 int XbBattleRuntime_BeginManagers(XbBattleRuntime *r){
- if(!r || active!=r || !XbBattleRuntime_HasResources() || r->managers || gBtlChars || gBtlAi || gSaveData || gProgress || !gBtlObjWork)return -891;
+ if(!r || active!=r || !XbBattleRuntime_HasResources() || r->managers || gBtlChars || gBtlAi || gSaveData || gProgress || gStgNav || !gBtlObjWork)return -891;
  /* Validate every stage start before AllocAll performs its immediate reset. */
  for(int side=0;side<2;side++){
   BtlObj *obj=BtlObj_Get(side);float pos[4],rot[4];int zone=-1;
@@ -85,10 +93,12 @@ int XbBattleRuntime_BeginManagers(XbBattleRuntime *r){
  }
  BattleSetup_Finish();
  for(int side=0;side<2;side++){BattleSide_SetObjId(side,side);BattleSide_SetModelSlot(side,side);}
- BtlChar_AllocAll(2);BtlAiMgr_Init();r->managers=1;return 0;
+ BtlChar_AllocAll(2);BtlAiMgr_Init();if(XbBattleStage_HasParameters())StgNav_Init();r->managers=1;return 0;
 }
 int XbBattleRuntime_EndManagers(XbBattleRuntime *r){
  if(!r || active!=r || !r->managers || !gBtlChars || !gBtlAi || !gSaveData || !gProgress)return -891;
+ if(r->audio){int e=XbBattleRuntime_EndAudio(r);if(e)return e;}
+ if(XbBattleStage_HasParameters())StgNav_Term();
  BtlAiMgr_Term();BtlChar_FreeAll();
  Heap_Free(gSaveData);gSaveData=NULL;
  Heap_Free(gProgress->loadSprites);Heap_Free(gProgress->loadRes);Heap_Free(gProgress->loadPack);Heap_Free(gProgress);gProgress=NULL;
@@ -106,3 +116,9 @@ int XbBattleRuntime_GetInfo(XbBattleRuntime *r,XbBattleRuntimeInfo *out){
  }
  return 0;
 }
+
+#include "xb_battle_audio.inc"
+
+#include "xb_battle_common3.inc"
+
+#include "xb_battle_files.inc"

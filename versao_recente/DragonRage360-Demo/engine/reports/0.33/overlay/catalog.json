@@ -1,0 +1,1541 @@
+{
+  "native_menu_units": 72,
+  "regions": [
+    {
+      "object": "src/menu/menu_a.c",
+      "section": ".bss.index.0",
+      "bytes": 16384,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a.c",
+      "section": ".sbss.gMainMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc12",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc11",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc10",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc9",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc8",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc7",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc6",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc5",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc4",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc3",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc2",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc1",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_b.c",
+      "section": ".sbss.gMenuArc0",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_c.c",
+      "section": ".sbss.gTitle",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_a_d.c",
+      "section": ".sbss.gModeMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_b_b.c",
+      "section": ".sbss.gModeBg",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_b_c.c",
+      "section": ".sbss.gHistOutro",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_b_d.c",
+      "section": ".sbss.gHistSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_c.c",
+      "section": ".sbss.gHistResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_d.c",
+      "section": ".sbss.gHistSave",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sBgmIds.0",
+      "bytes": 288,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sAllIds.1",
+      "bytes": 384,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".sbss.gCharSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortStageNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortSongNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortSongsAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_c_e.c",
+      "section": ".bss.sPortStagesAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sBgmIds.0",
+      "bytes": 288,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sAllIds.1",
+      "bytes": 384,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".sbss.gTeamSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".data.sPortStageRows",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortSongsAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortStagesAdded",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortStageNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_e_b.c",
+      "section": ".bss.sPortSongNameHidden",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_g.c",
+      "section": ".sbss.gItemPanel",
+      "bytes": 8,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_g_c.c",
+      "section": ".sbss.gDuelMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_h_b.c",
+      "section": ".sbss.gCharRef",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_h_d.c",
+      "section": ".sbss.gTrain",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_i_b.c",
+      "section": ".sbss.gBootCard",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_i_c.c",
+      "section": ".sbss.gLogo",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_i_d.c",
+      "section": ".sbss.gEntrySel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_j_b.c",
+      "section": ".sbss.gTourMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_k_b.c",
+      "section": ".sbss.gBracket",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_k_d.c",
+      "section": ".sbss.gTourBg",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_l_b.c",
+      "section": ".sbss.gSoloSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_m_b.c",
+      "section": ".sbss.gUbTeamSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_n_b.c",
+      "section": ".sbss.gUbzSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_n_c.c",
+      "section": ".sbss.gUbRank",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_n_d.c",
+      "section": ".sbss.gUbResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_o_b.c",
+      "section": ".sbss.gDiscFusion",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_o_d.c",
+      "section": ".data.gMisSelFaceTex",
+      "bytes": 20,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_o_d.c",
+      "section": ".sbss.gMisSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_p_b.c",
+      "section": ".sbss.gMisResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_p_c.c",
+      "section": ".sbss.gUbMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_q_b.c",
+      "section": ".sbss.gSimDay",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_b.c",
+      "section": ".data.gSimEvent",
+      "bytes": 148,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_c.c",
+      "section": ".sbss.gSimResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".sdata.gSimTopIdleVoice",
+      "bytes": 8,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".sdata.gSimTopUnused",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".data.gSimTopFaceTex",
+      "bytes": 20,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_r_d.c",
+      "section": ".sbss.gSimTop",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_s_b.c",
+      "section": ".sbss.gSurvSel",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_s_c.c",
+      "section": ".sbss.gSurvResult",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_u_g.c",
+      "section": ".sbss.gEvoZ",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_v_c.c",
+      "section": ".sbss.gItemHelp",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_v_d.c",
+      "section": ".sbss.gShop",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_x_c.c",
+      "section": ".sbss.gOption",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_z_d.c",
+      "section": ".data.gDcPassKeys",
+      "bytes": 140,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_b.c",
+      "section": ".data.gPassKeys",
+      "bytes": 56,
+      "kind": "initialized",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_b.c",
+      "section": ".sbss.gPassWin",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_d.c",
+      "section": ".sbss.gReplayMenu",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/menu_za_e.c",
+      "section": ".sbss.gDcSave",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 1
+    },
+    {
+      "object": "src/menu/port_language.c",
+      "section": ".bss.sLanguageArt",
+      "bytes": 12,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_language.c",
+      "section": ".bss.sLanguageDisplay",
+      "bytes": 32768,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_language.c",
+      "section": ".bss.sLanguage",
+      "bytes": 21504,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPromptCount",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPromptLabel",
+      "bytes": 24,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPromptKind",
+      "bytes": 24,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsShift",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsAlign",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".data.sPsPh",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".data.sPsPw",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPy",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": ".bss.sPsPx",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_screen.c",
+      "section": "COMMON",
+      "bytes": 4,
+      "common_symbol": "gPortScreen",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.0",
+      "bytes": 64,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.1",
+      "bytes": 40,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.parts.2",
+      "bytes": 96,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.value.4",
+      "bytes": 32,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.5",
+      "bytes": 64,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.6",
+      "bytes": 64,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.7",
+      "bytes": 96,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.value.9",
+      "bytes": 160,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.buf.10",
+      "bytes": 896,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.said.11",
+      "bytes": 224,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.cur.12",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.name.14",
+      "bytes": 7728,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.got.15",
+      "bytes": 161,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.noted.16",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.17",
+      "bytes": 256,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.said.18",
+      "bytes": 160,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.line.19",
+      "bytes": 224,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.typed.21",
+      "bytes": 40,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.mode.22",
+      "bytes": 4,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.noItems.23",
+      "bytes": 16,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbSignFrames",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbWinRes",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.sTbTitle",
+      "bytes": 36,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.sTbNameKeys",
+      "bytes": 100,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".data.sTbKeys",
+      "bytes": 40,
+      "kind": "initialized",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgCode",
+      "bytes": 7,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgFrames",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgQueue",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTbBgKind",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": ".bss.sTb",
+      "bytes": 4,
+      "kind": "zero",
+      "policy": 2
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "section": "COMMON",
+      "bytes": 4,
+      "common_symbol": "gPortTboSpar",
+      "policy": 2
+    }
+  ],
+  "relocations": [
+    {
+      "region": 58,
+      "offset": 0,
+      "symbol": "SimEv00",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 4,
+      "symbol": "SimEv01",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 8,
+      "symbol": "SimEv02",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 12,
+      "symbol": "SimEv03",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 16,
+      "symbol": "SimEv04",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 20,
+      "symbol": "SimEv05",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 24,
+      "symbol": "SimEv06",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 28,
+      "symbol": "SimEv07",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 32,
+      "symbol": "SimEv08",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 36,
+      "symbol": "SimEv09",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 40,
+      "symbol": "SimEv10",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 44,
+      "symbol": "SimEv11",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 48,
+      "symbol": "SimEv12",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 52,
+      "symbol": "SimEv13",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 56,
+      "symbol": "SimEv14",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 60,
+      "symbol": "SimEv15",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 64,
+      "symbol": "SimEv16",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 68,
+      "symbol": "SimEv17",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 72,
+      "symbol": "SimEv18",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 76,
+      "symbol": "SimEv19",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 80,
+      "symbol": "SimEv20",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 84,
+      "symbol": "SimEv21",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 88,
+      "symbol": "SimEv22",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 92,
+      "symbol": "SimEv23",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 96,
+      "symbol": "SimEv24",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 100,
+      "symbol": "SimEv25",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 104,
+      "symbol": "SimEv26",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 108,
+      "symbol": "SimEv27",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 112,
+      "symbol": "SimEv28",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 116,
+      "symbol": "SimEv29",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 120,
+      "symbol": "SimEv30",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 124,
+      "symbol": "SimEv31",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 128,
+      "symbol": "SimEv32",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 132,
+      "symbol": "SimEv33",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 136,
+      "symbol": "SimEv34",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 140,
+      "symbol": "SimEv35",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 58,
+      "offset": 144,
+      "symbol": "SimEv36",
+      "addend": 0,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 0,
+      "symbol": "__xbo_target_71_112",
+      "addend": 48,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 4,
+      "symbol": "__xbo_target_71_112",
+      "addend": 80,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 8,
+      "symbol": "__xbo_target_71_112",
+      "addend": 96,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 12,
+      "symbol": "__xbo_target_71_112",
+      "addend": 112,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 16,
+      "symbol": "__xbo_target_71_112",
+      "addend": 128,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 20,
+      "symbol": "__xbo_target_71_112",
+      "addend": 128,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 24,
+      "symbol": "__xbo_target_71_112",
+      "addend": 136,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 28,
+      "symbol": "__xbo_target_71_80",
+      "addend": 16,
+      "type": 1
+    },
+    {
+      "region": 110,
+      "offset": 32,
+      "symbol": "__xbo_target_71_112",
+      "addend": 48,
+      "type": 1
+    }
+  ],
+  "exported_local_targets": [
+    {
+      "object": "src/menu/port_tbo.c",
+      "alias": "__xbo_target_71_112",
+      "section": ".rodata.str1.8",
+      "value": 0
+    },
+    {
+      "object": "src/menu/port_tbo.c",
+      "alias": "__xbo_target_71_80",
+      "section": ".rodata.Tb_WaitUpdate.str1.8",
+      "value": 0
+    }
+  ],
+  "objects": [
+    {
+      "source": "src/menu/menu_a.c",
+      "source_sha256": "a3a080a385d8a228d4ca12c6067558cbb6ab6c4ee5e453c8772877c5bc362614",
+      "object_sha256": "2851e8d53852b15db9dccd1d38c323abbc2ec14f62d0c4bea83da6ff0e035bd6"
+    },
+    {
+      "source": "src/menu/menu_a_b.c",
+      "source_sha256": "b17feaf89a82e98f9dcde51dcb1d887353c4455a4f23f5f850a8e77147ae1109",
+      "object_sha256": "0e8570f79593662013e8449e3515d8615d87773017451c3ba03b5b3440a2c277"
+    },
+    {
+      "source": "src/menu/menu_a_c.c",
+      "source_sha256": "995621c8c6790cd2958ca833c486bd116786b98fcccb6c430cd316dbc69d6a1e",
+      "object_sha256": "cd8e7836ddb566c22e3deee22b38bedf95af6b982d5239262111660735829de9"
+    },
+    {
+      "source": "src/menu/menu_a_d.c",
+      "source_sha256": "9e735223ed904924e8063bd448e2cff1c3a57a55e5dd6382fbabd8793c8dc092",
+      "object_sha256": "8f943d81377b594ee6cddbf3b1c87ff777aa2f53ea750d08c670542ffb091afb"
+    },
+    {
+      "source": "src/menu/menu_b_b.c",
+      "source_sha256": "2a27a5d9d2b6860c28660744339079d7a12dcee5c9cc54e1baef2faaaf19975f",
+      "object_sha256": "3108bc49a4f4b106fdd20c347a46506c153f88eb656eaa699cafa21ae40c6f67"
+    },
+    {
+      "source": "src/menu/menu_b_c.c",
+      "source_sha256": "7ece8324e944c978a2ed5100405ac051503155f9687e5e9175abe9ae8f9cb76c",
+      "object_sha256": "27fc5f44b9fc6383518ab143c95d229cfc0a96a35e866be04e11cdac2197e6a7"
+    },
+    {
+      "source": "src/menu/menu_b_d.c",
+      "source_sha256": "8ba3ee064b3aeeaa7e4136a8f81fca8b438a7d5d85a73c43d4cae05114c21f30",
+      "object_sha256": "66c685dbe7a5c0056a6fac7850b83958da9d924e5a4d1559481676ff5fc9800c"
+    },
+    {
+      "source": "src/menu/menu_c_b.c",
+      "source_sha256": "c96e7237ccd39a85f30b9dd79e556bdb36868037263489d550eebd537adaa0a8",
+      "object_sha256": "156de898ceeb883cf960e6a45cab3bc989fb08286bffca4612de2aa39e883da6"
+    },
+    {
+      "source": "src/menu/menu_c_c.c",
+      "source_sha256": "bec3153df946b4a50c291cbcf242aa24493e7989131ee56d01ec583b41879caf",
+      "object_sha256": "85153366e324bab01be4959417aa547d4762a838c7dc12c06a214f56ea1111ea"
+    },
+    {
+      "source": "src/menu/menu_c_d.c",
+      "source_sha256": "54090161eb812106e48407391baa644f949b2824ff30087cfc6a5f126568ed92",
+      "object_sha256": "15b74e6bd7b90aef31c40e8f3400856ac24380c98fb90efb9f5f192939dc8e51"
+    },
+    {
+      "source": "src/menu/menu_c_e.c",
+      "source_sha256": "f9beb034d84f34375a8804711a7dd16f876aa63424e8ac8634dddea6fb87d926",
+      "object_sha256": "ee49f2c8472659f7e4b0248186ed458a62fda1966a44f682e6be39cb5d809590"
+    },
+    {
+      "source": "src/menu/menu_e_b.c",
+      "source_sha256": "63052c3f1a596d7779b0589816471d8d7cb76908bec11a3a1e32a2aaa8f7f8a0",
+      "object_sha256": "56035068f9b96c61f2be811a878d70e7579cfa70833972c9cfcb2b61f84d2b39"
+    },
+    {
+      "source": "src/menu/menu_g.c",
+      "source_sha256": "8ebcbc188b87e8b3f4d4478df824bdcb008593f4e77e7d2973db5a30969da1ba",
+      "object_sha256": "793b514f17c203c4ac85ea4a24b1493b37cb616481784a056629a598f90828db"
+    },
+    {
+      "source": "src/menu/menu_g_b.c",
+      "source_sha256": "2ddadfc1fea37cb10f97a5c354c4f8deba97079d78c2e0d45293a70e1de69616",
+      "object_sha256": "1bd4b815fbc6a13a9bc77f11cdcb320a5320e56cfd1e1bddafcc90673365a50d"
+    },
+    {
+      "source": "src/menu/menu_g_c.c",
+      "source_sha256": "349f55d47410809ed9681ddf481fc80b21c6bf45f65782ce650a313512dc175f",
+      "object_sha256": "db7ea0aa68c692e10cef083a492cb00970e13e8d8d9e8d89447224c02c78377f"
+    },
+    {
+      "source": "src/menu/menu_h_b.c",
+      "source_sha256": "6b8cbffbb464572a95eadc24e0171137a80b13fa853a1bf61616dad04567a2ed",
+      "object_sha256": "8c795202c24229df22b93d4a09778af9975fd9524a3e7de1142b8cabf7b24f35"
+    },
+    {
+      "source": "src/menu/menu_h_c.c",
+      "source_sha256": "07dfdb8a0b793bdfe969110478e2a28b79ce86825a3e4e194591cb2400e1ad18",
+      "object_sha256": "97fe72a528c2774b770cc787fc94e3288cfb2f6199b04eae726e0df40b65213e"
+    },
+    {
+      "source": "src/menu/menu_h_d.c",
+      "source_sha256": "61798cfd10442d7a3bf4c28e575db3763fd564852638fe65a2504a60dd06d9a4",
+      "object_sha256": "4d28eb846422453fef4660130613fce6c384596abacc79d10b98fbdd2c9c39b1"
+    },
+    {
+      "source": "src/menu/menu_i_b.c",
+      "source_sha256": "59ae8e853c99bef852f5407010a2b42c2a769a31b460f8b2a5c15c1ee1a617c4",
+      "object_sha256": "5dcacfd250de213ceb9da66d77bf76dce85772dcf852cc42ffb53dc99da86040"
+    },
+    {
+      "source": "src/menu/menu_i_c.c",
+      "source_sha256": "25b85d30733bbda4d638c0dc440c32817ddc9855d1e7d0367ac46dc65c52d74e",
+      "object_sha256": "4650fc0c26f51493d9b0b2033ec610b96f8a72cd16450941de13148cfb899593"
+    },
+    {
+      "source": "src/menu/menu_i_d.c",
+      "source_sha256": "82cf94d75fb9ac058efb8793a53cf09ad3d31d4d82b1bc7869010a99ad1b32cc",
+      "object_sha256": "80ec1055627d09f08cc35af82ab7e9836afe8a6786b4b4dbb8a507096fac813b"
+    },
+    {
+      "source": "src/menu/menu_j_b.c",
+      "source_sha256": "d561bb81bb20efe5edecdd7d86dd27cfb83610402c16a27b244fcfc81362605d",
+      "object_sha256": "8bfeb6604045bb955f0ac15d135c393151df81d0aaa81d9f220beab8588eb680"
+    },
+    {
+      "source": "src/menu/menu_k_b.c",
+      "source_sha256": "17f4735fd9fdd3babcbf3d00121a281a7cb0b5687ae84fe7b576a5d54401ece8",
+      "object_sha256": "2ddd43dfc345533f53aef9d6efb6832e5fa9169ff3af791535b807900280ee07"
+    },
+    {
+      "source": "src/menu/menu_k_c.c",
+      "source_sha256": "f7df0dafe2d97fc2db9e08d87fe54d38ceeb9c11431d91e27a1c42b4be9c3563",
+      "object_sha256": "3330606a50390702f5eb43673cd9b0cc94be1d6ad760d4952dd161591f913482"
+    },
+    {
+      "source": "src/menu/menu_k_d.c",
+      "source_sha256": "461673a3bdb44d91ab6b1cd4c1b5912a0788c4e7f21cfa9e66de13ecaa9562d7",
+      "object_sha256": "d90da646f90226ddcf1defd4d543b57c84ef148613451a1f6e5269fb0c836d92"
+    },
+    {
+      "source": "src/menu/menu_k_e.c",
+      "source_sha256": "b5aa6d5025f290220fdc08c0a87249d6c9930f814006c7ca162ea34261ca56d1",
+      "object_sha256": "5a0f78872860fbd4558a119d3d159b0217308216ab4b16c17b7c0b2a7eb05e10"
+    },
+    {
+      "source": "src/menu/menu_k_f.c",
+      "source_sha256": "0785055795eb24ea042f656240be1c72a52a0944d284410931267e67621f3163",
+      "object_sha256": "df910076d57b5f61fe26a06f696caa5d602bea2c145576b6db6e58f9f2835b51"
+    },
+    {
+      "source": "src/menu/menu_l_b.c",
+      "source_sha256": "71d2897eeab2083777e2301b8a7e07b0524e0c8f45f9ee6255ffa04d43e76ddc",
+      "object_sha256": "ec5e1d0f5ea2227d7dd3f4a8851b35d9fbebe6922b45208d3450c660b7ad4cea"
+    },
+    {
+      "source": "src/menu/menu_m_b.c",
+      "source_sha256": "49b532141b758f9769f198a278865684cf9751c601a432807182fdd3a1b0b7a9",
+      "object_sha256": "f60913eaedc70b471c1e9e231d2c1406ff89b3e7ab57bfaf4c323d6191070887"
+    },
+    {
+      "source": "src/menu/menu_n_b.c",
+      "source_sha256": "e42205ba0b58cafeafcaae76bc0a0650ffd4d62d9b026ab680eb556c2a5c3b6a",
+      "object_sha256": "1b2c7089f07779a697ddd085936e9d39c287cbeef09f31ecab830f072f691e17"
+    },
+    {
+      "source": "src/menu/menu_n_c.c",
+      "source_sha256": "032c7216077bea0f0beb32d42602f3f3d9888f0ed41936a4fa6466b82611f4ee",
+      "object_sha256": "77c157bba106135d6218cdfc78fb409571d5b92be9d3aed58c30c2ea2f8eb519"
+    },
+    {
+      "source": "src/menu/menu_n_d.c",
+      "source_sha256": "34650808aaf4541ae3f6efc2fac88d903938282440cf3e942a722d5b8b019819",
+      "object_sha256": "3dceb82e57e6fcb16313738fb6cf24d4f41dda049faf92a1a00a46c11c8bb026"
+    },
+    {
+      "source": "src/menu/menu_o_b.c",
+      "source_sha256": "da329e8b567e0393f3a3dd0bee530fc13ffaf7ca000975482e855e8deb1ddf03",
+      "object_sha256": "9e0e54c4e38611d8efefc1d2565b5c4c4ec24d574220554711feb585670a7bc2"
+    },
+    {
+      "source": "src/menu/menu_o_c.c",
+      "source_sha256": "0fd1ef710775341ad7fab2b03d38b38984975a206ff44cac2546d55b2ebe560e",
+      "object_sha256": "f460f94e80aa9fe5d7456192c480e404e4f4a310bab01274e202ac9887446d6b"
+    },
+    {
+      "source": "src/menu/menu_o_d.c",
+      "source_sha256": "24e0685dbcea25271b66e3341f1c6934631a59daf54b139646c48c5d86800359",
+      "object_sha256": "5d986992e0557f05b3b0688ac553e62a7d8a9dd9dc69988158d02842d960b452"
+    },
+    {
+      "source": "src/menu/menu_p_b.c",
+      "source_sha256": "76c261fb70aea3654650977dbe4acfa7af6591e9a7fadc5dcd0a4ab357ba9931",
+      "object_sha256": "91e4f154fa72d1e953cafda090264b0a8d7de54d12be262c53fb53f1ecb4acc8"
+    },
+    {
+      "source": "src/menu/menu_p_c.c",
+      "source_sha256": "e43d40994642cbbf3dc0a051425bf46cf79394965fcfcf9242322e06ffffa123",
+      "object_sha256": "49fcfc24778769d6c1e2665fe9bf98f3b138cd75604f953a23dfcff16e3d2727"
+    },
+    {
+      "source": "src/menu/menu_p_d.c",
+      "source_sha256": "faf8fdad9f0ef444706731ab1b3f6276f3b6e29fdde924d270e2386cbf7a2306",
+      "object_sha256": "7c30529ec706f7137be0a2dede0be6ef83a955ab7018c077fc9a40531e956803"
+    },
+    {
+      "source": "src/menu/menu_q_b.c",
+      "source_sha256": "fdeff90e3658fb28362a84da78781925d594ebea1714e0b9f24902f1aa573dc3",
+      "object_sha256": "83d093c13ab770d0cf62c07678720ed2bab28a2519d8af3b735893064ecc1186"
+    },
+    {
+      "source": "src/menu/menu_r_b.c",
+      "source_sha256": "5f7cfec47147f169b5aea24a9846b1a8225467a26e80cc67d362c3787a5d04d0",
+      "object_sha256": "c9226a395d04dee194724366cafb5d1f3b221457941b5c1433bfbc35f10a5027"
+    },
+    {
+      "source": "src/menu/menu_r_c.c",
+      "source_sha256": "1f370466e93dcda3ea693e48b66593de7152fe22b8bd39282cb7c1f93c8844c6",
+      "object_sha256": "72c40bca693a5b358c5161bc78a6bc464319f691b3f4b955e2c1f6eba210cef1"
+    },
+    {
+      "source": "src/menu/menu_r_d.c",
+      "source_sha256": "0be49a09ccec56d4a501a70fdaa3c26e1bb9198bca422d5ce269c3e46c71d7bc",
+      "object_sha256": "59fad0778f93c951fa44b3cfd732f848badea7d3949325b4f8ca7e2a7513a6db"
+    },
+    {
+      "source": "src/menu/menu_s_b.c",
+      "source_sha256": "90f20965ffd7804a9e7f62c5f92075bbdf05f4697fcfd9e81795641ab0980713",
+      "object_sha256": "5788721d6b091bbf139e27adecf003848eabfef18c840168eefb09fda8378cb3"
+    },
+    {
+      "source": "src/menu/menu_s_c.c",
+      "source_sha256": "e6be93f9215f72a0536b8b27eeeda1e20cdecfaabdd84ab941f4a62b03323843",
+      "object_sha256": "2cc6e951782706cd58f72cc8b215d04533366bc507c3ed2a002ff47c628a73d1"
+    },
+    {
+      "source": "src/menu/menu_s_d.c",
+      "source_sha256": "11dbc7a84a0e91a84b69973be97c1fcb73e593cb59f24d73e89d854c55c7b796",
+      "object_sha256": "6265b9f2680afb6a337fe20c600f8b4e7df77e0e281752cf593f46683f89eebf"
+    },
+    {
+      "source": "src/menu/menu_t_b.c",
+      "source_sha256": "6e41d9184934086e6b1e4fdc53085958c896c656035651af25457a8267ec5cce",
+      "object_sha256": "b23b372bcd436713604d52d75fce9ae134c98ee7138f5ccadc4e3df9ec991ffa"
+    },
+    {
+      "source": "src/menu/menu_u.c",
+      "source_sha256": "6cf5c3cad0719c9feefc35346b87ce65956a2c53d13385ace95e7ef58404c55f",
+      "object_sha256": "ae74d95347a158178858c02773df406abec1670a058cc474112e3a32eb7ee521"
+    },
+    {
+      "source": "src/menu/menu_u_b.c",
+      "source_sha256": "63d79fee4d1e1c5c090ac242808da085b64d0299bdd8638d2853307f1fa28626",
+      "object_sha256": "988c6c9a9a9fd688e70d9f381c918a15b01839fd9a0f92e3004881b251a45d71"
+    },
+    {
+      "source": "src/menu/menu_u_c.c",
+      "source_sha256": "b3f27d7502deeba23d9552d29bf762e19f5feba2e67d81bddf46407fbbc20b6b",
+      "object_sha256": "0ae14c348dac4f80b113f4aa240a37a9a971f48277b99d971f4dc3547b55e5f2"
+    },
+    {
+      "source": "src/menu/menu_u_d.c",
+      "source_sha256": "66c21aa7a9bbce3b4762ef57543aedbee90b126336750287fd18ffffb17b50dc",
+      "object_sha256": "a3efcb76d3ad423a814ed806efb6061afe83a5c59e3c811fc5ce6451d3d7b7d6"
+    },
+    {
+      "source": "src/menu/menu_u_e.c",
+      "source_sha256": "e9aea297b4cb0e0b3e50068f3fcdc331114573881b5cb6b2d03d2e0332b601db",
+      "object_sha256": "9d2cc1297b27de6c1bcb973321a11c503d69c0a56282a9ec5efa8a9fc3be52e5"
+    },
+    {
+      "source": "src/menu/menu_u_f.c",
+      "source_sha256": "e50ea540b0c7adad74820ced4d2e0ccc69b4173e5c30121ab47e9e7ef233554e",
+      "object_sha256": "9d4c6e211f621ea22d2c5cdec28f73763eb39e264cff040ddca64689e71b9c52"
+    },
+    {
+      "source": "src/menu/menu_u_g.c",
+      "source_sha256": "ac9b4ae738310899f13a3950e187c0d26b84c23a4398f7539e75f3b205769d96",
+      "object_sha256": "2e62be79194c95987ebdd72a0505a99987454fdc8e07fde4fd10aa5f2eb22576"
+    },
+    {
+      "source": "src/menu/menu_u_h.c",
+      "source_sha256": "69d7bd27454ef30c7283fb7540932604943cfb7a22b20672bafe4ef48c93336b",
+      "object_sha256": "e48e7ff7ec63338cf222886d9146687cc6e5a50665812746723453a31f184646"
+    },
+    {
+      "source": "src/menu/menu_v_b.c",
+      "source_sha256": "3e9b2374ceb95748ade505a3810a5aeba4fea02c21a2d8fcff4c91f659f45cd0",
+      "object_sha256": "362d64c4223ec4c3ec473ddf4d5b5f5bd090b867d3b458359795a1397bf107cd"
+    },
+    {
+      "source": "src/menu/menu_v_c.c",
+      "source_sha256": "bf2f1508d08477e8026e05a7bb0db0b230c9c49a2cf7ed17691d803687efa76d",
+      "object_sha256": "b57b926e5909448a93cddf9ca4765cec0f136f537e79dbe4ee595387ab90cdf1"
+    },
+    {
+      "source": "src/menu/menu_v_d.c",
+      "source_sha256": "658a08ae290d2ad0da844846def3a08a8016aa7bbe19231e4df0b82842f5348a",
+      "object_sha256": "d68a35766a2de8aeb11b93be4db062f7e2ccbdd1af4f0b19dc1143ceaa40f1bf"
+    },
+    {
+      "source": "src/menu/menu_w_b.c",
+      "source_sha256": "8a24b7059eb2e8ad5f902f957690d2fb8359bed95b4a6534861fd78fbf7a2635",
+      "object_sha256": "b9b717082a76706d04bd3c84575097d068b51d9871e810cb852501da31007ea4"
+    },
+    {
+      "source": "src/menu/menu_w_c.c",
+      "source_sha256": "9aebf02b55b2684281ec7867b90d7a791d91fe7ee032bcb1309e764f64171640",
+      "object_sha256": "f4d9df2e34aa3929c2ecb6199895b84d80cb78a157411680c018980b7e068af3"
+    },
+    {
+      "source": "src/menu/menu_x_b.c",
+      "source_sha256": "7d06c27accf10b60ce879d2c22030e655e5d6533aceb3aae83505a16385bc9b8",
+      "object_sha256": "7af3539ed2a8efd2863909096c15d9f685a7d7481e5748cdeb59a230c209c3a7"
+    },
+    {
+      "source": "src/menu/menu_x_c.c",
+      "source_sha256": "40dec9339694374320894ade75ac3e3eef2951f433399c7548dc60d042671276",
+      "object_sha256": "c03ac76e89f2485cfcdfef835e070f1bb651e16d87aceed1c5c668e44b702020"
+    },
+    {
+      "source": "src/menu/menu_y_b.c",
+      "source_sha256": "203d791a0550cd16e82f7e70ef49dcadcb78eb63650a116b10a5801be4a4ea49",
+      "object_sha256": "94cf70725a8a33da0cae4ca9be824f247c43ee7450db59de2b18e70f2ef48194"
+    },
+    {
+      "source": "src/menu/menu_z_b.c",
+      "source_sha256": "585463a4aa16c605725151a6a55d65ca286c720ffc31161d60bbc0665e35c3ef",
+      "object_sha256": "4196c6b209cf461308bcdf0e8e6a511b6a54166696ab81d0b8e8eff93ce610b1"
+    },
+    {
+      "source": "src/menu/menu_z_c.c",
+      "source_sha256": "0260715d86e67dd42c58c3166d0a45c8f1119b1d2a5960ebb633efabfe36cfa5",
+      "object_sha256": "da1e32bff17879a6ce89a5da4278e3ecedae1aa477cc8b2ac0b0757f5c6af324"
+    },
+    {
+      "source": "src/menu/menu_z_d.c",
+      "source_sha256": "c2fd852a1fc4db9e29d12f11f9df355ff0ad56667f42a3c1b38b0e0f010c3ad2",
+      "object_sha256": "a2da6f738ad27f7ca34d8e3d387231aa305eebf89838c600842a2011d71f2920"
+    },
+    {
+      "source": "src/menu/menu_za_b.c",
+      "source_sha256": "5bbc6e6d7ca0756cc75c5fecb19ae6e4be081279be6bf581c0b62b168f8ad4f2",
+      "object_sha256": "b956e7e8ade909768e843b35385d1998a06f13388ece346c6b38f8731e0561ee"
+    },
+    {
+      "source": "src/menu/menu_za_c.c",
+      "source_sha256": "22b40aa54473c79c497158585d031f5daf3d273a109ccd10be80a074beecbe33",
+      "object_sha256": "6d4d972a5902221a1e7e9cc9b301e58e0ddb5a650b451deb63c70b81d39b9dc2"
+    },
+    {
+      "source": "src/menu/menu_za_d.c",
+      "source_sha256": "cdbb7b65baa8d4431c43f8ac850a6c3a73474e421e4d646448546a0449a264f0",
+      "object_sha256": "9fddfb222c14435d3cce092f2fcad8e9efbae9966400c5e0367e661ad6317f96"
+    },
+    {
+      "source": "src/menu/menu_za_e.c",
+      "source_sha256": "337020a901069fac896928842bd03e0727c975dbc14b76f5c1914192008931d9",
+      "object_sha256": "dce0ac2222647b37eac2f1727fbb3882b656af48a3ae8e30abdc14b115686a83"
+    },
+    {
+      "source": "src/menu/port_language.c",
+      "source_sha256": "09cd53a2663cad5cd92e06b0e1fa02b7da126d622b2519d72674297a8a1beec5",
+      "object_sha256": "e1d8dc0e7387f3e0f655723b4a908b31bac51fe93d8645d2c2bcee843c121137"
+    },
+    {
+      "source": "src/menu/port_screen.c",
+      "source_sha256": "38746dcbd3f8a91bb7df0e40f3be6d55fe4ea84bbc659b19b66bb968a827780d",
+      "object_sha256": "44ed8d53801d5951ca2be64b54c36f4679ccd9604a988a2f48f876d4cf813c7d"
+    },
+    {
+      "source": "src/menu/port_tbo.c",
+      "source_sha256": "d464e7f06c86566238d3174a668ba44733f4726b4096634f43b6470fec3319ea",
+      "object_sha256": "3654e82dfbfbe78048e0a7c999624951687f945b4190a676e158ed9dabf9e620"
+    }
+  ],
+  "source_identity": "USA DBZP.BIN, size+FNV-1a, not a cryptographic authenticity check",
+  "MIPS_bytes_copied_to_native_memory": false,
+  "scope": "all compiled native menu writable sections/common symbols and their native pointer relocations; immutable constants and machine code stay resident under native linker control"
+}

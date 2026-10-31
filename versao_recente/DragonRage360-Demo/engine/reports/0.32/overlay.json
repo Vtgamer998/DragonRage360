@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "host_native_resets": 100,
+  "PPC_fixture_relocations_verified": 4,
+  "PPC_fixture_ABI": "0x100",
+  "PPC_execution": false,
+  "engine_link_not_replaced_by_fixture": true,
+  "MIPS_bytes_copied": false
+}

@@ -4,7 +4,8 @@
 #include <stddef.h>
 typedef struct XbBattleRuntime XbBattleRuntime;
 /* Dedicated native common resources for object/roster boot. Common 3 and the
- * effect scene are NOT supplied by this interface. No readiness marker is set. */
+ * effect scene are not complete. A separate API attaches a texture subset
+ * of common 3; other entries remain unavailable. No readiness marker is set. */
 int XbBattleRuntime_Open(const void *,size_t,const void *,size_t,XbBattleRuntime **);
 int XbBattleRuntime_Close(XbBattleRuntime *);
 int XbBattleRuntime_HasResources(void);
@@ -17,4 +18,14 @@ int XbBattleRuntime_BeginManagers(XbBattleRuntime *);
 int XbBattleRuntime_EndManagers(XbBattleRuntime *);
 typedef struct XbBattleRuntimeInfo {int health[2],ki[2],ai_type[2],ai_level[2];} XbBattleRuntimeInfo;
 int XbBattleRuntime_GetInfo(XbBattleRuntime *,XbBattleRuntimeInfo *);
+int XbBattleRuntime_BeginAudio(XbBattleRuntime *,const void *const[4],const size_t[4]);
+int XbBattleRuntime_ServiceAudio(XbBattleRuntime *);
+int XbBattleRuntime_EndAudio(XbBattleRuntime *);
+typedef struct XbCommon3Info {unsigned entries,textures,images,unprepared;} XbCommon3Info;
+/* Texture subset only: success does not mean all entries were prepared. */
+int XbBattleRuntime_AttachCommon3(XbBattleRuntime *,const void *,size_t,XbCommon3Info *);
+int XbBattleRuntime_TryCommon3Entry(int,void **);
+int XbBattleRuntime_BeginStage(XbBattleRuntime *,void *stage);
+int XbBattleRuntime_ServiceStage(XbBattleRuntime *);
+int XbBattleRuntime_EndStage(XbBattleRuntime *);
 #endif

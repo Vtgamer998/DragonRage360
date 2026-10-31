@@ -1,0 +1,8 @@
+{
+  "pipeline": "PASS synthetic ISO9660 -> AFS exact entry -> strict character BIN -> bounded BPE -> big-endian motion",
+  "bounds": "entry truncation cannot borrow adjacent bytes; malformed/empty/oversized/nonmonotonic packs rejected; capacities enforced",
+  "upstream": "actual BObjFile_GetEntry and actual BtlObjAnim_UpdateEvents tested; ISO-decoded synthetic hit opens/scales/closes",
+  "skeleton": "3 linked nodes with gaps, exact BE fields, truncated/invalid link rejection before mutation",
+  "embedded_motion": "uncompressed copy-and-convert API passed; PlayModel tested separately in 32-bit i386, no Xbox run",
+  "real_ISO_and_Xbox": "not tested"
+}

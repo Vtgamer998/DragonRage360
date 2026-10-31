@@ -1,0 +1,470 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later
+ * xsdk calls and GPU memory lifetime follow xsdk/samples/cube/main.c (MIT, Mena).
+ * No raw PM4/undocumented registers; shader containers compiled by open xost/xsc.
+ */
+#include "dr_xenos.h"
+#include "dr_targets.h"
+#include <math.h>
+#include <stddef.h>
+#include <string.h>
+#include "xsdk/gpu.h"
+#include "xsdk/shader.h"
+#include "xsdk/texture.h"
+#include "dr_gs_shaders.h"
+#include "dr_vu_shaders.h"
+#include "dr_effects_shaders.h"
+enum { MAX_TEXTURES=256,MAX_VERTICES=1024,VERTEX_WORDS=12 };
+static struct {
+    int opened,active,targets,saved_target;uint32_t used,textures,fence,width,height,target_id;
+    XsdkShader vertex,pixel,target_pixel,vu[3],effects[2];
+    XsdkTexture texture[MAX_TEXTURES];
+    uint32_t live[MAX_TEXTURES],ready[MAX_TEXTURES];
+    XsdkSamplerState sampler[16];
+    volatile uint32_t *vertices;
+} backend;
+_Static_assert(sizeof(DrGsVertex)==28,"upstream Vtx layout");
+static int wait_previous(void)
+{
+    if(backend.fence && !NT_SUCCESS(xsdk_gpu_wait(backend.fence,1000))) return DR_XENOS_GPU;
+    backend.fence=0;return DR_XENOS_OK;
+}
+int dr_xenos_sync(void)
+{return !backend.opened || backend.active?DR_XENOS_STATE:wait_previous();}
+int dr_xenos_close(void)
+{
+    if(backend.active) return DR_XENOS_STATE;
+    int error=wait_previous();if(error) return error; /* no freeing in-flight buffers on timeout */
+    if(backend.targets) {error=dr_targets_close();if(error) return error;}
+    for(uint32_t i=0;i<backend.textures;i++) if(backend.live[i]) xsdk_texture_free(&backend.texture[i]);
+    if(backend.vertices) xsdk_gpu_free(backend.vertices);
+    for(unsigned i=0;i<2;i++)xsdk_shader_free(&backend.effects[i]);
+    for(unsigned i=0;i<3;i++) xsdk_shader_free(&backend.vu[i]);
+    xsdk_shader_free(&backend.target_pixel);xsdk_shader_free(&backend.pixel);xsdk_shader_free(&backend.vertex);
+    memset(&backend,0,sizeof(backend));return DR_XENOS_OK;
+}
+int dr_xenos_open(void)
+{
+    if(backend.opened || backend.active || backend.vertices) return DR_XENOS_STATE;
+    NTSTATUS status=xsdk_shader_load(&backend.vertex,dr_gs_vert.container,dr_gs_vert.container_bytes);
+    if(NT_SUCCESS(status)) status=xsdk_shader_load(&backend.pixel,dr_gs_frag.container,dr_gs_frag.container_bytes);
+    if(NT_SUCCESS(status)) status=xsdk_shader_load(&backend.target_pixel,dr_gs_target_frag.container,dr_gs_target_frag.container_bytes);
+    const XsdkVertexElement layout[]={
+        {.usage=XSDK_USAGE_POSITION,.format=XSDK_VERTEX_FLOAT3,.offset_bytes=0},
+        {.usage=XSDK_USAGE_COLOR,.format=XSDK_VERTEX_FLOAT4,.offset_bytes=12},
+        {.usage=XSDK_USAGE_TEXCOORD,.format=XSDK_VERTEX_FLOAT3,.offset_bytes=28}
+    };
+    if(NT_SUCCESS(status)) status=xsdk_shader_set_vertex_layout(&backend.vertex,layout,3,(const uint32_t[]){VERTEX_WORDS*4});
+    const XsdkBuiltShader *vu[]={&dr_vu0_vert,&dr_vu4_vert,&dr_vu6_vert};
+    const XsdkVertexElement vu_layout[]={
+        {.usage=XSDK_USAGE_POSITION,.format=XSDK_VERTEX_FLOAT4,.offset_bytes=0},
+        {.usage=XSDK_USAGE_COLOR,.format=XSDK_VERTEX_FLOAT4,.offset_bytes=16},
+        {.usage=XSDK_USAGE_TEXCOORD,.format=XSDK_VERTEX_FLOAT4,.offset_bytes=32}};
+    for(unsigned i=0;i<3 && NT_SUCCESS(status);i++) {
+        status=xsdk_shader_load(&backend.vu[i],vu[i]->container,vu[i]->container_bytes);
+        if(NT_SUCCESS(status))status=xsdk_shader_set_vertex_layout(&backend.vu[i],vu_layout,3,(const uint32_t[]){48});
+    }
+    const XsdkBuiltShader *effects[]={&dr_outline_frag,&dr_dclut_frag};
+    for(unsigned i=0;i<2 && NT_SUCCESS(status);i++)
+        status=xsdk_shader_load(&backend.effects[i],effects[i]->container,effects[i]->container_bytes);
+    if(NT_SUCCESS(status)) backend.vertices=xsdk_gpu_alloc(MAX_VERTICES*VERTEX_WORDS*4);
+    if(!NT_SUCCESS(status) || !backend.vertices) {dr_xenos_close();return DR_XENOS_GPU;}
+    /* Same 16 sampler states as the original gs_gpu.c: filter, U/V edge,
+     * and whether replacement mip levels may be sampled. */
+    for(unsigned i=0;i<16;i++) {
+        const XsdkSampler sampler={.mag_filter=(i&1)?XSDK_FILTER_LINEAR:XSDK_FILTER_POINT,
+            .min_filter=(i&1)?XSDK_FILTER_LINEAR:XSDK_FILTER_POINT,
+            .mip_filter=XSDK_FILTER_LINEAR,.address_u=(i&2)?XSDK_ADDRESS_CLAMP:XSDK_ADDRESS_WRAP,
+            .address_v=(i&4)?XSDK_ADDRESS_CLAMP:XSDK_ADDRESS_WRAP,.address_w=XSDK_ADDRESS_CLAMP,
+            .level_count=(i&8)?0:1};
+        xsdk_texture_sampler_state(&backend.sampler[i],&sampler);
+    }
+    backend.opened=1;return DR_XENOS_OK;
+}
+int dr_xenos_texture_create(uint32_t width,uint32_t height,const void *rgba,uint32_t *handle)
+{
+    const DrXenosMip mip={rgba,width<=1024 && height<=1024?width*height*4:0};
+    return dr_xenos_texture_create_mips(width,height,&mip,1,handle);
+}
+uint32_t dr_xenos_texture_slots(void)
+{
+    if(!backend.opened) return 0;
+    uint32_t available=0;for(unsigned i=0;i<MAX_TEXTURES;i++) available+=!backend.live[i];return available;
+}
+int dr_xenos_texture_allocate(uint32_t width,uint32_t height,uint32_t levels,uint32_t *handle)
+{
+    if(handle) *handle=0;
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    if(!handle || !width || !height || width>1024 || height>1024 || !levels || levels>11) return DR_XENOS_INVALID;
+    uint32_t w=width,h=height;
+    for(unsigned i=1;i<levels;i++) {if(w==1 && h==1) return DR_XENOS_INVALID;w=w>1?w/2:1;h=h>1?h/2:1;}
+    unsigned slot=0;while(slot<MAX_TEXTURES && backend.live[slot]) slot++;
+    if(slot==MAX_TEXTURES) return DR_XENOS_FULL;
+    int error=wait_previous();if(error) return error;
+    if(!NT_SUCCESS(xsdk_texture_create(&backend.texture[slot],XSDK_FORMAT_R8G8B8A8,width,height,levels,true))) return DR_XENOS_GPU;
+    backend.live[slot]=1;backend.ready[slot]=0;
+    if(backend.textures<=slot) backend.textures=slot+1;
+    *handle=slot+1;return 0;
+}
+int dr_xenos_texture_upload(uint32_t handle,uint32_t level,const void *rgba,uint32_t bytes)
+{
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    if(!handle || handle>backend.textures || !backend.live[handle-1] || !rgba) return DR_XENOS_INVALID;
+    XsdkTexture *t=&backend.texture[handle-1];
+    if(level>=t->levels) return DR_XENOS_INVALID;
+    uint32_t w=t->width>>level,h=t->height>>level;w=w?w:1;h=h?h:1;
+    if(bytes!=w*h*4) return DR_XENOS_INVALID;
+    int error=wait_previous();if(error) return error;
+    xsdk_texture_upload(t,level,rgba,w*4);xsdk_gpu_invalidate(t->address,t->size_bytes);
+    backend.ready[handle-1]|=1u<<level;return 0;
+}
+int dr_xenos_texture_destroy(uint32_t handle)
+{
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    if(!handle || handle>backend.textures || !backend.live[handle-1]) return DR_XENOS_INVALID;
+    int error=wait_previous();if(error) return error;
+    xsdk_texture_free(&backend.texture[handle-1]);backend.live[handle-1]=backend.ready[handle-1]=0;return 0;
+}
+int dr_xenos_texture_create_mips(uint32_t width,uint32_t height,const DrXenosMip *mips,uint32_t levels,uint32_t *handle)
+{
+    if(handle) *handle=0;
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    if(!width || !height || width>1024 || height>1024 || !mips || !handle || !levels || levels>11) return DR_XENOS_INVALID;
+    uint32_t w=width,h=height;
+    for(uint32_t i=0;i<levels;i++) {
+        if(!mips[i].pixels || mips[i].bytes!=w*h*4 || (i+1<levels && w==1 && h==1)) return DR_XENOS_INVALID;
+        w=w>1?w/2:1;h=h>1?h/2:1;
+    }
+    uint32_t native;int error=dr_xenos_texture_allocate(width,height,levels,&native);if(error) return error;
+    XsdkTexture *texture=&backend.texture[native-1];
+    w=width;
+    for(uint32_t i=0;i<levels;i++) {xsdk_texture_upload(texture,i,mips[i].pixels,w*4);w=w>1?w/2:1;}
+    xsdk_gpu_invalidate(texture->address,texture->size_bytes);
+    backend.ready[native-1]=(1u<<levels)-1;*handle=native;return DR_XENOS_OK;
+}
+int dr_xenos_begin(uint32_t width,uint32_t height)
+{
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    if(!width || !height || width>1280 || height>720 || (width&31)) return DR_XENOS_INVALID;
+    int error=wait_previous();if(error) return error;
+    backend.width=width;backend.height=height;backend.used=0;backend.active=1;
+    xsdk_gpu_set_target(width,height);
+    return DR_XENOS_OK;
+}
+int dr_xenos_target_create(unsigned id,uint32_t width,uint32_t height)
+{
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    int error=wait_previous();if(error) return error;
+    if(!backend.targets) {
+        error=dr_targets_open();if(error) return error;
+        backend.targets=1;
+    }
+    return dr_targets_ensure(id,width,height);
+}
+int dr_xenos_target_create_gs(unsigned id,uint32_t width,uint32_t height)
+{
+    if(!backend.opened || backend.active) return DR_XENOS_STATE;
+    int error=wait_previous();if(error) return error;
+    if(!backend.targets) {error=dr_targets_open();if(error) return error;backend.targets=1;}
+    return dr_targets_ensure_gs(id,width,height);
+}
+uint32_t dr_xenos_target_texture(unsigned id)
+{return dr_targets_is_gs(id)?0x80000000u|id:0;}
+int dr_xenos_snapshot(unsigned kind)
+{
+    if(!backend.active || !backend.saved_target || !dr_targets_is_gs(backend.target_id)) return DR_XENOS_STATE;
+    return dr_targets_snapshot(kind);
+}
+int dr_xenos_target_drop(unsigned id)
+{
+    if(!backend.opened || backend.active || !backend.targets) return DR_XENOS_STATE;
+    int error=wait_previous();return error?error:dr_targets_drop(id);
+}
+int dr_xenos_begin_target(unsigned id)
+{
+    if(!backend.opened || backend.active || !backend.targets) return DR_XENOS_STATE;
+    uint32_t w,h;int error=dr_targets_size(id,&w,&h);if(error) return error;
+    error=wait_previous();if(error) return error;
+    error=dr_targets_bind(id);if(error) return error;
+    backend.width=w;backend.height=h;backend.used=0;backend.active=1;backend.saved_target=1;backend.target_id=id;return 0;
+}
+int dr_xenos_select_target(unsigned id)
+{
+    if(!backend.active || !backend.saved_target) return DR_XENOS_STATE;
+    uint32_t w,h;int error=dr_targets_size(id,&w,&h);if(error) return error;
+    error=dr_targets_bind(id);if(error) return error;
+    backend.width=w;backend.height=h;backend.target_id=id;return 0;
+}
+static int validate_draw(const void *data,uint32_t count,uint32_t texture,const DrXenosDraw *draw,
+                         uint32_t width,uint32_t height)
+{
+    int target_texture=(texture&0x80000000u)!=0;
+    if(!data || !draw || !count || !texture ||
+       (target_texture?!dr_targets_is_gs(texture&0x7fffffffu):texture>backend.textures || !backend.live[texture-1] ||
+        backend.ready[texture-1]!=(1u<<backend.texture[texture-1].levels)-1) || !draw->logical_width || !draw->logical_height ||
+       draw->logical_width>4096 || draw->logical_height>4096 || draw->topology>2 || draw->blend>2 || draw->depth>3 || draw->depth_write>1 ||
+       draw->scissor[0]<0 || draw->scissor[1]<0 || draw->scissor[2]<=0 || draw->scissor[3]<=0 ||
+       (uint32_t)draw->scissor[0]>=width || (uint32_t)draw->scissor[1]>=height ||
+       (uint32_t)draw->scissor[2]>width-(uint32_t)draw->scissor[0] ||
+       (uint32_t)draw->scissor[3]>height-(uint32_t)draw->scissor[1] ||
+       (draw->topology==0 && count%3) || (draw->topology==1 && count%2)) return DR_XENOS_INVALID;
+    if(draw->effect>2 || (draw->effect && (draw->vu_program || draw->date || draw->fba || draw->stencil ||
+       draw->depth!=1 || draw->depth_write || draw->topology || !draw->gs_material || !draw->gs_blend)))return DR_XENOS_INVALID;
+    if(draw->effect==1 && (draw->write_mask!=7 || !draw->preserve_aux))return DR_XENOS_INVALID;
+    if(draw->effect==2 && (draw->effect_source>1 || texture>backend.textures || !texture ||
+       backend.texture[texture-1].width!=256 || backend.texture[texture-1].height!=1 ||
+       (draw->effect_depth_max!=65535.0f && draw->effect_depth_max!=16777215.0f &&
+        draw->effect_depth_max!=4294967295.0f)))return DR_XENOS_INVALID;
+    if(draw->vu_program>3 || !isfinite(draw->depth_quantize) ||
+       (draw->depth_quantize!=0 && draw->depth_quantize!=65535.0f &&
+        draw->depth_quantize!=16777215.0f && draw->depth_quantize!=4294967295.0f)) return DR_XENOS_INVALID;
+    if(draw->vu_program) {
+        if(!draw->vu_uniform || ((uintptr_t)draw->vu_uniform&3) || ((uintptr_t)data&3) || draw->logical_width!=1024 || draw->logical_height!=1024 || draw->topology) return DR_XENOS_INVALID;
+        for(unsigned i=0;i<76;i++) if(!isfinite(draw->vu_uniform[i])) return DR_XENOS_INVALID;
+        if(draw->vu_uniform[70]==0) return DR_XENOS_INVALID;
+        if(draw->vu_program==1 && (draw->vu_uniform[71]<0 || draw->vu_uniform[71]>5 || floorf(draw->vu_uniform[71])!=draw->vu_uniform[71])) return DR_XENOS_INVALID;
+    }
+    if(draw->sampler>15 || draw->gs_material>1 || draw->gs_blend>1 || draw->date>2 || draw->fba>1 || draw->stencil>2 || draw->preserve_aux>1 ||
+       (draw->gs_material && (draw->textured>2 || draw->tfx>3 || draw->tcc>1 || draw->alpha_test>8 || draw->alpha_reference>255)) ||
+       (draw->gs_blend && (draw->blend_key>1023 || ((draw->blend_key>>1)&7)>5 ||
+        ((draw->blend_key>>4)&7)>5 || ((draw->blend_key>>7)&3)>2 || draw->write_mask>15 ||
+        !isfinite(draw->blend_constant) || draw->blend_constant<0 || draw->blend_constant>2))) return DR_XENOS_INVALID;
+    if(draw->gs_material && draw->textured==2) {
+        for(unsigned i=0;i<4;i++) if(!isfinite(draw->texture_rect[i]) || draw->texture_rect[i]<0 || draw->texture_rect[i]>1) return DR_XENOS_INVALID;
+        if(draw->texture_rect[0]>draw->texture_rect[2] || draw->texture_rect[1]>draw->texture_rect[3]) return DR_XENOS_INVALID;
+    }
+    if(target_texture && (!draw->gs_material || draw->textured!=2)) return DR_XENOS_INVALID;
+    if(draw->gs_material && draw->textured==2 && !target_texture) return DR_XENOS_INVALID;
+    if(count>MAX_VERTICES) return DR_XENOS_FULL;
+    if(draw->vu_program) {
+        const float *vertices=data;
+        for(uint32_t i=0;i<count*12;i++)if(!isfinite(vertices[i]))return DR_XENOS_INVALID;
+        return 0;
+    }
+    const DrGsVertex *vertices=data;
+    for(uint32_t i=0;i<count;i++) {
+        const DrGsVertex *v=&vertices[i];
+        if(!isfinite(v->x) || !isfinite(v->y) || !isfinite(v->z) || v->z<0 || v->z>1 ||
+           !isfinite(v->s) || !isfinite(v->t) || !isfinite(v->q) || v->q==0) return DR_XENOS_INVALID;
+        if(draw->gs_material && draw->textured==2 &&
+           (v->q<=0)) return DR_XENOS_INVALID;
+    }
+    return DR_XENOS_OK;
+}
+static int needs_effect_snapshot(const DrXenosDraw *d)
+{return d->effect==1 || (d->effect==2 && d->effect_source==1);}
+static int validate_features(const DrXenosDraw *draw,uint32_t texture,unsigned id,int saved,uint32_t w,uint32_t h,int pending_date,int pending_effect)
+{
+    int gs=saved && dr_targets_is_gs(id);
+    if((draw->date || draw->fba || draw->stencil || draw->effect) && !gs) return DR_XENOS_STATE;
+    if((texture&0x80000000u) && !gs && !dr_targets_ready(texture&0x7fffffffu)) return DR_XENOS_STATE;
+    if(needs_effect_snapshot(draw) && !pending_effect && !dr_targets_snapshot_texture(1,id,w,h))return DR_XENOS_STATE;
+    if(draw->date && !pending_date && !dr_targets_snapshot_texture(0,id,w,h)) return DR_XENOS_STATE;
+    return 0;
+}
+int dr_xenos_draw_list(const DrXenosCommand *commands,uint32_t count)
+{
+    if(!backend.active) return DR_XENOS_STATE;
+    if(!commands || !count) return DR_XENOS_INVALID;
+    if(count>MAX_VERTICES) return DR_XENOS_FULL;
+    uint32_t total=0;
+    for(uint32_t i=0;i<count;i++) {
+        int error=validate_draw(commands[i].draw.vu_program?(const void *)commands[i].vu_vertices:commands[i].vertices,commands[i].count,commands[i].texture,&commands[i].draw,backend.width,backend.height);
+        if(!error) error=validate_features(&commands[i].draw,commands[i].texture,backend.target_id,backend.saved_target,backend.width,backend.height,0,0);
+        if(error) return error;
+        if(commands[i].count>MAX_VERTICES-backend.used-total) return DR_XENOS_FULL;
+        total+=commands[i].count;
+    }
+    for(uint32_t i=0;i<count;i++) {
+        int error=commands[i].draw.vu_program?dr_xenos_draw_vu(commands[i].vu_vertices,commands[i].count,commands[i].texture,&commands[i].draw):
+            dr_xenos_draw(commands[i].vertices,commands[i].count,commands[i].texture,&commands[i].draw);
+        if(error) return error;
+    }
+    return DR_XENOS_OK;
+}
+static int draw_impl(const void *data,uint32_t count,uint32_t texture,const DrXenosDraw *draw)
+{
+    if(!backend.active) return DR_XENOS_STATE;
+    if(count>MAX_VERTICES-backend.used) return DR_XENOS_FULL;
+    int error=validate_draw(data,count,texture,draw,backend.width,backend.height);
+    if(error) return error;
+    int gs=backend.saved_target && dr_targets_is_gs(backend.target_id);
+    error=validate_features(draw,texture,backend.target_id,backend.saved_target,backend.width,backend.height,0,0);if(error) return error;
+    const XsdkTexture *date=gs?dr_targets_snapshot_texture(0,backend.target_id,backend.width,backend.height):NULL;
+    const XsdkTexture *image=NULL,*target_alpha=NULL;
+    const XsdkTexture *effect_depth=NULL,*effect_aux=NULL;
+    if(draw->effect) {
+        /* Resolve prior writes before any sampled depth/alpha consumer. The
+         * frozen ID snapshot is independent of the live auxiliary attachment. */
+        error=dr_targets_store();if(error)return error;
+        error=dr_targets_bind(backend.target_id);if(error)return error;
+        effect_depth=dr_targets_texture(backend.target_id,2);
+        effect_aux=dr_targets_snapshot_texture(1,backend.target_id,backend.width,backend.height);
+    }
+    if((texture&0x80000000u) && gs) {
+        /* End the recording before sampling a target, including self-feedback. */
+        error=dr_targets_store();if(error) return error;
+        unsigned source=texture&0x7fffffffu;
+        if(source!=backend.target_id) {
+            error=dr_targets_bind(source);if(error) return error;
+            error=dr_targets_store();if(error) return error;
+        }
+        error=dr_targets_bind(backend.target_id);if(error) return error;
+        image=dr_targets_texture(texture&0x7fffffffu,0);
+    } else image=(texture&0x80000000u)?dr_targets_texture(texture&0x7fffffffu,0):&backend.texture[texture-1];
+    if(texture&0x80000000u) target_alpha=dr_targets_texture(texture&0x7fffffffu,1);
+    uint32_t first=backend.used*VERTEX_WORDS;
+    const DrGsVertex *vertices=data;
+    for(uint32_t i=0;i<count;i++) {
+        if(draw->vu_program) {
+            const float *raw=data;
+            for(unsigned j=0;j<12;j++) {uint32_t word;memcpy(&word,raw+i*12+j,4);backend.vertices[first+i*12+j]=word;}
+            continue;
+        }
+        const DrGsVertex *v=&vertices[i];
+        const float values[VERTEX_WORDS]={v->x,v->y,v->z,v->r/128.0f,v->g/128.0f,v->b/128.0f,v->a/128.0f,v->s,v->t,v->q,0,0};
+        for(uint32_t j=0;j<VERTEX_WORDS;j++) {
+            uint32_t word;memcpy(&word,&values[j],4);backend.vertices[first+i*VERTEX_WORDS+j]=word;
+        }
+    }
+    uint32_t address=xsdk_gpu_address(backend.vertices)+first*4,bytes=count*VERTEX_WORDS*4;
+    xsdk_gpu_invalidate(address,bytes);
+    const uint32_t comparisons[]={XSDK_COMPARE_NEVER,XSDK_COMPARE_ALWAYS,XSDK_COMPARE_GREATER_EQUAL,XSDK_COMPARE_GREATER};
+    const XsdkDepthStencil depth={.depth_test=true,.depth_write=draw->depth_write!=0,.depth_compare=comparisons[draw->depth],
+        .stencil_test=draw->stencil!=0,.stencil_compare=draw->stencil==2?XSDK_COMPARE_ALWAYS:XSDK_COMPARE_EQUAL,.stencil_reference=0,
+        .stencil_read_mask=255,.stencil_write_mask=255,.stencil_fail=XSDK_STENCIL_KEEP,
+        .stencil_depth_fail=XSDK_STENCIL_KEEP,.stencil_pass=draw->stencil==2?XSDK_STENCIL_REPLACE:XSDK_STENCIL_INCREMENT_CLAMP};
+    XsdkDepthStencilState depth_state;xsdk_gpu_depth_stencil_state(&depth_state,&depth);xsdk_gpu_set_depth_stencil(&depth_state);
+    XsdkBlend blend={.color_source=draw->blend?XSDK_BLEND_SRC_ALPHA:XSDK_BLEND_ONE,
+        .color_dest=draw->blend==1?XSDK_BLEND_ONE_MINUS_SRC_ALPHA:draw->blend==2?XSDK_BLEND_ONE:XSDK_BLEND_ZERO,
+        .color_op=XSDK_BLEND_OP_ADD,.alpha_source=XSDK_BLEND_ONE,.alpha_dest=XSDK_BLEND_ZERO,
+        .alpha_op=XSDK_BLEND_OP_ADD,.write_mask=XSDK_WRITE_ALL};
+    if(draw->gs_blend) {
+        uint32_t b=draw->blend_key,src=(b>>1)&7,dst=(b>>4)&7,c=(b>>7)&3;
+        const uint32_t factor[]={XSDK_BLEND_SRC_ALPHA,XSDK_BLEND_DST_ALPHA,XSDK_BLEND_CONSTANT_COLOR};
+        const uint32_t inverse[]={XSDK_BLEND_ONE_MINUS_SRC_ALPHA,XSDK_BLEND_ONE_MINUS_DST_ALPHA,XSDK_BLEND_ONE_MINUS_CONSTANT_COLOR};
+        const uint32_t factors[]={XSDK_BLEND_ZERO,XSDK_BLEND_ONE,factor[c],factor[c],inverse[c],XSDK_BLEND_ONE};
+        blend.color_source=(b&1)?((b&(1u<<9))?XSDK_BLEND_ONE:factors[src]):XSDK_BLEND_ONE;
+        blend.color_dest=(b&1)?factors[dst]:XSDK_BLEND_ZERO;
+        blend.color_op=!(b&1)?XSDK_BLEND_OP_ADD:src==3?XSDK_BLEND_OP_REVERSE_SUBTRACT:dst==3?XSDK_BLEND_OP_SUBTRACT:XSDK_BLEND_OP_ADD;
+        blend.write_mask=draw->write_mask;
+        const float constant[]={draw->blend_constant,draw->blend_constant,draw->blend_constant,draw->blend_constant};
+        xsdk_gpu_set_blend_constants(constant);
+    }
+    if(draw->effect==1) {
+        blend.color_source=XSDK_BLEND_ONE;blend.color_dest=XSDK_BLEND_ONE;
+        blend.color_op=XSDK_BLEND_OP_REVERSE_SUBTRACT;blend.write_mask=7;
+    }
+    XsdkBlendState blend_state;xsdk_gpu_blend_state(&blend_state,&blend);
+    if(gs) {
+        const XsdkBlend aux={.color_source=XSDK_BLEND_ONE,.color_dest=XSDK_BLEND_ZERO,.color_op=XSDK_BLEND_OP_ADD,
+            .alpha_source=XSDK_BLEND_ONE,.alpha_dest=XSDK_BLEND_ZERO,.alpha_op=XSDK_BLEND_OP_ADD,
+            .write_mask=(blend.write_mask&XSDK_WRITE_ALPHA) && !draw->preserve_aux?XSDK_WRITE_RED:0};
+        XsdkBlendState states[2]={blend_state,{0}};xsdk_gpu_blend_state(&states[1],&aux);xsdk_gpu_set_blends(states,2);
+    } else xsdk_gpu_set_blend(&blend_state);
+    xsdk_gpu_set_scissor(draw->scissor[0],draw->scissor[1],draw->scissor[2],draw->scissor[3]);
+    int sampled_target=draw->gs_material && draw->textured==2;
+    xsdk_gpu_set_shaders(draw->vu_program?&backend.vu[draw->vu_program-1]:&backend.vertex,draw->effect?&backend.effects[draw->effect-1]:sampled_target?&backend.target_pixel:&backend.pixel);
+    const XsdkBuiltShader *vs[]={&dr_gs_vert,&dr_vu0_vert,&dr_vu4_vert,&dr_vu6_vert};
+    xsdk_built_shader_set_literals(vs[draw->vu_program]);
+    const XsdkBuiltShader *fs=draw->effect==1?&dr_outline_frag:draw->effect==2?&dr_dclut_frag:sampled_target?&dr_gs_target_frag:&dr_gs_frag;
+    xsdk_built_shader_set_literals(fs);
+    const float extent[]={2.0f/draw->logical_width,2.0f/draw->logical_height,0,0};
+    if(draw->vu_program) {
+        const uint32_t reg[]={0,DR_VU0_VERT_UNIFORM_1_0,DR_VU4_VERT_UNIFORM_1_0,DR_VU6_VERT_UNIFORM_1_0};
+        const uint32_t regs[]={0,DR_VU0_VERT_UNIFORM_1_0_REGISTERS,DR_VU4_VERT_UNIFORM_1_0_REGISTERS,DR_VU6_VERT_UNIFORM_1_0_REGISTERS};
+        xsdk_gpu_set_vertex_constants(reg[draw->vu_program],draw->vu_uniform,regs[draw->vu_program]);
+    } else xsdk_gpu_set_vertex_constants(DR_GS_VERT_PUSH,extent,DR_GS_VERT_PUSH_REGISTERS);
+    const float material[]={draw->gs_material?(float)draw->textured:1,
+        draw->gs_material?(float)draw->tfx:0,draw->gs_material?(float)draw->tcc:1,
+        draw->gs_material?(float)draw->alpha_test:0,(float)draw->alpha_reference,
+        draw->gs_blend && (draw->blend_key&(1u<<9))?1:0,(float)draw->date,(float)draw->fba,
+        1.0f/1280.0f,1.0f/1024.0f,draw->depth_quantize,0,
+        draw->texture_rect[0],draw->texture_rect[1],draw->texture_rect[2],draw->texture_rect[3]};
+    if(draw->effect==1) {
+        const float params[]={1.0f/1280.0f,1.0f/1024.0f,100.0f/255.0f,0,
+            0.5f/1280,0.5f/1024,(backend.width-0.5f)/1280,(backend.height-0.5f)/1024};
+        xsdk_gpu_set_pixel_constants(DR_OUTLINE_FRAG_PUSH,params,DR_OUTLINE_FRAG_PUSH_REGISTERS);
+        xsdk_gpu_set_texture(DR_OUTLINE_FRAG_SAMPLER_0_0,effect_aux,&backend.sampler[6]);
+    } else if(draw->effect==2) {
+        const float params[]={(float)draw->effect_source,draw->effect_depth_max,1.0f/1280,1.0f/1024,
+            1.0f/backend.width,1.0f/backend.height,(draw->blend_key&(1u<<9))?1.0f:0.0f,0};
+        xsdk_gpu_set_pixel_constants(DR_DCLUT_FRAG_PUSH,params,DR_DCLUT_FRAG_PUSH_REGISTERS);
+        xsdk_gpu_set_texture(DR_DCLUT_FRAG_SAMPLER_0_0,effect_depth,&backend.sampler[6]);
+        xsdk_gpu_set_texture(DR_DCLUT_FRAG_SAMPLER_0_1,effect_aux?effect_aux:effect_depth,&backend.sampler[6]);
+        xsdk_gpu_set_texture(DR_DCLUT_FRAG_SAMPLER_0_2,image,&backend.sampler[6]);
+    } else {
+        xsdk_gpu_set_pixel_constants(DR_GS_FRAG_PUSH,material,DR_GS_FRAG_PUSH_REGISTERS);
+        xsdk_gpu_set_texture(DR_GS_FRAG_SAMPLER_0_0,image,&backend.sampler[draw->sampler]);
+        xsdk_gpu_set_texture(DR_GS_FRAG_SAMPLER_0_1,date?date:image,&backend.sampler[6]);
+        if(sampled_target) xsdk_gpu_set_texture(DR_GS_TARGET_FRAG_SAMPLER_0_2,target_alpha,&backend.sampler[draw->sampler]);
+    }
+    xsdk_gpu_set_vertices(0,address,bytes);
+    const uint32_t primitive[]={XSDK_PRIMITIVE_TRIANGLE_LIST,XSDK_PRIMITIVE_LINE_LIST,XSDK_PRIMITIVE_POINT_LIST};
+    xsdk_gpu_draw(primitive[draw->topology],count);
+    backend.used+=count;return DR_XENOS_OK;
+}
+int dr_xenos_draw(const DrGsVertex *v,uint32_t count,uint32_t texture,const DrXenosDraw *draw)
+{if(!draw || draw->vu_program)return DR_XENOS_INVALID;return draw_impl(v,count,texture,draw);}
+int dr_xenos_draw_vu(const float *v,uint32_t count,uint32_t texture,const DrXenosDraw *draw)
+{if(!draw || !draw->vu_program)return DR_XENOS_INVALID;return draw_impl(v,count,texture,draw);}
+int dr_xenos_end(void)
+{
+    if(!backend.active) return DR_XENOS_STATE;
+    int error=backend.saved_target?dr_targets_store():0;
+    backend.saved_target=0;
+    backend.fence=xsdk_gpu_fence();backend.active=0;
+    return error;
+}
+/* Clear only stencil at a shadow-run boundary, preserving both MRTs and Z. */
+static DrXenosDraw stencil_clear_draw(uint32_t w,uint32_t h) {
+    return (DrXenosDraw){.logical_width=w,.logical_height=h,.depth=1,.stencil=2,
+        .gs_material=1,.tcc=1,.gs_blend=1,.write_mask=0,.scissor={0,0,(int)w,(int)h}};
+}
+static void stencil_clear_vertices(DrGsVertex v[6],uint32_t w,uint32_t h) {
+    const DrGsVertex quad[6]={{0,0,0,128,128,128,128,0,0,1},{w,0,0,128,128,128,128,0,0,1},
+        {0,h,0,128,128,128,128,0,0,1},{0,h,0,128,128,128,128,0,0,1},
+        {w,0,0,128,128,128,128,0,0,1},{w,h,0,128,128,128,128,0,0,1}};
+    memcpy(v,quad,sizeof(quad));
+}
+int dr_xenos_replay_targets(const DrXenosTargetCommand *commands,uint32_t count)
+{
+    if(!backend.opened || backend.active || !backend.targets) return DR_XENOS_STATE;
+    if(!commands || !count) return DR_XENOS_INVALID;
+    if(count>MAX_VERTICES) return DR_XENOS_FULL;
+    uint32_t total=0;int date_target=-1,effect_target=-1;
+    for(uint32_t i=0;i<count;i++) {
+        uint32_t w,h;int error=dr_targets_size(commands[i].target,&w,&h);if(error) return error;
+        const DrXenosCommand *c=&commands[i].command;
+        if(commands[i].snapshot) {
+            if(commands[i].snapshot>3 || c->count || !dr_targets_is_gs(commands[i].target)) return DR_XENOS_INVALID;
+            if(commands[i].snapshot==3) {
+                DrGsVertex quad[6];stencil_clear_vertices(quad,w,h);DrXenosDraw clear=stencil_clear_draw(w,h);
+                error=validate_draw(quad,6,c->texture,&clear,w,h);if(error)return error;
+                if(total>MAX_VERTICES-6)return DR_XENOS_FULL;
+                total+=6;
+            }
+            if(commands[i].snapshot==2)effect_target=(int)commands[i].target;
+            if(commands[i].snapshot==1) date_target=(int)commands[i].target;
+            continue;
+        }
+        if(c->count>MAX_VERTICES-total) return DR_XENOS_FULL;
+        error=validate_draw(c->draw.vu_program?(const void *)c->vu_vertices:c->vertices,c->count,c->texture,&c->draw,w,h);if(error) return error;
+        if(c->draw.date && date_target>=0 && date_target!=(int)commands[i].target) return DR_XENOS_STATE;
+        if(needs_effect_snapshot(&c->draw) && effect_target>=0 && effect_target!=(int)commands[i].target)return DR_XENOS_STATE;
+        error=validate_features(&c->draw,c->texture,commands[i].target,1,w,h,date_target==(int)commands[i].target,effect_target==(int)commands[i].target);if(error) return error;
+        total+=c->count;
+    }
+    int error=dr_xenos_begin_target(commands[0].target);if(error) return error;
+    for(uint32_t i=0;i<count && !error;i++) {
+        error=dr_xenos_select_target(commands[i].target);
+        const DrXenosCommand *c=&commands[i].command;
+        if(!error && commands[i].snapshot==3) {
+            DrGsVertex quad[6];stencil_clear_vertices(quad,backend.width,backend.height);
+            DrXenosDraw clear=stencil_clear_draw(backend.width,backend.height);
+            error=dr_xenos_draw(quad,6,c->texture,&clear);continue;
+        }
+        if(!error) error=commands[i].snapshot?dr_xenos_snapshot(commands[i].snapshot-1):c->draw.vu_program?
+            dr_xenos_draw_vu(c->vu_vertices,c->count,c->texture,&c->draw):dr_xenos_draw(c->vertices,c->count,c->texture,&c->draw);
+    }
+    int end=dr_xenos_end();return error?error:end;
+}

@@ -1,0 +1,11 @@
+{
+  "target": "powerpc-xsdk-elf",
+  "compiled": [
+    "dr_graphics_demo.c",
+    "dr_gs_texture.c",
+    "dr_xenos.c"
+  ],
+  "shaders": "GLSL -> SPIR-V -> open xost/xsc native containers",
+  "scope": "drawing core and GS VRAM texture decoder; not full GsBackend or linked game engine",
+  "hardware": "not executed"
+}

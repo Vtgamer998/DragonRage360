@@ -1,0 +1,18 @@
+{
+  "previous_unresolved": 139,
+  "current_unresolved": 137,
+  "resolved": [
+    "Port_StageBufSize",
+    "Port_WideFactor"
+  ],
+  "game_heap_code_adapted": true,
+  "heap_checks": 3016,
+  "randomized_heap_operations": 3000,
+  "full_ISO_downloaded_and_required_files_extracted": true,
+  "AFS_missing": false,
+  "real_resources_checked_on_host": true,
+  "Battle_Main_in_XEX": false,
+  "battle_executed": false,
+  "Xbox_executed": false,
+  "diagnostic_XEX_unchanged_from_027": true
+}

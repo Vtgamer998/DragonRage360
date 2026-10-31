@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "first_call": "XbTypedData_RequireBattleData",
+  "conditional_exit_before_work_access": true,
+  "main_catalog_complete": true,
+  "readiness_marker": 2,
+  "hardware_executed": false
+}

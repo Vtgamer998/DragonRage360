@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "baseline": "0.38-D4",
+  "changed_text_files": [
+    "Makefile",
+    "README.md",
+    "RELATORIO-0.39-D5.md",
+    "engine/platform/platform/xb_battle_fighter.c",
+    "engine/platform/platform/xb_battle_fighter.h",
+    "engine/platform/platform/xb_fighter_registry.c",
+    "engine/platform/platform/xb_fighter_tables.c",
+    "engine/platform/platform/xb_fighter_tables.h",
+    "engine/tests/test_native_fighter.c",
+    "engine/tools/build_engine_diagnostic.py",
+    "engine/tools/fixed_profile_source.py",
+    "engine/tools/test_fighter_tables.py",
+    "engine/tools/test_native_fighter.py",
+    "src/demo_ui.c",
+    "src/main.c",
+    "tests/check_xex.py"
+  ],
+  "applied_and_compared": true,
+  "binary_and_manifest_supplied_separately_in_full": true
+}

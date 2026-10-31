@@ -1,0 +1,6 @@
+0.47-D13: novo XEX de diagnóstico. 39 cenários exercitados em CPU, incluindo seis animados; comum 3 com 635/637 recursos preparados (restam dois). Xenia 291f0c9 executou o XEX e falhou em present_open/LUT 0xC00000B5. O ciclo Battle_Load/Battle_Init, Battle_Update/Battle_Main e o desenho GPU continuam pendentes. Leia RELATORIO-0.47-D13.md.
+
+--- Histórico anterior ---
+
+XEX SHA256: 14faf41335d3e68c941903437fd948715a3ca77e12132a9b685289364b590ee6
+405/405 unidades nativas; zero indefinidos e conflitos ABI; execução i386 passou; execução Xenia bloqueada na abertura da tela.

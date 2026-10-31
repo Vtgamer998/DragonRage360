@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "capture": "whole gs_draw.c and gs_core.c, reachable GS sections linked",
+  "GPU_execution": false,
+  "battle_loop": false,
+  "sanitizers": "ASan/UBSan",
+  "scope": "GIF/register/VRAM -> real capture -> backend -> mock XSDK calls; lifecycle, endian boundaries, eight original filter/clamp selectors, DATE/FBA/snapshot descriptors"
+}

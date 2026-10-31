@@ -1,0 +1,15 @@
+{
+  "previous_unresolved": 139,
+  "current_unresolved": 139,
+  "new_unresolved": [],
+  "resolved": [],
+  "loader_tests": 546,
+  "loader_linked_in_diagnostic_XEX": false,
+  "real_game_data_loaded": false,
+  "native_boot_integrated": false,
+  "Battle_Main_in_XEX": false,
+  "battle_executed": false,
+  "Xbox_executed": false,
+  "emulator_executed": false,
+  "diagnostic_XEX_unchanged_from_027": true
+}

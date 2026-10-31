@@ -1,0 +1,1 @@
+owned 6 roster tables + AI 228 steps/537 rules/28 profiles PASS; source freed; no manager/battle boot

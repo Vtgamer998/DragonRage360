@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "compiled_sources_match_delivered_sources": [
+    {
+      "source": "xb_battle_fighter.c",
+      "sha256": "1b0873f8e8000dfc7d1df6fdcbc930cd044c61a8178c82b89124456e95295735"
+    },
+    {
+      "source": "xb_fighter_registry.c",
+      "sha256": "38a8dc30570ef9564838eed93957c4fd1a3641325a48bd99e3a1dcb56d921aea"
+    },
+    {
+      "source": "xb_fighter_tables.c",
+      "sha256": "3b7dc82c908643c87e6c5850cb233aad204dd2d4681521f068017156b1095ec5"
+    }
+  ]
+}

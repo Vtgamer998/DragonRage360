@@ -1,3 +1,5 @@
+0.45-D11: MAPD, caminhos e navegação nativos; 111 recursos de textura do comum 3 (154 imagens), com 526 recursos ainda indisponíveis; ciclo original de áudio/mixer testado em CPU. A batalha completa, HUD/cena e GPU continuam pendentes. Marcador 2/NOT_READY mantidos. Veja RELATORIO-0.45-D11.md.
+
 # 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
 
 Novo default.xex compilado. O boot original de objetos e o reset/inicialização

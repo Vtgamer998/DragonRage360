@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "original_collision_readers": true,
+  "native_global_stage_and_mesh_base_installed": true,
+  "owned_arena_survives_source_free": true,
+  "whole_and_broken_reference": [
+    [
+      12251,
+      15979834580077166354
+    ],
+    [
+      9789,
+      12023970934271149234
+    ]
+  ],
+  "sanitizers": true,
+  "host_only": true,
+  "full_stage_boot_ready": false
+}

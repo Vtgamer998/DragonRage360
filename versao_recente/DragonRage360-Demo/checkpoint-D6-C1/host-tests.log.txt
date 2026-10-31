@@ -1,0 +1,32 @@
+make: Entering directory '/workspace/scratch/0e938d660765/active/DragonRage360-Demo'
+mkdir -p build
+gcc -std=c17 -Wall -Wextra -Werror -Isrc src/demo_ui.c tests/test_ui.c -o build/test-ui
+./build/test-ui
+PASS: menus, empty library, wrapping, options, modal and exit confirmation
+mkdir -p build
+gcc -std=c99 -Wall -Wextra -Werror -Isrc src/dr_disc.c tests/disc_probe.c -o build/disc-probe
+python3 tests/test_disc.py
+test_afs_entry_is_bounded (__main__.DiscTests.test_afs_entry_is_bounded) ... ok
+test_afs_out_of_bounds (__main__.DiscTests.test_afs_out_of_bounds) ... ok
+test_afs_overlapping_table (__main__.DiscTests.test_afs_overlapping_table) ... ok
+test_afs_oversized_table (__main__.DiscTests.test_afs_oversized_table) ... ok
+test_corrupt_endian_pair (__main__.DiscTests.test_corrupt_endian_pair) ... ok
+test_directory_invalid_length (__main__.DiscTests.test_directory_invalid_length) ... ok
+test_identify (__main__.DiscTests.test_identify) ... ok
+test_loose_file_case_and_version (__main__.DiscTests.test_loose_file_case_and_version) ... ok
+test_missing_entry (__main__.DiscTests.test_missing_entry) ... ok
+test_multiextent_rejected (__main__.DiscTests.test_multiextent_rejected) ... ok
+test_offset_above_four_gib (__main__.DiscTests.test_offset_above_four_gib) ... ok
+test_traversal_rejected (__main__.DiscTests.test_traversal_rejected) ... ok
+test_truncated (__main__.DiscTests.test_truncated) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.018s
+
+OK
+mkdir -p build
+gcc -std=c17 -Wall -Wextra -Werror -Isrc src/save_unlock.c src/save_export.c tests/save/test_export.c -o build/test-save-export
+python3 tests/save/test_save.py build/test-save-export
+PASS: unlocks/checksum; separate exports; originals, custom records and unknown fields preserved; bad size refused
+New save SHA-256: 09d70ac4e339b2c640f6ee6b8defc9e99609f292e4132d5911b06ffae7bc44f9
+make: Leaving directory '/workspace/scratch/0e938d660765/active/DragonRage360-Demo'

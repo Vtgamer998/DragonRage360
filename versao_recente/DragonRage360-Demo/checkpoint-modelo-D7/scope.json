@@ -1,0 +1,17 @@
+{
+  "revision": "0.41-D7",
+  "original_BtlObj_Setup": true,
+  "original_BtlObj_CreateChara": true,
+  "native_model_resources_and_pools": true,
+  "BtlChar_BtlAi_initialized": false,
+  "battle_started": false,
+  "Xbox_or_Xenia_execution": false,
+  "GPU_pixels_or_skinning_validated": false,
+  "gPortDataStripped": 2,
+  "stage_NOT_READY": true,
+  "profile_fighter_ids": [
+    0,
+    1
+  ],
+  "source_ISO_assets_packaged": false
+}

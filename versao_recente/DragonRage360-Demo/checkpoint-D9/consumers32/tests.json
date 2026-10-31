@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "execution": "QEMU-i386 Linux user mode, freestanding test allocator",
+  "original_BtlAnim_GetFlags": 414,
+  "original_voice_entries": 57,
+  "original_character_and_item_readers": [
+    161,
+    4
+  ],
+  "temporary_installation_and_cleanup_twice": true,
+  "occupied_global_refused": true,
+  "source_overwritten_after_preparation": true,
+  "synthetic_fixtures_only": true,
+  "full_manager_init": false,
+  "PowerPC_execution": false
+}

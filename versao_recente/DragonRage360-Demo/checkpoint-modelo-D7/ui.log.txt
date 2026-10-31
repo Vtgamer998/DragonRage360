@@ -1,0 +1,6 @@
+make: Entering directory '/workspace/scratch/0e938d660765/active/DragonRage360-Demo'
+mkdir -p build
+gcc -std=c17 -Wall -Wextra -Werror -Isrc src/demo_ui.c tests/test_ui.c -o build/test-ui
+./build/test-ui
+PASS: menus, empty library, wrapping, options, modal and exit confirmation
+make: Leaving directory '/workspace/scratch/0e938d660765/active/DragonRage360-Demo'

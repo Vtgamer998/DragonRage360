@@ -1,0 +1,140 @@
+----------------
+IN: EftChar_Init
+0x0078b2a8:  
+OBJD-T: 8b45e401c683ec046a046a0a57e88f99eeff
+
+----------------
+IN: EftChar_Init
+0x0078b2ba:  
+OBJD-T: 89c783c41085f6741d
+
+----------------
+IN: EftChar_Init
+0x0078b2c3:  
+OBJD-T: f7c6030000007515
+
+----------------
+IN: EftChar_Init
+0x0078b2cb:  
+OBJD-T: 8d460483fefc7322
+
+----------------
+IN: EftChar_Init
+0x0078b2d3:  
+OBJD-T: 897e04be00000000e9f7000000
+
+----------------
+IN: EftChar_Init
+0x0078b3d7:  
+OBJD-T: 83fe030f842bffffff
+
+----------------
+IN: EftChar_Init
+0x0078b3e0:  
+OBJD-T: bf0000000083fe060f8534ffffff
+
+----------------
+IN: EftChar_Init
+0x0078b322:  
+OBJD-T: 89f783c7017045
+
+----------------
+IN: EftChar_Init
+0x0078b329:  
+OBJD-T: 83ec0857ff750ce811ece5ff
+
+----------------
+IN: BtlScene_TestCharPackBit
+0x005e9f46:  
+OBJD-T: 5589e557565383ec14e8bc44f1ff
+
+----------------
+IN: BtlScene_TestCharPackBit
+0x005e9f54:  
+OBJD-T: 81c3ac0d37006a01ff7508e839ffffff
+
+----------------
+IN: BtlScene_GetCharPackEntry
+0x005e9e9d:  
+OBJD-T: 5589e557565383ec18e86545f1ff
+
+----------------
+IN: BtlScene_GetCharPackEntry
+0x005e9eab:  
+OBJD-T: 81c3550e3700ff7508e8425bfcff
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005af9fb:  
+OBJD-T: 5589e55653e80beaf4ff
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa05:  
+OBJD-T: 81c3fbb23a0083ec0cff7508e8006f0100
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa16:  
+OBJD-T: 83c410ba0000000085c07428
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa22:  
+OBJD-T: 83ec0c50e8e8700100
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa2b:  
+OBJD-T: 89c683c410ba0000000085c07411
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa39:  
+OBJD-T: 7418
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa3b:  
+OBJD-T: a8077514
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa3f:  
+OBJD-T: 8d465883fea87321
+
+----------------
+IN: BtlCharApi_GetPlayerObjUnk58
+0x005afa47:  
+OBJD-T: 8b565889d08d65f85b5e5dc3
+
+----------------
+IN: BtlScene_GetCharPackEntry
+0x005e9eb9:  
+OBJD-T: 89c683c41085c0747a
+
+----------------
+IN: BtlScene_GetCharPackEntry
+0x005e9f3c:  
+OBJD-T: 89f08d65f45b5e5f5dc3
+
+----------------
+IN: BtlScene_TestCharPackBit
+0x005e9f64:  
+OBJD-T: 89c683c4108b7d0c83ef01704a
+
+----------------
+IN: BtlScene_TestCharPackBit
+0x005e9f71:  
+OBJD-T: b91f00000029f9b801000000d3e885c07551
+
+----------------
+IN: BtlScene_TestCharPackBit
+0x005e9f83:  
+OBJD-T: 83ff1f774c
+
+----------------
+IN: BtlScene_TestCharPackBit
+0x005e9f88:  
+OBJD-T: b80100000089f9d3e089c783ec086a0156e882fdffff
+

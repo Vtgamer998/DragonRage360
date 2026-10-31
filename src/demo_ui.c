@@ -99,7 +99,7 @@ void demo_draw(const DemoUi *u,const DemoPaint *p,unsigned tick)
     p->rect(52,52,68,68,ORANGE);
     text(p,66,66,2,0xFF211000,"DR");
     text(p,144,48,2,WHITE,"DRAGON RAGE");
-    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.44-D10");
+    text(p,146,94,1,GOLD,"XBOX 360  /  DEMO 0.46-D12");
     text(p,930,56,1,u->connected?0xFF3DDC84:GOLD,u->connected?"CONTROLE CONECTADO":"CONECTE O CONTROLE");
     text(p,930,88,1,MUTED,"Interface + leitor de ISO");
     p->rect(52,154,300,480,PANEL);
