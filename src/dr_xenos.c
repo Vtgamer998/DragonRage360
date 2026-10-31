@@ -410,12 +410,12 @@ static int draw_impl(const void *data,uint32_t count,uint32_t texture,const DrXe
     if(draw->vu_program) {
         /* Raw CPU float words; the arena is float storage, so the copy is
          * bit-identical without per-word conversions. */
-        memcpy(backend.vertices+first,data,(size_t)count*VERTEX_WORDS*4);
+        memcpy((uint32_t *)backend.vertices+first,data,(size_t)count*VERTEX_WORDS*4);
     } else {
         for(uint32_t i=0;i<count;i++) {
             const DrGsVertex *v=&vertices[i];
             const float values[VERTEX_WORDS]={v->x,v->y,v->z,v->r/128.0f,v->g/128.0f,v->b/128.0f,v->a/128.0f,v->s,v->t,v->q,0,0};
-            memcpy(backend.vertices+first+i*VERTEX_WORDS,values,sizeof(values));
+            memcpy((uint32_t *)backend.vertices+first+i*VERTEX_WORDS,values,sizeof(values));
         }
     }
     uint32_t address=xsdk_gpu_address(backend.vertices)+first*4,bytes=count*VERTEX_WORDS*4;

@@ -71,10 +71,8 @@ static void uniform_constants(uint32_t first,const float *data,uint32_t count){
     if(first+count>19){xsdk_gpu_set_vertex_constants(first,data,count);return;}
     unsigned at=0;
     while(at<count){
-            if(first+at+run<=19 && state_cache.valid&(1u<<(first+at))) continue; /* skip unchanged uniforms */
         unsigned run=0,start=at;
         while(at<count){
-            if(first+at+run<=19 && state_cache.valid&(1u<<(first+at))) continue; /* skip unchanged uniforms */
             unsigned n=4-((first+at)&3);if(n>count-at)n=count-at;
             uint32_t mask=((1u<<n)-1)<<(first+at);
             int changed=(state_cache.valid&mask)!=mask || memcmp(state_cache.constants+(first+at)*4,data+at*4,n*16);
@@ -412,12 +410,12 @@ static int draw_impl(const void *data,uint32_t count,uint32_t texture,const DrXe
     if(draw->vu_program) {
         /* Raw CPU float words; the arena is float storage, so the copy is
          * bit-identical without per-word conversions. */
-        memcpy(backend.vertices+first,data,(size_t)count*VERTEX_WORDS*4);
+        memcpy((uint32_t *)backend.vertices+first,data,(size_t)count*VERTEX_WORDS*4);
     } else {
         for(uint32_t i=0;i<count;i++) {
             const DrGsVertex *v=&vertices[i];
             const float values[VERTEX_WORDS]={v->x,v->y,v->z,v->r/128.0f,v->g/128.0f,v->b/128.0f,v->a/128.0f,v->s,v->t,v->q,0,0};
-            memcpy(backend.vertices+first+i*VERTEX_WORDS,values,sizeof(values));
+            memcpy((uint32_t *)backend.vertices+first+i*VERTEX_WORDS,values,sizeof(values));
         }
     }
     uint32_t address=xsdk_gpu_address(backend.vertices)+first*4,bytes=count*VERTEX_WORDS*4;

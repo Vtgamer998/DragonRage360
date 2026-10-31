@@ -67,6 +67,17 @@ static int cancel_requested(unsigned fight_frames){
 }
 static uint64_t probe_us(void);
 static uint64_t update_started,draw_started,last_update_us,last_draw_us;
+/* D49 frame budget: lifetime stage timings snapshotted before each battle
+ * frame, diffed after it; reveals the per-frame time no counter explains. */
+typedef struct {uint64_t replay,preflight,emit,select,store,bind,movie,present;} DrStageSnapshot;
+static DrStageSnapshot stage_prev;
+void dr_gs_backend_frame_times(uint64_t *movie_us,uint64_t *present_us);
+static void stage_capture(DrStageSnapshot *s){
+ DrCaptureProfile cp;DrXenosProfile xp;DrTargetProfile tp;uint64_t mv,pr;
+ dr_capture_original_profile(&cp);dr_xenos_profile(&xp);dr_targets_profile(&tp);dr_gs_backend_frame_times(&mv,&pr);
+ s->replay=cp.replay_us;s->preflight=xp.preflight_us;s->emit=xp.emit_us;s->select=xp.select_us;
+ s->store=tp.store_us;s->bind=tp.bind_us;s->movie=mv;s->present=pr;
+}
 void XbFreshBoot_TraceInit(const char *name){
  if(trace_quiet){
   if(!strcmp(name,"Battle_Update"))update_started=probe_us();
@@ -242,7 +253,7 @@ static int probe(int full_load) {
      if(full_load==9 && cancel_requested(fight_seen)){cancelled=1;xsdk_log_write("D46 battle stopped between completed frames; normal original termination follows");break;}
      action_tick=fight_seen;
      if(action_check && !charge_check && (fight_seen==4 || fight_seen==16 || fight_seen==36 || fight_seen==48))xsdk_log_write("D46 scripted action tick=%u buttons=%04x LT=%u",fight_seen,fight_seen==4?0x4000:fight_seen==36?0x2000:fight_seen==48?0x8000:0,fight_seen==16?255:0);
-     uint64_t frame_started=probe_us();int step=Battle_StepFrame();
+     uint64_t frame_started=probe_us();stage_capture(&stage_prev);int step=Battle_StepFrame();
      frame_times[frame]=probe_us()-frame_started;
      if(action_check && (charge_check || fight_seen==5 || fight_seen==11 || fight_seen==18 || fight_seen==33 || fight_seen==39 || fight_seen==51) && gBtlChars)xsdk_log_write("D46 action response tick=%u action=%d ki=%d health=%d",fight_seen,gBtlChars->chars[0].action,gBtlChars->chars[0].members[0].gauge.ki,gBtlChars->chars[0].members[0].gauge.health);
      if(full_load==6 || (full_load==8 && frame%16u==0) || frame%32u==0 || frame+1==limit || step || XbRes_LastError())xsdk_log_write("D46 original Battle_StepFrame frame=%u returned=%d read_error=%d",frame,step,XbRes_LastError());
@@ -255,6 +266,19 @@ static int probe(int full_load) {
      }
      if(full_load==6 || (full_load==8 && frame%16u==0) || frame%32u==0 || frame+1==limit){
       xsdk_log_write("D46 frame components simulation_us=%llu producers_us=%llu",(unsigned long long)last_update_us,(unsigned long long)last_draw_us);
+      {DrStageSnapshot now;stage_capture(&now);uint64_t fr=frame_times[frame];
+       uint64_t d_replay=now.replay-stage_prev.replay,d_store=now.store-stage_prev.store,d_bind=now.bind-stage_prev.bind,
+                d_movie=now.movie-stage_prev.movie,d_present=now.present-stage_prev.present,
+                d_pre=now.preflight-stage_prev.preflight,d_emit=now.emit-stage_prev.emit,d_sel=now.select-stage_prev.select;
+       uint64_t sim=last_update_us,prod=last_draw_us;
+       uint64_t outer=sim+prod+d_replay+d_bind+d_movie+d_present; /* bind includes nested stores */
+       uint64_t unaccounted=fr>outer?fr-outer:0;
+       uint64_t loose=sim+prod+d_replay+d_movie+d_present; /* ignoring overlapping target counters */
+       uint64_t unaccounted_loose=fr>loose?fr-loose:0;
+       xsdk_log_write("D46 frame budget total_us=%llu sim=%llu producers=%llu replay=%llu bind=%llu store=%llu movie=%llu present=%llu replay_stages=%llu/%llu/%llu unaccounted=%llu range_lo=%llu",
+        (unsigned long long)fr,(unsigned long long)sim,(unsigned long long)prod,(unsigned long long)d_replay,(unsigned long long)d_bind,(unsigned long long)d_store,
+        (unsigned long long)d_movie,(unsigned long long)d_present,(unsigned long long)d_pre,(unsigned long long)d_emit,(unsigned long long)d_sel,
+        (unsigned long long)unaccounted,(unsigned long long)unaccounted_loose);}
       extern unsigned gGsTexturePressureSweeps,gGsTexturePressureFallbacks;
       xsdk_log_write("D46 texture pressure sweeps=%u white_fallbacks=%u direct_effect_packets=%u",gGsTexturePressureSweeps,gGsTexturePressureFallbacks,direct_effect_packets);
       DrCaptureProfile cp;dr_capture_original_profile(&cp);
