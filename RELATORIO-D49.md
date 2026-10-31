@@ -73,3 +73,24 @@ xsdk_log_write("D46 backend stage movie_us=%llu present_us=%llu",...)
 
 Não há breaking changes: todos os caminhos de aceitação e reverso são
 preservados. Os tests passam host sem mudança de skład.
+
+## Avaliação honesta do alvo de 30 FPS
+
+Com os números do D47/D49, o alvo de 30 FPS estáveis **provavelmente não
+será atingido com a arquitetura atual**:
+
+- O quadro leva ~500 ms; o orçamento de 30 FPS é ~33 ms (15× menos).
+- Simulação (~14 ms) + produtores (~16 ms) já consomem quase todo o orçamento
+  sozinhos — otimizar só o replay não basta.
+- O replay custa ~92 µs/draw; precisaria cair para ~6 µs/draw ou reduzir
+  drasticamente a contagem de draws.
+- ~240 ms do quadro não aparecem em nenhum contador; sem saber onde estão,
+  qualquer estimativa é incerta.
+- As mudanças do D49 (buffers persistentes, referência direta, batch merge)
+  são micro-cortes; não fecham essa distância.
+
+Para 30 FPS seriam necessárias mudanças estruturais (agrupamento real de
+draws, mover transformação de VU1 para vertex shader, paralelizar simulação
+e replay entre threads de hardware) sem garantia de resultado. Enquanto
+evidência de hardware não mostrar mediana ≤ 33 ms, o projeto permanece
+**NOT_READY** e não promete FPS.

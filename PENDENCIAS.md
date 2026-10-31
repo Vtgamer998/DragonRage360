@@ -1,5 +1,12 @@
 # D49 (2026-10-31) — instrumentação e otimização do replay
 
+**Avaliação final:** com o log de hardware (replay ~231 ms, quadro ~500 ms),
+o alvo de **30 FPS estáveis provavelmente não será atingido** com a
+arquitetura atual — as otimizações do D49 são micro-cortes e não fecham a
+distância de 15×. Ver "Avaliação honesta do alvo de 30 FPS" no
+RELATORIO-D49.md. Correção defensiva (`DR_XENOS_FULL` quando a arena está
+quase cheia) aplicada para o crash do efeito de sombra/outline do ki.
+
 Instrumentação completa dos estágios do replay (preflight/emit/select/store/bind/movie/present)
 e otimizações de cópias (buffers reutilizados, ponteiro direto a Vtx, arena memcpy único).
 Testes host PASS. 8 arquivos alterados (dr_gs_backend.{c,h}, dr_gs_replay.c, dr_targets.{c,h},
