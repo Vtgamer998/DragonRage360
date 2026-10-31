@@ -7,7 +7,9 @@
  * alpha and restore stencil, using MRT and tiled passes. GPU pixels unverified.
  * Every bind/resolve invalidates drawing state; caller must rebind all of it.
  * No present or external eDRAM commands between bind and store. */
-typedef struct {uint32_t stores,loads,fence_waits,stencil_restore_passes,zero_stencil_restores,command_splits;} DrTargetProfile;
+typedef struct {uint32_t stores,loads,fence_waits,stencil_restore_passes,zero_stencil_restores,command_splits;
+    /* Lifetime CPU-side stage timings; bind includes any nested store it performs. */
+    uint64_t store_us,bind_us;} DrTargetProfile;
 void dr_targets_profile(DrTargetProfile *);
 uint32_t dr_targets_epoch(void);
 int dr_targets_set_wait_timeout(uint32_t milliseconds);

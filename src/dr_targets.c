@@ -10,11 +10,16 @@
 #include "dr_restore_shaders.h"
 #include "dr_gs_targets_shaders.h"
 #include <string.h>
+#include <time.h>
 #ifdef DR_XBOX360
 #include <xsdk/log.h>
 #endif
 enum { COUNT=24,BUDGET=128*1024*1024,COMMAND_SLOTS=8 };
 static DrTargetProfile profile;
+static uint64_t targets_now_us(void)
+{
+    struct timespec t;return clock_gettime(CLOCK_MONOTONIC,&t)?0:(uint64_t)t.tv_sec*1000000u+t.tv_nsec/1000u;
+}
 static uint32_t wait_timeout_ms=1000;
 static int checked_gpu_status(NTSTATUS status,const char *operation,uint32_t detail)
 {
@@ -197,6 +202,7 @@ int dr_targets_ensure_gs(unsigned id,uint32_t w,uint32_t h)
 }
 static int gs_store(int snapshot)
 {
+    uint64_t started=targets_now_us();
     unsigned id=(unsigned)pool.current;
     XsdkTileResolve resolves[4]={
         {.target=XSDK_TILE_DEPTH,.texture=&pool.slots[id].depth,.drawn_back=pool.slots[id].valid!=0},
@@ -226,6 +232,7 @@ static int gs_store(int snapshot)
         pool.snapshot_height[snapshot]=pool.slots[id].color.height;
         pool.snapshot_id[snapshot]=id;
     }
+    profile.store_us+=targets_now_us()-started;
     return 0;
 }
 /* The pinned SDK updates buffer.count lazily while its write window is open.
@@ -273,6 +280,7 @@ int dr_targets_bind(unsigned id)
     if(!pool.opened) return DR_XENOS_STATE;
     if(id>=COUNT || !pool.slots[id].made) return DR_XENOS_INVALID;
     if(pool.current==(int)id) return 0;
+    uint64_t started=targets_now_us();
     if(pool.current>=0) {int error=dr_targets_store();if(error) return error;}
     if(pool.slots[id].gs) {
         /* Only this ring slot will be overwritten. Resolves already carry GPU
@@ -328,6 +336,7 @@ int dr_targets_bind(unsigned id)
             }else profile.zero_stencil_restores++;
 
         }
+        if(pool.current>=0)profile.bind_us+=targets_now_us()-started;
         return 0;
     }
     const XsdkTexture *color=&pool.slots[id].color;
@@ -351,7 +360,9 @@ int dr_targets_bind(unsigned id)
     }
     pool.current=(int)id;
     /* Covers a restore draw even if a later store has not happened yet. */
-    pool.fence=xsdk_gpu_fence();return 0;
+    pool.fence=xsdk_gpu_fence();
+    if(pool.current>=0)profile.bind_us+=targets_now_us()-started;
+    return 0;
 }
 int dr_targets_snapshot(unsigned kind)
 {
