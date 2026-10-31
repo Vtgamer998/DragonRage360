@@ -1,4 +1,16 @@
-# 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi
+# D48 (2026-10-31) — atualização
+
+XEX D47 recompilado pelas Actions (console e xenia, verificação estática OK)
+e luta varrida no Xenia Canary/llvmpipe com ISO real: **321 quadros,
+`Battle_StepFrame returned=0` em todos os checkpoints, zero
+`DR_DMA_INVALID`/`-420`** (inclui o quadro 88 do console). Evidência em
+`validation-d47/xenia/original-battle-321/`; leia [RELATORIO-D48.md](RELATORIO-D48.md).
+O travamento do quadro 88 no RGH agora aponta para o caminho de GPU nativa
+do XEX console; o próximo teste é repetir `original-battle` no Xbox com o
+`console/default.xex` de `sha256 68fa346a17d3c790b8f02c70bc70009687ab568c2d2e012d462d6e27564b46c8`
+e colher o `default.log`.
+
+# 0.44-D10 — novo XEX: objetos, BtlChar e BtlAi (histórico)
 
 Novo default.xex compilado. O boot original de objetos e o reset/inicialização
 de BtlChar/BtlAi estão integrados ao diagnóstico e passaram em CPU i386 com
