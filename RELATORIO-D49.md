@@ -94,3 +94,31 @@ draws, mover transformação de VU1 para vertex shader, paralelizar simulação
 e replay entre threads de hardware) sem garantia de resultado. Enquanto
 evidência de hardware não mostrar mediana ≤ 33 ms, o projeto permanece
 **NOT_READY** e não promete FPS.
+
+## Build final D49 (2026-10-31, commit 2bbc438)
+
+O workflow `D46 native diagnostic` (run 41247879474) passou os 20 testes host
+e gerou os dois XEX (`console/default.xex` e `xenia/default.xex`, 3.068.800
+bytes cada) com o código do D49.
+
+Mudanças que destravaram o build, depois de reverter `dr_gs_replay.c` para a
+versão D47 (a versão com buffers estáticos quebrava `test_gs_replay`/
+`merged_draws`):
+
+- `dr_xenos.c`: cast explícito nos dois `memcpy` da arena (destino
+  `volatile uint32_t *`), necessário para `-Werror`; remoção de um trecho
+  duplicado inválido em `uniform_constants` que impedia a compilação.
+- `dr_gs_batch.c`: remoção do bloco "D49 practical" que era código morto.
+- `src/dr_targets.{c,h}`: espelho sincronizado com `engine/graphics` (faltavam
+  `store_us`/`bind_us`, o que quebrava o link do XEX).
+- `xb_fresh_boot.c`: nova linha de log `D46 frame budget ...` com os deltas
+  por quadro de replay, bind, store, movie, present e
+  `unaccounted_us`/`range_lo` — a medição do tempo que não aparece nos
+  contadores.
+
+Hashe SHA-256 dos binários:
+- console: `05ba7bba6feba0ee37ed425fcc70ae329847cef94588743daee66be762bc5070`
+- xenia:   `d048964c19a191d6ff5ad50659f7466c2fe890e08f028c0352c3f5cadf702c34`
+
+Isto é um build de diagnóstico: **não há prova de 30 FPS** e a luta completa
+segue NOT_READY. Use por conta e risco.
