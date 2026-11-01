@@ -24,6 +24,12 @@ host-test:
 	mkdir -p build
 	gcc -std=c17 -Wall -Wextra -Werror -Isrc src/demo_ui.c tests/test_ui.c -o build/test-ui
 	./build/test-ui
+# D50 milestones 1-2: xsdk platform layer + clear/triangle probe, host mocks only.
+.PHONY: d50-probe-test
+d50-probe-test:
+	mkdir -p build
+	gcc -std=gnu17 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -g -Iengine/tests -Iengine/graphics -Isrc -Ivalidation-tooling/xsdk/include d50/test_d50_probe.c d50/gfx_probe.c d50/xsdk_compat.c engine/graphics/dr_xenos.c engine/graphics/dr_targets.c engine/graphics/dr_gs_texture.c engine/graphics/dr_graphics_demo.c -lm -o build/test-d50-probe
+	ASAN_OPTIONS=detect_leaks=0 ./build/test-d50-probe
 clean:
 	rm -rf build
 .PHONY: disc-test
