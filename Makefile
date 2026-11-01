@@ -4,8 +4,8 @@ TOOLCHAIN ?= ../xsdk-gcc/bin/powerpc-xsdk-elf-
 CC := $(TOOLCHAIN)gcc
 # Retain real native component APIs for static verification in the diagnostic.
 NATIVE_API_ROOTS := -Wl,--undefined=sceMpegInit -Wl,--undefined=sceMpegCreate -Wl,--undefined=sceMpegDelete -Wl,--undefined=sceMpegReset -Wl,--undefined=sceMpegIsEnd -Wl,--undefined=sceMpegAddCallback -Wl,--undefined=sceMpegAddStrCallback -Wl,--undefined=sceMpegDemuxPss -Wl,--undefined=sceMpegGetPicture -Wl,--undefined=sceGsResetPath -Wl,--undefined=sceGsResetGraph -Wl,--undefined=dr_gs_movie_build -Wl,--undefined=dr_gs_movie_send -Wl,--undefined=XbAdx_Clock -Wl,--undefined=ADXT_Init -Wl,--undefined=ADXT_Create -Wl,--undefined=ADXT_SetReloadSct -Wl,--undefined=ADXT_SetSvrFreq -Wl,--undefined=ADXT_StartAfs -Wl,--undefined=ADXT_StartFname -Wl,--undefined=ADXT_Stop -Wl,--undefined=ADXT_Pause -Wl,--undefined=ADXT_SetOutVol -Wl,--undefined=ADXT_GetOutVol -Wl,--undefined=ADXT_SetOutPan -Wl,--undefined=ADXT_SetOutputMono -Wl,--undefined=ADXT_GetStat -Wl,--undefined=XbOverlay_PrepareBuild -Wl,--undefined=XbOverlay_Load -Wl,--undefined=XbMpeg_Open -Wl,--undefined=XbMpeg_Next -Wl,--undefined=XbMpeg_Close
-CFLAGS := -mcpu=cell -fno-pic -std=gnu17 -MMD -MP -O2 -g -ffunction-sections -fdata-sections -Wall -Wextra -Werror -I$(XSDK)/include -Isrc -Iengine/graphics -Iengine/capture/port/src/gs -Iengine/platform/platform -DDR_XBOX360
-OBJECTS := build/dr_ot_native.o build/dr_gs_movie.o build/dr_dma_engine.o build/dr_gs_native.o build/dr_dma_producer.o build/dr_gs_stream.o build/gs_draw.o build/gs_core.o build/gs_sony.o build/dr_gs_backend.o build/dr_gs_replay.o build/dr_gs_batch.o build/dr_capture_demo.o build/dr_capture_platform.o build/main.o build/demo_ui.o build/dr_disc.o build/bt3_wire.o build/net_check.o build/lobby.o build/dr_anim.o build/dr_bpe.o build/dr_resource_selftest.o build/dr_container.o build/dr_stage_collision.o build/dr_skeleton.o build/dr_xenos.o build/dr_gs_texture.o build/dr_graphics_demo.o build/dr_body_demo.o build/dr_texfile.o build/dr_body_pipeline.o build/dr_body_model.o build/dr_elf.o build/dr_face_vif.o build/dr_targets.o build/dr_vu1.o build/dr_vu1_selftest.o build/save_unlock.o build/save_export.o
+CFLAGS := -mcpu=cell -fno-pic -std=gnu17 -MMD -MP -O2 -g -ffunction-sections -fdata-sections -Wall -Wextra -Werror -I$(XSDK)/include -Isrc -Iengine/graphics -Iengine/capture/port/src/gs -Iengine/platform/platform -Id50 -DDR_XBOX360
+OBJECTS := build/dr_ot_native.o build/dr_gs_movie.o build/dr_dma_engine.o build/dr_gs_native.o build/dr_dma_producer.o build/dr_gs_stream.o build/gs_draw.o build/gs_core.o build/gs_sony.o build/dr_gs_backend.o build/dr_gs_replay.o build/dr_gs_batch.o build/dr_capture_demo.o build/dr_capture_platform.o build/main.o build/demo_ui.o build/dr_disc.o build/bt3_wire.o build/net_check.o build/lobby.o build/dr_anim.o build/dr_bpe.o build/dr_resource_selftest.o build/dr_container.o build/dr_stage_collision.o build/dr_skeleton.o build/dr_xenos.o build/dr_gs_texture.o build/dr_graphics_demo.o build/dr_body_demo.o build/dr_texfile.o build/dr_body_pipeline.o build/dr_body_model.o build/dr_elf.o build/dr_face_vif.o build/dr_targets.o build/dr_vu1.o build/dr_vu1_selftest.o build/save_unlock.o build/save_export.o build/d50/xsdk_compat.o build/d50/gfx_probe.o build/d50/gfx_present.o
 .PHONY: all clean host-test
 PLATFORM_SOURCES := $(addprefix engine/platform/platform/,$(shell cat engine/platform/platform-sources.txt))
 PLATFORM_OBJECTS := $(patsubst engine/platform/platform/%.c,build/%.o,$(PLATFORM_SOURCES))
@@ -15,6 +15,11 @@ $(PLATFORM_OBJECTS): build/%.o: engine/platform/platform/%.c
 all: build/default.xex
 build/%.o: src/%.c
 	mkdir -p build
+	$(CC) $(CFLAGS) -c $< -o $@
+# D50/D51 platform layer and probes. Kept out of src/ so the bt3xbx port can
+# evolve without touching the title's original sources.
+build/d50/%.o: d50/%.c
+	mkdir -p build/d50
 	$(CC) $(CFLAGS) -c $< -o $@
 build/default.elf: $(OBJECTS) $(XSDK)/build/libxsdk.a
 	$(CC) -static -nostdlib -T $(XSDK)/src/xsdk.ld -Wl,--gc-sections,-Map,build/default.map -o $@ $(OBJECTS) $(NATIVE_API_ROOTS) -Wl,--start-group $(XSDK)/build/libxsdk.a -lc -lm -lgcc -Wl,--end-group
@@ -28,7 +33,7 @@ host-test:
 .PHONY: d50-probe-test
 d50-probe-test:
 	mkdir -p build
-	gcc -std=gnu17 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -g -Iengine/tests -Iengine/graphics -Isrc -Ivalidation-tooling/xsdk/include d50/test_d50_probe.c d50/gfx_probe.c d50/xsdk_compat.c engine/graphics/dr_xenos.c engine/graphics/dr_targets.c engine/graphics/dr_gs_texture.c engine/graphics/dr_graphics_demo.c -lm -o build/test-d50-probe
+	gcc -std=gnu17 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -g -Iengine/tests -Iengine/graphics -Isrc -Ivalidation-tooling/xsdk/include d50/test_d50_probe.c d50/gfx_probe.c d50/gfx_present.c d50/xsdk_compat.c engine/graphics/dr_xenos.c engine/graphics/dr_targets.c engine/graphics/dr_gs_texture.c engine/graphics/dr_graphics_demo.c -lm -o build/test-d50-probe
 	ASAN_OPTIONS=detect_leaks=0 ./build/test-d50-probe
 clean:
 	rm -rf build

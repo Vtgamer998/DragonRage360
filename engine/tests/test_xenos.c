@@ -82,7 +82,7 @@ static uint32_t expected_wait_timeout=1000;
 NTSTATUS xsdk_gpu_wait(uint32_t f,uint32_t t) {assert(!tile_recording && f && t==expected_wait_timeout);waits++;return wait_result;}
 uint32_t xsdk_gpu_fence(void) {assert(!tile_recording);return ++fences;}
 NTSTATUS xsdk_texture_init(XsdkTexture *t,uint32_t format,uint32_t w,uint32_t h,uint32_t levels,bool tiled)
-{assert((format==XSDK_FORMAT_R8G8B8A8 || format==XSDK_FORMAT_D24S8) && w && h && levels>=1 && levels<=11 && tiled);
+{assert((format==XSDK_FORMAT_R8G8B8A8 || format==XSDK_FORMAT_A8R8G8B8 || format==XSDK_FORMAT_D24S8) && w && h && levels>=1 && levels<=11 && tiled);
  memset(t,0,sizeof(*t));t->format=format;t->width=w;t->height=h;t->levels=levels;t->tiled=true;
  t->pitch=w;t->size_bytes=((w*((h+31)&~31u)*4+65535)&~65535u);return STATUS_SUCCESS;}
 NTSTATUS xsdk_texture_create(XsdkTexture *t,uint32_t format,uint32_t w,uint32_t h,uint32_t levels,bool tiled)

@@ -95,12 +95,15 @@ static void release_native_stage(void){
 #include "xsdk/log.h"
 #include "xsdk/present.h"
 #include "dr_capture_demo.h"
+#include "gfx_present.h"
 #include "xsdk/text.h"
 #include "xsdk/texture.h"
 
 static DemoUi ui;
 static uint32_t display_width,display_height;
 static bool confirm_seen,back_seen,navigation_seen,first_frame;
+/* D51: 0 off, 1 d51-gfx-probe (640x480), 2 d51-gfx-probe-720 (1280x720). */
+static int d51_gfx_probe;
 static uint64_t now_ms(void)
 {
     struct timespec t;
@@ -653,6 +656,10 @@ static int startup_test_load(void)
     if(n==1 && !strcmp(kind,"graphics"))return DEMO_GRAPHICS_TEST;
     if(n==1 && !strcmp(kind,"model-cache-test")){body_cache_autotest=1;return DEMO_BODY_TEST;}
     if(n==1 && !strcmp(kind,"model"))return DEMO_BODY_TEST;
+    /* D51: explicit hardware graphics probe. Runs at tick 2, after the
+     * interface's first pixel check, and presents its own frames. */
+    if(n==1 && !strcmp(kind,"d51-gfx-probe")){d51_gfx_probe=1;return DEMO_NONE;}
+    if(n==1 && !strcmp(kind,"d51-gfx-probe-720")){d51_gfx_probe=2;return DEMO_NONE;}
 #ifdef DR_TYPED_CATALOG
     if(n==1 && !strcmp(kind,"typed-data"))return DEMO_TYPED_TEST;
 #ifdef DR_ENGINE_LINKED
@@ -729,6 +736,9 @@ int main(void)
     xsdk_log_write("PASS: display and text opened %ux%u",(unsigned)display_width,(unsigned)display_height);
     bool graphics_mode=false,body_mode=false,capture_mode=false;unsigned graphics_frames=0;int body_face=-1,body_request=-2;unsigned body_loading_shown=0,body_auto_step=0;uint64_t body_auto_next=0;
     int startup_test=startup_test_load();
+    if(d51_gfx_probe)
+        xsdk_log_write("startup: D51 gfx probe requested token=%s; will run after the interface pixel check",
+                       d51_gfx_probe==2?"d51-gfx-probe-720":"d51-gfx-probe");
     xsdk_log_write("startup: requested action=%d; automatic probe after interface pixel check",startup_test);
     uint16_t last=0,repeat_direction=0;uint64_t next_repeat=0;bool running=true;
     for(unsigned tick=0;running;tick++) {
@@ -799,6 +809,22 @@ int main(void)
             action=startup_test;startup_test=DEMO_NONE;
             xsdk_log_write("startup: executing diagnostic action=%d",action);
             if(action==DEMO_BODY_TEST || action==DEMO_TYPED_TEST)scan_isos();
+        }
+        /* D51: one explicit probe, after the interface's first pixel check.
+         * It presents its own frames and then returns to the UI loop. */
+        if(d51_gfx_probe && tick>=2 && running && !ui.exit_prompt &&
+           !graphics_mode && !body_mode && !capture_mode) {
+            int mode=d51_gfx_probe;d51_gfx_probe=0;
+            uint32_t probe_width=mode==2?1280u:640u,probe_height=mode==2?720u:480u;
+            xsdk_log_write("D51 gfx probe: executing token=%s logical=%ux%u front_buffer=%ux%u frames=180",
+                           mode==2?"d51-gfx-probe-720":"d51-gfx-probe",
+                           (unsigned)probe_width,(unsigned)probe_height,
+                           (unsigned)display_width,(unsigned)display_height);
+            int probe=D50_GfxPresentRun(probe_width,probe_height,display_width,display_height,180);
+            xsdk_log_write("%s: D51 gfx probe returned %d; NOT_READY=2; physical confirmation still pending",
+                           probe?"FAIL":"PASS",probe);
+            if(probe) snprintf(ui.modal,sizeof(ui.modal),
+                               "Probe D51 falhou: %d.\nConsulte default.log.",probe);
         }
 #ifdef DR_TYPED_CATALOG
         if(action==DEMO_TYPED_TEST){test_typed_data();

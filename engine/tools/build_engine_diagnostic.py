@@ -32,7 +32,7 @@ main=out/'main-engine-diagnostic.o'
 cmd=[str(cc),'-mcpu=cell','-fno-pic','-std=gnu17','-O2','-g','-ffunction-sections','-fdata-sections',
      '-Wall','-Wextra','-Werror','-I'+str(sdk/'include'),'-I'+str(project/'src'),
      '-I'+str(project/'engine/graphics'),'-I'+str(project/'engine/capture/port/src/gs'),
-     '-I'+str(project/'engine/platform/platform'),'-DDR_XBOX360','-DDR_ENGINE_LINKED',
+     '-I'+str(project/'engine/platform/platform'),'-I'+str(project/'d50'),'-DDR_XBOX360','-DDR_ENGINE_LINKED',
      '-c',str(project/'src/main.c'),'-o',str(main)]
 if r.get('typed_catalog_linked'):cmd.insert(1,'-DDR_TYPED_CATALOG')
 if a.xenia_display:cmd.insert(1,'-DDR_XENIA_DISPLAY')
