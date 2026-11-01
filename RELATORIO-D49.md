@@ -122,3 +122,27 @@ Hashe SHA-256 dos binários:
 
 Isto é um build de diagnóstico: **não há prova de 30 FPS** e a luta completa
 segue NOT_READY. Use por conta e risco.
+
+## Build D49 + guarda NULL do ki (2026-11-01, commit e027486)
+
+Workflow run 41313835370: 20/20 testes host PASS e os dois XEX compilados.
+
+Patches aplicados (análise Lucas-Tito, referência bt3xbx para blend/alfa):
+
+1. `bind_texture` agora recebe guarda: se `image`, `target_alpha`,
+   `effect_depth` ou `effect_aux` vierem NULL, o draw falha com
+   `Xenos NULL view: ...` em vez de desreferenciar ponteiro nulo (o console
+   caía no dashboard; o Xenia tolerava a leitura no endereço 0).
+2. A checagem de arena do efeito-storm só roda com `backend.active`, evitando
+   usar o `backend.used` do quadro anterior no preflight.
+3. `main.c`: `original-charge-cpu` e `original-actions-cpu` liberados no
+   console (sem GPU/replay/present) para separar defeito de CPU do de GPU.
+
+Hashe SHA-256:
+- console: `223ec357bd0497b6743d07c6bca70ff5985eeda277a926590afa3feb09cc266b`
+- xenia:   `e158e939d6bb56ccfb0aa100d88bef56e3ec4a0e0555f6b9c4cff95ac12fd82b`
+
+O blend/alfa (fatores, TFX/TCC, 255/128, TEXA/AEM) foi comparado com o
+bt3xbx e é equivalente; os "efeitos quadrados" não vêm dessas três partes —
+suspeita segue em classificação de draws ou dados, e pede dump do estado GS
+(TEX0/ALPHA/TEST) de um draw quadrado.
