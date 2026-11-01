@@ -53,6 +53,19 @@ int main(void)
     dr_lobby_stop(&c);dr_lobby_stop(&h);
     assert(dr_lobby_start(&c,0,"127.0.0.1",port,100,1));dr_lobby_tick(&c,30101);assert(c.state==LOBBY_OFF);
     assert(!dr_lobby_start(&c,0,"invalid",port,1,1));assert(c.fd==-1);
+    /* lobby_host.txt parser: IP only, IP+port, and invalid inputs. */
+    char target[16];uint16_t target_port=0;
+    assert(dr_lobby_parse_target("192.168.1.10",target,sizeof target,&target_port)==1 &&
+           !strcmp(target,"192.168.1.10") && target_port==7371);
+    assert(dr_lobby_parse_target("192.168.1.10 7000\n",target,sizeof target,&target_port)==1 &&
+           target_port==7000);
+    assert(!dr_lobby_parse_target("192.168.1.10 0",target,sizeof target,&target_port));
+    assert(!dr_lobby_parse_target("192.168.1.10 70000",target,sizeof target,&target_port));
+    assert(!dr_lobby_parse_target("192.168.1.10 abc",target,sizeof target,&target_port));
+    assert(!dr_lobby_parse_target("192.168.1.10 7000 extra",target,sizeof target,&target_port));
+    assert(!dr_lobby_parse_target("999.1.1.1",target,sizeof target,&target_port));
+    assert(!dr_lobby_parse_target("",target,sizeof target,&target_port));
+    assert(!dr_lobby_parse_target(NULL,target,sizeof target,&target_port));
     /* Some sandbox environments have no route to the LAN broadcast address. */
     int probe=socket(AF_INET,SOCK_DGRAM,0),yes=1;
     assert(probe>=0 && !setsockopt(probe,SOL_SOCKET,SO_BROADCAST,&yes,sizeof(yes)));
@@ -70,5 +83,5 @@ int main(void)
     /* Unsigned millisecond wrap-around keeps search deadlines valid. */
     assert(dr_lobby_start(&c,0,"127.0.0.1",port,0xffffff00u,1));dr_lobby_tick(&c,200);assert(c.state==LOBBY_SEARCH);
     dr_lobby_tick(&c,31000);assert(c.state==LOBBY_OFF);dr_lobby_stop(&c);
-    puts("PASS: actual UDP discovery and direct-IP lobby handshake, lost offer retry, full room, invalid packets, source filtering, leave, timeout, clock wrap");
+    puts("PASS: actual UDP discovery and direct-IP lobby handshake, lost offer retry, full room, invalid packets, source filtering, leave, timeout, clock wrap, lobby_host.txt parsing");
 }

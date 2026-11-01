@@ -152,6 +152,9 @@ void demo_draw(const DemoUi *u,const DemoPaint *p,unsigned tick)
         row(u,p,1,330,"Partida rápida LAN","Descobre e conecta ao primeiro host livre");
         row(u,p,2,406,"Conectar por IP","Leia lobby_host.txt · IPv4 e porta UDP");
         row(u,p,3,482,"Encerrar conexão","Fecha sua sala ou sai do host");
+        snprintf(b,sizeof(b),"Jogadores: %d/2 · %s",u->players,
+                 u->lobby_role==1?"host":u->lobby_role==2?"cliente":"sem sessão");
+        text(p,410,526,1,GOLD,b);
         text(p,410,562,1,BLUE,u->network[0]?u->network:"Rede desligada. Lutas ainda indisponíveis.");
     } else if(u->page==DEMO_CHEATS) {
         row(u,p,0,254,"Criar save desbloqueado","Novo arquivo RAW · conteúdo liberado e Zeni máximo");

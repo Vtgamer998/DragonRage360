@@ -7,6 +7,7 @@
 #include "dr_disc.h"
 #include "net_check.h"
 #include "lobby.h"
+#include "lobby_selftest.h"
 #include "dr_resource.h"
 #include "dr_container.h"
 #include "dr_graphics_demo.h"
@@ -104,6 +105,8 @@ static uint32_t display_width,display_height;
 static bool confirm_seen,back_seen,navigation_seen,first_frame;
 /* D51: 0 off, 1 d51-gfx-probe (640x480), 2 d51-gfx-probe-720 (1280x720). */
 static int d51_gfx_probe;
+/* D52: run the loopback lobby self-test once, after the interface pixel check. */
+static int d52_lobby_selftest;
 static uint64_t now_ms(void)
 {
     struct timespec t;
@@ -660,6 +663,9 @@ static int startup_test_load(void)
      * interface's first pixel check, and presents its own frames. */
     if(n==1 && !strcmp(kind,"d51-gfx-probe")){d51_gfx_probe=1;return DEMO_NONE;}
     if(n==1 && !strcmp(kind,"d51-gfx-probe-720")){d51_gfx_probe=2;return DEMO_NONE;}
+    /* D52: loopback UDP lobby self-test. Proves the protocol on this console's
+     * local stack; the two-console session still needs a physical test. */
+    if(n==1 && !strcmp(kind,"d52-lobby-selftest")){d52_lobby_selftest=1;return DEMO_NONE;}
 #ifdef DR_TYPED_CATALOG
     if(n==1 && !strcmp(kind,"typed-data"))return DEMO_TYPED_TEST;
 #ifdef DR_ENGINE_LINKED
@@ -702,10 +708,34 @@ static int startup_test_load(void)
     xsdk_log_write("FAIL: unsupported startup_test.txt diagnostic token");
     return DEMO_NONE;
 }
+/* D52: stable names so default.log can be grepped for lobby events. */
+static const char *lobby_role_name(const DrLobby *l)
+{
+    if(l->state==LOBBY_OFF) return "none";
+    return l->host?"host":"client";
+}
+static int lobby_player_count(const DrLobby *l)
+{
+    if(l->state==LOBBY_OFF) return 0;
+    return l->state==LOBBY_PAIRED?2:1;
+}
+static const char *lobby_event_name(int previous,int current,const char *message)
+{
+    if(current==LOBBY_PAIRED) return "connected";
+    if(previous==LOBBY_PAIRED && current==LOBBY_HOST)
+        return strstr(message,"desconectado")?"timeout":"disconnected";
+    if(previous!=LOBBY_OFF && current==LOBBY_OFF)
+        return (strstr(message,"perdida")||strstr(message,"Nenhum host"))?"timeout":"closed";
+    if(current==LOBBY_HOST) return "hosting";
+    if(current==LOBBY_SEARCH) return "searching";
+    if(current==LOBBY_JOIN) return "joining";
+    return "idle";
+}
 int main(void)
 {
     XbPlatform_Install();
     DrLobby lobby;dr_lobby_init(&lobby);int logged_lobby_state=LOBBY_OFF;
+    uint16_t logged_lobby_peer=0;
     demo_init(&ui);settings_load();
 #ifdef DR_ENGINE_LINKED
     extern int Battle_Main(void);
@@ -739,6 +769,8 @@ int main(void)
     if(d51_gfx_probe)
         xsdk_log_write("startup: D51 gfx probe requested token=%s; will run after the interface pixel check",
                        d51_gfx_probe==2?"d51-gfx-probe-720":"d51-gfx-probe");
+    if(d52_lobby_selftest)
+        xsdk_log_write("startup: D52 lobby selftest requested token=d52-lobby-selftest; will run after the interface pixel check");
     xsdk_log_write("startup: requested action=%d; automatic probe after interface pixel check",startup_test);
     uint16_t last=0,repeat_direction=0;uint64_t next_repeat=0;bool running=true;
     for(unsigned tick=0;running;tick++) {
@@ -826,6 +858,18 @@ int main(void)
             if(probe) snprintf(ui.modal,sizeof(ui.modal),
                                "Probe D51 falhou: %d.\nConsulte default.log.",probe);
         }
+        /* D52: one loopback lobby self-test after the interface pixel check.
+         * It never contacts a real peer; the two-console session is separate. */
+        if(d52_lobby_selftest && tick>=2 && running && !ui.exit_prompt &&
+           !graphics_mode && !body_mode && !capture_mode) {
+            d52_lobby_selftest=0;
+            xsdk_log_write("D52 lobby selftest: starting loopback UDP host+client; two-console session still needs a physical test");
+            int error=D52_LobbySelfTest();
+            xsdk_log_write("%s: D52 lobby selftest loopback returned %d; NOT_READY=2; physical two-console test still pending",
+                           error?"FAIL":"PASS",error);
+            if(error) snprintf(ui.modal,sizeof(ui.modal),
+                               "Autoteste do lobby falhou: %d.\nConsulte default.log.",error);
+        }
 #ifdef DR_TYPED_CATALOG
         if(action==DEMO_TYPED_TEST){test_typed_data();
 #ifdef DR_ENGINE_LINKED
@@ -860,30 +904,62 @@ int main(void)
         if(action==DEMO_RESOURCE_TEST) test_iso_resource();
         if(action==DEMO_SAVE) settings_save();
         if(action==DEMO_NET_CHECK) demo_net_check(ui.modal,sizeof(ui.modal));
-        if(action==DEMO_LOBBY_STOP) dr_lobby_stop(&lobby);
+        if(action==DEMO_LOBBY_STOP) {
+            int was=lobby.state;
+            dr_lobby_stop(&lobby);
+            if(was!=LOBBY_OFF) xsdk_log_write("lobby event=stop role=local players=0: user closed the session");
+        }
         if(action==DEMO_LOBBY_HOST || action==DEMO_LOBBY_SEARCH || action==DEMO_LOBBY_DIRECT) {
             struct in_addr address;int error=xsdk_net_address(&address);
             char ip[16]={0};unsigned net_port=7371;int valid=1;
             if(action==DEMO_LOBBY_DIRECT) {
+                /* Accept "192.168.1.10" (default UDP 7371) or "192.168.1.10 7371". */
+                char line[64]={0};
                 FILE *config=fopen("game:/lobby_host.txt","r");
-                valid=config && fscanf(config,"%15s %u",ip,&net_port)==2 && net_port>0 && net_port<=65535;
+                int read=config && fgets(line,sizeof line,config)?1:0;
                 if(config) fclose(config);
+                uint16_t parsed_port=7371;
+                valid=read && dr_lobby_parse_target(line,ip,sizeof ip,&parsed_port);
+                net_port=parsed_port;
             }
-            if(error) snprintf(ui.modal,sizeof(ui.modal),"Console sem IPv4. Confira a rede e tente novamente.");
-            else if(!valid) snprintf(ui.modal,sizeof(ui.modal),"Crie lobby_host.txt ao lado do XEX:\n192.168.1.10 7371\nUse o IP do console host.");
-            else {
-                dr_lobby_start(&lobby,action==DEMO_LOBBY_HOST,ip[0]?ip:NULL,(uint16_t)net_port,(uint32_t)now,(uint32_t)now^address.s_addr);
-                if(action==DEMO_LOBBY_HOST && lobby.fd>=0) {
-                    char local[16];inet_ntop(AF_INET,&address,local,sizeof(local));
-                    snprintf(lobby.message,sizeof(lobby.message),"Host %s:7371. Aguardando cliente...",local);
+            if(error) {
+                xsdk_log_write("lobby event=error role=none players=0: console has no IPv4");
+                snprintf(ui.modal,sizeof(ui.modal),"Console sem IPv4. Confira a rede e tente novamente.");
+            } else if(!valid) {
+                xsdk_log_write("lobby event=error role=%s players=0: lobby_host.txt needs an IPv4 and optional UDP port",
+                               action==DEMO_LOBBY_HOST?"host":"client");
+                snprintf(ui.modal,sizeof(ui.modal),"Crie lobby_host.txt ao lado do XEX:\n192.168.1.10\nou 192.168.1.10 7371\nUse o IP do console host.");
+            } else {
+                int started=dr_lobby_start(&lobby,action==DEMO_LOBBY_HOST,ip[0]?ip:NULL,(uint16_t)net_port,(uint32_t)now,(uint32_t)now^address.s_addr);
+                if(!started) {
+                    xsdk_log_write("lobby event=error role=%s players=0 target=%s:%u: %s",
+                                   action==DEMO_LOBBY_HOST?"host":"client",
+                                   action==DEMO_LOBBY_HOST?"local":ip,(unsigned)net_port,lobby.message);
+                    snprintf(ui.modal,sizeof(ui.modal),"%s\nConsulte default.log.",lobby.message);
+                } else {
+                    if(action==DEMO_LOBBY_HOST && lobby.fd>=0) {
+                        char local[16];inet_ntop(AF_INET,&address,local,sizeof(local));
+                        snprintf(lobby.message,sizeof(lobby.message),"Host %s:%u. Aguardando cliente...",local,(unsigned)net_port);
+                    }
+                    xsdk_log_write("lobby event=start role=%s players=1 target=%s:%u",
+                                   action==DEMO_LOBBY_HOST?"host":"client",
+                                   action==DEMO_LOBBY_HOST?"local":ip,(unsigned)net_port);
                 }
             }
         }
         dr_lobby_tick(&lobby,(uint32_t)now);
         snprintf(ui.network,sizeof(ui.network),"%s",lobby.message);
-        if(lobby.state!=logged_lobby_state) {
-            xsdk_log_write("lobby state=%d host=%d: %s",lobby.state,lobby.host,lobby.message);
-            logged_lobby_state=lobby.state;
+        ui.lobby_role=lobby.state==LOBBY_OFF?0:(lobby.host?1:2);
+        ui.players=lobby_player_count(&lobby);
+        if(lobby.state!=logged_lobby_state || lobby.peer.sin_port!=logged_lobby_peer) {
+            char peer[16]="none";
+            if(lobby.peer.sin_port) inet_ntop(AF_INET,&lobby.peer.sin_addr,peer,sizeof(peer));
+            xsdk_log_write("lobby event=%s role=%s players=%d state=%s(%d) peer=%s:%u: %s",
+                           lobby_event_name(logged_lobby_state,lobby.state,lobby.message),
+                           lobby_role_name(&lobby),ui.players,
+                           dr_lobby_state_name(lobby.state),lobby.state,
+                           peer,(unsigned)ntohs(lobby.peer.sin_port),lobby.message);
+            logged_lobby_state=lobby.state;logged_lobby_peer=lobby.peer.sin_port;
         }
 
         if(action==DEMO_SAVE_NEW || action==DEMO_SAVE_UNLOCK) {

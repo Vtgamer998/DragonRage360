@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <poll.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -20,6 +21,34 @@ static void send_packet(DrLobby *l,const struct sockaddr_in *to,unsigned type,ui
     (void)sendto(l->fd,p,sizeof(p),0,(const struct sockaddr *)to,sizeof(*to));
 }
 void dr_lobby_init(DrLobby *l) { memset(l,0,sizeof(*l));l->fd=-1;strcpy(l->message,"Rede desligada."); }
+const char *dr_lobby_state_name(int state)
+{
+    switch(state) {
+    case LOBBY_HOST: return "host";
+    case LOBBY_SEARCH: return "search";
+    case LOBBY_JOIN: return "join";
+    case LOBBY_PAIRED: return "paired";
+    default: return "off";
+    }
+}
+int dr_lobby_parse_target(const char *line,char *target,size_t size,uint16_t *port)
+{
+    char host[16]={0},port_text[16]={0},extra[2]={0};
+    struct in_addr address;
+    unsigned long value;
+    char *end=NULL;
+    if(!line || !target || size<16 || !port) return 0;
+    int fields=sscanf(line,"%15s %15s %1s",host,port_text,extra);
+    if(fields<1 || fields>2 || inet_pton(AF_INET,host,&address)!=1) return 0;
+    *port=7371;
+    if(fields>=2) {
+        value=strtoul(port_text,&end,10);
+        if(!end || *end || !value || value>65535) return 0;
+        *port=(uint16_t)value;
+    }
+    snprintf(target,size,"%s",host);
+    return 1;
+}
 void dr_lobby_stop(DrLobby *l)
 {
     if(l->fd>=0) {

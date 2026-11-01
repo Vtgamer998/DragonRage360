@@ -11,6 +11,7 @@ enum { DEMO_UP=1, DEMO_DOWN=2, DEMO_LEFT=4, DEMO_RIGHT=8, DEMO_START=16,
 enum { DEMO_MAX_ISOS=32, DEMO_PATH=512 };
 typedef struct {
     int page, selection, count, selected_iso, confirm_action;
+    int players, lobby_role; /* D52: 0/2..2/2 and 0 none, 1 host, 2 client */
     bool high_contrast, fast_repeat, show_help, connected, exit_prompt;
     uint16_t buttons;
     int16_t lx,ly,rx,ry;

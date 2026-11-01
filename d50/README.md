@@ -21,6 +21,7 @@ prova pixels de GPU real, scanout nem console.
 
 ```sh
 make d50-probe-test
+make d52-lobby-test
 ```
 
 Saída esperada (resumida):
@@ -118,3 +119,66 @@ falha se algum quebrar.
    `Clear` (25) e `SetRenderState` (91), que são os mais frequentes.
 
 Sem validação física, nada aqui autoriza dizer que o console renderiza.
+
+## D52-1 — menu online + lobby UDP/IP
+
+| Item | Estado |
+| --- | --- |
+| Menu online (Host, partida rápida LAN, conectar por IP, encerrar) | Implementado no diagnóstico xsdk |
+| Lobby UDP `DRL1` com handshake, confirmação, heartbeat e retransmissão | Implementado e testado no host |
+| Contador `Jogadores: n/2` e papel (host/cliente/sem sessão) na tela | Implementado |
+| Logs `lobby event=...` com papel, jogadores, peer e estado | Implementado |
+| `lobby_host.txt` com apenas IP (porta padrão 7371) | Implementado |
+| Autoteste de loopback no console | Implementado; execução física pendente |
+| Sessão real entre dois consoles RGH | **Não realizada** |
+
+### Teste host
+
+```sh
+make d52-lobby-test
+```
+
+O teste abre host e cliente UDP em `127.0.0.1`, faz o pareamento, encerra com
+`LEAVE`, simula cabo puxado (timeout de 12 s do host) e testa o timeout de busca
+de 30 s com wrap de relógio. Ele prova a máquina de estados e o socket local;
+**não** prova o Wi-Fi, o roteador, o stack de rede do Xbox 360 nem dois consoles.
+
+`make lobby-test` continua cobrindo retransmissão da oferta, sala cheia,
+pacotes inválidos e filtragem por origem.
+
+### Token no console
+
+Coloque **apenas uma linha** em `startup_test.txt`:
+
+```text
+d52-lobby-selftest
+```
+
+O token roda no tick 2, depois da checagem do primeiro pixel da interface, e
+escreve no `default.log`:
+
+```text
+PASS: D52 lobby selftest connected role=host+client players=2 ...
+PASS: D52 lobby selftest explicit leave role=client players=0
+PASS: D52 lobby selftest host timeout role=host players=1 after 12001 ms
+PASS: D52 lobby selftest client search timeout role=client players=0 after 31256 ms with clock wrap
+PASS: D52 lobby selftest loopback pairing, explicit leave, host timeout, client search timeout; two-console session still needs a physical test
+```
+
+Se o loopback não for suportado pelo stack do console, o log mostrará `FAIL` e
+o código negativo; isso é evidência de limitação do ambiente, não autorização
+para declarar o online pronto.
+
+### Dois consoles
+
+1. No console host: abra `Dragon Net` → `Criar sala LAN`.
+2. No console cliente: crie `lobby_host.txt` ao lado do XEX com o IPv4 do host
+   (`192.168.1.10`) ou `192.168.1.10 7371`.
+3. No cliente: `Dragon Net` → `Conectar por IP`.
+4. Confira nos dois `default.log` as linhas `lobby event=connected`.
+5. Teste `Encerrar conexão` e o cabo puxado; o host deve voltar a
+   `hosting`/`players=1` em até 12 s, sem travar.
+
+O lobby ainda **não** transporta entradas de luta, não inicia batalha e não
+prova FPS. O estado do projeto continua `NOT_READY=2`.
+

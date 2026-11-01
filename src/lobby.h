@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: MIT */
 #ifndef DR_LOBBY_H
 #define DR_LOBBY_H
+#include <stddef.h>
 #include <stdint.h>
 #include <netinet/in.h>
 enum { LOBBY_OFF, LOBBY_HOST, LOBBY_SEARCH, LOBBY_JOIN, LOBBY_PAIRED };
@@ -11,6 +12,12 @@ typedef struct {
     char message[240];
 } DrLobby;
 void dr_lobby_init(DrLobby *l);
+/* Stable name for logs: "off", "host", "search", "join" or "paired". */
+const char *dr_lobby_state_name(int state);
+/* Parse one lobby_host.txt line: "IPv4" (default UDP 7371) or "IPv4 PORT".
+ * target must hold at least 16 bytes. Returns 1 on success, 0 on invalid
+ * address/port or extra fields. */
+int dr_lobby_parse_target(const char *line,char *target,size_t size,uint16_t *port);
 /* target NULL means LAN broadcast. port=7371 in production; override for tests. */
 int dr_lobby_start(DrLobby *l,int host,const char *target,uint16_t port,uint32_t now,uint32_t nonce);
 void dr_lobby_tick(DrLobby *l,uint32_t now);
