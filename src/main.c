@@ -514,13 +514,11 @@ static int original_full_present(int phase){
     }
     original_loading_frames++;return e;
 }
-#ifdef DR_XENIA_DISPLAY
 static int original_cpu_present(int phase){
     if(phase==0)return original_full_present(0);
     if(phase==1)return 0;
     return dr_capture_original_decode();
 }
-#endif
 static void test_typed_data(void)
 {
     if(ui.selection<0 || ui.selection>=ui.count) {
@@ -569,9 +567,7 @@ static void test_typed_data(void)
         if(!error && fresh_boot_requested==3)error=XbFreshBoot_RecoveryProbe();
         for(unsigned cycle=0;!error && cycle<(fresh_boot_requested==8?2u:fresh_boot_requested>=6?1u:fresh_boot_requested==5?3u:2u);cycle++){
             xsdk_log_write("D46 fresh session cycle=%u mode=%d",cycle+1,fresh_boot_requested);
-            #ifdef DR_XENIA_DISPLAY
             if((fresh_boot_requested==18 || fresh_boot_requested==20)){xsdk_log_write("D46 CPU-only action diagnostic: original producers/decode; NO GPU replay or presentation");error=XbFreshBoot_SetOriginalLoading((int)cycle,original_cpu_present);}else
-#endif
             if(fresh_boot_requested>=5)error=XbFreshBoot_SetOriginalLoading((int)cycle,original_full_present);
             if(fresh_boot_requested==8 && cycle==0)original_inject_completed_frame_error=1;
             if(!error)error=fresh_boot_requested>=19?XbFreshBoot_ChargeCheck():fresh_boot_requested>=17?XbFreshBoot_ActionFastCheck():fresh_boot_requested==16?XbFreshBoot_ActionCheck():fresh_boot_requested==15?XbFreshBoot_BattleCheck():fresh_boot_requested==14?XbFreshBoot_BattleProbe():fresh_boot_requested==13?XbFreshBoot_FightProbe():fresh_boot_requested==12?XbFreshBoot_StageProbe():fresh_boot_requested==11?XbFreshBoot_FighterProbe():fresh_boot_requested==10?XbFreshBoot_IntroProbe():fresh_boot_requested==9?XbFreshBoot_FramesProbe():(fresh_boot_requested==7 || (fresh_boot_requested==8 && cycle==0))?XbFreshBoot_FrameProbe():(fresh_boot_requested==6 || fresh_boot_requested==8)?XbFreshBoot_InitProbe():fresh_boot_requested>=2?XbFreshBoot_LoadProbe():XbFreshBoot_Probe();
@@ -676,6 +672,9 @@ static int startup_test_load(void)
     if(n==1 && !strcmp(kind,"original-frames")){fresh_boot_requested=9;return DEMO_TYPED_TEST;}
     if(n==1 && !strcmp(kind,"original-recovery")){fresh_boot_requested=8;return DEMO_TYPED_TEST;}
 #else
+    /* Console: CPU-only diagnostics (no GPU replay, no present) to bisect the ki-charge crash. */
+    if(n==1 && !strcmp(kind,"original-charge-cpu")){fresh_boot_requested=20;return DEMO_TYPED_TEST;}
+    if(n==1 && !strcmp(kind,"original-actions-cpu")){fresh_boot_requested=18;return DEMO_TYPED_TEST;}
     if(n==1 && !strcmp(kind,"original-battle")){fresh_boot_requested=14;return DEMO_TYPED_TEST;}
     if(n==1 && !strcmp(kind,"original-fight")){fresh_boot_requested=13;return DEMO_TYPED_TEST;}
     if(n==1 && !strcmp(kind,"original-stage")){fresh_boot_requested=12;return DEMO_TYPED_TEST;}

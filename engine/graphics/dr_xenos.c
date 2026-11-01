@@ -289,7 +289,7 @@ static int validate_draw(const void *data,uint32_t count,uint32_t texture,const 
        (draw->depth_quantize!=0 && draw->depth_quantize!=65535.0f &&
         draw->depth_quantize!=16777215.0f && draw->depth_quantize!=4294967295.0f)) return DR_XENOS_INVALID;
     /* Defensive: prevent effect-storm crash (shadow/outline effects accumulating). */
-    if((draw->effect==1 || draw->effect==2) && backend.used>ARENA_VERTICES-256) return DR_XENOS_FULL;
+    if((draw->effect==1 || draw->effect==2) && backend.active && backend.used>ARENA_VERTICES-256) return DR_XENOS_FULL;
     if(draw->vu_program) {
         if(!draw->vu_uniform || ((uintptr_t)draw->vu_uniform&3) || ((uintptr_t)data&3) || draw->logical_width!=1024 || draw->logical_height!=1024 || draw->topology) return DR_XENOS_INVALID;
         for(unsigned i=0;i<76;i++) if(!isfinite(draw->vu_uniform[i])) return DR_XENOS_INVALID;
@@ -400,6 +400,15 @@ static int draw_impl(const void *data,uint32_t count,uint32_t texture,const DrXe
         image=dr_targets_texture(source,0);
     } else image=(texture&0x80000000u)?dr_targets_texture(texture&0x7fffffffu,0):&backend.texture[texture-1];
     if(texture&0x80000000u) target_alpha=dr_targets_texture(texture&0x7fffffffu,1);
+    /* bind_texture() dereferences its argument. A target view that is not ready must fail this draw with a log line,
+     * not fault the CPU (the console returns to the dashboard; Xenia may tolerate a read at address 0). */
+    if(!image || ((texture&0x80000000u) && !target_alpha) || (draw->effect==2 && !effect_depth) || (draw->effect==1 && !effect_aux)) {
+#ifdef DR_XBOX360
+        xsdk_log_write("Xenos NULL view: image=%d target_alpha=%d depth=%d aux=%d effect=%u source=%u texture=%08x target=%u",
+            image!=NULL,target_alpha!=NULL,effect_depth!=NULL,effect_aux!=NULL,draw->effect,draw->effect_source,texture,backend.target_id);
+#endif
+        return DR_XENOS_STATE;
+    }
     /* A complete draw emits <16k dwords; preserve this margin before any of
      * its state is written, while all vertices remain immutable in the arena. */
     if(gs){error=dr_targets_ensure_commands(16384);if(error)return error;}
