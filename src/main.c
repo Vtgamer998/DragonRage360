@@ -18,7 +18,7 @@
 #ifdef DR_TYPED_CATALOG
 #include "xb_typed_data.h"
 #include "dr_stage_collision.h"
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
 #include "xb_battle_stage.h"
 #include "xb_battle_fighter.h"
 #include "xb_battle_common.h"
@@ -302,7 +302,7 @@ static int stage_count_triangle(void *ctx,uint32_t polygon,const DrStageTriangle
 {
     (void)polygon;(void)triangle;(*(unsigned *)ctx)++;return 1;
 }
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
 static int read_battle_resource(unsigned id,void **bytes,size_t *size)
 {
     char path[64];dr_span span;*bytes=NULL;*size=0;snprintf(path,sizeof(path),"pzs3us1/%05u.bin",id-1);
@@ -449,7 +449,7 @@ static int test_stage_collision(void)
         xsdk_log_write("stage-collision: error=%d zones=%u meshes=%u nodes=%u leaves=%u zone0_triangles=%u bounds=%f,%f,%f; NOT installed in battle",
             error,view.zones,view.meshes,view.nodes,view.polygons,triangles,(double)view.radius,(double)view.top,(double)view.bottom);
     }else xsdk_log_write("stage-collision: refused error=%d; NOT installed in battle",error);
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     if(!error){
         error=XbBattleStage_PrepareCollision(pack,(size_t)span.size,&native_stage);
         if(!error)error=XbBattleStage_PrepareStarts(native_stage,pack,(size_t)span.size);
@@ -530,12 +530,12 @@ static void test_typed_data(void)
     if(ui.selection<0 || ui.selection>=ui.count) {
         snprintf(ui.modal,sizeof(ui.modal),"Nenhuma ISO encontrada para o teste de dados.");return;
     }
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     release_native_stage();
     if(native_stage){snprintf(ui.modal,sizeof(ui.modal),"Falha ao liberar o cenário anterior. Consulte default.log.");return;}
 #endif
     int error=XbDisc_Mount(ui.paths[ui.selection]);
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     if(transport_only){
         if(!error)error=XbTransportProbe_Run();
         if(!error && transport_model_requested)transport_model_pending=1;
@@ -546,28 +546,28 @@ static void test_typed_data(void)
 #endif
     if(!error){
         unsigned flags=XBTD_ALLOW_PARTIAL;
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
         /* Reapplying DATA would erase live heap pointers while Heap_Init's
          * private ready flag remains set. Subsequent runs validate only. */
         if(fresh_boot_requested)flags=0;
         if(native_typed_values_loaded)flags|=XBTD_VALIDATE_ONLY;
 #endif
         error=XbTypedData_LoadFromDisc(&gXbTypedMainCatalog,flags);
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
         if(!error)native_typed_values_loaded=1;
 #endif
     }
     xsdk_log_write("%s: typed native-data load error=%d regions=%u ops=%u complete=%u data_stripped=%u; combat BLOCKED",
         error?"FAIL":"PASS",error,(unsigned)gXbTypedMainCatalog.region_count,
         (unsigned)gXbTypedMainCatalog.op_count,gXbTypedMainCatalog.complete,(unsigned)gPortDataStripped);
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     if(!error && !fresh_boot_requested){
         int transport=XbTransportProbe_Run();
         xsdk_log_write("%s: D46 full-file original transport probe result=%d",transport?"FAIL":"PASS",transport);
         if(transport)error=transport;
     }
 #endif
- #ifdef DR_ENGINE_LINKED
+ #if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     if(fresh_boot_requested){
         if(!error && fresh_boot_requested==4)error=XbFreshBoot_SetPresentation(original_loading_present);
         if(!error && fresh_boot_requested==3)error=XbFreshBoot_RecoveryProbe();
@@ -602,7 +602,7 @@ static void test_typed_data(void)
     }
  #endif
     int collision_error=error?error:test_stage_collision();
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     if(!error && !collision_error)collision_error=prepare_fighter_models();
 #endif
     if(error)snprintf(ui.modal,sizeof(ui.modal),"Dados recusados: erro %d.\nNenhuma tabela alterada pelo carregador.\nConsulte default.log. Luta bloqueada.",error);
@@ -668,7 +668,7 @@ static int startup_test_load(void)
     if(n==1 && !strcmp(kind,"d52-lobby-selftest")){d52_lobby_selftest=1;return DEMO_NONE;}
 #ifdef DR_TYPED_CATALOG
     if(n==1 && !strcmp(kind,"typed-data"))return DEMO_TYPED_TEST;
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
 #ifdef DR_XENIA_DISPLAY
     if(n==1 && !strcmp(kind,"original-charge-cpu")){fresh_boot_requested=20;return DEMO_TYPED_TEST;}
     if(n==1 && !strcmp(kind,"original-charge-check")){fresh_boot_requested=19;return DEMO_TYPED_TEST;}
@@ -737,7 +737,7 @@ int main(void)
     DrLobby lobby;dr_lobby_init(&lobby);int logged_lobby_state=LOBBY_OFF;
     uint16_t logged_lobby_peer=0;
     demo_init(&ui);settings_load();
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
     extern int Battle_Main(void);
     extern volatile uint32_t gPortDataStripped;
     xsdk_log_write("DragonRage360 D46: native diagnostic; Battle_Main linked at %p",(void *)(uintptr_t)Battle_Main);
@@ -872,12 +872,12 @@ int main(void)
         }
 #ifdef DR_TYPED_CATALOG
         if(action==DEMO_TYPED_TEST){test_typed_data();
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
             xsdk_log_write("typed-data diagnostic returned to UI loop; scene=%d stage=%d",native_scene_running,native_stage_running);
 #endif
         }
 #endif
-#ifdef DR_ENGINE_LINKED
+#if defined(DR_ENGINE_LINKED) && defined(DR_TYPED_CATALOG)
         if(transport_model_pending){transport_model_pending=0;body_request=-1;body_loading_shown=0;}
 #endif
         if(action==DEMO_GRAPHICS_TEST) {

@@ -44,7 +44,7 @@ roots=re.search(r'^NATIVE_API_ROOTS := (.+)$',(project/'Makefile').read_text(),r
 assert roots
 # Preparing the original menu catalog retains Progress_Main and the full
 # menu services. This diagnostic exposes no menu boot, and does not root it.
-cmd[1:1]=['-Wl,--undefined=Common_Init,--undefined=Common_LoadBoot,--undefined=Common_Reload']+[x for x in roots[1].split() if x!='-Wl,--undefined=XbOverlay_PrepareBuild']
+cmd[1:1]=['-Wl,--undefined=Common_Init,--undefined=Common_LoadBoot,--undefined=Common_Reload,--undefined=dr_vu1_model_profile,--undefined=dr_gs_native_limits,--undefined=XbFreshBoot_FrameProbe,--undefined=XbFreshBoot_FramesProbe,--undefined=XbFreshBoot_IntroProbe,--undefined=XbFreshBoot_BattleProbe,--undefined=XbFreshBoot_BattleCheck,--undefined=XbVif_ChainAddress,--undefined=Battle_StepFrame,--undefined=dr_dma_snapshot_chain,--undefined=dr_ot_payload,--undefined=dr_targets_epoch']+[x for x in roots[1].split() if x!='-Wl,--undefined=XbOverlay_PrepareBuild']
 run=subprocess.run(cmd,capture_output=True,text=True)
 (out/'link.txt').write_text(run.stdout+run.stderr);run.check_returncode()
 (out/'link-arguments.json').write_text(json.dumps(cmd,indent=2)+'\n')
